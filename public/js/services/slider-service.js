@@ -40,8 +40,47 @@ angular.module('SliderService', []).factory('Slider', [function()
                     $('.navbar-default').removeClass('on');
                 }
 
-                sliderService.selectedPage = Math.round((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)*5);
+                sliderService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)*5);
                 sliderService.scrollTo(sliderService.selectedPage);
+            });
+
+            // Ignore scrolling with mouse wheel
+
+            $(window).bind('wheel', function()
+            {
+                return false;
+            });
+
+            // Forced scroll
+
+            $('html, body').animate({
+                scrollTop: $(sliderService.pages[0]).offset().top
+            }, 500);
+
+            // Initialize section sliders
+
+            $(window).load(function() {
+                $('.scrollable-light').mCustomScrollbar( {
+                    theme:"inset",
+                    scrollButtons:{
+                        enable:false
+                    },
+                    advanced:{
+                        autoScrollOnFocus: false
+                    },
+                    updateOnContentResize: true
+                });
+
+                $('.scrollable-dark').mCustomScrollbar( {
+                    theme:"inset-dark",
+                    scrollButtons:{
+                        enable:false
+                    },
+                    advanced:{
+                        autoScrollOnFocus: false
+                    },
+                    updateOnContentResize: true
+                });
             });
         },
 

@@ -1,12 +1,15 @@
 @media (min-width: 768px)
 {
-    #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form
+    {
         margin-bottom: 0px;
     }
-    .navbar-right .navbar-button{
+    .navbar-right .navbar-button
+    {
         margin-left: 20px;
     }
-    .navbar-left .navbar-button{
+    .navbar-left .navbar-button
+    {
         margin-right: 10px;
     }
     .navbar-button
@@ -18,11 +21,13 @@
     {
         margin-left: 0px;
     }
-    .navbar-button-right {
+    .navbar-button-right
+    {
         display: block !important;
         float:right !important;
     }
-    .navbar-right {
+    .navbar-right
+    {
         margin-right: 0px;
     }
 }
