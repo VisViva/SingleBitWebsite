@@ -1,4 +1,5 @@
-angular.module('SliderService', []).factory('Slider', [function() {
+angular.module('SliderService', []).factory('Slider', [function()
+{
     var sliderService = this;
 
     return {
@@ -7,8 +8,6 @@ angular.module('SliderService', []).factory('Slider', [function() {
 
         initializeSlider : function (pages, callback)
         {
-            'use strict';
-
             // Initialize page list
 
             sliderService.pages = pages;
@@ -16,7 +15,8 @@ angular.module('SliderService', []).factory('Slider', [function() {
 
             // Custom slider
 
-            $('a.page-scroll').click(function() {
+            $('a.page-scroll').click(function()
+            {
                 if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                     var target = $(this.hash);
                     target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -31,34 +31,24 @@ angular.module('SliderService', []).factory('Slider', [function() {
 
             // Menu modifier
 
-            $(window).bind('scroll', function() {
+            $(window).bind('scroll', function()
+            {
                 var navHeight = $(window).height() - 100;
                 if ($(window).scrollTop() > navHeight) {
                     $('.navbar-default').addClass('on');
                 } else {
                     $('.navbar-default').removeClass('on');
                 }
-            });
 
-            $('body').scrollspy({
-                target: '.navbar-default',
-                offset: 80
-            })
-
-            // Scroll callbacks
-
-            window.onscroll = function(ev) {
                 sliderService.selectedPage = Math.round((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)*5);
                 sliderService.scrollTo(sliderService.selectedPage);
-            };
+            });
         },
 
         // Forced scroll
 
         scrollTo : function(id)
         {
-            'use strict'
-
             // Forced scroll
 
             $('html, body').animate({
