@@ -1,5 +1,9 @@
 angular.module("SingleBitApplication", [
-    'NavbarCtrl',
-    'SliderService'
+    // Controllers
+    'MainCtrl',
+
+    // Jquery bits
+    'SliderService',
+    'LayoutEngineService'
 ]);
 

@@ -30,11 +30,11 @@
     <script type="text/javascript" src="../libs/modernizr/modernizr.custom.js"></script>
     <script type="text/javascript" src="../libs/smooth-scroll/smooth-scroll.js"></script>
 </head>
-<body>
+<body ng-controller="MainController">
 
 <!-- Navigation -->
 
-<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController">
+<nav id="menu" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -52,49 +52,54 @@
         <!-- Main Menu Actions -->
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <span class="search-button navbar-nav hover-glow-orange" ng-click="search=!search">
-              <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i>
-              <i ng-hide="search" class="fa fa-search"></i>
-              &nbsp;&nbsp;SEARCH
-        </span>
-            <ul class="nav navbar-nav navbar-left" style="margin-bottom: -10px;">
-                <li><a href="#tf-home" class="page-scroll hover-glow-orange">Home</a></li>
-                <li><a href="#tf-feed" class="page-scroll hover-glow-orange">Feed</a></li>
-                <li><a href="#tf-projects" class="page-scroll hover-glow-orange">Projects</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#tf-about" class="page-scroll hover-glow-orange">About</a></li>
-                <li><a href="#tf-contact" class="page-scroll hover-glow-orange">Contact</a></li>
-            </ul>
+            <div class="navbar-left">
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-click="search=!search">
+                    <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i>
+                    <i ng-hide="search" class="fa fa-search"></i>
+                    &nbsp;&nbsp;SEARCH
+                </span>
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active:selectedPage == 0}" ng-click="scrollTo(0)">
+                    HOME
+                </span>
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active:selectedPage == 1}" ng-click="scrollTo(1)">
+                    FEED
+                </span>
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active:selectedPage == 2}" ng-click="scrollTo(2)">
+                    PROJECTS
+                </span>
+            </div>
+            <div class="navbar-right">
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: (selectedPage == 3) || (selectedPage == 4)}" ng-click="scrollTo(3)">
+                  ABOUT
+                </span>
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: selectedPage == 5}" ng-click="scrollTo(4)">
+                  CONTACT
+                </span>
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Home Page -->
 
-<div id="tf-home" class="text-center">
-    <div class="overlay">
-        <div class="content">
-            <br><br>
-
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <img src="img/company/LOGO.png" class="img-responsive center-block" alt="..." style="width:25%;">
-                </div>
+<div id="home" class="text-center viewport-100">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <img src="img/company/LOGO.png" class="img-responsive center-block" alt="..." style="width:25%;">
             </div>
-            <a href="#tf-feed" class="fa fa-angle-down page-scroll "></a>
         </div>
+        <div ng-click="scrollTo(1)"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
     </div>
 </div>
 
 <!-- Feed Section -->
 
-<div id="tf-feed">
+<div id="feed" class="viewport-100">
     <div class="container">
         <div class="section-title text-center center">
             <h2>Latest <strong>news and activities</strong></h2>
         </div>
-
         <div class="categories">
             <ul class="cat">
                 <li class="pull-right">
@@ -110,7 +115,6 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-
         <div class="row">
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
@@ -127,7 +131,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -143,7 +146,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -159,7 +161,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -175,7 +176,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -191,7 +191,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -207,7 +206,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -223,7 +221,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="view-item">
                     <div class="hover-bg">
@@ -240,7 +237,6 @@
                 </div>
             </div>
         </div>
-
         <div class="categories">
             <ul class="cat">
                 <li class="pull-left">
@@ -263,14 +259,12 @@
 
 <!-- Projects Section -->
 
-<div id="tf-projects" class="text-center">
+<div id="projects" class="text-center viewport-100">
     <div class="container">
-
-        <div class="section-title center space-big">
+        <div class="section-title center">
             <h2>Our <strong>projects</strong></h2>
         </div>
-
-        <div class="row space-small">
+        <div class="row">
             <div class="col-md-3 col-sm-6 project-type-selector">
                 <i class="fa fa-gamepad project-type"></i>
                 <h4><strong>Games</strong></h4>
@@ -297,38 +291,32 @@
 
 <!-- About Section -->
 
-<div id="tf-about" class="text-center">
-    <div class="overlay">
+<div id="about" class="text-center viewport-100">
+    <div class="overlay-100">
         <div class="container">
-
-            <div class="space-big"></div>
-
             <div class="item">
-                    <img src="img/about/01.jpg" alt="..." class="img-circle profile-image">
-                    <div class="profile-info">
-                        <h3>Abdulali Gasimov</h3>
-                        <p>Artist / Developer</p>
-                        <p>I love playing and developing video games.</p>
-                    </div>
-                    <ul class="social-icon-set">
-                        <li><a href="#"><i class="fa fa-facebook social-icon-narrow"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin social-icon-narrow"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus social-icon-wide"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter social-icon-narrow"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube social-icon-narrow"></i></a></li>
-                    </ul>
+                <img src="img/about/01.jpg" alt="..." class="img-circle profile-image">
+                <div class="profile-info">
+                    <h3>Abdulali Gasimov</h3>
+                    <p>Artist / Developer</p>
+                    <p>I love playing and developing video games.</p>
                 </div>
+                <ul class="social-icon-set">
+                    <li><a href="#"><i class="fa fa-facebook social-icon-narrow"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin social-icon-narrow"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus social-icon-wide"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter social-icon-narrow"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube social-icon-narrow"></i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Contact Section -->
 
-<div id="tf-contact" class="text-center">
+<div id="contact" class="text-center viewport-90">
     <div class="container">
-
-        <div class="space-small"></div>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="section-title center">
@@ -372,7 +360,7 @@
 
 <!-- Footer -->
 
-<nav id="footer">
+<div id="footer" class="viewport-10">
     <div class="container">
         <div class="pull-left">
             <p>All Rights Reserved. Copyright © 2016.
@@ -387,10 +375,11 @@
             </ul>
         </div>
     </div>
-</nav>
+</div>
 
-<script type="text/javascript" src="../js/services/custom-slider-service.js"></script>
-<script type="text/javascript" src="../js/controllers/navbar-ctrl.js"></script>
+<script type="text/javascript" src="../js/services/slider-service.js"></script>
+<script type="text/javascript" src="../js/services/layout-engine-service.js"></script>
+<script type="text/javascript" src="../js/controllers/main-ctrl.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>
 
 </body>

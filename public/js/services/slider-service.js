@@ -1,7 +1,18 @@
 angular.module('SliderService', []).factory('Slider', [function() {
+    var sliderService = this;
+
     return {
-        initializeSlider : function () {
+
+        // Initialization
+
+        initializeSlider : function (pages, callback)
+        {
             'use strict';
+
+            // Initialize page list
+
+            sliderService.pages = pages;
+            sliderService.scrollTo = callback;
 
             // Custom slider
 
@@ -33,6 +44,26 @@ angular.module('SliderService', []).factory('Slider', [function() {
                 target: '.navbar-default',
                 offset: 80
             })
+
+            // Scroll callbacks
+
+            window.onscroll = function(ev) {
+                sliderService.selectedPage = Math.round((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)*5);
+                sliderService.scrollTo(sliderService.selectedPage);
+            };
+        },
+
+        // Forced scroll
+
+        scrollTo : function(id)
+        {
+            'use strict'
+
+            // Forced scroll
+
+            $('html, body').animate({
+                scrollTop: $(sliderService.pages[id]).offset().top
+            }, 500);
         }
     }
 }]);

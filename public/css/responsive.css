@@ -1,6 +1,15 @@
 @media (min-width: 768px)
 {
-    .search-button
+    #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        margin-bottom: 0px;
+    }
+    .navbar-right .navbar-button{
+        margin-left: 20px;
+    }
+    .navbar-left .navbar-button{
+        margin-right: 10px;
+    }
+    .navbar-button
     {
         display: table !important;
         margin-left: 10px;
@@ -8,6 +17,13 @@
     .search-pane
     {
         margin-left: 0px;
+    }
+    .navbar-button-right {
+        display: block !important;
+        float:right !important;
+    }
+    .navbar-right {
+        margin-right: 0px;
     }
 }
 @media (max-width: 768px)
@@ -20,14 +36,14 @@
     {
         margin-left:10px;
     }
-    .search-button
+    .navbar-button
     {
         display: table !important;
     }
 }
 @media (max-width: 603px)
 {
-    #tf-feed li.pull-right, #tf-feed li.pull-left
+    #feed li.pull-right, #feed li.pull-left
     {
         margin-top: 10px;
         float: none !important;
