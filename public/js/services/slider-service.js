@@ -41,10 +41,12 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Menu modifier
 
-            $(window).bind('resize', function()
-            {
-                setTimeout(function(){
-                    sliderService.scroll(sliderService.selectedPage, 500);
+            var resizeTimer;
+
+            $(window).on('resize', function(e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    sliderService.scroll(sliderService.selectedPage, 400);
                 }, 100);
             });
 
@@ -70,7 +72,6 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Forced scroll
 
-            sliderService.scroll(sliderService.selectedPage, 500);
 
             // Initialize section sliders
 
