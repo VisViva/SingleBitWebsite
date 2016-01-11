@@ -67,9 +67,9 @@ angular.module('SliderService', []).factory('Slider', [function()
                         enable:true
                     },
                     advanced:{
-                        autoScrollOnFocus: false
-                    },
-                    updateOnContentResize: true
+                        autoScrollOnFocus: false,
+                        updateOnContentResize: true
+                    }
                 });
 
                 $('.scrollable-dark').mCustomScrollbar( {
@@ -79,9 +79,33 @@ angular.module('SliderService', []).factory('Slider', [function()
                         enable:true
                     },
                     advanced:{
-                        autoScrollOnFocus: false
+                        autoScrollOnFocus: false,
+                        updateOnContentResize: true
+                    }
+                });
+
+                $('.scrollable-light-inside').mCustomScrollbar( {
+                    theme:"inset",
+                    scrollbarPosition:"inside",
+                    scrollButtons:{
+                        enable:true
                     },
-                    updateOnContentResize: true
+                    advanced:{
+                        autoScrollOnFocus: false,
+                        updateOnContentResize: true
+                    }
+                });
+
+                $('.scrollable-dark-inside').mCustomScrollbar( {
+                    theme:"inset-dark",
+                    scrollbarPosition:"inside",
+                    scrollButtons:{
+                        enable:true
+                    },
+                    advanced:{
+                        autoScrollOnFocus: false,
+                        updateOnContentResize: true
+                    }
                 });
             });
         },
