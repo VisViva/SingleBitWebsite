@@ -1,4 +1,4 @@
-angular.module('LayoutEngineService', []).factory('LayoutEngine', [function() {
+angular.module('UserInterfaceService', []).factory('UserInterface', [function() {
     return {
 
         // Initialization
@@ -56,6 +56,11 @@ angular.module('LayoutEngineService', []).factory('LayoutEngine', [function() {
                     calculateDimensions(classes);
                 }, 100);
             });
+        },
+
+        hideMenu : function()
+        {
+            $('.navbar-collapse').collapse('hide');
         }
     }
 }]);

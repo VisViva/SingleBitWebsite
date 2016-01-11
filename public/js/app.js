@@ -4,6 +4,6 @@ angular.module("SingleBitApplication", [
 
     // Jquery bits
     'SliderService',
-    'LayoutEngineService'
+    'UserInterfaceService'
 ]);
 

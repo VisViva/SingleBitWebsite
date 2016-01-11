@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, Slider, LayoutEngine) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, Slider, UserInterface) {
 
     // Initialize slider
 
@@ -17,7 +17,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Sli
 
     // Initialize layout engine
 
-    LayoutEngine.initializeLayoutEngine([
+    UserInterface.initializeLayoutEngine([
         {type: "spc", className:"viewport-100", height:100},
         {type: "spc", className:"viewport-90", height:90},
         {type: "spc", className:"viewport-80", height:80},
@@ -39,12 +39,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Sli
     $scope.toggleSearch = function()
     {
         $scope.search=!$scope.search;
+        UserInterface.hideMenu();
     }
     $scope.scrollTo = function(id)
     {
         Slider.scrollTo(id);
-
-        $('#content').mCustomScrollbar('update');
+        UserInterface.hideMenu();
     }
 })
 
