@@ -62,8 +62,9 @@ angular.module('SliderService', []).factory('Slider', [function()
             $(window).load(function() {
                 $('.scrollable-light').mCustomScrollbar( {
                     theme:"inset",
+                    scrollbarPosition:"outside",
                     scrollButtons:{
-                        enable:false
+                        enable:true
                     },
                     advanced:{
                         autoScrollOnFocus: false
@@ -73,8 +74,9 @@ angular.module('SliderService', []).factory('Slider', [function()
 
                 $('.scrollable-dark').mCustomScrollbar( {
                     theme:"inset-dark",
+                    scrollbarPosition:"outside",
                     scrollButtons:{
-                        enable:false
+                        enable:true
                     },
                     advanced:{
                         autoScrollOnFocus: false
