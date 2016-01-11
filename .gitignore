@@ -1,2 +1,11 @@
 .idea/*
 node_modules/
+public/libs/angular/
+public/libs/angular-route/
+public/libs/bootstrap/
+public/libs/font-awesome
+public/libs/jquery
+public/libs/open-sans-fontface
+public/libs/lato
+public/libs/malihu-custom-scrollbar-plugin
+public/libs/jquery-mousewheel
