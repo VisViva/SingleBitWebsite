@@ -48,9 +48,13 @@ angular.module('LayoutEngineService', []).factory('LayoutEngine', [function() {
 
             // Initialize custom sliders
 
-            $(window).bind('resize', function()
-            {
-                calculateDimensions(classes);
+            var resizeTimer;
+
+            $(window).on('resize', function(e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    calculateDimensions(classes);
+                }, 100);
             });
         }
     }

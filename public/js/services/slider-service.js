@@ -46,8 +46,8 @@ angular.module('SliderService', []).factory('Slider', [function()
             $(window).on('resize', function(e) {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
-                    sliderService.scroll(sliderService.selectedPage, 400);
-                }, 100);
+                    sliderService.scroll(sliderService.selectedPage, 300);
+                }, 200);
             });
 
             $(window).bind('scroll', function()
