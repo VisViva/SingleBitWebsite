@@ -1,6 +1,10 @@
 {
   "name": "starter-node-angular",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "bower install"
+  },
   "dependencies": {
     "bower": "0.6.x",
     "express" : "~4.5.1",
@@ -8,8 +12,7 @@
     "body-parser" : "~1.4.2",
     "method-override" : "~2.0.2"
   },
-  "scripts": {
-    "start": "node index.js",
-    "postinstall": "bower install"
+  "engines": {
+    "node": "0.12.7"
   }
 }
