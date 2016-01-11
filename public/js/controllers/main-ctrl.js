@@ -36,6 +36,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Sli
     // Defaults
 
     $scope.selectedPage = 0;
+    $scope.toggleSearch = function()
+    {
+        $scope.search=!$scope.search;
+    }
     $scope.scrollTo = function(id)
     {
         Slider.scrollTo(id);

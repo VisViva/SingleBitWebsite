@@ -2,6 +2,16 @@ angular.module('SliderService', []).factory('Slider', [function()
 {
     var sliderService = this;
 
+    sliderService.scroll = function(page, speed)
+    {
+        $('html, body').animate({
+            scrollTop: $(sliderService.pages[page]).offset().top
+        }, speed);
+    };
+
+    sliderService.selectedPage = 0;
+    sliderService.pages = [];
+
     return {
 
         // Initialization
@@ -31,6 +41,13 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Menu modifier
 
+            $(window).bind('resize', function()
+            {
+                setTimeout(function(){
+                    sliderService.scroll(sliderService.selectedPage, 500);
+                }, 100);
+            });
+
             $(window).bind('scroll', function()
             {
                 var navHeight = $(window).height() - 100;
@@ -53,9 +70,7 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Forced scroll
 
-            $('html, body').animate({
-                scrollTop: $(sliderService.pages[0]).offset().top
-            }, 500);
+            sliderService.scroll(sliderService.selectedPage, 500);
 
             // Initialize section sliders
 
@@ -116,9 +131,7 @@ angular.module('SliderService', []).factory('Slider', [function()
         {
             // Forced scroll
 
-            $('html, body').animate({
-                scrollTop: $(sliderService.pages[id]).offset().top
-            }, 500);
+            sliderService.scroll(id, 500);
         }
     }
 }]);

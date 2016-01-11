@@ -48,11 +48,10 @@ angular.module('LayoutEngineService', []).factory('LayoutEngine', [function() {
 
             // Initialize custom sliders
 
-            window.onresize = function(event) {
+            $(window).bind('resize', function()
+            {
                 calculateDimensions(classes);
-                $('.scrollable-dark').mCustomScrollbar
-            };
-
+            });
         }
     }
 }]);
