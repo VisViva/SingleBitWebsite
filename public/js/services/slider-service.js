@@ -9,6 +9,65 @@ angular.module('SliderService', []).factory('Slider', [function()
         }, speed);
     };
 
+    sliderService.destroyScrollbars = function()
+    {
+        $('.scrollable-light').mCustomScrollbar('destroy');
+        $('.scrollable-dark').mCustomScrollbar('destroy');
+        $('.scrollable-light-inside').mCustomScrollbar('destroy');
+        $('.scrollable-dark-inside').mCustomScrollbar('destroy');
+    };
+
+    sliderService.initializeScrollbars = function()
+    {
+        $('.scrollable-light').mCustomScrollbar( {
+            theme:"inset",
+            scrollbarPosition:"outside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+
+        $('.scrollable-dark').mCustomScrollbar( {
+            theme:"inset-dark",
+            scrollbarPosition:"outside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+
+        $('.scrollable-light-inside').mCustomScrollbar( {
+            theme:"inset",
+            scrollbarPosition:"inside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+
+        $('.scrollable-dark-inside').mCustomScrollbar( {
+            theme:"inset-dark",
+            scrollbarPosition:"inside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+    };
+
     sliderService.selectedPage = 0;
     sliderService.pages = [];
 
@@ -59,7 +118,7 @@ angular.module('SliderService', []).factory('Slider', [function()
                     $('.navbar-default').removeClass('on');
                 }
 
-                sliderService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)*5);
+                sliderService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (sliderService.pages.length - 1));
                 sliderService.scrollTo(sliderService.selectedPage);
             });
 
@@ -72,57 +131,12 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Forced scroll
 
+            sliderService.scroll(0, 500);
 
             // Initialize section sliders
 
             $(window).load(function() {
-                $('.scrollable-light').mCustomScrollbar( {
-                    theme:"inset",
-                    scrollbarPosition:"outside",
-                    scrollButtons:{
-                        enable:true
-                    },
-                    advanced:{
-                        autoScrollOnFocus: false,
-                        updateOnContentResize: true
-                    }
-                });
-
-                $('.scrollable-dark').mCustomScrollbar( {
-                    theme:"inset-dark",
-                    scrollbarPosition:"outside",
-                    scrollButtons:{
-                        enable:true
-                    },
-                    advanced:{
-                        autoScrollOnFocus: false,
-                        updateOnContentResize: true
-                    }
-                });
-
-                $('.scrollable-light-inside').mCustomScrollbar( {
-                    theme:"inset",
-                    scrollbarPosition:"inside",
-                    scrollButtons:{
-                        enable:true
-                    },
-                    advanced:{
-                        autoScrollOnFocus: false,
-                        updateOnContentResize: true
-                    }
-                });
-
-                $('.scrollable-dark-inside').mCustomScrollbar( {
-                    theme:"inset-dark",
-                    scrollbarPosition:"inside",
-                    scrollButtons:{
-                        enable:true
-                    },
-                    advanced:{
-                        autoScrollOnFocus: false,
-                        updateOnContentResize: true
-                    }
-                });
+                sliderService.initializeScrollbars();
             });
         },
 

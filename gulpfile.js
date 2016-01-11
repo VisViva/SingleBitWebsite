@@ -4,34 +4,42 @@ var gulp = require('gulp'),
     gp_replace = require('gulp-replace');
 
 
-var scripts = [
-    // Jquery
-    'public/libs/jquery/dist/jquery.min.js',
-    'public/libs/jquery-mousewheel/jquery.mousewheel.min.js',
-    // Bootstrap
-    'public/libs/bootstrap/dist/js/bootstrap.min.js',
-    // Modernizr
-    'public/libs/modernizr/modernizr.custom.js',
-    // Smooth scroll
-    'public/libs/smooth-scroll/smooth-scroll.js',
-    // Malihu custom scrollbar
-    'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
-    // Angular
-    'public/libs/angular/angular.min.js',
-    'public/libs/angular-route/angular-route.min.js',
+var scripts = {
+    scriptsSimple : [
+        // Jquery
+        'public/libs/jquery/dist/jquery.min.js',
+        'public/libs/jquery-mousewheel/jquery.mousewheel.min.js',
+        // Bootstrap
+        'public/libs/bootstrap/dist/js/bootstrap.min.js',
+        // Modernizr
+        'public/libs/modernizr/modernizr.custom.js',
+        // Smooth scroll
+        'public/libs/smooth-scroll/smooth-scroll.js',
+        // Malihu custom scrollbar
+        'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+        // Angular
+        'public/libs/angular/angular.min.js',
+        'public/libs/angular-route/angular-route.min.js',
 
-    // Controllers
-    'public/js/controllers/main-ctrl.js',
-    // Services
-    'public/js/services/slider-service.js',
-    'public/js/services/user-interface-service.js',
-    // Application
-    'public/js/app.js',
-]
+        // Controllers
+        'public/js/controllers/main-ctrl.js',
+        'public/js/controllers/feed-ctrl.js',
+        'public/js/controllers/projects-ctrl.js',
+        // Services
+        'public/js/services/slider-service.js',
+        'public/js/services/user-interface-service.js',
+        // Application
+        'public/dist/temp/routes.js', // Temporary
+        'public/js/app.js'
+    ],
+
+    // Routes
+    routes: 'public/js/routes.js'
+}
 
 var stylesheets = {
     // Styles
-    styles:[
+    stylesheetsSimple:[
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
 
@@ -63,64 +71,72 @@ var fonts = [
 
 // Low level tasks
 
-gulp.task('styles', ['cleanup'], function(){
-    return gulp.src(stylesheets.styles)
-        .pipe(gp_replace("url(../img", "url(../../img"))
-        .pipe(gp_concat('styles.css'))
-        .pipe(gulp.dest('public/dist/css/temp'));
+gulp.task('routes', ['cleanup-pre'], function(){
+    return gulp.src(scripts.routes)
+        .pipe(gp_replace("../views", "../../views"))
+        .pipe(gulp.dest('public/dist/temp'));
 });
 
-gulp.task('bootstrap', ['cleanup'], function(){
-    return gulp.src(stylesheets.bootstrap)
-        .pipe(gulp.dest('public/dist/css/temp'));
-});
-
-gulp.task('fontawesome', ['cleanup'], function(){
-    return gulp.src(stylesheets.fontawesome)
-        .pipe(gulp.dest('public/dist/css/temp'));
-});
-
-gulp.task('lato', ['cleanup'], function(){
-    return gulp.src(stylesheets.lato)
-        .pipe(gp_replace("../font", "../fonts"))
-        .pipe(gulp.dest('public/dist/css/temp'));
-});
-
-gulp.task('opensans', ['cleanup'], function(){
-    return gulp.src(stylesheets.opensans)
-        .pipe(gp_replace("./fonts", "../fonts"))
-        .pipe(gulp.dest('public/dist/css/temp'));
-});
-
-gulp.task('combine-stylesheets', ['styles', 'bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
-    return gulp.src('public/dist/css/temp/*')
-        .pipe(gp_concat('stylesheets.css'))
-        .pipe(gulp.dest('public/dist/css'));
-});
-
-gulp.task('cleanup-temp', ['combine-stylesheets'], function(){
-    return del('public/dist/css/temp');
-});
-
-// High level tasks
-
-gulp.task('scripts', ['cleanup'], function(){
-    return gulp.src(scripts)
+gulp.task('combine-scripts', ['routes'], function(){
+    return gulp.src(scripts.scriptsSimple)
         .pipe(gp_concat('scripts.js'))
         .pipe(gulp.dest('public/dist/js'));
 });
 
-gulp.task('stylesheets', ['styles', 'bootstrap', 'fontawesome', 'lato', 'opensans', 'combine-stylesheets', 'cleanup-temp']);
+gulp.task('stylesheets-simple', ['cleanup-pre'], function(){
+    return gulp.src(stylesheets.stylesheetsSimple)
+        .pipe(gp_replace("url(../img", "url(../../img"))
+        .pipe(gp_concat('stylesheets-simple.css'))
+        .pipe(gulp.dest('public/dist/temp'));
+});
 
-gulp.task('fonts', ['cleanup'], function(){
+gulp.task('bootstrap', ['cleanup-pre'], function(){
+    return gulp.src(stylesheets.bootstrap)
+        .pipe(gulp.dest('public/dist/temp'));
+});
+
+gulp.task('fontawesome', ['cleanup-pre'], function(){
+    return gulp.src(stylesheets.fontawesome)
+        .pipe(gulp.dest('public/dist/temp'));
+});
+
+gulp.task('lato', ['cleanup-pre'], function(){
+    return gulp.src(stylesheets.lato)
+        .pipe(gp_replace("../font", "../fonts"))
+        .pipe(gulp.dest('public/dist/temp'));
+});
+
+gulp.task('opensans', ['cleanup-pre'], function(){
+    return gulp.src(stylesheets.opensans)
+        .pipe(gp_replace("./fonts", "../fonts"))
+        .pipe(gulp.dest('public/dist/temp'));
+});
+
+gulp.task('combine-stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
+    return gulp.src('public/dist/temp/*.css')
+        .pipe(gp_concat('stylesheets.css'))
+        .pipe(gulp.dest('public/dist/css'));
+});
+
+// High level tasks
+
+gulp.task('scripts', ['routes', 'combine-scripts']);
+
+gulp.task('stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lato', 'opensans', 'combine-stylesheets']);
+
+gulp.task('fonts', ['cleanup-pre'], function(){
     return gulp.src(fonts)
         .pipe(gulp.dest('public/dist/fonts'));
 });
 
-gulp.task('cleanup', function(){
+gulp.task('cleanup-pre', function(){
     return del('public/dist/*');
+});
+
+gulp.task('cleanup-post', ['combine-stylesheets', 'combine-scripts'], function(){
+    return del('public/dist/temp');
 });
 
 // Default task
 
-gulp.task('default', ['cleanup', 'scripts', 'stylesheets', 'fonts']);
+gulp.task('default', ['cleanup-pre', 'scripts', 'stylesheets', 'fonts', 'cleanup-post']);

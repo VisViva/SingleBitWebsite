@@ -1,11 +1,10 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, Slider, UserInterface) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $location, Slider, UserInterface) {
 
     // Initialize slider
 
     Slider.initializeSlider([
         '#home',
-        '#feed',
-        '#projects',
+        '#view',
         '#about',
         '#contact',
         '#footer'
@@ -45,6 +44,18 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Sli
     {
         Slider.scrollTo(id);
         UserInterface.hideMenu();
+    }
+    $scope.gotoFeed = function()
+    {
+        Slider.scrollTo(1);
+        UserInterface.hideMenu();
+        $location.path('/feed');
+    }
+    $scope.gotoProjects = function()
+    {
+        Slider.scrollTo(1);
+        UserInterface.hideMenu();
+        $location.path('/projects');
     }
 })
 
