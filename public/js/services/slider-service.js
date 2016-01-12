@@ -19,18 +19,6 @@ angular.module('SliderService', []).factory('Slider', [function()
 
     sliderService.initializeScrollbars = function()
     {
-        $('.scrollable-light').mCustomScrollbar( {
-            theme:"inset",
-            scrollbarPosition:"outside",
-            scrollButtons:{
-                enable:true
-            },
-            advanced:{
-                autoScrollOnFocus: false,
-                updateOnContentResize: true
-            }
-        });
-
         $('.scrollable-dark').mCustomScrollbar( {
             theme:"inset-dark",
             scrollbarPosition:"outside",
@@ -124,12 +112,12 @@ angular.module('SliderService', []).factory('Slider', [function()
 
             // Ignore scrolling with mouse wheel
 
-            $(window).bind('wheel', function()
+            /*$(window).bind('wheel', function()
             {
                 return false;
-            });
+            });*/
 
-            // Forced scroll
+            // Forced scroll on initialization
 
             sliderService.scroll(0, 500);
 
