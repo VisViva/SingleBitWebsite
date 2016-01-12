@@ -5,5 +5,6 @@ angular.module('ProjectsCtrl', []).controller('ProjectsController', function($sc
         UserInterface.updateService();
         PageNavigation.updateService();
         spinnerService.hide('viewSpinner');
+        UserInterface.setZoomEnabled();
     });
 });

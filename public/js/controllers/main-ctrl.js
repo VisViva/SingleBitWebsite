@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $location, PageNavigation, UserInterface, spinnerService) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $timeout, $location, PageNavigation, UserInterface, spinnerService) {
 
     // Initialize slider
 
@@ -33,39 +33,38 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
     // Get current location and scroll if needed
 
-    $scope.$on('$viewContentLoaded', function(){
-        UserInterface.updateService();
-        PageNavigation.updateService();
-        spinnerService.hide('viewSpinner');
-    });
-
     switch ($location.path())
     {
         case '/home':
         {
+            UserInterface.zoomOut();
             PageNavigation.scrollByPageNumber(0);
-            break;
-        }
-        case '/about':
-        {
-            PageNavigation.scrollByPageNumber(2);
-            break;
-        }
-        case '/contact':
-        {
-            PageNavigation.scrollByPageNumber(4);
             break;
         }
         case '/feed':
         {
             PageNavigation.selectedView = 'feed';
             PageNavigation.scrollByPageNumber(1);
+            $timeout(function(){UserInterface.zoomIn();}, 300);
             break;
         }
         case '/projects':
         {
             PageNavigation.selectedView = 'projects';
             PageNavigation.scrollByPageNumber(1);
+            $timeout(function(){UserInterface.zoomIn();}, 300);
+            break;
+        }
+        case '/about':
+        {
+            UserInterface.zoomOut();
+            PageNavigation.scrollByPageNumber(2);
+            break;
+        }
+        case '/contact':
+        {
+            UserInterface.zoomOut();
+            PageNavigation.scrollByPageNumber(4);
             break;
         }
     }
@@ -83,7 +82,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     $scope.scrollByPageNumber = function(pageNumber)
     {
         PageNavigation.scrollByPageNumber(pageNumber);
-        UserInterface.hideMenu();
     }
 
     // Actions
@@ -95,32 +93,104 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     }
     $scope.gotoHome = function()
     {
-        $location.path('/home');
-        if (!$scope.isPageSelected(0)) $scope.scrollByPageNumber(0);
+        UserInterface.hideMenu();
+        if ($scope.isPageSelected(1)) {
+            UserInterface.zoomOut();
+            $timeout(function () {
+                $location.path('/home');
+                if (!$scope.isPageSelected(0)) $scope.scrollByPageNumber(0);
+            }, 300);
+        }
+        else{
+            $location.path('/home');
+            if (!$scope.isPageSelected(0)) $scope.scrollByPageNumber(0);
+        }
     }
     $scope.gotoFeed = function()
     {
-        spinnerService.show('viewSpinner');
-        $location.path('/feed');
-        PageNavigation.selectedView = 'feed';
-        $scope.scrollByPageNumber(1);
+        UserInterface.hideMenu();
+        if ($scope.isPageSelected(1))
+        {
+            if (PageNavigation.selectedView != 'feed')
+            {
+                UserInterface.zoomOut();
+                $timeout(function()
+                {
+                    spinnerService.show('viewSpinner');
+                    $location.path('/feed');
+                    PageNavigation.selectedView = 'feed';
+                    UserInterface.zoomIn(); // Try zooming in until zoomed in
+                }, 300);
+            }
+        }
+        else
+        {
+            spinnerService.show('viewSpinner');
+            $location.path('/feed');
+            PageNavigation.selectedView = 'feed';
+            $scope.scrollByPageNumber(1);
+            $timeout(function(){
+                UserInterface.zoomIn(); // Try zooming in until zoomed in
+            }, 400);
+        }
     }
     $scope.gotoProjects = function()
     {
-        spinnerService.show('viewSpinner');
-        $location.path('/projects');
-        PageNavigation.selectedView = 'projects';
-        $scope.scrollByPageNumber(1);
+        UserInterface.hideMenu();
+        if ($scope.isPageSelected(1))
+        {
+            if (PageNavigation.selectedView != 'projects')
+            {
+                UserInterface.zoomOut();
+                $timeout(function ()
+                {
+                    spinnerService.show('viewSpinner');
+                    $location.path('/projects');
+                    PageNavigation.selectedView = 'projects';
+                    UserInterface.zoomIn(); // Try zooming in until zoomed in
+                }, 300);
+            }
+        }
+        else
+        {
+            spinnerService.show('viewSpinner');
+            $location.path('/projects');
+            PageNavigation.selectedView = 'projects';
+            $scope.scrollByPageNumber(1);
+            $timeout(function () {
+                UserInterface.zoomIn(); // Try zooming in until zoomed in
+            }, 400);
+        }
     }
     $scope.gotoAbout = function()
     {
-        $location.path('/about');
-        if (!$scope.isPageSelected(2)) $scope.scrollByPageNumber(2);
+        UserInterface.hideMenu();
+        if ($scope.isPageSelected(1)) {
+            UserInterface.zoomOut();
+            $timeout(function(){
+                $location.path('/about');
+                if (!$scope.isPageSelected(2)) $scope.scrollByPageNumber(2);
+            }, 300);
+        }
+        else {
+            $location.path('/about');
+            if (!$scope.isPageSelected(2)) $scope.scrollByPageNumber(2);
+        }
     }
     $scope.gotoContact = function()
     {
-        $location.path('/contact');
-        if (!(($scope.isPageSelected(3)) || ($scope.isPageSelected(4)))) $scope.scrollByPageNumber(4);
+        UserInterface.hideMenu();
+        if ($scope.isPageSelected(1)) {
+            UserInterface.zoomOut();
+            $timeout(function () {
+                $location.path('/contact');
+                if (!(($scope.isPageSelected(3)) || ($scope.isPageSelected(4)))) $scope.scrollByPageNumber(4);
+            }, 300);
+        }
+        else {
+            $location.path('/contact');
+            if (!$scope.isPageSelected(3)) $scope.scrollByPageNumber(3);
+        }
     }
 })
 

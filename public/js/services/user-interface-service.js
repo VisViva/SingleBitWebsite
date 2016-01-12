@@ -3,6 +3,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
     var userInterface = this;
 
     userInterface.classes = [];
+    userInterface.zoomInEnabled = false;
 
     userInterface.calculateDimensions = function()
     {
@@ -67,9 +68,36 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
             userInterface.calculateDimensions();
         },
 
+        // Toggling menu
+
         hideMenu : function()
         {
             $('.navbar-collapse').collapse('hide');
+        },
+
+        // Zooming page
+
+        zoomIn : function zoom()
+        {
+            if (userInterface.zoomInEnabled == false)
+            {
+                setTimeout(function(){zoom();}, 100);
+            }
+            else
+            {
+                $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+                userInterface.zoomInEnabled = false;
+            }
+        },
+
+        zoomOut : function()
+        {
+            $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+        },
+
+        setZoomEnabled : function()
+        {
+            userInterface.zoomInEnabled = true;
         }
     }
 }]);

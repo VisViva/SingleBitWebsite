@@ -84,7 +84,7 @@
 
     <div class="viewport-20"></div>
 
-    <div ng-click="scrollByPageNumber(1)"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
+    <div ng-click="gotoFeed()"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
 </div>
 
 <!-- View Section -->
@@ -92,7 +92,9 @@
 <div id="view" class="viewport-100">
     <spinner name="viewSpinner" class="spinner viewport-100" show="true">
     </spinner>
-    <div ng-view></div>
+    <div class="zoom-in-start">
+        <div ng-view></div>
+    </div>
 </div>
 <!-- About Section -->
 

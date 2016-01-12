@@ -5,5 +5,6 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, Use
         UserInterface.updateService();
         PageNavigation.updateService();
         spinnerService.hide('viewSpinner');
+        UserInterface.setZoomEnabled();
     });
 });

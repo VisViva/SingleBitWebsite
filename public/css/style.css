@@ -547,6 +547,56 @@
 		background:url(../img/animated/loading.gif) no-repeat center center;
 		background-size: 80px 80px;
 	}
+	.zoom-in-start
+	{
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		-ms-transition: all 0.3s;
+		-o-transition: all 0.3s;
+		transition: all 0.3s;
+
+		-ms-transform: scale(0.1);
+		-ms-transform-origin: center;
+		-moz-transform: scale(0.1);
+		-moz-transform-origin: center;
+		-o-transform: scale(0.1);
+		-o-transform-origin: center;
+		-webkit-transform: scale(0.1);
+		-webkit-transform-origin: center;
+		transform: scale(0.1);
+		transform-origin: center;
+
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+		filter: alpha(opacity=0);
+		-moz-opacity: 0;
+		-khtml-opacity: 0;
+		opacity: 0;
+	}
+	.zoom-in-end
+	{
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		-ms-transition: all 0.3s;
+		-o-transition: all 0.3s;
+		transition: all 0.3s;
+
+		-ms-transform: scale(1);
+		-ms-transform-origin: center;
+		-moz-transform: scale(1);
+		-moz-transform-origin: center;
+		-o-transform: scale(1);
+		-o-transform-origin: center;
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: center;
+		transform: scale(1);
+		transform-origin: center;
+
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+		filter: alpha(opacity=100);
+		-moz-opacity: 100;
+		-khtml-opacity: 100;
+		opacity: 100;
+	}
 
 /* General **************************************************/
 
