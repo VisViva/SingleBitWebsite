@@ -69,7 +69,7 @@ var fonts = [
     'public/libs/open-sans-fontface/fonts/**/*'
 ]
 
-// Low level tasks
+// Scripts
 
 gulp.task('routes', ['cleanup-pre'], function(){
     return gulp.src(scripts.routes)
@@ -82,6 +82,8 @@ gulp.task('combine-scripts', ['routes'], function(){
         .pipe(gp_concat('scripts.js'))
         .pipe(gulp.dest('public/dist/js'));
 });
+
+// Stylesheets
 
 gulp.task('stylesheets-simple', ['cleanup-pre'], function(){
     return gulp.src(stylesheets.stylesheetsSimple)
@@ -120,6 +122,10 @@ gulp.task('combine-stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesom
 
 // High level tasks
 
+gulp.task('cleanup-pre', function(){
+    return del('public/dist/*');
+});
+
 gulp.task('scripts', ['routes', 'combine-scripts']);
 
 gulp.task('stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lato', 'opensans', 'combine-stylesheets']);
@@ -127,10 +133,6 @@ gulp.task('stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lat
 gulp.task('fonts', ['cleanup-pre'], function(){
     return gulp.src(fonts)
         .pipe(gulp.dest('public/dist/fonts'));
-});
-
-gulp.task('cleanup-pre', function(){
-    return del('public/dist/*');
 });
 
 gulp.task('cleanup-post', ['combine-stylesheets', 'combine-scripts'], function(){

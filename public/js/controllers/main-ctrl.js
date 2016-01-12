@@ -47,14 +47,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     }
     $scope.gotoFeed = function()
     {
-        Slider.scrollTo(1);
-        UserInterface.hideMenu();
+        $scope.scrollTo(1);
         $location.path('/feed');
     }
     $scope.gotoProjects = function()
     {
-        Slider.scrollTo(1);
-        UserInterface.hideMenu();
+        $scope.scrollTo(1);
         $location.path('/projects');
     }
 })
