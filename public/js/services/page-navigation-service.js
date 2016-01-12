@@ -1,15 +1,22 @@
-angular.module('SliderService', []).factory('Slider', [function()
+angular.module('PageNavigationService', []).factory('PageNavigation', [function()
 {
-    var sliderService = this;
+    var pageNavigationService = this;
 
-    sliderService.scroll = function(page, speed)
+    pageNavigationService.scrollByPageName = function(pageName, speed)
     {
         $('html, body').animate({
-            scrollTop: $(sliderService.pages[page]).offset().top
+            scrollTop: $(pageName).offset().top
         }, speed);
     };
 
-    sliderService.destroyScrollbars = function()
+    pageNavigationService.scrollByPageNumber = function(pageNumber, speed)
+    {
+        $('html, body').animate({
+            scrollTop: $(pageNavigationService.pages[pageNumber]).offset().top
+        }, speed);
+    };
+
+    pageNavigationService.destroyScrollbars = function()
     {
         $('.scrollable-light').mCustomScrollbar('destroy');
         $('.scrollable-dark').mCustomScrollbar('destroy');
@@ -17,7 +24,7 @@ angular.module('SliderService', []).factory('Slider', [function()
         $('.scrollable-dark-inside').mCustomScrollbar('destroy');
     };
 
-    sliderService.initializeScrollbars = function()
+    pageNavigationService.initializeScrollbars = function()
     {
         $('.scrollable-dark').mCustomScrollbar( {
             theme:"inset-dark",
@@ -56,20 +63,20 @@ angular.module('SliderService', []).factory('Slider', [function()
         });
     };
 
-    sliderService.selectedPage = 0;
-    sliderService.selectedView = 'empty';
-    sliderService.pages = [];
+    pageNavigationService.selectedPage = 0;
+    pageNavigationService.selectedView = 'empty';
+    pageNavigationService.pages = [];
 
     return {
 
         // Initialization
 
-        initializeSlider : function (pages, callback)
+        initializeService : function (pages, callback)
         {
             // Initialize page list
 
-            sliderService.pages = pages;
-            sliderService.onScroll = callback;
+            pageNavigationService.pages = pages;
+            pageNavigationService.onScroll = callback;
 
             // Custom slider
 
@@ -94,7 +101,7 @@ angular.module('SliderService', []).factory('Slider', [function()
             $(window).on('resize', function(e) {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
-                    sliderService.scroll(sliderService.selectedPage, 300);
+                    pageNavigationService.scrollByPageNumber(pageNavigationService.selectedPage, 300);
                 }, 200);
             });
 
@@ -107,8 +114,8 @@ angular.module('SliderService', []).factory('Slider', [function()
                     $('.navbar-default').removeClass('on');
                 }
 
-                sliderService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (sliderService.pages.length - 1));
-                sliderService.onScroll();
+                pageNavigationService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (pageNavigationService.pages.length - 1));
+                pageNavigationService.onScroll();
             });
 
             // Ignore scrolling with mouse wheel
@@ -118,42 +125,41 @@ angular.module('SliderService', []).factory('Slider', [function()
                 return false;
             });
 
-            // Forced scroll on initialization
-
-            sliderService.scroll(0, 500);
-
             // Initialize section sliders
 
             $(window).load(function() {
-                sliderService.initializeScrollbars();
+                pageNavigationService.initializeScrollbars();
             });
         },
 
         // Forced scroll
 
-        scrollTo : function(id)
+        scrollByPageNumber : function(pageNumber)
         {
-            // Forced scroll
+            pageNavigationService.scrollByPageNumber(pageNumber, 500);
+        },
 
-            sliderService.scroll(id, 500);
+        scrollByPageName : function(pageName)
+        {
+            pageNavigationService.scrollByPageName(pageName, 500);
         },
 
         // Selected page
 
         getSelectedPage : function()
         {
-            return sliderService.selectedPage;
+            return pageNavigationService.selectedPage;
         },
 
         // Selected page
 
         setSelectedPage : function(page)
         {
-            sliderService.selectedPage = page;
+            pageNavigationService.selectedPage = page;
         },
 
         // Selected view
 
-        selectedView : sliderService.selectedView
+        selectedView : pageNavigationService.selectedView
     }
 }]);

@@ -49,7 +49,7 @@
                     <i ng-hide="search" class="fa fa-search"></i>
                     &nbsp;&nbsp;SEARCH
                 </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="scrollTo(0)">
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">
                     HOME
                 </span>
                 <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">
@@ -60,10 +60,10 @@
                 </span>
             </div>
             <div class="navbar-right">
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(2)}" ng-click="scrollTo(2)">
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(2)}" ng-click="gotoAbout()">
                   ABOUT
                 </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(3) || isPageSelected(4)}" ng-click="scrollTo(4)">
+                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(3) || isPageSelected(4)}" ng-click="gotoContact()">
                   CONTACT
                 </span>
             </div>
@@ -84,7 +84,7 @@
 
     <div class="viewport-20"></div>
 
-    <div ng-click="scrollTo(1)"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
+    <div ng-click="scrollByPageNumber(1)"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
 </div>
 
 <!-- View Section -->

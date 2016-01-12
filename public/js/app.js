@@ -3,7 +3,7 @@ angular.module("SingleBitApplication", [
     'ngRoute',
 
     // Routes
-    'appRoutes',
+    'Routes',
 
     // Controllers
     'MainCtrl',
@@ -11,7 +11,7 @@ angular.module("SingleBitApplication", [
     'ProjectsCtrl',
 
     // Jquery bits
-    'SliderService',
+    'PageNavigationService',
     'UserInterfaceService'
 ]);
 

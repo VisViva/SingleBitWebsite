@@ -44,7 +44,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
         // Initialization
 
-        initializeLayoutEngine : function (classes) {
+        initializeService : function (classes) {
             'use strict';
 
             userInterface.classes = classes;
@@ -62,7 +62,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
             });
         },
 
-        reinitializeLayoutEngine : function()
+        updateService : function()
         {
             userInterface.calculateDimensions();
         },
