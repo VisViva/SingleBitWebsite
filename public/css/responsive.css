@@ -4,9 +4,17 @@
     {
         margin-bottom: 0px;
     }
+    .navbar-right
+    {
+        margin-bottom:0px;
+    }
+    .navbar-right .navbar-button-space
+    {
+        margin-right: 10px;
+    }
     .navbar-right .navbar-button
     {
-        margin-left: 20px;
+        margin-right: 10px;
     }
     .navbar-left .navbar-button
     {

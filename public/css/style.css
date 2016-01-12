@@ -25,6 +25,10 @@
 		outline: none;
 		border-color: #FCAC45;
 	}
+	.navbar-right
+	{
+		margin-bottom:20px;
+	}
 	.navbar-button
 	{
 		display: table !important;
@@ -49,7 +53,6 @@
 	}
 	#menu.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 		border-color: #444;
-		margin-bottom: 10px;
 	}
 	#menu.navbar-default
 	{
@@ -84,6 +87,7 @@
 	{
 		border: 0px;
 		border-radius: 0px;
+		margin-right: 0px !important;
 	}
 	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
 	{
