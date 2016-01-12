@@ -20,6 +20,7 @@ var scripts = {
         // Angular
         'public/libs/angular/angular.min.js',
         'public/libs/angular-route/angular-route.min.js',
+        'public/libs/angular-spinners/dist/angular-spinners.min.js',
 
         // Controllers
         'public/js/controllers/main-ctrl.js',

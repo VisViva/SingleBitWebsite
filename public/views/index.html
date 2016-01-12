@@ -90,9 +90,10 @@
 <!-- View Section -->
 
 <div id="view" class="viewport-100">
+    <spinner name="viewSpinner" class="spinner viewport-100" show="true">
+    </spinner>
     <div ng-view></div>
 </div>
-
 <!-- About Section -->
 
 <div id="about" class="text-center viewport-100">
@@ -144,7 +145,7 @@
             <form>
                 <div class="form-group">
                     <label class="custom-label">Email address</label>
-                    <input type="email" class="form-control" placeholder="Enter email">
+                    <input type="email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label class="custom-label">Message</label>

@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $location, PageNavigation, UserInterface) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $location, PageNavigation, UserInterface, spinnerService) {
 
     // Initialize slider
 
@@ -32,6 +32,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     ]);
 
     // Get current location and scroll if needed
+
+    $scope.$on('$viewContentLoaded', function(){
+        UserInterface.updateService();
+        PageNavigation.updateService();
+        spinnerService.hide('viewSpinner');
+    });
 
     switch ($location.path())
     {
@@ -94,12 +100,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     }
     $scope.gotoFeed = function()
     {
+        spinnerService.show('viewSpinner');
         $location.path('/feed');
         PageNavigation.selectedView = 'feed';
         $scope.scrollByPageNumber(1);
     }
     $scope.gotoProjects = function()
     {
+        spinnerService.show('viewSpinner');
         $location.path('/projects');
         PageNavigation.selectedView = 'projects';
         $scope.scrollByPageNumber(1);

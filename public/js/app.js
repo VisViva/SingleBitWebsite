@@ -1,6 +1,7 @@
 angular.module("SingleBitApplication", [
     // Angular
     'ngRoute',
+    'angularSpinners',
 
     // Routes
     'Routes',

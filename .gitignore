@@ -3,10 +3,11 @@ node_modules/
 public/dist/
 public/libs/angular/
 public/libs/angular-route/
+public/libs/angular-spinners/
 public/libs/bootstrap/
 public/libs/font-awesome
 public/libs/jquery
-public/libs/open-sans-fontface
+public/libs/jquery-mousewheel
 public/libs/lato
 public/libs/malihu-custom-scrollbar-plugin
-public/libs/jquery-mousewheel
+public/libs/open-sans-fontface

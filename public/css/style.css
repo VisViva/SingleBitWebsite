@@ -272,7 +272,7 @@
 	}
 	.custom-label
 	{
-		float: left;
+		float: none;
 		font-size: 12px;
 		font-weight: 400;
 	}
@@ -541,6 +541,11 @@
 	.clearfix
 	{
 		display: block;
+	}
+	.spinner
+	{
+		background:url(../img/animated/loading.gif) no-repeat center center;
+		background-size: 80px 80px;
 	}
 
 /* General **************************************************/
