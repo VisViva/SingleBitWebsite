@@ -132,6 +132,35 @@ angular.module('PageNavigationService', []).factory('PageNavigation', [function(
             });
         },
 
+        // Update service
+
+        updateService : function()
+        {
+            $('.scrollable-dark-view').mCustomScrollbar( {
+                theme:"inset-dark",
+                scrollbarPosition:"outside",
+                scrollButtons:{
+                    enable:true
+                },
+                advanced:{
+                    autoScrollOnFocus: false,
+                    updateOnContentResize: true
+                }
+            });
+
+            $('.scrollable-dark-inside-view').mCustomScrollbar( {
+                theme:"inset-dark",
+                scrollbarPosition:"inside",
+                scrollButtons:{
+                    enable:true
+                },
+                advanced:{
+                    autoScrollOnFocus: false,
+                    updateOnContentResize: true
+                }
+            });
+        },
+
         // Forced scroll
 
         scrollByPageNumber : function(pageNumber)
