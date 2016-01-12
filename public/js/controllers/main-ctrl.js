@@ -8,9 +8,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
         '#about',
         '#contact',
         '#footer'
-    ], function(currentPage)
+    ], function()
     {
-        $scope.selectedPage = currentPage;
         $scope.$apply();
     });
 
@@ -32,14 +31,23 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
         {type: "img", className:"img-viewport-20", height:20}
     ]);
 
-    // Defaults
+    // Actions
 
-    $scope.selectedPage = 0;
+    $scope.isPageSelected = function(page)
+    {
+        return page == Slider.getSelectedPage();
+    }
+    $scope.isViewSelected = function(view)
+    {
+        return view == Slider.selectedView;
+    }
+
     $scope.toggleSearch = function()
     {
-        $scope.search=!$scope.search;
+        $scope.search =! $scope.search;
         UserInterface.hideMenu();
     }
+
     $scope.scrollTo = function(id)
     {
         Slider.scrollTo(id);
@@ -47,13 +55,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     }
     $scope.gotoFeed = function()
     {
-        $scope.scrollTo(1);
         $location.path('/feed');
+        if ((!$scope.isPageSelected(1)) && ($scope.isViewSelected('feed'))) $scope.scrollTo(1);
     }
     $scope.gotoProjects = function()
     {
-        $scope.scrollTo(1);
         $location.path('/projects');
+        if ((!$scope.isPageSelected(1)) && ($scope.isViewSelected('projects'))) $scope.scrollTo(1);
     }
 })
 

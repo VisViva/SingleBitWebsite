@@ -57,6 +57,7 @@ angular.module('SliderService', []).factory('Slider', [function()
     };
 
     sliderService.selectedPage = 0;
+    sliderService.selectedView = 'empty';
     sliderService.pages = [];
 
     return {
@@ -68,7 +69,7 @@ angular.module('SliderService', []).factory('Slider', [function()
             // Initialize page list
 
             sliderService.pages = pages;
-            sliderService.scrollTo = callback;
+            sliderService.onScroll = callback;
 
             // Custom slider
 
@@ -107,15 +108,15 @@ angular.module('SliderService', []).factory('Slider', [function()
                 }
 
                 sliderService.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (sliderService.pages.length - 1));
-                sliderService.scrollTo(sliderService.selectedPage);
+                sliderService.onScroll();
             });
 
             // Ignore scrolling with mouse wheel
 
-            /*$(window).bind('wheel', function()
+            $(window).bind('wheel', function()
             {
                 return false;
-            });*/
+            });
 
             // Forced scroll on initialization
 
@@ -135,6 +136,24 @@ angular.module('SliderService', []).factory('Slider', [function()
             // Forced scroll
 
             sliderService.scroll(id, 500);
-        }
+        },
+
+        // Selected page
+
+        getSelectedPage : function()
+        {
+            return sliderService.selectedPage;
+        },
+
+        // Selected page
+
+        setSelectedPage : function(page)
+        {
+            sliderService.selectedPage = page;
+        },
+
+        // Selected view
+
+        selectedView : sliderService.selectedView
     }
 }]);
