@@ -41,7 +41,7 @@ var stylesheets = {
     // Stylesheets
     stylesheets:[
         // Bootstrap
-        'publicdist/temp/bootstrap.css',
+        'public/dist/temp/bootstrap.css',
         // Font awesome
         'public/dist/temp/font-awesome.css',
         // Lato fonts
@@ -93,13 +93,6 @@ gulp.task('combine-scripts', ['routes'], function(){
 
 // Stylesheets
 
-gulp.task('stylesheets-simple', ['bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
-    return gulp.src(stylesheets.stylesheets)
-        .pipe(gp_replace("url(../img", "url(../../img"))
-        .pipe(gp_concat('stylesheets-simple.css'))
-        .pipe(gulp.dest('public/dist/temp'));
-});
-
 gulp.task('bootstrap', ['cleanup-pre'], function(){
     return gulp.src(stylesheets.bootstrap)
         .pipe(gulp.dest('public/dist/temp'));
@@ -122,8 +115,9 @@ gulp.task('opensans', ['cleanup-pre'], function(){
         .pipe(gulp.dest('public/dist/temp'));
 });
 
-gulp.task('combine-stylesheets', ['stylesheets-simple'], function(){
-    return gulp.src('public/dist/temp/*.css')
+gulp.task('combine-stylesheets', ['bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
+    return gulp.src(stylesheets.stylesheets)
+        .pipe(gp_replace("url(../img", "url(../../img"))
         .pipe(gp_concat('stylesheets.min.css'))
         .pipe(gp_cssmin())
         .pipe(gulp.dest('public/dist/css'));
@@ -137,7 +131,7 @@ gulp.task('cleanup-pre', function(){
 
 gulp.task('scripts', ['routes', 'combine-scripts']);
 
-gulp.task('stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lato', 'opensans', 'combine-stylesheets']);
+gulp.task('stylesheets', ['bootstrap', 'fontawesome', 'lato', 'opensans', 'combine-stylesheets']);
 
 gulp.task('fonts', ['cleanup-pre'], function(){
     return gulp.src(fonts)
