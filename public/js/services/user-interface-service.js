@@ -2,9 +2,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
     var userInterface = this;
 
-    userInterface.classes = [];
-    userInterface.zoomInEnabled = false;
-
     userInterface.calculateDimensions = function()
     {
         // Get viewport dimensions
@@ -41,11 +38,78 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
         });
     }
 
+    userInterface.scrollByPageName = function(pageName, speed)
+    {
+        $('html, body').animate({
+            scrollTop: $(pageName).offset().top
+        }, speed);
+    };
+
+    userInterface.scrollByPageNumber = function(pageNumber, speed)
+    {
+        $('html, body').animate({
+            scrollTop: $(userInterface.pages[pageNumber]).offset().top
+        }, speed);
+    };
+
+    userInterface.destroyScrollbars = function()
+    {
+        $('.scrollable-light').mCustomScrollbar('destroy');
+        $('.scrollable-dark').mCustomScrollbar('destroy');
+        $('.scrollable-light-inside').mCustomScrollbar('destroy');
+        $('.scrollable-dark-inside').mCustomScrollbar('destroy');
+    };
+
+    userInterface.initializeScrollbars = function()
+    {
+        $('.scrollable-dark').mCustomScrollbar( {
+            theme:"inset-dark",
+            scrollbarPosition:"outside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+
+        $('.scrollable-light-inside').mCustomScrollbar( {
+            theme:"inset",
+            scrollbarPosition:"inside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+
+        $('.scrollable-dark-inside').mCustomScrollbar( {
+            theme:"inset-dark",
+            scrollbarPosition:"inside",
+            scrollButtons:{
+                enable:true
+            },
+            advanced:{
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        });
+    };
+
+    userInterface.selectedPage = 0;
+    userInterface.selectedView = 'empty';
+    userInterface.pages = [];
+    userInterface.classes = [];
+    userInterface.zoomInEnabled = false;
+
     return {
 
         // Initialization
 
-        initializeService : function (classes) {
+        initializeService : function (pages, callback, classes) {
             'use strict';
 
             userInterface.classes = classes;
@@ -61,11 +125,93 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
                     userInterface.calculateDimensions();
                 }, 100);
             });
+
+            // Initialize page list
+
+            userInterface.pages = pages;
+            userInterface.onScroll = callback;
+
+            // Custom slider
+
+            $('a.page-scroll').click(function()
+            {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top - 40
+                        }, 900);
+                        return false;
+                    }
+                }
+            });
+
+            // Menu modifier
+
+            var resizeTimer;
+
+            $(window).on('resize', function(e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    userInterface.scrollByPageNumber(userInterface.selectedPage, 300);
+                }, 200);
+            });
+
+            $(window).bind('scroll', function()
+            {
+                var navHeight = $(window).height() - 100;
+                if ($(window).scrollTop() > navHeight) {
+                    $('.navbar-default').addClass('on');
+                } else {
+                    $('.navbar-default').removeClass('on');
+                }
+
+                userInterface.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (userInterface.pages.length - 1));
+                userInterface.onScroll();
+            });
+
+            // Ignore scrolling with mouse wheel
+
+            $(window).bind('wheel', function()
+            {
+                return false;
+            });
+
+            // Initialize section sliders
+
+            $(window).load(function() {
+                userInterface.initializeScrollbars();
+            });
         },
 
         updateService : function()
         {
             userInterface.calculateDimensions();
+
+            $('.scrollable-dark-view').mCustomScrollbar( {
+                theme:"inset-dark",
+                scrollbarPosition:"outside",
+                scrollButtons:{
+                    enable:true
+                },
+                advanced:{
+                    autoScrollOnFocus: false,
+                    updateOnContentResize: true
+                }
+            });
+
+            $('.scrollable-dark-inside-view').mCustomScrollbar( {
+                theme:"inset-dark",
+                scrollbarPosition:"inside",
+                scrollButtons:{
+                    enable:true
+                },
+                advanced:{
+                    autoScrollOnFocus: false,
+                    updateOnContentResize: true
+                }
+            });
         },
 
         // Toggling menu
@@ -98,6 +244,34 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
         setZoomEnabled : function()
         {
             userInterface.zoomInEnabled = true;
-        }
+        },
+
+        // Forced scroll
+
+        scrollByPageNumber : function(pageNumber)
+        {
+            userInterface.scrollByPageNumber(pageNumber, 500);
+        },
+
+        scrollByPageName : function(pageName)
+        {
+            userInterface.scrollByPageName(pageName, 500);
+        },
+
+        // Selected page
+
+        getSelectedPage : function()
+        {
+            return userInterface.selectedPage;
+        },
+
+        setSelectedPage : function(page)
+        {
+            userInterface.selectedPage = page;
+        },
+
+        // Selected view
+
+        selectedView : userInterface.selectedView
     }
 }]);

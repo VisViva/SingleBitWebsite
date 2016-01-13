@@ -1,10 +1,9 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, UserInterface, PageNavigation, spinnerService) {
+angular.module('FeedCtrl', []).controller('FeedController', function($scope, UserInterface, spinnerService) {
 
     // Execute when content is loaded
     $scope.$on('$viewContentLoaded', function(){
-        UserInterface.updateService();
-        PageNavigation.updateService();
         spinnerService.hide('viewSpinner');
+        UserInterface.updateService();
         UserInterface.setZoomEnabled();
     });
 });

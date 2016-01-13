@@ -1,8 +1,8 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $timeout, $location, PageNavigation, UserInterface, spinnerService) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $timeout, $location, UserInterface, spinnerService) {
 
-    // Initialize slider
+    // Initialize user interface
 
-    PageNavigation.initializeService([
+    UserInterface.initializeService([
         '#home',
         '#view',
         '#about',
@@ -11,11 +11,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
     ], function()
     {
         $scope.$apply();
-    });
-
-    // Initialize layout engine
-
-    UserInterface.initializeService([
+    },[
         {type: "spc", className:"viewport-100", height:100},
         {type: "spc", className:"viewport-90", height:90},
         {type: "spc", className:"viewport-80", height:80},
@@ -38,33 +34,33 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
         case '/home':
         {
             UserInterface.zoomOut();
-            PageNavigation.scrollByPageNumber(0);
+            UserInterface.scrollByPageNumber(0);
             break;
         }
         case '/feed':
         {
-            PageNavigation.selectedView = 'feed';
-            PageNavigation.scrollByPageNumber(1);
+            UserInterface.selectedView = 'feed';
+            UserInterface.scrollByPageNumber(1);
             $timeout(function(){UserInterface.zoomIn();}, 300);
             break;
         }
         case '/projects':
         {
-            PageNavigation.selectedView = 'projects';
-            PageNavigation.scrollByPageNumber(1);
+            UserInterface.selectedView = 'projects';
+            UserInterface.scrollByPageNumber(1);
             $timeout(function(){UserInterface.zoomIn();}, 300);
             break;
         }
         case '/about':
         {
             UserInterface.zoomOut();
-            PageNavigation.scrollByPageNumber(2);
+            UserInterface.scrollByPageNumber(2);
             break;
         }
         case '/contact':
         {
             UserInterface.zoomOut();
-            PageNavigation.scrollByPageNumber(4);
+            UserInterface.scrollByPageNumber(4);
             break;
         }
     }
@@ -73,15 +69,15 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
 
     $scope.isPageSelected = function(page)
     {
-        return page == PageNavigation.getSelectedPage();
+        return page == UserInterface.getSelectedPage();
     }
     $scope.isViewSelected = function(view)
     {
-        return view == PageNavigation.selectedView;
+        return view == UserInterface.selectedView;
     }
     $scope.scrollByPageNumber = function(pageNumber)
     {
-        PageNavigation.scrollByPageNumber(pageNumber);
+        UserInterface.scrollByPageNumber(pageNumber);
     }
 
     // Actions
@@ -111,14 +107,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
         UserInterface.hideMenu();
         if ($scope.isPageSelected(1))
         {
-            if (PageNavigation.selectedView != 'feed')
+            if (UserInterface.selectedView != 'feed')
             {
                 UserInterface.zoomOut();
                 $timeout(function()
                 {
                     spinnerService.show('viewSpinner');
                     $location.path('/feed');
-                    PageNavigation.selectedView = 'feed';
+                    UserInterface.selectedView = 'feed';
                     UserInterface.zoomIn(); // Try zooming in until zoomed in
                 }, 300);
             }
@@ -127,7 +123,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
         {
             spinnerService.show('viewSpinner');
             $location.path('/feed');
-            PageNavigation.selectedView = 'feed';
+            UserInterface.selectedView = 'feed';
             $scope.scrollByPageNumber(1);
             $timeout(function(){
                 UserInterface.zoomIn(); // Try zooming in until zoomed in
@@ -139,14 +135,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
         UserInterface.hideMenu();
         if ($scope.isPageSelected(1))
         {
-            if (PageNavigation.selectedView != 'projects')
+            if (UserInterface.selectedView != 'projects')
             {
                 UserInterface.zoomOut();
                 $timeout(function ()
                 {
                     spinnerService.show('viewSpinner');
                     $location.path('/projects');
-                    PageNavigation.selectedView = 'projects';
+                    UserInterface.selectedView = 'projects';
                     UserInterface.zoomIn(); // Try zooming in until zoomed in
                 }, 300);
             }
@@ -155,7 +151,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
         {
             spinnerService.show('viewSpinner');
             $location.path('/projects');
-            PageNavigation.selectedView = 'projects';
+            UserInterface.selectedView = 'projects';
             $scope.scrollByPageNumber(1);
             $timeout(function () {
                 UserInterface.zoomIn(); // Try zooming in until zoomed in

@@ -12,7 +12,6 @@ angular.module("SingleBitApplication", [
     'ProjectsCtrl',
 
     // Jquery bits
-    'PageNavigationService',
     'UserInterfaceService'
 ]);
 

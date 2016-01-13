@@ -27,7 +27,6 @@ var scripts = {
         'public/js/controllers/feed-ctrl.js',
         'public/js/controllers/projects-ctrl.js',
         // Services
-        'public/js/services/page-navigation-service.js',
         'public/js/services/user-interface-service.js',
         // Application
         'public/dist/temp/routes.js', // Temporary
