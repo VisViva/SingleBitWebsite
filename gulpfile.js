@@ -1,11 +1,11 @@
 var gulp = require('gulp'),
     del = require('del'),
     gp_concat = require('gulp-concat'),
-    gp_replace = require('gulp-replace');
-
+    gp_replace = require('gulp-replace'),
+    gp_cssmin = require('gulp-cssmin');
 
 var scripts = {
-    scriptsSimple : [
+    scripts : [
         // Jquery
         'public/libs/jquery/dist/jquery.min.js',
         'public/libs/jquery-mousewheel/jquery.mousewheel.min.js',
@@ -29,7 +29,7 @@ var scripts = {
         // Services
         'public/js/services/user-interface-service.js',
         // Application
-        'public/dist/temp/routes.js', // Temporary
+        'public/dist/temp/routes.js',
         'public/js/app.js'
     ],
 
@@ -38,8 +38,16 @@ var scripts = {
 }
 
 var stylesheets = {
-    // Styles
-    stylesheetsSimple:[
+    // Stylesheets
+    stylesheets:[
+        // Bootstrap
+        'publicdist/temp/bootstrap.css',
+        // Font awesome
+        'public/dist/temp/font-awesome.css',
+        // Lato fonts
+        'public/dist/temp/lato.css',
+        // Open sans fonts
+        'public/dist/temp/open-sans.css',
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
 
@@ -78,15 +86,15 @@ gulp.task('routes', ['cleanup-pre'], function(){
 });
 
 gulp.task('combine-scripts', ['routes'], function(){
-    return gulp.src(scripts.scriptsSimple)
-        .pipe(gp_concat('scripts.js'))
+    return gulp.src(scripts.scripts)
+        .pipe(gp_concat('scripts.min.js'))
         .pipe(gulp.dest('public/dist/js'));
 });
 
 // Stylesheets
 
-gulp.task('stylesheets-simple', ['cleanup-pre'], function(){
-    return gulp.src(stylesheets.stylesheetsSimple)
+gulp.task('stylesheets-simple', ['bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
+    return gulp.src(stylesheets.stylesheets)
         .pipe(gp_replace("url(../img", "url(../../img"))
         .pipe(gp_concat('stylesheets-simple.css'))
         .pipe(gulp.dest('public/dist/temp'));
@@ -114,9 +122,10 @@ gulp.task('opensans', ['cleanup-pre'], function(){
         .pipe(gulp.dest('public/dist/temp'));
 });
 
-gulp.task('combine-stylesheets', ['stylesheets-simple', 'bootstrap', 'fontawesome', 'lato', 'opensans'], function(){
+gulp.task('combine-stylesheets', ['stylesheets-simple'], function(){
     return gulp.src('public/dist/temp/*.css')
-        .pipe(gp_concat('stylesheets.css'))
+        .pipe(gp_concat('stylesheets.min.css'))
+        .pipe(gp_cssmin())
         .pipe(gulp.dest('public/dist/css'));
 });
 
