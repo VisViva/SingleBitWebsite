@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $timeout, UserInterface, spinnerService) {
+angular.module('TypeCtrl', []).controller('TypeController', function($scope, $location, $timeout, UserInterface, spinnerService) {
 
     // Execute when content is loaded
 
@@ -10,26 +10,25 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
 
     // Get activities
 
-    $scope.activities = [];
+    $scope.projects = [];
     for (var i = 0; i < 16; ++i)
     {
-        $scope.activities.push({
-            title: "How to design achievements?",
+        $scope.projects.push({
+            title: "Project #1",
             type: 0,
-            date: "13 January 2015",
-            size: "5 minutes"
+            date: "13 January 2015"
         });
     }
 
     // Actions
 
-    $scope.openActivity = function()
+    $scope.openProject = function()
     {
         UserInterface.zoomOut();
         $timeout(function()
         {
             spinnerService.show('viewSpinner');
-            $location.path('/feed/view');
+            $location.path('/projects/view');
             UserInterface.zoomIn();
         }, 300);
     };

@@ -525,6 +525,22 @@
 		font-weight: 400;
 		color: #FCAC45;
 	}
+	.back-arrow
+	{
+		font-size: 30px;
+		cursor: pointer;
+		cursor: hand;
+		color: #5A5A5A;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		-ms-transition: all 0.3s;
+		-o-transition: all 0.3s;
+		transition: all 0.3s;
+	}
+	.back-arrow:hover
+	{
+		color: #FCAC45;
+	}
 	.clearfix:after
 	{
 		visibility: hidden;

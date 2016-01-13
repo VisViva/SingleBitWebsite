@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $timeout, $location, UserInterface, spinnerService) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $location, $timeout, UserInterface, spinnerService) {
 
     // Initialize user interface
 
@@ -29,38 +29,40 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ti
 
     // Get current location and scroll if needed
 
-    switch ($location.path())
+    var location = $location.path().split('?')[0].split('/')[1];
+
+    switch (location)
     {
-        case '/home':
-        {
-            UserInterface.zoomOut();
-            UserInterface.scrollByPageNumber(0);
-            break;
-        }
-        case '/feed':
+        case 'feed':
         {
             UserInterface.selectedView = 'feed';
             UserInterface.scrollByPageNumber(1);
             $timeout(function(){UserInterface.zoomIn();}, 300);
             break;
         }
-        case '/projects':
+        case 'projects':
         {
             UserInterface.selectedView = 'projects';
             UserInterface.scrollByPageNumber(1);
             $timeout(function(){UserInterface.zoomIn();}, 300);
             break;
         }
-        case '/about':
+        case 'about':
         {
             UserInterface.zoomOut();
             UserInterface.scrollByPageNumber(2);
             break;
         }
-        case '/contact':
+        case 'contact':
         {
             UserInterface.zoomOut();
             UserInterface.scrollByPageNumber(4);
+            break;
+        }
+        default: // Home
+        {
+            UserInterface.zoomOut();
+            UserInterface.scrollByPageNumber(0);
             break;
         }
     }

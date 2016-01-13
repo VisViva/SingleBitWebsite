@@ -10,6 +10,8 @@ angular.module("SingleBitApplication", [
     'MainCtrl',
     'FeedCtrl',
     'ProjectsCtrl',
+    'TypeCtrl',
+    'ViewCtrl',
 
     // Jquery bits
     'UserInterfaceService'

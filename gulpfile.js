@@ -23,9 +23,7 @@ var scripts = {
         'public/libs/angular-spinners/dist/angular-spinners.min.js',
 
         // Controllers
-        'public/js/controllers/main-ctrl.js',
-        'public/js/controllers/feed-ctrl.js',
-        'public/js/controllers/projects-ctrl.js',
+        'public/js/controllers/*',
         // Services
         'public/js/services/user-interface-service.js',
         // Application
