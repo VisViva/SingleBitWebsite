@@ -115,17 +115,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
             userInterface.classes = classes;
             userInterface.calculateDimensions();
 
-            // Subscribe to window resize event
-
-            var resizeTimer;
-
-            $(window).on('resize', function(e) {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    userInterface.calculateDimensions();
-                }, 100);
-            });
-
             // Initialize page list
 
             userInterface.pages = pages;
@@ -149,13 +138,16 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
             // Menu modifier
 
+            // Subscribe to window events
+
             var resizeTimer;
 
             $(window).on('resize', function(e) {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
+                    userInterface.calculateDimensions();
                     userInterface.scrollByPageNumber(userInterface.selectedPage, 300);
-                }, 200);
+                }, 100);
             });
 
             $(window).bind('scroll', function()
