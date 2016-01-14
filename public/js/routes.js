@@ -1,4 +1,4 @@
-angular.module('Routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider, PageNavigation) {
+angular.module('Routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
   // Activities
   .when('/feed', {
