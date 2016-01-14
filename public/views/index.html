@@ -1,177 +1,177 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="SingleBitApplication">
 <head>
-    <!-- Basics -->
-    <title>Single Bit</title>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Single Bit is a company that focuses on game development.">
-    <meta name="keywords" content="single bit, game development, abdulali gasimov, gamedev, gamedev diary">
-    <meta name="author" content="Abdulali Gasimov">
+  <!-- Basics -->
+  <title>Single Bit</title>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Single Bit is a company that focuses on game development.">
+  <meta name="keywords" content="single bit, game development, abdulali gasimov, gamedev, gamedev diary">
+  <meta name="author" content="Abdulali Gasimov">
 
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="img/company/LOGO_COMPACT.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/company/APPLE_TOUCH_ICON.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/company/APPLE_TOUCH_ICON_72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/company/APPLE_TOUCH_ICON_14.png">
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="img/company/LOGO_COMPACT.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/company/APPLE_TOUCH_ICON.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/company/APPLE_TOUCH_ICON_72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/company/APPLE_TOUCH_ICON_14.png">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="../dist/css/stylesheets.min.css">
-    <!-- Scripts -->
-    <script type="text/javascript" src="../dist/js/scripts.min.js"></script>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../dist/css/stylesheets.min.css">
+  <!-- Scripts -->
+  <script type="text/javascript" src="../dist/js/scripts.min.js"></script>
 </head>
 
 <body ng-controller="MainController">
 
-<!-- Navigation -->
+  <!-- Navigation -->
 
-<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+  <nav id="menu" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html" ng-hide="search">
-                <img src="img/company/LOGO_SINGLEBIT.png" class="img-responsive" alt="...">
-            </a>
-            <input ng-show="search" type="text" class="form-control search-pane" placeholder="Search">
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html" ng-hide="search">
+          <img src="img/company/LOGO_SINGLEBIT.png" class="img-responsive" alt="...">
+        </a>
+        <input ng-show="search" type="text" class="form-control search-pane" placeholder="Search">
+      </div>
 
-        <!-- Main Menu Actions -->
+      <!-- Main Menu Actions -->
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="navbar-left">
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-click="toggleSearch()">
-                    <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i>
-                    <i ng-hide="search" class="fa fa-search"></i>
-                    &nbsp;&nbsp;SEARCH
-                </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">
-                    HOME
-                </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">
-                    FEED
-                </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('projects')}" ng-click="gotoProjects()">
-                    PROJECTS
-                </span>
-            </div>
-            <div class="navbar-right">
-                <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(2)}" ng-click="gotoAbout()">
-                    ABOUT
-                </span>
-                <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(3) || isPageSelected(4)}" ng-click="gotoContact()">
-                    CONTACT
-                </span>
-            </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-left">
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-click="toggleSearch()">
+            <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i>
+            <i ng-hide="search" class="fa fa-search"></i>
+            &nbsp;&nbsp;SEARCH
+          </span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">
+            HOME
+          </span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">
+            FEED
+          </span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('projects')}" ng-click="gotoProjects()">
+            PROJECTS
+          </span>
         </div>
+        <div class="navbar-right">
+          <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(2)}" ng-click="gotoAbout()">
+            ABOUT
+          </span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(3) || isPageSelected(4)}" ng-click="gotoContact()">
+            CONTACT
+          </span>
+        </div>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<!-- Home Page -->
+  <!-- Home Page -->
 
-<div id="home" class="text-center viewport-100">
+  <div id="home" class="text-center viewport-100">
     <div class="viewport-30"></div>
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <img src="img/company/LOGO.png" class="img-responsive center-block img-viewport-10" alt="..." style="width:25%;">
-        </div>
+      <div class="col-md-8 col-md-offset-2">
+        <img src="img/company/LOGO.png" class="img-responsive center-block img-viewport-10" alt="..." style="width:25%;">
+      </div>
     </div>
 
     <div class="viewport-20"></div>
 
     <div ng-click="gotoFeed()"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
-</div>
+  </div>
 
-<!-- View Section -->
+  <!-- View Section -->
 
-<div id="view" class="viewport-100">
+  <div id="view" class="viewport-100">
     <spinner name="viewSpinner" class="spinner viewport-100" show="true">
     </spinner>
     <div class="zoom-in-start">
-        <div ng-view></div>
+      <div ng-view></div>
     </div>
-</div>
+  </div>
 
-<!-- About Section -->
+  <!-- About Section -->
 
-<div id="about" class="text-center viewport-100">
+  <div id="about" class="text-center viewport-100">
     <div class="viewport-15"></div>
 
     <div class="viewport-80">
-        <div class="item">
-            <img src="img/about/01.jpg" alt="..." class="img-circle profile-image img-viewport-20">
-            <div class="profile-info col-sm-12">
-                <h3>Abdulali Gasimov</h3>
-                <p>Artist / Developer</p>
-                <div class="col-sm-8 col-sm-offset-2 scrollable-light-inside viewport-30">
-                    <p>I love playing and developing video games.</p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    <br>
-                    <br>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    <br>
-                    <br>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                    <br>
-                    <br>
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                </div>
-            </div>
-            <ul class="social-icon-set">
-                <li><a href="#"><i class="fa fa-facebook social-icon-narrow"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin social-icon-narrow"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus social-icon-wide"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter social-icon-narrow"></i></a></li>
-                <li><a href="#"><i class="fa fa-youtube social-icon-narrow"></i></a></li>
-            </ul>
+      <div class="item">
+        <img src="img/about/01.jpg" alt="..." class="img-circle profile-image img-viewport-20">
+        <div class="profile-info col-sm-12">
+          <h3>Abdulali Gasimov</h3>
+          <p>Artist / Developer</p>
+          <div class="col-sm-8 col-sm-offset-2 scrollable-light-inside viewport-30">
+            <p>I love playing and developing video games.</p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <br>
+            <br>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            <br>
+            <br>
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+            <br>
+            <br>
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+          </div>
         </div>
+        <ul class="social-icon-set">
+          <li><a href="#"><i class="fa fa-facebook social-icon-narrow"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin social-icon-narrow"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus social-icon-wide"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter social-icon-narrow"></i></a></li>
+          <li><a href="#"><i class="fa fa-youtube social-icon-narrow"></i></a></li>
+        </ul>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Contact Section -->
+  <!-- Contact Section -->
 
-<div id="contact" class="text-center viewport-90">
+  <div id="contact" class="text-center viewport-90">
     <div class="viewport-10"></div>
 
     <div class="container">
-        <div class="section-title center">
-            <h2>Contact<strong> us</strong></h2>
-        </div>
-        <div class="col-md-4 col-md-offset-4 scrollable-dark viewport-60">
+      <div class="section-title center">
+        <h2>Contact<strong> us</strong></h2>
+      </div>
+      <div class="col-md-4 col-md-offset-4 scrollable-dark viewport-60">
 
-            <div class="viewport-10"></div>
-            <form>
-                <div class="form-group">
-                    <label class="custom-label">Email address</label>
-                    <input type="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="custom-label">Message</label>
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-            </form>
+        <div class="viewport-10"></div>
+        <form>
+          <div class="form-group">
+            <label class="custom-label">Email address</label>
+            <input type="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="custom-label">Message</label>
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+        </form>
 
-            <div class="center">
-                <button type="submit" class="btn btn-warning btn-default">Submit</button>
-            </div>
+        <div class="center">
+          <button type="submit" class="btn btn-warning btn-default">Submit</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Footer -->
+  <!-- Footer -->
 
-<div id="footer" class="viewport-10">
+  <div id="footer" class="viewport-10">
     <div class="container">
-        <div class="text-center">
-            <p>All Rights Reserved. Copyright © 2016.
+      <div class="text-center">
+        <p>All Rights Reserved. Copyright © 2016.
         </div>
+      </div>
     </div>
-</div>
 
-</body>
-</html>
+  </body>
+  </html>

@@ -16,4 +16,3 @@ angular.module("SingleBitApplication", [
     // Jquery bits
     'UserInterfaceService'
 ]);
-

@@ -24,6 +24,8 @@ var scripts = {
 
         // Controllers
         'public/js/controllers/*',
+        'public/js/controllers/feed/*',
+        'public/js/controllers/projects/*',
         // Services
         'public/js/services/user-interface-service.js',
         // Application
