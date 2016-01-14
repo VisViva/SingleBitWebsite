@@ -170,14 +170,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
         return false;
       });
 
-      $(window).on('touchmove', function(event)
-      {
-        if (blockMenuHeaderScroll)
-        {
-          event.preventDefault();
-        }
-      });
-
       // Initialize section sliders
 
       $(window).load(function() {
@@ -189,89 +181,90 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
     {
       userInterface.calculateDimensions();
 
-      $('.scrollable-dark-view').mCustomScrollbar( {
-        theme:"inset-dark",
-        scrollbarPosition:"outside",
-        scrollButtons:{
-          enable:true
-        },
-        advanced:{
-          autoScrollOnFocus: false,
-          updateOnContentResize: true
-        }
-      });
+      $('.scrollable-dark-view').mCustomScrollbar(
+        {
+          theme:"inset-dark",
+          scrollbarPosition:"outside",
+          scrollButtons:{
+            enable:true
+          },
+          advanced:{
+            autoScrollOnFocus: false,
+            updateOnContentResize: true
+          }
+        });
 
-      $('.scrollable-dark-inside-view').mCustomScrollbar( {
-        theme:"inset-dark",
-        scrollbarPosition:"inside",
-        scrollButtons:{
-          enable:true
-        },
-        advanced:{
-          autoScrollOnFocus: false,
-          updateOnContentResize: true
-        }
-      });
-    },
+        $('.scrollable-dark-inside-view').mCustomScrollbar( {
+          theme:"inset-dark",
+          scrollbarPosition:"inside",
+          scrollButtons:{
+            enable:true
+          },
+          advanced:{
+            autoScrollOnFocus: false,
+            updateOnContentResize: true
+          }
+        });
+      },
 
-    // Toggling menu
+      // Toggling menu
 
-    hideMenu : function()
-    {
-      $('.navbar-collapse').collapse('hide');
-    },
-
-    // Zooming page
-
-    zoomIn : function zoom()
-    {
-      if (userInterface.zoomInEnabled == false)
+      hideMenu : function()
       {
-        setTimeout(function(){zoom();}, 100);
-      }
-      else
+        $('.navbar-collapse').collapse('hide');
+      },
+
+      // Zooming page
+
+      zoomIn : function zoom()
       {
-        $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
-        userInterface.zoomInEnabled = false;
-      }
-    },
+        if (userInterface.zoomInEnabled == false)
+        {
+          setTimeout(function(){zoom();}, 100);
+        }
+        else
+        {
+          $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+          userInterface.zoomInEnabled = false;
+        }
+      },
 
-    zoomOut : function()
-    {
-      $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
-    },
+      zoomOut : function()
+      {
+        $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+      },
 
-    setZoomEnabled : function()
-    {
-      userInterface.zoomInEnabled = true;
-    },
+      setZoomEnabled : function()
+      {
+        userInterface.zoomInEnabled = true;
+      },
 
-    // Forced scroll
+      // Forced scroll
 
-    scrollByPageNumber : function(pageNumber)
-    {
-      userInterface.scrollByPageNumber(pageNumber, 500);
-    },
+      scrollByPageNumber : function(pageNumber)
+      {
+        userInterface.scrollByPageNumber(pageNumber, 500);
+      },
 
-    scrollByPageName : function(pageName)
-    {
-      userInterface.scrollByPageName(pageName, 500);
-    },
+      scrollByPageName : function(pageName)
+      {
+        userInterface.scrollByPageName(pageName, 500);
+      },
 
-    // Selected page
+      // Selected page
 
-    getSelectedPage : function()
-    {
-      return userInterface.selectedPage;
-    },
+      getSelectedPage : function()
+      {
+        return userInterface.selectedPage;
+      },
 
-    setSelectedPage : function(page)
-    {
-      userInterface.selectedPage = page;
-    },
+      setSelectedPage : function(page)
+      {
+        userInterface.selectedPage = page;
+      },
 
-    // Selected view
+      // Selected view
 
-    selectedView : userInterface.selectedView
-  }
-}]);
+      selectedView : userInterface.selectedView
+    }
+  }]);

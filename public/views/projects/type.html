@@ -1,42 +1,45 @@
 <!-- Type Section -->
 
 <div id="projects" class="viewport-100">
-    <div class="viewport-10"></div>
 
-    <div class="section-title text-center center">
-        <h2><strong ng-bind="type"></strong> projects</h2>
-    </div>
+  <div style="height:10%"></div>
 
-    <div class="viewport-5"></div>
+  <div class="section-title text-center center">
+    <h2><strong ng-bind="type"></strong> projects</h2>
+  </div>
 
-    <div class="container viewport-60 scrollable-dark-inside-view">
-        <div ng-repeat="project in projects">
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="view-item">
-                    <div class="hover-bg">
-                        <a href="#" ng-click="openProject(project.type)">
-                            <div class="hover-text">
-                                <h4 ng-bind="project.title"></h4>
-                                <small ng-bind="project.date">13 January 2015</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                            <img src="img/portfolio/item_video.png" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <div style="height:2%"></div>
+
+  <div class="container scrollable-dark-inside-view" style="height:66%">
+    <div ng-repeat="project in projects">
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+        <div class="view-item">
+          <div class="hover-bg">
+            <a href="#" ng-click="openProject(project.type)">
+              <div class="hover-text">
+                <h4 ng-bind="project.title"></h4>
+                <small ng-bind="project.date">13 January 2015</small>
+                <div class="clearfix"></div>
+                <i class="fa fa-arrow-right"></i>
+              </div>
+              <img src="img/portfolio/item_video.png" class="img-responsive" alt="...">
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="categories">
-        <ul>
-            <li><div class="active pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-            <li><div class="pagination-link"></div></li>
-        </ul>
-    </div>
+  </div>
+
+  <div class="categories">
+    <ul>
+      <li><div class="active pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+      <li><div class="pagination-link"></div></li>
+    </ul>
+  </div>
+  
 </div>
