@@ -1,4 +1,4 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', [function() {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', function($location, $timeout, spinnerService) {
 
   var userInterface = this;
 
@@ -22,7 +22,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
   userInterface.scrollByPageNumber = function(pageNumber, speed){
     $('html, body').animate({
-      scrollTop: $(userInterface.pages[pageNumber]).offset().top
+      scrollTop: $('#' + userInterface.pages[pageNumber]).offset().top
     }, speed);
   };
 
@@ -97,6 +97,28 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
     });
   };
 
+  userInterface.zoomIn = function zoom(){
+    if (userInterface.zoomInEnabled == false)
+    setTimeout(function(){ zoom(); }, 100);
+    else {
+      $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+      userInterface.zoomInEnabled = false;
+    }
+  }
+
+  userInterface.zoomIn = function zoom(){
+    if (userInterface.zoomInEnabled == false)
+    setTimeout(function(){ zoom(); }, 100);
+    else {
+      $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+      userInterface.zoomInEnabled = false;
+    }
+  }
+
+  userInterface.zoomOut = function(){
+    $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+  }
+
   return {
 
     // Initialization
@@ -147,7 +169,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
         for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
         {
-          if ($(document).scrollTop() > $(userInterface.pages[i]).offset().top) ++page;
+          if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
           else break;
         }
 
@@ -173,17 +195,12 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
     // Zooming page
 
-    zoomIn : function zoom(){
-      if (userInterface.zoomInEnabled == false)
-      setTimeout(function(){ zoom(); }, 100);
-      else {
-        $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
-        userInterface.zoomInEnabled = false;
-      }
+    zoomIn : function(){
+      userInterface.zoomIn();
     },
 
     zoomOut : function(){
-      $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+      userInterface.zoomOut();
     },
 
     setZoomEnabled : function(){
@@ -212,6 +229,57 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
     // Selected view
 
-    selectedView : userInterface.selectedView
+    getSelectedView : function(){
+      return userInterface.selectedView;
+    },
+
+    setSelectedView : function(view){
+      userInterface.selectedView = view;
+    },
+
+    // Navigation
+
+    gotoPage : function(page, view)
+    {
+      if (page == 1)
+      {
+        if (userInterface.selectedPage == 1)
+        {
+          if (userInterface.selectedView != view)
+          {
+            userInterface.zoomOut();
+            $timeout(function()
+            {
+              spinnerService.show('viewSpinner');
+              $location.path('/' + view);
+              userInterface.selectedView = view;
+              userInterface.zoomIn();
+            }, 300);
+          }
+        }
+        else
+        {
+          spinnerService.show('viewSpinner');
+          $location.path('/' + view);
+          userInterface.selectedView = view;
+          userInterface.scrollByPageNumber(1);
+          $timeout(function(){
+            userInterface.zoomIn();
+          }, 400);
+        }
+      } else {
+        if (userInterface.selectedPage == page){
+          userInterface.zoomOut();
+          $timeout(function (){
+            $location.path('/' + userInterface.pages[page]);
+            if (!(userInterface.selectedPage == page)) userInterface.scrollByPageNumber(page);
+          }, 300);
+        }
+        else {
+          $location.path('/' + userInterface.pages[page]);
+          if (!(userInterface.selectedPage == page)) userInterface.scrollByPageNumber(page);
+        }
+      }
+    }
   }
 }]);

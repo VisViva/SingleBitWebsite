@@ -3,10 +3,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
   // Initialize user interface
 
   UserInterface.initializeService([
-    '#home',
-    '#view',
-    '#about',
-    '#contact'
+    'home',
+    'view',
+    'about',
+    'contact'
   ],[
     ".s-viewport-100",
     ".s-viewport-90",
@@ -28,14 +28,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
   {
     case 'feed':
     {
-      UserInterface.selectedView = 'feed';
+      UserInterface.setSelectedView('feed');
       UserInterface.scrollByPageNumber(1);
       $timeout(function(){UserInterface.zoomIn();}, 300);
       break;
     }
     case 'projects':
     {
-      UserInterface.selectedView = 'projects';
+      UserInterface.setSelectedView('projects');
       UserInterface.scrollByPageNumber(1);
       $timeout(function(){UserInterface.zoomIn();}, 300);
       break;
@@ -62,13 +62,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
   // Helper actions
 
-  $scope.isPageSelected = function(page)
-  {
+  $scope.isPageSelected = function(page){
     return page == UserInterface.getSelectedPage();
   }
-  $scope.isViewSelected = function(view)
-  {
-    return view == UserInterface.selectedView;
+  $scope.isViewSelected = function(view){
+    return view == UserInterface.getSelectedView();
   }
 
   // Actions
@@ -81,102 +79,26 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
   $scope.gotoHome = function()
   {
     UserInterface.hideMenu();
-    if ($scope.isPageSelected(1)) {
-      UserInterface.zoomOut();
-      $timeout(function () {
-        $location.path('/home');
-        if (!$scope.isPageSelected(0)) UserInterface.scrollByPageNumber(0);
-      }, 300);
-    }
-    else{
-      $location.path('/home');
-      if (!$scope.isPageSelected(0)) UserInterface.scrollByPageNumber(0);
-    }
+    UserInterface.gotoPage(0);
   }
   $scope.gotoFeed = function()
   {
     UserInterface.hideMenu();
-    if ($scope.isPageSelected(1))
-    {
-      if (UserInterface.selectedView != 'feed')
-      {
-        UserInterface.zoomOut();
-        $timeout(function()
-        {
-          spinnerService.show('viewSpinner');
-          $location.path('/feed');
-          UserInterface.selectedView = 'feed';
-          UserInterface.zoomIn(); // Try zooming in until zoomed in
-        }, 300);
-      }
-    }
-    else
-    {
-      spinnerService.show('viewSpinner');
-      $location.path('/feed');
-      UserInterface.selectedView = 'feed';
-      UserInterface.scrollByPageNumber(1);
-      $timeout(function(){
-        UserInterface.zoomIn(); // Try zooming in until zoomed in
-      }, 400);
-    }
+    UserInterface.gotoPage(1, 'feed');
   }
   $scope.gotoProjects = function()
   {
     UserInterface.hideMenu();
-    if ($scope.isPageSelected(1))
-    {
-      if (UserInterface.selectedView != 'projects')
-      {
-        UserInterface.zoomOut();
-        $timeout(function ()
-        {
-          spinnerService.show('viewSpinner');
-          $location.path('/projects');
-          UserInterface.selectedView = 'projects';
-          UserInterface.zoomIn(); // Try zooming in until zoomed in
-        }, 300);
-      }
-    }
-    else
-    {
-      spinnerService.show('viewSpinner');
-      $location.path('/projects');
-      UserInterface.selectedView = 'projects';
-      UserInterface.scrollByPageNumber(1);
-      $timeout(function () {
-        UserInterface.zoomIn(); // Try zooming in until zoomed in
-      }, 400);
-    }
+    UserInterface.gotoPage(1, 'projects');
   }
   $scope.gotoAbout = function()
   {
     UserInterface.hideMenu();
-    if ($scope.isPageSelected(1)) {
-      UserInterface.zoomOut();
-      $timeout(function(){
-        $location.path('/about');
-        if (!$scope.isPageSelected(2)) UserInterface.scrollByPageNumber(2);
-      }, 300);
-    }
-    else {
-      $location.path('/about');
-      if (!$scope.isPageSelected(2)) UserInterface.scrollByPageNumber(2);
-    }
+    UserInterface.gotoPage(2);
   }
   $scope.gotoContact = function()
   {
     UserInterface.hideMenu();
-    if ($scope.isPageSelected(1)) {
-      UserInterface.zoomOut();
-      $timeout(function () {
-        $location.path('/contact');
-        if (!$scope.isPageSelected(3)) UserInterface.scrollByPageNumber(3);
-      }, 300);
-    }
-    else {
-      $location.path('/contact');
-      if (!$scope.isPageSelected(3)) UserInterface.scrollByPageNumber(3);
-    }
+    UserInterface.gotoPage(3);
   }
 })
