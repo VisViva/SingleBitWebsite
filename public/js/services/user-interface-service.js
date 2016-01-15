@@ -268,7 +268,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           }, 400);
         }
       } else {
-        if (userInterface.selectedPage == page){
+        if (userInterface.selectedPage != page){
           userInterface.zoomOut();
           $timeout(function (){
             $location.path('/' + userInterface.pages[page]);
