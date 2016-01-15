@@ -6,7 +6,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
   {
     // Get viewport dimensions
 
-    var width = $(window).width();
     var height = $(window).height();
 
     // Set div heights
@@ -136,8 +135,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
         }
       });
 
-      // Menu modifier
-
       // Subscribe to window events
 
       var resizeTimer;
@@ -159,7 +156,13 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
           $('.navbar-default').removeClass('on');
         }
 
-        userInterface.selectedPage = Math.floor((document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * (userInterface.pages.length - 1));
+        for (var i = 0; i < userInterface.pages.length; ++i)
+        {
+          if ($(document).scrollTop() > $(userInterface.pages[i]).offset().top)
+          userInterface.selectedPage = userInterface.pages[i];
+          else break;
+        }
+
         userInterface.onScroll();
       });
 

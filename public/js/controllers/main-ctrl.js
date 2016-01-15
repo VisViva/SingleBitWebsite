@@ -6,25 +6,21 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     '#home',
     '#view',
     '#about',
-    '#contact',
-    '#footer'
-  ], function()
-  {
-    $scope.$apply();
-  },[
-    {type: "spc", className:"viewport-100", height:100},
-    {type: "spc", className:"viewport-90", height:90},
-    {type: "spc", className:"viewport-60", height:60},
-    {type: "spc", className:"viewport-40", height:40},
-    {type: "spc", className:"viewport-30", height:30},
-    {type: "spc", className:"viewport-10", height:10},
-    {type: "spc", className:"viewport-3", height:3},
-    {type: "img", className:"img-viewport-20", height:20}
+    '#contact'
+  ],[
+    ".s-viewport-100",
+    ".s-viewport-90",
+    ".s-viewport-60",
+    ".s-viewport-40",
+    ".s-viewport-30",
+    ".s-viewport-10",
+    ".s-viewport-3",
+    ".i-viewport-20",
   ]);
 
   // Get current location and scroll if needed
 
-  var location = $location.path().split('?')[0].split('/')[1];
+  var location = $location.path().split('/')[1];
 
   switch (location)
   {
@@ -72,10 +68,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
   {
     return view == UserInterface.selectedView;
   }
-  $scope.scrollByPageNumber = function(pageNumber)
-  {
-    UserInterface.scrollByPageNumber(pageNumber);
-  }
 
   // Actions
 
@@ -91,12 +83,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       UserInterface.zoomOut();
       $timeout(function () {
         $location.path('/home');
-        if (!$scope.isPageSelected(0)) $scope.scrollByPageNumber(0);
+        if (!$scope.isPageSelected(0)) UserInterface.scrollByPageNumber(0);
       }, 300);
     }
     else{
       $location.path('/home');
-      if (!$scope.isPageSelected(0)) $scope.scrollByPageNumber(0);
+      if (!$scope.isPageSelected(0)) UserInterface.scrollByPageNumber(0);
     }
   }
   $scope.gotoFeed = function()
@@ -121,7 +113,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       spinnerService.show('viewSpinner');
       $location.path('/feed');
       UserInterface.selectedView = 'feed';
-      $scope.scrollByPageNumber(1);
+      UserInterface.scrollByPageNumber(1);
       $timeout(function(){
         UserInterface.zoomIn(); // Try zooming in until zoomed in
       }, 400);
@@ -149,7 +141,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       spinnerService.show('viewSpinner');
       $location.path('/projects');
       UserInterface.selectedView = 'projects';
-      $scope.scrollByPageNumber(1);
+      UserInterface.scrollByPageNumber(1);
       $timeout(function () {
         UserInterface.zoomIn(); // Try zooming in until zoomed in
       }, 400);
@@ -162,12 +154,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       UserInterface.zoomOut();
       $timeout(function(){
         $location.path('/about');
-        if (!$scope.isPageSelected(2)) $scope.scrollByPageNumber(2);
+        if (!$scope.isPageSelected(2)) UserInterface.scrollByPageNumber(2);
       }, 300);
     }
     else {
       $location.path('/about');
-      if (!$scope.isPageSelected(2)) $scope.scrollByPageNumber(2);
+      if (!$scope.isPageSelected(2)) UserInterface.scrollByPageNumber(2);
     }
   }
   $scope.gotoContact = function()
@@ -177,12 +169,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       UserInterface.zoomOut();
       $timeout(function () {
         $location.path('/contact');
-        if (!(($scope.isPageSelected(3)) || ($scope.isPageSelected(4)))) $scope.scrollByPageNumber(4);
+        if (!(($scope.isPageSelected(3)) || ($scope.isPageSelected(4)))) UserInterface.scrollByPageNumber(4);
       }, 300);
     }
     else {
       $location.path('/contact');
-      if (!$scope.isPageSelected(3)) $scope.scrollByPageNumber(3);
+      if (!$scope.isPageSelected(3)) UserInterface.scrollByPageNumber(3);
     }
   }
 })
