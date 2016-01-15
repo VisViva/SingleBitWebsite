@@ -29,7 +29,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     ".p-percentage-60",
     ".p-percentage-66",
     ".i-viewport-20",
-    ".e-ender-100"
+    ".e-ender-100",
+    ".e-ender-50"
   ], function(){
     $scope.$apply();
   });

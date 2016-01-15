@@ -43,7 +43,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           break;
         }
         case 'e' : {
-          $(element).css({"height": '100px'});
+          $(element).css({"height": parseInt(element.split('-')[2]) + "px"});
           $(element).css({"width":"auto"});
           $(element).css({"overflow": "hidden"});
           break;

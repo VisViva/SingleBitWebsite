@@ -9,7 +9,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   $scope.$on('$viewContentLoaded', function(){
     spinnerService.hide('viewSpinner');
     UserInterface.updateService();
-    UserInterface.setZoomEnabled();
+    UserInterface.setZoomEnabled();    
   });
 
   // Get activities
