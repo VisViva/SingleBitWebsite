@@ -465,6 +465,18 @@
 		color: #FFF;
 	}
 
+/* Spaces ***************************************************/
+
+.p-percentage-15{height:15%;}
+.p-percentage-30{height:30%;}
+.p-percentage-20{height:20%;}
+.p-percentage-10{height:10%;}
+.p-percentage-2 {height:2%;}
+.p-percentage-13{height:13%;}
+.p-percentage-60{height:60%;}
+.p-percentage-66{height:66%;}
+.p-percentage-70{height:70%;}
+
 /* Helpers **************************************************/
 
 	.content

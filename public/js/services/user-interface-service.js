@@ -7,7 +7,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.pages = [];
   userInterface.classes = [];
   userInterface.zoomInEnabled = false;
-  userInterface.mobile = (($(window).height() < 600) || ($(window).width() < 600)) ? true : false;
+  userInterface.mobile = (($(window).height() <= 600) || ($(window).width() <= 600)) ? true : false;
   userInterface.scrollbarTemplate = {
     scrollButtons:{
       enable:true
@@ -22,10 +22,33 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     var heightPercentageMultiplier = $(window).height()/100;
     userInterface.classes.forEach(function(element, index, array)
     {
-      $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
-      if (element[1] == 'i') $(element).css({"width":"auto"});
-      else $(element).css({"display": "block"});
-      $(element).css({"overflow": "hidden"});
+      switch (element[1])
+      {
+        case 's': case 'm':{
+          $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
+          $(element).css({"display": "block"});
+          $(element).css({"overflow": "hidden"});
+          break;
+        }
+        case 'p': {
+          $(element).css({"height":'50px'});
+          $(element).css({"display": "block"});
+          $(element).css({"overflow": "hidden"});
+          break;
+        }
+        case 'i' : {
+          $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
+          $(element).css({"width":"auto"});
+          $(element).css({"overflow": "hidden"});
+          break;
+        }
+        case 'e' : {
+          $(element).css({"height": '100px'});
+          $(element).css({"width":"auto"});
+          $(element).css({"overflow": "hidden"});
+          break;
+        }
+      }
     });
   }
 
@@ -42,43 +65,43 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   };
 
   userInterface.initializePrimaryScrollbars = function(){
-    userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
-    $('.scrollable-dark').mCustomScrollbar(userInterface.scrollbarTemplate);
-    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
-    $('.scrollable-dark-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
-    userInterface.scrollbarTemplate.theme = "inset";
-    $('.scrollable-light-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
+    if (userInterface.mobile == false){
+      userInterface.scrollbarTemplate.theme = "inset-dark";
+      userInterface.scrollbarTemplate.scrollbarPosition = "outside";
+      $('.scrollable-dark').mCustomScrollbar(userInterface.scrollbarTemplate);
+      userInterface.scrollbarTemplate.scrollbarPosition = "inside";
+      $('.scrollable-dark-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
+      userInterface.scrollbarTemplate.theme = "inset";
+      $('.scrollable-light-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
+    }
   };
 
   userInterface.initializeSecondaryScrollbars = function(){
-    userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
-    $('.scrollable-dark-view').mCustomScrollbar(userInterface.scrollbarTemplate);
-    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
-    $('.scrollable-dark-inside-view').mCustomScrollbar(userInterface.scrollbarTemplate);
+    if (userInterface.mobile == false){
+      userInterface.scrollbarTemplate.theme = "inset-dark";
+      userInterface.scrollbarTemplate.scrollbarPosition = "outside";
+      $('.scrollable-dark-view').mCustomScrollbar(userInterface.scrollbarTemplate);
+      userInterface.scrollbarTemplate.scrollbarPosition = "inside";
+      $('.scrollable-dark-inside-view').mCustomScrollbar(userInterface.scrollbarTemplate);
+    }
   };
 
   userInterface.zoomIn = function zoom(){
-    if (userInterface.zoomInEnabled == false)
-    setTimeout(function(){ zoom(); }, 100);
-    else {
-      $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
-      userInterface.zoomInEnabled = false;
-    }
-  }
-
-  userInterface.zoomIn = function zoom(){
-    if (userInterface.zoomInEnabled == false)
-    setTimeout(function(){ zoom(); }, 100);
-    else {
-      $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
-      userInterface.zoomInEnabled = false;
+    if (userInterface.mobile == false){
+      if (userInterface.zoomInEnabled == false)
+      setTimeout(function(){ zoom(); }, 100);
+      else {
+        $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+        userInterface.zoomInEnabled = false;
+      }
     }
   }
 
   userInterface.zoomOut = function(){
-    $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+    if (userInterface.mobile == false) $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+  }
+
+  userInterface.disableResponsiveCSS = function(){
   }
 
   return {
@@ -89,6 +112,33 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
 
       userInterface.classes = classes;
       userInterface.pages = pages;
+
+      // Figure out responsiveness
+
+      if (userInterface.mobile == false){
+        $(window).load(function(){
+          userInterface.initializePrimaryScrollbars();
+        });
+        $(window).bind('wheel', function(){
+          return false;
+        });
+        for (var i = 0; i < userInterface.classes.length; ++i)
+        {
+          if ((userInterface.classes[i][1] == 'p') || (userInterface.classes[i][1] == 'e'))
+          userInterface.classes.splice(i--, 1);
+        }
+      }
+      else {
+        $('.zoom-in-start').removeClass('zoom-in-start');
+        $('.zoom-in-end').removeClass('zoom-in-end');
+
+        for (var i = 0; i < userInterface.classes.length; ++i)
+        {
+          if ((userInterface.classes[i][1] == 's') || (userInterface.classes[i][1] == 'i'))
+          userInterface.classes.splice(i--, 1);
+        }
+      }
+
       userInterface.calculateDimensions();
 
       // Custom slider
@@ -109,12 +159,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
 
       // Subscribe to window events
 
-      $(window).load(function(){
-        userInterface.initializePrimaryScrollbars();
-      });
-
       var resizeTimer;
-
       $(window).on('resize', function(e){
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
@@ -127,7 +172,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
         var navHeight = $(window).height() - 100;
         if ($(window).scrollTop() > navHeight)
         $('.navbar-default').addClass('on');
-        else  $('.navbar-default').removeClass('on');
+        else $('.navbar-default').removeClass('on');
 
         for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
         {
@@ -138,15 +183,14 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
         userInterface.selectedPage = page;
         callback();
       });
-
-      $(window).bind('wheel', function(){
-        return false;
-      });
     },
 
     updateService : function(){
       userInterface.calculateDimensions();
-      userInterface.initializeSecondaryScrollbars();
+      if (userInterface.mobile == false)userInterface.initializeSecondaryScrollbars();
+      else {
+        userInterface.disableResponsiveCSS();
+      }
     },
 
     // Toggling menu
@@ -212,6 +256,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
               spinnerService.show('viewSpinner');
               $location.path('/' + view);
               userInterface.selectedView = view;
+              if (userInterface.mobile == true) userInterface.scrollByPageNumber(1);
               userInterface.zoomIn();
             }, 300);
           }
@@ -231,14 +276,16 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           userInterface.zoomOut();
           $timeout(function (){
             $location.path('/' + userInterface.pages[page]);
-            if (!(userInterface.selectedPage == page)) userInterface.scrollByPageNumber(page);
+            if (!(userInterface.selectedPage == page) || (userInterface.mobile == true)) userInterface.scrollByPageNumber(page);
           }, 300);
         }
         else {
           $location.path('/' + userInterface.pages[page]);
-          if (!(userInterface.selectedPage == page)) userInterface.scrollByPageNumber(page);
+          if (!(userInterface.selectedPage == page) || (userInterface.mobile == true)) userInterface.scrollByPageNumber(page);
         }
       }
-    }
+    },
+
+    mobile : userInterface.mobile
   }
 }]);

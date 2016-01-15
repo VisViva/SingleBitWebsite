@@ -28,6 +28,8 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $lo
     {
       spinnerService.show('viewSpinner');
       $location.path('/' + UserInterface.selectedView);
+      UserInterface.updateService();
+      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
       UserInterface.zoomIn();
     }, 300);
   };

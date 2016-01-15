@@ -33,6 +33,8 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
     {
       spinnerService.show('viewSpinner');
       $location.path('/feed/view/' + id);
+      UserInterface.updateService();
+      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
       UserInterface.zoomIn();
     }, 300);
   };

@@ -34,6 +34,8 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
     {
       spinnerService.show('viewSpinner');
       $location.path('/projects/view/' + id);
+      UserInterface.updateService();
+      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
       UserInterface.zoomIn();
     }, 300);
   };
