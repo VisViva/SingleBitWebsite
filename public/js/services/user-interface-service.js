@@ -20,6 +20,12 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     });
   }
 
+  userInterface.scrollByPageNumber = function(pageName, speed){
+    $('html, body').animate({
+      scrollTop: $('#' + pageName).offset().top
+    }, speed);
+  };
+
   userInterface.scrollByPageNumber = function(pageNumber, speed){
     $('html, body').animate({
       scrollTop: $('#' + userInterface.pages[pageNumber]).offset().top
