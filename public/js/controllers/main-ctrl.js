@@ -26,36 +26,17 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
   switch (location)
   {
-    case 'feed':
+    case 'feed': case 'projects':
     {
-      UserInterface.setSelectedView('feed');
-      UserInterface.scrollByPageNumber(1);
+      UserInterface.setSelectedView(location);
+      UserInterface.scrollByPageName('view');
       $timeout(function(){UserInterface.zoomIn();}, 300);
       break;
     }
-    case 'projects':
-    {
-      UserInterface.setSelectedView('projects');
-      UserInterface.scrollByPageNumber(1);
-      $timeout(function(){UserInterface.zoomIn();}, 300);
-      break;
-    }
-    case 'about':
+    case 'home': case 'about': case 'contact':
     {
       UserInterface.zoomOut();
-      UserInterface.scrollByPageNumber(2);
-      break;
-    }
-    case 'contact':
-    {
-      UserInterface.zoomOut();
-      UserInterface.scrollByPageNumber(3);
-      break;
-    }
-    default:
-    {
-      UserInterface.zoomOut();
-      UserInterface.scrollByPageNumber(0);
+      UserInterface.scrollByPageName(location);
       break;
     }
   }

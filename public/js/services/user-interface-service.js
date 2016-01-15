@@ -8,6 +8,15 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.classes = [];
   userInterface.zoomInEnabled = false;
   userInterface.mobile = (($(window).height() < 600) || ($(window).width() < 600)) ? true : false;
+  userInterface.scrollbarTemplate = {
+    scrollButtons:{
+      enable:true
+    },
+    advanced:{
+      autoScrollOnFocus: false,
+      updateOnContentResize: true
+    }
+  }
 
   userInterface.calculateDimensions = function(){
     var heightPercentageMultiplier = $(window).height()/100;
@@ -20,7 +29,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     });
   }
 
-  userInterface.scrollByPageNumber = function(pageName, speed){
+  userInterface.scrollByPageName = function(pageName, speed){
     $('html, body').animate({
       scrollTop: $('#' + pageName).offset().top
     }, speed);
@@ -32,75 +41,22 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     }, speed);
   };
 
-  userInterface.destroyScrollbars = function(){
-    $('.scrollable-light').mCustomScrollbar('destroy');
-    $('.scrollable-dark').mCustomScrollbar('destroy');
-    $('.scrollable-light-inside').mCustomScrollbar('destroy');
-    $('.scrollable-dark-inside').mCustomScrollbar('destroy');
-  };
-
   userInterface.initializePrimaryScrollbars = function(){
-    $('.scrollable-dark').mCustomScrollbar({
-      theme:"inset-dark",
-      scrollbarPosition:"outside",
-      scrollButtons:{
-        enable:true
-      },
-      advanced:{
-        autoScrollOnFocus: false,
-        updateOnContentResize: true
-      }
-    });
-
-    $('.scrollable-light-inside').mCustomScrollbar({
-      theme:"inset",
-      scrollbarPosition:"inside",
-      scrollButtons:{
-        enable:true
-      },
-      advanced:{
-        autoScrollOnFocus: false,
-        updateOnContentResize: true
-      }
-    });
-
-    $('.scrollable-dark-inside').mCustomScrollbar({
-      theme:"inset-dark",
-      scrollbarPosition:"inside",
-      scrollButtons:{
-        enable:true
-      },
-      advanced:{
-        autoScrollOnFocus: false,
-        updateOnContentResize: true
-      }
-    });
+    userInterface.scrollbarTemplate.theme = "inset-dark";
+    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
+    $('.scrollable-dark').mCustomScrollbar(userInterface.scrollbarTemplate);
+    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
+    $('.scrollable-dark-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
+    userInterface.scrollbarTemplate.theme = "inset";
+    $('.scrollable-light-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
   };
 
   userInterface.initializeSecondaryScrollbars = function(){
-    $('.scrollable-dark-view').mCustomScrollbar({
-      theme:"inset-dark",
-      scrollbarPosition:"outside",
-      scrollButtons:{
-        enable:true
-      },
-      advanced:{
-        autoScrollOnFocus: false,
-        updateOnContentResize: true
-      }
-    });
-
-    $('.scrollable-dark-inside-view').mCustomScrollbar({
-      theme:"inset-dark",
-      scrollbarPosition:"inside",
-      scrollButtons:{
-        enable:true
-      },
-      advanced:{
-        autoScrollOnFocus: false,
-        updateOnContentResize: true
-      }
-    });
+    userInterface.scrollbarTemplate.theme = "inset-dark";
+    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
+    $('.scrollable-dark-view').mCustomScrollbar(userInterface.scrollbarTemplate);
+    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
+    $('.scrollable-dark-inside-view').mCustomScrollbar(userInterface.scrollbarTemplate);
   };
 
   userInterface.zoomIn = function zoom(){
@@ -218,7 +174,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     scrollByPageNumber : function(pageNumber){
       userInterface.scrollByPageNumber(pageNumber, 500);
     },
-
     scrollByPageName : function(pageName){
       userInterface.scrollByPageName(pageName, 500);
     },
@@ -228,7 +183,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     getSelectedPage : function(){
       return userInterface.selectedPage;
     },
-
     setSelectedPage : function(page){
       userInterface.selectedPage = page;
     },
@@ -238,7 +192,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     getSelectedView : function(){
       return userInterface.selectedView;
     },
-
     setSelectedView : function(view){
       userInterface.selectedView = view;
     },
