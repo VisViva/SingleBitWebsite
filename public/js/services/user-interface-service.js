@@ -2,66 +2,39 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
   var userInterface = this;
 
-  userInterface.calculateDimensions = function()
-  {
-    // Get viewport dimensions
+  userInterface.selectedPage = 0;
+  userInterface.selectedView = 'feed';
+  userInterface.pages = [];
+  userInterface.classes = [];
+  userInterface.zoomInEnabled = false;
+  userInterface.mobile = (($(window).height() < 600) || ($(window).width() < 600)) ? true : false;
 
-    var height = $(window).height();
-
-    // Set div heights
-
+  userInterface.calculateDimensions = function(){
+    var heightPercentageMultiplier = $(window).height()/100;
     userInterface.classes.forEach(function(element, index, array)
     {
-      if (!angular.isUndefined(element.height))
-      {
-        $('.' + element.className).css({"height": height/100 * element.height + "px"});
-      }
-      else
-      {
-        if (element.type == "img") $('.' + element.className).css({"height":"auto"});
-      }
-
-      if (!angular.isUndefined(element.width))
-      {
-        $('.' + element.className).css({"width": height/100 * element.width + "px"});
-      }
-      else
-      {
-        if (element.type == "img") $('.' + element.className).css({"width":"auto"});
-      }
-      if(element.type == "spc")
-      {
-        $('.' + element.className).css({"display": "block"});
-      }
-      $('.' + element.className).css({"overflow": "hidden"});
+      $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
+      if (element[1] == 'i') $(element).css({"width":"auto"});
+      else $(element).css({"display": "block"});
+      $(element).css({"overflow": "hidden"});
     });
   }
 
-  userInterface.scrollByPageName = function(pageName, speed)
-  {
-    $('html, body').animate({
-      scrollTop: $(pageName).offset().top
-    }, speed);
-  };
-
-  userInterface.scrollByPageNumber = function(pageNumber, speed)
-  {
+  userInterface.scrollByPageNumber = function(pageNumber, speed){
     $('html, body').animate({
       scrollTop: $(userInterface.pages[pageNumber]).offset().top
     }, speed);
   };
 
-  userInterface.destroyScrollbars = function()
-  {
+  userInterface.destroyScrollbars = function(){
     $('.scrollable-light').mCustomScrollbar('destroy');
     $('.scrollable-dark').mCustomScrollbar('destroy');
     $('.scrollable-light-inside').mCustomScrollbar('destroy');
     $('.scrollable-dark-inside').mCustomScrollbar('destroy');
   };
 
-  userInterface.initializeScrollbars = function()
-  {
-    $('.scrollable-dark').mCustomScrollbar( {
+  userInterface.initializePrimaryScrollbars = function(){
+    $('.scrollable-dark').mCustomScrollbar({
       theme:"inset-dark",
       scrollbarPosition:"outside",
       scrollButtons:{
@@ -73,7 +46,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
       }
     });
 
-    $('.scrollable-light-inside').mCustomScrollbar( {
+    $('.scrollable-light-inside').mCustomScrollbar({
       theme:"inset",
       scrollbarPosition:"inside",
       scrollButtons:{
@@ -85,7 +58,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
       }
     });
 
-    $('.scrollable-dark-inside').mCustomScrollbar( {
+    $('.scrollable-dark-inside').mCustomScrollbar({
       theme:"inset-dark",
       scrollbarPosition:"inside",
       scrollButtons:{
@@ -98,26 +71,41 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
     });
   };
 
-  userInterface.selectedPage = 0;
-  userInterface.selectedView = 'empty';
-  userInterface.pages = [];
-  userInterface.classes = [];
-  userInterface.zoomInEnabled = false;
+  userInterface.initializeSecondaryScrollbars = function(){
+    $('.scrollable-dark-view').mCustomScrollbar({
+      theme:"inset-dark",
+      scrollbarPosition:"outside",
+      scrollButtons:{
+        enable:true
+      },
+      advanced:{
+        autoScrollOnFocus: false,
+        updateOnContentResize: true
+      }
+    });
+
+    $('.scrollable-dark-inside-view').mCustomScrollbar({
+      theme:"inset-dark",
+      scrollbarPosition:"inside",
+      scrollButtons:{
+        enable:true
+      },
+      advanced:{
+        autoScrollOnFocus: false,
+        updateOnContentResize: true
+      }
+    });
+  };
 
   return {
 
     // Initialization
 
-    initializeService : function (pages, callback, classes) {
-      'use strict';
+    initializeService : function (pages, classes, callback) {
 
       userInterface.classes = classes;
-      userInterface.calculateDimensions();
-
-      // Initialize page list
-
       userInterface.pages = pages;
-      userInterface.onScroll = callback;
+      userInterface.calculateDimensions();
 
       // Custom slider
 
@@ -137,9 +125,13 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
 
       // Subscribe to window events
 
+      $(window).load(function(){
+        userInterface.initializePrimaryScrollbars();
+      });
+
       var resizeTimer;
 
-      $(window).on('resize', function(e) {
+      $(window).on('resize', function(e){
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
           userInterface.calculateDimensions();
@@ -147,127 +139,79 @@ angular.module('UserInterfaceService', []).factory('UserInterface', [function() 
         }, 100);
       });
 
-      $(window).bind('scroll', function()
-      {
+      $(window).bind('scroll', function(){
         var navHeight = $(window).height() - 100;
-        if ($(window).scrollTop() > navHeight) {
-          $('.navbar-default').addClass('on');
-        } else {
-          $('.navbar-default').removeClass('on');
-        }
+        if ($(window).scrollTop() > navHeight)
+        $('.navbar-default').addClass('on');
+        else  $('.navbar-default').removeClass('on');
 
-        for (var i = 0; i < userInterface.pages.length; ++i)
+        for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
         {
-          if ($(document).scrollTop() > $(userInterface.pages[i]).offset().top)
-          userInterface.selectedPage = userInterface.pages[i];
+          if ($(document).scrollTop() > $(userInterface.pages[i]).offset().top) ++page;
           else break;
         }
 
-        userInterface.onScroll();
+        userInterface.selectedPage = page;
+        callback();
       });
 
-      // Ignore scrolling with mouse wheel
-
-      $(window).bind('wheel', function()
-      {
+      $(window).bind('wheel', function(){
         return false;
-      });
-
-      // Initialize section sliders
-
-      $(window).load(function() {
-        userInterface.initializeScrollbars();
       });
     },
 
-    updateService : function()
-    {
+    updateService : function(){
       userInterface.calculateDimensions();
+      userInterface.initializeSecondaryScrollbars();
+    },
 
-      $('.scrollable-dark-view').mCustomScrollbar(
-        {
-          theme:"inset-dark",
-          scrollbarPosition:"outside",
-          scrollButtons:{
-            enable:true
-          },
-          advanced:{
-            autoScrollOnFocus: false,
-            updateOnContentResize: true
-          }
-        });
+    // Toggling menu
 
-        $('.scrollable-dark-inside-view').mCustomScrollbar( {
-          theme:"inset-dark",
-          scrollbarPosition:"inside",
-          scrollButtons:{
-            enable:true
-          },
-          advanced:{
-            autoScrollOnFocus: false,
-            updateOnContentResize: true
-          }
-        });
-      },
+    hideMenu : function(){
+      $('.navbar-collapse').collapse('hide');
+    },
 
-      // Toggling menu
+    // Zooming page
 
-      hideMenu : function()
-      {
-        $('.navbar-collapse').collapse('hide');
-      },
+    zoomIn : function zoom(){
+      if (userInterface.zoomInEnabled == false)
+      setTimeout(function(){ zoom(); }, 100);
+      else {
+        $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+        userInterface.zoomInEnabled = false;
+      }
+    },
 
-      // Zooming page
+    zoomOut : function(){
+      $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+    },
 
-      zoomIn : function zoom()
-      {
-        if (userInterface.zoomInEnabled == false)
-        {
-          setTimeout(function(){zoom();}, 100);
-        }
-        else
-        {
-          $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
-          userInterface.zoomInEnabled = false;
-        }
-      },
+    setZoomEnabled : function(){
+      userInterface.zoomInEnabled = true;
+    },
 
-      zoomOut : function()
-      {
-        $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
-      },
+    // Forced scroll
 
-      setZoomEnabled : function()
-      {
-        userInterface.zoomInEnabled = true;
-      },
+    scrollByPageNumber : function(pageNumber){
+      userInterface.scrollByPageNumber(pageNumber, 500);
+    },
 
-      // Forced scroll
+    scrollByPageName : function(pageName){
+      userInterface.scrollByPageName(pageName, 500);
+    },
 
-      scrollByPageNumber : function(pageNumber)
-      {
-        userInterface.scrollByPageNumber(pageNumber, 500);
-      },
+    // Selected page
 
-      scrollByPageName : function(pageName)
-      {
-        userInterface.scrollByPageName(pageName, 500);
-      },
+    getSelectedPage : function(){
+      return userInterface.selectedPage;
+    },
 
-      // Selected page
+    setSelectedPage : function(page){
+      userInterface.selectedPage = page;
+    },
 
-      getSelectedPage : function()
-      {
-        return userInterface.selectedPage;
-      },
+    // Selected view
 
-      setSelectedPage : function(page)
-      {
-        userInterface.selectedPage = page;
-      },
-
-      // Selected view
-
-      selectedView : userInterface.selectedView
-    }
-  }]);
+    selectedView : userInterface.selectedView
+  }
+}]);

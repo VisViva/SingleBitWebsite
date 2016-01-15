@@ -16,7 +16,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     ".s-viewport-10",
     ".s-viewport-3",
     ".i-viewport-20",
-  ]);
+  ], function(){
+    $scope.$apply();
+  });
 
   // Get current location and scroll if needed
 
@@ -47,10 +49,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     case 'contact':
     {
       UserInterface.zoomOut();
-      UserInterface.scrollByPageNumber(4);
+      UserInterface.scrollByPageNumber(3);
       break;
     }
-    default: // Home
+    default:
     {
       UserInterface.zoomOut();
       UserInterface.scrollByPageNumber(0);
@@ -169,7 +171,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       UserInterface.zoomOut();
       $timeout(function () {
         $location.path('/contact');
-        if (!(($scope.isPageSelected(3)) || ($scope.isPageSelected(4)))) UserInterface.scrollByPageNumber(4);
+        if (!$scope.isPageSelected(3)) UserInterface.scrollByPageNumber(3);
       }, 300);
     }
     else {

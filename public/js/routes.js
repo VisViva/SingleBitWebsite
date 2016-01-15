@@ -24,7 +24,8 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   // Other cases
   .otherwise({
-    templateUrl: '../views/empty.html'
+    templateUrl: '../views/feed/feed.html',
+    controller: 'FeedController'
   });
 
   $locationProvider.html5Mode(true);
