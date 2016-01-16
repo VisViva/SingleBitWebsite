@@ -18,8 +18,8 @@ angular.module('ProjectsCtrl', []).controller('ProjectsController', function($sc
       spinnerService.show('viewSpinner');
       $location.path('/projects/type/' + type);
       UserInterface.updateService();
-      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
+      if (UserInterface.isMobile()) UserInterface.scrollByPageNumber(1);
       UserInterface.zoomIn();
-    }, 300);
+    }, UserInterface.isMobile() ? 0 : 300);
   };
 });

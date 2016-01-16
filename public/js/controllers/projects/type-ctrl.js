@@ -5,15 +5,6 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   $scope.projects = [];
   $scope.type = $routeParams.type;
 
-  // Execute when content is loaded
-
-  $scope.$on('$viewContentLoaded', function(){
-    spinnerService.hide('viewSpinner');
-    UserInterface.updateService();
-    UserInterface.setZoomEnabled();
-    if (UserInterface.isMobile()) UserInterface.scrollByPageNumber(1);
-  });
-
   // Get activities
 
   for (var i = 0; i < 8; ++i)
@@ -30,14 +21,6 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
 
   $scope.openProject = function(id)
   {
-    UserInterface.zoomOut();
-    $timeout(function()
-    {
-      spinnerService.show('viewSpinner');
-      $location.path('/projects/view/' + id);
-      UserInterface.updateService();
-      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
-      UserInterface.zoomIn();
-    }, 300);
+    UserInterface.gotoLocation('/projects/view/' + id);
   };
 });

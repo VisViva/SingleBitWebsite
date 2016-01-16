@@ -2,6 +2,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
   // Initialize user interface
 
+  $scope.$on('$viewContentLoaded', function(){
+    UserInterface.contentLoaded();
+  });
+
   UserInterface.initializeService([
     'home',
     'view',
@@ -35,6 +39,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       ".dr-5"
     ],
     mobilePixels:[
+      ".mp-200",
       ".mp-150",
       ".mp-100",
       ".mp-50",
@@ -53,7 +58,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       {
         UserInterface.setSelectedView(location);
         UserInterface.scrollByPageName('view');
-        $timeout(function(){UserInterface.zoomIn();}, 300);
+        $timeout(function(){UserInterface.zoomIn();}, UserInterface.isMobile() ? 0 : 300);
         break;
       }
       case 'home': case 'about': case 'contact':

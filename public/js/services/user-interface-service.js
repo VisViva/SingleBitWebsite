@@ -111,6 +111,21 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     if (userInterface.mobile == false) $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
   }
 
+  userInterface.updateService = function(){
+    userInterface.calculateDimensions();
+    if (userInterface.mobile == false) userInterface.initializeSecondaryScrollbars();
+  }
+
+  userInterface.contentLoaded = function(){
+    spinnerService.hide('viewSpinner');
+    userInterface.updateService();
+    userInterface.setZoomEnabled();
+  }
+
+  userInterface.setZoomEnabled = function(){
+    userInterface.zoomInEnabled = true;
+  }
+
   return {
 
     // Initialization
@@ -181,8 +196,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     },
 
     updateService : function(){
-      userInterface.calculateDimensions();
-      if (userInterface.mobile == false) userInterface.initializeSecondaryScrollbars();
+      userInterface.updateService();
     },
 
     // Toggling menu
@@ -202,7 +216,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     },
 
     setZoomEnabled : function(){
-      userInterface.zoomInEnabled = true;
+      userInterface.setZoomEnabled();
     },
 
     // Forced scroll
@@ -250,7 +264,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
               userInterface.selectedView = view;
               if (userInterface.isMobile()) userInterface.scrollByPageNumber(page);
               userInterface.zoomIn();
-            }, 300);
+            }, userInterface.isMobile() ? 0 : 300);
           }
         }
         else
@@ -271,7 +285,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
             $location.path('/' + userInterface.pages[page]);
             if (userInterface.isMobile()) userInterface.switchToPage(page);
             if ((userInterface.selectedPage != page) || (userInterface.isMobile())) userInterface.scrollByPageNumber(page);
-          }, 300);
+          }, userInterface.isMobile() ? 0 : 300);
         }
         else {
           $location.path('/' + userInterface.pages[page]);
@@ -279,6 +293,21 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
           if ((userInterface.selectedPage != page) || (userInterface.isMobile())) userInterface.scrollByPageNumber(page);
         }
       }
+    },
+
+    gotoLocation : function(location){
+      userInterface.zoomOut();
+      $timeout(function(){
+        spinnerService.show('viewSpinner');
+        $location.path(location);
+        userInterface.updateService();
+        if (userInterface.isMobile()) userInterface.scrollByPageNumber(1);
+        userInterface.zoomIn();
+      }, userInterface.isMobile() ? 0 : 300);
+    },
+
+    contentLoaded : function(){
+      userInterface.contentLoaded();
     },
 
     isMobile : function(){
