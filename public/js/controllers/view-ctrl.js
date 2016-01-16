@@ -17,20 +17,13 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $lo
     spinnerService.hide('viewSpinner');
     UserInterface.updateService();
     UserInterface.setZoomEnabled();
+    if (UserInterface.isMobile()) UserInterface.scrollByPageNumber(1);
   });
 
   // Actions
 
   $scope.goBack = function()
   {
-    UserInterface.zoomOut();
-    $timeout(function()
-    {
-      spinnerService.show('viewSpinner');
-      $location.path('/' + UserInterface.selectedView);
-      UserInterface.updateService();
-      if (UserInterface.mobile == true) UserInterface.scrollByPageNumber(1);
-      UserInterface.zoomIn();
-    }, 300);
+    UserInterface.gotoPage(1,  UserInterface.getSelectedView());
   };
 });

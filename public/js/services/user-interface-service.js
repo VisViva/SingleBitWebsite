@@ -1,4 +1,4 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', function($location, $timeout, spinnerService) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope', '$location','$timeout','spinnerService', function($rootScope, $location, $timeout, spinnerService) {
 
   var userInterface = this;
 
@@ -16,6 +16,14 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
       autoScrollOnFocus: false,
       updateOnContentResize: true
     }
+  }
+
+  userInterface.switchToPage = function(page){
+    $('#' + userInterface.pages[1]).css({'display': 'none'});
+    $('#' + userInterface.pages[2]).css({'display': 'none'});
+    $('#' + userInterface.pages[3]).css({'display': 'none'});
+    $('#' + userInterface.pages[page]).css({'display': ''});
+    userInterface.selectedPage = page;
   }
 
   userInterface.isMobile = function() {
@@ -53,12 +61,14 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   }
 
   userInterface.scrollByPageName = function(pageName, speed){
+    if (userInterface.isMobile()) userInterface.switchToPage(userInterface.pages.indexOf(pageName));
     $('html, body').animate({
       scrollTop: $('#' + pageName).offset().top
     }, speed);
   };
 
   userInterface.scrollByPageNumber = function(pageNumber, speed){
+    if (userInterface.isMobile()) userInterface.switchToPage(pageNumber);
     $('html, body').animate({
       scrollTop: $('#' + userInterface.pages[pageNumber]).offset().top
     }, speed);
@@ -118,8 +128,24 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
         $(window).bind('wheel', function(){
           return false;
         });
+        $(window).bind('scroll', function(){
+          var navHeight = $(window).height() - 100;
+          if ($(window).scrollTop() > navHeight)
+          $('.navbar-default').addClass('on');
+          else $('.navbar-default').removeClass('on');
+
+          for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
+          {
+            if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
+            else break;
+          }
+          userInterface.selectedPage = page;
+          callback();
+        });
       }
       else {
+        userInterface.switchToPage(0);
+        $('.navbar-default').addClass('on');
         $('.zoom-in-start').removeClass('zoom-in-start');
         $('.zoom-in-end').removeClass('zoom-in-end');
       }
@@ -151,22 +177,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           userInterface.calculateDimensions();
           userInterface.scrollByPageNumber(userInterface.selectedPage, 300);
         }, 100);
-      });
-
-      $(window).bind('scroll', function(){
-        var navHeight = $(window).height() - 100;
-        if ($(window).scrollTop() > navHeight)
-        $('.navbar-default').addClass('on');
-        else $('.navbar-default').removeClass('on');
-
-        for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
-        {
-          if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
-          else break;
-        }
-
-        userInterface.selectedPage = page;
-        callback();
       });
     },
 
@@ -228,9 +238,9 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     {
       if (page == 1)
       {
-        if (userInterface.selectedPage == 1)
+        if (userInterface.selectedPage == page)
         {
-          if (userInterface.selectedView != view)
+          if ((userInterface.selectedView != view) || (userInterface.isMobile()))
           {
             userInterface.zoomOut();
             $timeout(function()
@@ -238,6 +248,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
               spinnerService.show('viewSpinner');
               $location.path('/' + view);
               userInterface.selectedView = view;
+              if (userInterface.isMobile()) userInterface.scrollByPageNumber(page);
               userInterface.zoomIn();
             }, 300);
           }
@@ -247,7 +258,8 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           spinnerService.show('viewSpinner');
           $location.path('/' + view);
           userInterface.selectedView = view;
-          userInterface.scrollByPageNumber(1);
+          if (userInterface.isMobile()) userInterface.switchToPage(page);
+          userInterface.scrollByPageNumber(page);
           $timeout(function(){
             userInterface.zoomIn();
           }, 400);
@@ -257,12 +269,14 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           userInterface.zoomOut();
           $timeout(function (){
             $location.path('/' + userInterface.pages[page]);
-            if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
+            if (userInterface.isMobile()) userInterface.switchToPage(page);
+            if ((userInterface.selectedPage != page) || (userInterface.isMobile())) userInterface.scrollByPageNumber(page);
           }, 300);
         }
         else {
           $location.path('/' + userInterface.pages[page]);
-          if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
+          if (userInterface.isMobile()) userInterface.switchToPage(page);
+          if ((userInterface.selectedPage != page) || (userInterface.isMobile())) userInterface.scrollByPageNumber(page);
         }
       }
     },

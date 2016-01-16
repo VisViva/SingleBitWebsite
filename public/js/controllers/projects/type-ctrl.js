@@ -11,6 +11,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
     spinnerService.hide('viewSpinner');
     UserInterface.updateService();
     UserInterface.setZoomEnabled();
+    if (UserInterface.isMobile()) UserInterface.scrollByPageNumber(1);
   });
 
   // Get activities
