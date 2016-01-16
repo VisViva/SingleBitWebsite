@@ -1,13 +1,10 @@
 angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $timeout, UserInterface, spinnerService) {
 
-  // Initialize
-
   $scope.activities = [];
 
   // Get activities
 
-  for (var i = 0; i < 8; ++i)
-  {
+  for (var i = 0; i < 8; ++i){
     $scope.activities.push({
       id: 15,
       title: "How to design achievements?",
@@ -18,8 +15,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
 
   // Actions
 
-  $scope.openActivity = function(id)
-  {
+  $scope.openActivity = function(id){
     UserInterface.gotoLocation('/feed/view/' + id);
   };
 });

@@ -13,6 +13,6 @@ angular.module("SingleBitApplication", [
     'TypeCtrl',
     'ViewCtrl',
 
-    // Jquery bits
+    // Services
     'UserInterfaceService'
 ]);

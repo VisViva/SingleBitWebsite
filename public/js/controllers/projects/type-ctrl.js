@@ -19,8 +19,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
 
   // Actions
 
-  $scope.openProject = function(id)
-  {
+  $scope.openProject = function(id){
     UserInterface.gotoLocation('/projects/view/' + id);
   };
 });

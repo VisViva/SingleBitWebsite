@@ -58,7 +58,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       {
         UserInterface.setSelectedView(location);
         UserInterface.scrollByPageName('view');
-        $timeout(function(){UserInterface.zoomIn();}, UserInterface.isMobile() ? 0 : 300);
+        $timeout(function(){ UserInterface.zoomIn(); }, UserInterface.isMobile() ? 0 : 300);
         break;
       }
       case 'home': case 'about': case 'contact':
@@ -89,6 +89,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     {
       UserInterface.hideMenu();
       UserInterface.gotoPage(0);
+      UserInterface.contentLoaded();
     }
     $scope.gotoFeed = function()
     {
@@ -104,10 +105,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     {
       UserInterface.hideMenu();
       UserInterface.gotoPage(2);
+      UserInterface.contentLoaded();
     }
     $scope.gotoContact = function()
     {
       UserInterface.hideMenu();
       UserInterface.gotoPage(3);
+      UserInterface.contentLoaded();
     }
   })
