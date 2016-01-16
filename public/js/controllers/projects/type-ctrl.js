@@ -15,7 +15,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
 
   // Get activities
 
-  for (var i = 0; i < 16; ++i)
+  for (var i = 0; i < 8; ++i)
   {
     $scope.projects.push({
       id: 15,

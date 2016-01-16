@@ -9,12 +9,12 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   $scope.$on('$viewContentLoaded', function(){
     spinnerService.hide('viewSpinner');
     UserInterface.updateService();
-    UserInterface.setZoomEnabled();    
+    UserInterface.setZoomEnabled();
   });
 
   // Get activities
 
-  for (var i = 0; i < 16; ++i)
+  for (var i = 0; i < 8; ++i)
   {
     $scope.activities.push({
       id: 15,

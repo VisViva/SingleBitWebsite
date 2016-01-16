@@ -7,94 +7,102 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     'view',
     'about',
     'contact'
-  ],[
-    ".m-persistent-100",
-    ".m-persistent-30",
-    ".m-persistent-20",
-    ".s-viewport-100",
-    ".s-viewport-90",
-    ".s-viewport-70",
-    ".s-viewport-65",
-    ".s-viewport-60",
-    ".s-viewport-40",
-    ".s-viewport-30",
-    ".s-viewport-10",
-    ".s-viewport-3",
-    ".p-percentage-15",
-    ".p-percentage-30",
-    ".p-percentage-20",
-    ".p-percentage-10",
-    ".p-percentage-2",
-    ".p-percentage-13",
-    ".p-percentage-60",
-    ".p-percentage-66",
-    ".i-viewport-20",
-    ".e-ender-100",
-    ".e-ender-50"
-  ], function(){
-    $scope.$apply();
-  });
+  ],{
+    persistentAbsolute:[
+      ".pa-100",
+      ".pa-30",
+      ".pa-20"
+    ],
+    persistentImages:[
+      ".i-20"
+    ],
+    desktopAbsolute:[
+      ".da-100",
+      ".da-90",
+      ".da-70",
+      ".da-60",
+      ".da-65",
+      ".da-40",
+      ".da-30",
+      ".da-10",
+      ".da-5"
+    ],
+    desktopRelative:[
+      ".dr-20",
+      ".dr-15",
+      ".dr-13",
+      ".dr-10",
+      ".dr-5"
+    ],
+    mobilePixels:[
+      ".mp-150",
+      ".mp-100",
+      ".mp-50",
+      ".mp-30"
+    ]}, function(){
+      $scope.$apply();
+    });
 
-  // Get current location and scroll if needed
+    // Get current location and scroll if needed
 
-  var location = $location.path().split('/')[1];
+    var location = $location.path().split('/')[1];
 
-  switch (location)
-  {
-    case 'feed': case 'projects':
+    switch (location)
     {
-      UserInterface.setSelectedView(location);
-      UserInterface.scrollByPageName('view');
-      $timeout(function(){UserInterface.zoomIn();}, 300);
-      break;
+      case 'feed': case 'projects':
+      {
+        UserInterface.setSelectedView(location);
+        UserInterface.scrollByPageName('view');
+        $timeout(function(){UserInterface.zoomIn();}, 300);
+        break;
+      }
+      case 'home': case 'about': case 'contact':
+      {
+        UserInterface.zoomOut();
+        UserInterface.scrollByPageName(location);
+        break;
+      }
     }
-    case 'home': case 'about': case 'contact':
+
+    // Helper actions
+
+    $scope.isPageSelected = function(page){
+      return page == UserInterface.getSelectedPage();
+    }
+    $scope.isViewSelected = function(view){
+      return view == UserInterface.getSelectedView();
+    }
+
+    // Actions
+
+    $scope.toggleSearch = function()
     {
-      UserInterface.zoomOut();
-      UserInterface.scrollByPageName(location);
-      break;
+      $scope.search =! $scope.search;
+      UserInterface.hideMenu();
     }
-  }
-
-  // Helper actions
-
-  $scope.isPageSelected = function(page){
-    return page == UserInterface.getSelectedPage();
-  }
-  $scope.isViewSelected = function(view){
-    return view == UserInterface.getSelectedView();
-  }
-
-  // Actions
-
-  $scope.toggleSearch = function()
-  {
-    $scope.search =! $scope.search;
-    UserInterface.hideMenu();
-  }
-  $scope.gotoHome = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(0);
-  }
-  $scope.gotoFeed = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'feed');
-  }
-  $scope.gotoProjects = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'projects');
-  }
-  $scope.gotoAbout = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(2);
-  }
-  $scope.gotoContact = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(3);
-  }
-})
+    $scope.gotoHome = function()
+    {
+      UserInterface.hideMenu();
+      UserInterface.gotoPage(0);
+    }
+    $scope.gotoFeed = function()
+    {
+      UserInterface.hideMenu();
+      UserInterface.gotoPage(1, 'feed');
+    }
+    $scope.gotoProjects = function()
+    {
+      UserInterface.hideMenu();
+      UserInterface.gotoPage(1, 'projects');
+    }
+    $scope.gotoAbout = function()
+    {
+      UserInterface.hideMenu();
+      UserInterface.gotoPage(2);
+    }
+    $scope.gotoContact = function()
+    {
+      UserInterface.hideMenu();
+      UserInterface.gotoPage(3);
+    }
+  })

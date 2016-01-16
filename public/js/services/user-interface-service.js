@@ -5,7 +5,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.selectedPage = 0;
   userInterface.selectedView = 'feed';
   userInterface.pages = [];
-  userInterface.classes = [];
+  userInterface.classes = {persistentAbsolute:[], desktopAbsolute:[], desktopRelative:[], mobilePixels:[]};
   userInterface.zoomInEnabled = false;
   userInterface.mobile = (($(window).height() <= 600) || ($(window).width() <= 600)) ? true : false;
   userInterface.scrollbarTemplate = {
@@ -18,38 +18,38 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     }
   }
 
+  userInterface.isMobile = function() {
+    return userInterface.mobile;
+  }
+
   userInterface.calculateDimensions = function(){
     var heightPercentageMultiplier = $(window).height()/100;
-    userInterface.classes.forEach(function(element, index, array)
-    {
-      switch (element[1])
-      {
-        case 's': case 'm':{
-          $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
-          $(element).css({"display": "block"});
-          $(element).css({"overflow": "hidden"});
-          break;
-        }
-        case 'p': {
-          $(element).css({"height":'50px'});
-          $(element).css({"display": "block"});
-          $(element).css({"overflow": "hidden"});
-          break;
-        }
-        case 'i' : {
-          $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[2]) + "px"});
-          $(element).css({"width":"auto"});
-          $(element).css({"overflow": "hidden"});
-          break;
-        }
-        case 'e' : {
-          $(element).css({"height": parseInt(element.split('-')[2]) + "px"});
-          $(element).css({"width":"auto"});
-          $(element).css({"overflow": "hidden"});
-          break;
-        }
-      }
+    userInterface.classes.persistentAbsolute.forEach(function(element, index, array){
+      $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[1]) + "px"});
+      $(element).css({"display": "block"});
+      $(element).css({"overflow": "hidden"});
     });
+    userInterface.classes.persistentImages.forEach(function(element, index, array){
+      $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[1]) + "px"});
+      $(element).css({"width": "auto"});
+      $(element).css({"overflow": "hidden"});
+    });
+    if (userInterface.isMobile()){
+      userInterface.classes.mobilePixels.forEach(function(element, index, array){
+        $(element).css({"height": parseInt(element.split('-')[1]) + "px"});
+        $(element).css({"width":"auto"});
+        $(element).css({"overflow": "hidden"});
+      });
+    }else{
+      userInterface.classes.desktopAbsolute.forEach(function(element, index, array){
+        $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[1]) + "px"});
+        $(element).css({"display": "block"});
+        $(element).css({"overflow": "hidden"});
+      });
+      userInterface.classes.desktopRelative.forEach(function(element, index, array){
+        $(element).css({"height": element.split('-')[1] + "%"});
+      });
+    }
   }
 
   userInterface.scrollByPageName = function(pageName, speed){
@@ -101,15 +101,11 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     if (userInterface.mobile == false) $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
   }
 
-  userInterface.disableResponsiveCSS = function(){
-  }
-
   return {
 
     // Initialization
 
     initializeService : function (pages, classes, callback) {
-
       userInterface.classes = classes;
       userInterface.pages = pages;
 
@@ -122,21 +118,10 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
         $(window).bind('wheel', function(){
           return false;
         });
-        for (var i = 0; i < userInterface.classes.length; ++i)
-        {
-          if ((userInterface.classes[i][1] == 'p') || (userInterface.classes[i][1] == 'e'))
-          userInterface.classes.splice(i--, 1);
-        }
       }
       else {
         $('.zoom-in-start').removeClass('zoom-in-start');
         $('.zoom-in-end').removeClass('zoom-in-end');
-
-        for (var i = 0; i < userInterface.classes.length; ++i)
-        {
-          if ((userInterface.classes[i][1] == 's') || (userInterface.classes[i][1] == 'i'))
-          userInterface.classes.splice(i--, 1);
-        }
       }
 
       userInterface.calculateDimensions();
@@ -187,10 +172,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
 
     updateService : function(){
       userInterface.calculateDimensions();
-      if (userInterface.mobile == false)userInterface.initializeSecondaryScrollbars();
-      else {
-        userInterface.disableResponsiveCSS();
-      }
+      if (userInterface.mobile == false) userInterface.initializeSecondaryScrollbars();
     },
 
     // Toggling menu
@@ -256,7 +238,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
               spinnerService.show('viewSpinner');
               $location.path('/' + view);
               userInterface.selectedView = view;
-              if (userInterface.mobile == true) userInterface.scrollByPageNumber(1);
               userInterface.zoomIn();
             }, 300);
           }
@@ -276,16 +257,18 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
           userInterface.zoomOut();
           $timeout(function (){
             $location.path('/' + userInterface.pages[page]);
-            if (!(userInterface.selectedPage == page) || (userInterface.mobile == true)) userInterface.scrollByPageNumber(page);
+            if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
           }, 300);
         }
         else {
           $location.path('/' + userInterface.pages[page]);
-          if (!(userInterface.selectedPage == page) || (userInterface.mobile == true)) userInterface.scrollByPageNumber(page);
+          if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
         }
       }
     },
 
-    mobile : userInterface.mobile
+    isMobile : function(){
+      return userInterface.isMobile();
+    }
   }
 }]);
