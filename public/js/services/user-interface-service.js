@@ -60,14 +60,14 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     var location = $location.path().split('/')[1];
     switch (location)
     {
-      case 'feed': case 'projects': case 'admin':
+      case 'feed': case 'projects': case 'about': case 'contact': case 'admin':
       {
         userInterface.selectedView = location;
         userInterface.scrollByPageName('view');
         $timeout(function(){ userInterface.zoomIn(); }, 500);
         break;
       }
-      case 'home': case 'about': case 'contact':
+      case 'home':
       {
         userInterface.zoomOut();
         userInterface.scrollByPageName(location);

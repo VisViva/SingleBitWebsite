@@ -13,6 +13,8 @@ angular.module("SingleBitApplication", [
     'FeedCtrl',
     'ProjectsCtrl',
     'TypeCtrl',
+    'AboutCtrl',
+    'ContactCtrl',
     'ViewCtrl',
 
     // Services

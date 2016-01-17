@@ -50,27 +50,15 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class="navbar-left">
           <span class="navbar-button navbar-nav hover-glow-orange" ng-click="toggleSearch()">
-            <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i>
-            <i ng-hide="search" class="fa fa-search"></i>
-            &nbsp;&nbsp;SEARCH
+            <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i><i ng-hide="search" class="fa fa-search"></i>&nbsp;&nbsp;SEARCH
           </span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">
-            HOME
-          </span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">
-            FEED
-          </span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('projects')}" ng-click="gotoProjects()">
-            PROJECTS
-          </span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">HOME</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">FEED</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('projects')}" ng-click="gotoProjects()">PROJECTS</span>
         </div>
         <div class="navbar-right">
-          <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(2)}" ng-click="gotoAbout()">
-            ABOUT
-          </span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(3)}" ng-click="gotoContact()">
-            CONTACT
-          </span>
+          <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('about')}" ng-click="gotoAbout()">ABOUT</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('contact')}" ng-click="gotoContact()">CONTACT</span>
         </div>
       </div>
     </div>
@@ -98,77 +86,5 @@
       <div ng-view></div>
     </div>
   </div>
-
-  <!-- About Section -->
-
-  <div id="about" class="text-center da-100">
-    <div style="height:50px;"></div>
-    <div class="scrollable-light-inside da-view">
-      <div style="height:50px;"></div>
-      <div class="item">
-        <img src="img/about/01.jpg" alt="..." class="img-circle profile-image i-20">
-        <div class="profile-info col-sm-12">
-          <h3>Abdulali Gasimov</h3>
-          <p>Artist / Developer</p>
-          <div class="col-sm-8 col-sm-offset-2">
-            <p>I love playing and developing video games.</p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            <br>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            <br>
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-          </div>
-        </div>
-      </div>
-      <ul class="social-icon-set">
-        <li><a href="#"><i class="fa fa-facebook social-icon-narrow"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin social-icon-narrow"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus social-icon-wide"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter social-icon-narrow"></i></a></li>
-        <li><a href="#"><i class="fa fa-youtube social-icon-narrow"></i></a></li>
-      </ul>
-      <div style="height:50px;"></div>
-    </div>
-  </div>
-
-  <!-- Contact Section -->
-
-  <div id="contact" class="text-center da-90">
-    <div style="height:50px;"></div>
-    <div class="scrollable-dark-inside da-view-min">
-      <div class="da-5"></div>
-      <div class="container">
-        <div class="section-title center">
-          <h2>Contact<strong> us</strong></h2>
-        </div>
-        <div class="da-10"></div>
-        <div class="col-md-4 col-md-offset-4">
-          <form>
-            <div class="form-group">
-              <label class="custom-label">Email address:</label>
-              <input type="email" class="form-control">
-            </div>
-            <div class="form-group">
-              <label class="custom-label">Message:</label>
-              <textarea class="form-control" rows="3"></textarea>
-            </div>
-          </form>
-          <div class="center">
-            <button type="submit" class="btn btn-warning btn-default">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-
-  <div id="footer" class="da-10">
-    <div class="container">
-      <div class="text-center">
-        <p>All Rights Reserved. Copyright © 2016.
-        </div>
-      </div>
-    </div>
-  </body>
-  </html>
+</body>
+</html>

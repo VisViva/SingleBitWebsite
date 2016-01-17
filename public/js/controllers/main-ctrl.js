@@ -8,9 +8,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
   UserInterface.initializeService([
     'home',
-    'view',
-    'about',
-    'contact'
+    'view'
   ],{
     desktopAbsolute:[
       ".da-100",
@@ -61,13 +59,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
   $scope.gotoAbout = function()
   {
     UserInterface.hideMenu();
-    UserInterface.gotoPage(2);
-    UserInterface.contentLoaded();
+    UserInterface.gotoPage(1, 'about');
   }
   $scope.gotoContact = function()
   {
     UserInterface.hideMenu();
-    UserInterface.gotoPage(3);
-    UserInterface.contentLoaded();
+    UserInterface.gotoPage(1, 'contact');
   }
 })

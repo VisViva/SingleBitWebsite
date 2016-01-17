@@ -31,6 +31,17 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     templateUrl: '../views/view.html',
     controller: 'ViewController'
   })
+  // About
+  .when('/about', {
+    templateUrl: '../views/about.html',
+    controller: 'AboutController'
+  })
+  // Contact
+  .when('/contact', {
+    templateUrl: '../views/contact.html',
+    controller: 'ContactController'
+  })
+  // Otherwise
   .otherwise({
     templateUrl: '../views/feed/feed.html',
     controller: 'FeedController'
