@@ -300,6 +300,10 @@
 	{
 		outline: none;
 	}
+	.thumbnail
+	{
+		border-radius: 7px;
+	}
 
 /* Section Title ********************************************/
 
@@ -341,16 +345,22 @@
 
 /* View Item ************************************************/
 
+	.upload
+	{
+		margin-bottom: 0px !important;
+		margin-top: 0px !important;
+	}
 	.view-item
 	{
-		margin-bottom: 5px;
-		margin-top: 5px;
+		margin-bottom: 10px;
+		margin-top: 10px;
 	}
 	.view-item .hover-bg
 	{
 		overflow: hidden;
 		position: relative;
 		background-color: #222;
+		border-radius: 7px;
 	}
 	.view-item .hover-bg .hover-text
 	{
@@ -368,6 +378,7 @@
 		-ms-transition: all 0.3s;
 		-o-transition: all 0.3s;
 		transition: all 0.3s;
+			border-radius: 7px;
 	}
 	.view-item .hover-bg .hover-text > h4
 	{
