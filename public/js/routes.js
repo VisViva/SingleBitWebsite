@@ -1,5 +1,14 @@
 angular.module('Routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
+  // Admin
+  .when('/admin/authorize', {
+    templateUrl: '../views/admin/authorize.html',
+    controller: 'AuthorizeController'
+  })
+  .when('/admin/publish', {
+    templateUrl: '../views/admin/publish.html',
+    controller: 'PublishController'
+  })
   // Activities
   .when('/feed', {
     templateUrl: '../views/feed/feed.html',
