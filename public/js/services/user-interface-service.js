@@ -30,6 +30,9 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       $(window).load(function(){
         userInterface.initializePrimaryScrollbars();
       });
+      $(window).bind('wheel', function(){
+        return false;
+      });
       $(window).bind('scroll', function(){
         var navHeight = $(window).height() - 100;
         if ($(window).scrollTop() > navHeight)
@@ -44,6 +47,11 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
         userInterface.selectedPage = page;
         callback();
       });
+      jQuery(document).on('touchmove', function(ev){
+        if (!jQuery(ev.target).parents().hasClass('touch-moveable')){
+          ev.preventDefault();
+        }
+      });
     }
     else {
       userInterface.switchToPage(0);
@@ -53,10 +61,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     }
 
     userInterface.calculateDimensions();
-
-    // Custom slider
-
-
 
     // Subscribe to window events
 
