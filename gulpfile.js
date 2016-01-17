@@ -8,13 +8,13 @@ var scripts = {
     scripts : [
         // Jquery
         'public/libs/jquery/dist/jquery.min.js',
-        'public/libs/jquery-mousewheel/jquery.mousewheel.min.js',
+        //'public/libs/jquery-mousewheel/jquery.mousewheel.min.js',
         // Bootstrap
         'public/libs/bootstrap/dist/js/bootstrap.min.js',
         // Modernizr
-        'public/libs/modernizr/modernizr.custom.js',
+        //'public/libs/modernizr/modernizr.custom.js',
         // Smooth scroll
-        'public/libs/smooth-scroll/smooth-scroll.js',
+        //'public/libs/smooth-scroll/smooth-scroll.js',
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
         // Angular

@@ -7,7 +7,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
   userInterface.selectedPage = 0;
   userInterface.selectedView = 'feed';
   userInterface.zoomInEnabled = false;
-  userInterface.mobile = (($(window).height() <= 600) || ($(window).width() <= 600)) ? true : false;
+  userInterface.mobile = false/*(($(window).height() <= 600) || ($(window).width() <= 600)) ? true : false*/;
   userInterface.scrollbarTemplate = {
     scrollButtons:{
       enable:true
@@ -29,9 +29,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     if (userInterface.mobile == false){
       $(window).load(function(){
         userInterface.initializePrimaryScrollbars();
-      });
-      $(window).bind('wheel', function(){
-        return false;
       });
       $(window).bind('scroll', function(){
         var navHeight = $(window).height() - 100;
@@ -59,19 +56,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
     // Custom slider
 
-    $('a.page-scroll').click(function()
-    {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-          $('html,body').animate({
-            scrollTop: target.offset().top - 40
-          }, 900);
-          return false;
-        }
-      }
-    });
+
 
     // Subscribe to window events
 
