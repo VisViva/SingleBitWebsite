@@ -26,6 +26,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     userInterface.calculateDimensions();
 
     // Subscribe to window events
+
     $(window).load(function(){
       userInterface.initializePrimaryScrollbars();
     });
@@ -33,10 +34,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       return false;
     });
     $(window).bind('scroll', function(){
-      var navHeight = $(window).height() - 100;
-      if ($(window).scrollTop() > navHeight)
-      $('.navbar-default').addClass('on');
-      else $('.navbar-default').removeClass('on');
+      userInterface.styleNavbar();
       $timeout(function () {
         for (var i = 0, page = 0; i < userInterface.pages.length; ++i){
           if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
@@ -57,6 +55,25 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       }, 100);
     });
   };
+  userInterface.loadRequestedLocation = function(){
+    var location = $location.path().split('/')[1];
+    switch (location)
+    {
+      case 'feed': case 'projects': case 'admin':
+      {
+        userInterface.selectedView = location;
+        userInterface.scrollByPageName('view');
+        $timeout(function(){ userInterface.zoomIn(); }, 500);
+        break;
+      }
+      case 'home': case 'about': case 'contact':
+      {
+        userInterface.zoomOut();
+        userInterface.scrollByPageName(location);
+        break;
+      }
+    }
+  }
   userInterface.updateService = function(){
     userInterface.calculateDimensions();
     userInterface.initializeSecondaryScrollbars();
@@ -146,6 +163,12 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
   userInterface.setZoomEnabled = function(){
     userInterface.zoomInEnabled = true;
   };
+  userInterface.styleNavbar = function(){
+    var navHeight = $(window).height() - 100;
+    if ($(window).scrollTop() > navHeight)
+    $('.navbar-default').addClass('on');
+    else $('.navbar-default').removeClass('on');
+  };
 
   // Private methods
 
@@ -186,8 +209,11 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
     // Initialization
 
-    initializeService : function (pages, classes) {
+    initializeService : function(pages, classes){
       userInterface.initializeService(pages, classes);
+    },
+    loadRequestedLocation : function(){
+      userInterface.loadRequestedLocation();
     },
     updateService : function(){
       userInterface.updateService();
