@@ -44,9 +44,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
         userInterface.selectedPage = page;
       });
     });
-    $(document).bind('touchmove', function(event){
-      event.preventDefault();
-    });
     var resizeTimer;
     $(window).on('resize', function(e){
       clearTimeout(resizeTimer);

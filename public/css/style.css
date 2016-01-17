@@ -581,22 +581,14 @@
 	}
 	.zoom-in-start
 	{
+
 		-webkit-transition: all 0.3s;
 		-moz-transition: all 0.3s;
 		-ms-transition: all 0.3s;
 		-o-transition: all 0.3s;
 		transition: all 0.3s;
 
-		-ms-transform: scale(0.1);
-		-ms-transform-origin: center;
-		-moz-transform: scale(0.1);
-		-moz-transform-origin: center;
-		-o-transform: scale(0.1);
-		-o-transform-origin: center;
-		-webkit-transform: scale(0.1);
-		-webkit-transform-origin: center;
-		transform: scale(0.1);
-		transform-origin: center;
+		transform: translateY(1000px);
 
 		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 		filter: alpha(opacity=0);
@@ -612,17 +604,7 @@
 		-o-transition: all 0.3s;
 		transition: all 0.3s;
 
-		-ms-transform: scale(1);
-		-ms-transform-origin: center;
-		-moz-transform: scale(1);
-		-moz-transform-origin: center;
-		-o-transform: scale(1);
-		-o-transform-origin: center;
-		-webkit-transform: scale(1);
-		-webkit-transform-origin: center;
-		transform: scale(1);
-		transform-origin: center;
-
+		transform: translateY(0px);
 		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 		filter: alpha(opacity=100);
 		-moz-opacity: 100;
