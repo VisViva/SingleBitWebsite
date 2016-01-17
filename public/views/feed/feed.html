@@ -1,48 +1,52 @@
 <!-- Feed Section -->
 
 <div id="projects" class="da-100">
-  <div class="dr-13"></div>
-  <div class="section-title text-center center">
-    <h2>Latest <strong>activities</strong></h2>
-  </div>
-  <div class="categories">
-    <ul>
-      <li><div href="#" class="active custom-link">All</div></li>
-      <li><div href="#" class="custom-link">Articles</div></li>
-      <li><div href="#" class="custom-link">Diary</div></li>
-      <li><div href="#" class="custom-link">Podcasts</div></li>
-      <li><div href="#" class="custom-link">Blog</div></li>
-    </ul>
-    <div class="clearfix"></div>
-  </div>
-  <div class="container scrollable-dark-inside-view da-60 touch-moveable">
-    <div ng-repeat="activity in activities">
-      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-        <div class="view-item">
-          <div class="hover-bg">
-            <a href="#" ng-click="openActivity(activity.id)">
-              <div class="hover-text">
-                <h4 ng-bind="activity.title"></h4>
-                <small ng-bind="activity.date"></small>
-                <div class="clearfix"></div>
-                <i class="fa fa-arrow-right"></i>
-              </div>
-              <img src="img/portfolio/item_video.png" class="img-responsive" alt="...">
-            </a>
+  <div style="height:50px;"></div>
+  <div class="scrollable-dark-inside-view touch-moveable da-view">
+    <div class="da-5"></div>
+    <div class="section-title text-center center">
+      <h2>Latest <strong>activities</strong></h2>
+    </div>
+    <div class="categories">
+      <ul>
+        <li><div href="#" class="active custom-link">All</div></li>
+        <li><div href="#" class="custom-link">Articles</div></li>
+        <li><div href="#" class="custom-link">Diary</div></li>
+        <li><div href="#" class="custom-link">Podcasts</div></li>
+        <li><div href="#" class="custom-link">Blog</div></li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="container">
+      <div ng-repeat="activity in activities">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+          <div class="view-item">
+            <div class="hover-bg">
+              <a href="#" ng-click="openActivity(activity.id)">
+                <div class="hover-text">
+                  <h4 ng-bind="activity.title"></h4>
+                  <small ng-bind="activity.date"></small>
+                  <div class="clearfix"></div>
+                  <i class="fa fa-arrow-right"></i>
+                </div>
+                <img src="img/portfolio/item_video.png" class="img-responsive" alt="...">
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="categories dr-10">
-    <ul>
-      <li><div class="active pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-      <li><div class="pagination-link"></div></li>
-    </ul>
+    <div class="categories">
+      <ul>
+        <li><div class="active pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+        <li><div class="pagination-link"></div></li>
+      </ul>
+    </div>
+    <div style="height:50px;"></div>
   </div>
 </div>

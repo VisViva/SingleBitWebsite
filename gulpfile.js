@@ -15,6 +15,7 @@ var scripts = {
         // Angular
         'public/libs/angular/angular.min.js',
         'public/libs/angular-route/angular-route.min.js',
+        'public/libs/angular-sanitize/angular-sanitize.min.js',
         'public/libs/angular-spinners/dist/angular-spinners.min.js',
 
         // Controllers
@@ -43,6 +44,8 @@ var stylesheets = {
         'public/dist/temp/open-sans.css',
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
+        // Textangular
+        'public/libs/textAngular/dist/textAngular.css',
 
         // Custom styles
         'public/css/style.css',

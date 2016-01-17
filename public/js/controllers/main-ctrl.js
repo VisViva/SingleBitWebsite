@@ -12,27 +12,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     'about',
     'contact'
   ],{
-    desktopImages:[
-      ".i-20"
-    ],
     desktopAbsolute:[
       ".da-100",
       ".da-90",
-      ".da-70",
-      ".da-60",
-      ".da-65",
-      ".da-40",
       ".da-30",
       ".da-20",
       ".da-10",
-      ".da-5"
-    ],
-    desktopRelative:[
-      ".dr-20",
-      ".dr-15",
-      ".dr-13",
-      ".dr-10",
-      ".dr-5"
+      ".da-5",
     ]
   });
 

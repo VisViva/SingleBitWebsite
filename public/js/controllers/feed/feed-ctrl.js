@@ -4,7 +4,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
 
   // Get activities
 
-  for (var i = 0; i < 8; ++i){
+  for (var i = 0; i < 16; ++i){
     $scope.activities.push({
       id: 15,
       title: "How to design achievements?",

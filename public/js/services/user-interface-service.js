@@ -15,7 +15,8 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       autoScrollOnFocus: false,
       updateOnContentResize: true
     },
-    documentTouchScroll: true
+    documentTouchScroll: true,
+    alwaysShowScrollbar: true
   }
 
   // Initialization
@@ -174,8 +175,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
   userInterface.initializePrimaryScrollbars = function(){
     userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
-    $('.scrollable-dark').mCustomScrollbar(userInterface.scrollbarTemplate);
     userInterface.scrollbarTemplate.scrollbarPosition = "inside";
     $('.scrollable-dark-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
     userInterface.scrollbarTemplate.theme = "inset";
@@ -183,8 +182,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
   };
   userInterface.initializeSecondaryScrollbars = function(){
     userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "outside";
-    $('.scrollable-dark-view').mCustomScrollbar(userInterface.scrollbarTemplate);
     userInterface.scrollbarTemplate.scrollbarPosition = "inside";
     $('.scrollable-dark-inside-view').mCustomScrollbar(userInterface.scrollbarTemplate);
   };
@@ -195,14 +192,15 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       $(element).css({"display": "block"});
       $(element).css({"overflow": "hidden"});
     });
-    userInterface.classes.desktopImages.forEach(function(element, index, array){
-      $(element).css({"height": heightPercentageMultiplier * parseInt(element.split('-')[1]) + "px"});
-      $(element).css({"width": "auto"});
-      $(element).css({"overflow": "hidden"});
-    });
-    userInterface.classes.desktopRelative.forEach(function(element, index, array){
-      $(element).css({"height": element.split('-')[1] + "%"});
-    });
+
+    // View
+
+    $(".da-view").css({"height": $(window).height()-50 + "px"});
+    $(".da-view").css({"display": "block"});
+    $(".da-view").css({"overflow": "hidden"});
+    $(".da-view-min").css({"height": heightPercentageMultiplier * 90 - 50 + "px"});
+    $(".da-view-min").css({"display": "block"});
+    $(".da-view-min").css({"overflow": "hidden"});
   };
 
   return {
