@@ -38,8 +38,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
       $('.navbar-default').addClass('on');
       else $('.navbar-default').removeClass('on');
       $timeout(function () {
-        for (var i = 0, page = 0; i < userInterface.pages.length; ++i)
-        {
+        for (var i = 0, page = 0; i < userInterface.pages.length; ++i){
           if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
           else break;
         }
@@ -62,7 +61,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
     userInterface.calculateDimensions();
     userInterface.initializeSecondaryScrollbars();
   };
-
 
   // Navigation
 
@@ -188,8 +186,8 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
     // Initialization
 
-    initializeService : function (pages, classes, callback) {
-      userInterface.initializeService(pages, classes, callback);
+    initializeService : function (pages, classes) {
+      userInterface.initializeService(pages, classes);
     },
     updateService : function(){
       userInterface.updateService();
