@@ -22,6 +22,10 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     templateUrl: '../views/view.html',
     controller: 'ViewController'
   })
+  .otherwise({
+    templateUrl: '../views/feed/feed.html',
+    controller: 'FeedController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);

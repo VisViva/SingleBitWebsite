@@ -12,8 +12,7 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $lo
 
   // Actions
 
-  $scope.goBack = function()
-  {
-      UserInterface.gotoLocation('/' + UserInterface.getSelectedView());
+  $scope.goBack = function(){
+    UserInterface.gotoLocation('/' + UserInterface.getSelectedView());
   };
 });

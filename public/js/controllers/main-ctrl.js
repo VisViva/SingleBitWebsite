@@ -12,12 +12,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     'about',
     'contact'
   ],{
-    persistentAbsolute:[
-      ".pa-100",
-      ".pa-30",
-      ".pa-20"
-    ],
-    persistentImages:[
+    desktopImages:[
       ".i-20"
     ],
     desktopAbsolute:[
@@ -28,6 +23,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       ".da-65",
       ".da-40",
       ".da-30",
+      ".da-20",
       ".da-10",
       ".da-5"
     ],
@@ -37,16 +33,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       ".dr-13",
       ".dr-10",
       ".dr-5"
-    ],
-    mobilePixels:[
-      ".mp-200",
-      ".mp-150",
-      ".mp-100",
-      ".mp-50",
-      ".mp-30"
-    ]}, function(){
-      $scope.$apply();
-    });
+    ]
+  });
 
     // Get current location and scroll if needed
 
@@ -58,7 +46,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
       {
         UserInterface.setSelectedView(location);
         UserInterface.scrollByPageName('view');
-        $timeout(function(){ UserInterface.zoomIn(); }, UserInterface.isMobile() ? 0 : 300);
+        $timeout(function(){ UserInterface.zoomIn(); }, 300);
         break;
       }
       case 'home': case 'about': case 'contact':
