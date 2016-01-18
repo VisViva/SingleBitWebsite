@@ -56,30 +56,10 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-12">
-            <ul class="nav nav-tabs">
-              <li ng-class="(activeTab == 0) ? 'active' : ''"><a href="" ng-click="setActiveTab(0)">HTML</a></li>
-              <li ng-class="(activeTab == 1) ? 'active' : ''"><a href="" ng-click="setActiveTab(1)">Preview</a></li>
-              <li ng-class="(activeTab == 2) ? 'active' : ''"><a href="" ng-click="setActiveTab(2)">Mixed</a></li>
-            </ul>
-          </div>
-          <div id="textarea" ng-class="description" ng-show="(activeTab == 0) || (activeTab == 2)">
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="makeBold()"><i class="fa fa-bold"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="makeItalic()"><i class="fa fa-italic"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="makeUnderlined()"><i class="fa fa-underline"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="makeStrikethrough()"><i class="fa fa-strikethrough"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="makeParagraph()"><i class="fa fa-paragraph"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="insertBreak()">&lt;br&gt;</button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;"><i class="fa fa-link"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;"><i class="fa fa-picture-o"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="insertSoundcloudSound()"><i class="fa fa-soundcloud"></i></button>
-            <button class="btn btn-default" type="submit" style="margin-top:10px;" ng-click="insertYoutubeVideo()"><i class="fa fa-youtube-play"></i></button>
-            <textarea id="textarea" ng-model="resource.description" ng-change="updatePreview()" class="form-control" rows="30" style="overflow:hidden; margin-top:10px;"></textarea>
-          </div>
-          <div ng-class="preview" style="margin-top:10px;" ng-show="(activeTab == 1) || (activeTab == 2)">
-            <h2 ng-bind="resource.title" class="center text-center" style="padding:10px;font-weight:300;"></h2>
+          <div class="col-sm-12" style="margin-top:20px;">
+            <h2 ng-bind="resource.title" class="center text-center" style="padding:10px; font-weight:300;"></h2>
             <div class="da-5"></div>
-            <div ng-bind-html="previewHtml" style="padding:10px;"></div>
+            <summernote ng-model="resource.description" height="300"></summernote>
           </div>
         </div>
       </div>

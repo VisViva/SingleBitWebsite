@@ -1,23 +1,26 @@
 angular.module("SingleBitApplication", [
-    // Angular
-    'ngRoute',
-    'angularSpinners',
+  // Additional  
+  'angularSpinners',
+  'summernote',
 
-    // Routes
-    'Routes',
+  // Angular
+  'ngRoute',
 
-    // Controllers
-    'MainCtrl',
-    'AuthorizeCtrl',
-    'PublishCtrl',    
-    'HomeCtrl',
-    'FeedCtrl',
-    'ProjectsCtrl',
-    'TypeCtrl',
-    'AboutCtrl',
-    'ContactCtrl',
-    'ViewCtrl',
+  // Routes
+  'Routes',
 
-    // Services
-    'UserInterfaceService'
+  // Controllers
+  'MainCtrl',
+  'AuthorizeCtrl',
+  'PublishCtrl',
+  'HomeCtrl',
+  'FeedCtrl',
+  'ProjectsCtrl',
+  'TypeCtrl',
+  'AboutCtrl',
+  'ContactCtrl',
+  'ViewCtrl',
+
+  // Services
+  'UserInterfaceService'
 ]);
