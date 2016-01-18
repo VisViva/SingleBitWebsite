@@ -107,6 +107,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     });
 
     // View
+
     $(".da-view").css({"height": $(window).height() - 50 + "px"});
     $(".da-view").css({"display": "block"});
     $(".da-view").css({"overflow": "hidden"});
