@@ -52,30 +52,17 @@
           <span class="navbar-button navbar-nav hover-glow-orange" ng-click="toggleSearch()">
             <i ng-show="search" style="margin-right:1px;" class="fa fa-times-circle"></i><i ng-hide="search" class="fa fa-search"></i>&nbsp;&nbsp;SEARCH
           </span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(0)}" ng-click="gotoHome()">HOME</span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('feed')}" ng-click="gotoFeed()">FEED</span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('projects')}" ng-click="gotoProjects()">PROJECTS</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isViewSelected('home')}" ng-click="gotoLocation('home')">HOME</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isViewSelected('feed')}" ng-click="gotoLocation('feed')">FEED</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isViewSelected('projects')}" ng-click="gotoLocation('projects')">PROJECTS</span>
         </div>
         <div class="navbar-right">
-          <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('about')}" ng-click="gotoAbout()">ABOUT</span>
-          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isPageSelected(1) && isViewSelected('contact')}" ng-click="gotoContact()">CONTACT</span>
+          <span class="navbar-button navbar-button-space navbar-nav hover-glow-orange" ng-class="{active: isViewSelected('about')}" ng-click="gotoLocation('about')">ABOUT</span>
+          <span class="navbar-button navbar-nav hover-glow-orange" ng-class="{active: isViewSelected('contact')}" ng-click="gotoLocation('contact')">CONTACT</span>
         </div>
       </div>
     </div>
   </nav>
-
-  <!-- Home Page -->
-
-  <div id="home" class="text-center da-100">
-    <div class="da-30"></div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <img src="img/company/LOGO.png" class="img-responsive center-block" alt="..." style="width:25%;">
-      </div>
-    </div>
-    <div class="da-20"></div>
-    <div ng-click="gotoFeed()"><i class="fa fa-angle-down page-scroll down-arrow-button"></i></div>
-  </div>
 
   <!-- View Section -->
 

@@ -1,8 +1,8 @@
-angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($scope, $location, $routeParams, $sce, $timeout, UserInterface, spinnerService) {
+angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($scope, UserInterface) {
 
   // Actions
 
-  $scope.goBack = function(){
-    UserInterface.gotoLocation('/' + UserInterface.getSelectedView());
+  $scope.login = function(){
+    UserInterface.gotoLocation('admin/publish');
   };
 });

@@ -1,4 +1,4 @@
-angular.module('TypeCtrl', []).controller('TypeController', function($scope, $location, $routeParams, $timeout, UserInterface, spinnerService) {
+angular.module('TypeCtrl', []).controller('TypeController', function($scope, $routeParams, UserInterface) {
 
   // Initialize
 
@@ -20,6 +20,6 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   // Actions
 
   $scope.openProject = function(id){
-    UserInterface.gotoLocation('/projects/view/' + id);
+    UserInterface.gotoLocation('projects/view/' + id);
   };
 });

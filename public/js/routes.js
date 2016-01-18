@@ -9,6 +9,11 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     templateUrl: '../views/admin/publish.html',
     controller: 'PublishController'
   })
+  // Home
+  .when('/home', {
+    templateUrl: '../views/home.html',
+    controller: 'HomeController'
+  })
   // Activities
   .when('/feed', {
     templateUrl: '../views/feed/feed.html',
@@ -43,8 +48,8 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   // Otherwise
   .otherwise({
-    templateUrl: '../views/feed/feed.html',
-    controller: 'FeedController'
+    templateUrl: '../views/home.html',
+    controller: 'HomeController'
   })
 
   $locationProvider.html5Mode(true);

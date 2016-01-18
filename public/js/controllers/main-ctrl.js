@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $location, $timeout, UserInterface, spinnerService) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, UserInterface) {
 
   // Initialize user interface
 
@@ -6,10 +6,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     UserInterface.contentLoaded();
   });
 
-  UserInterface.initializeService([
-    'home',
-    'view'
-  ],{
+  UserInterface.initializeService({
     desktopAbsolute:[
       ".da-100",
       ".da-90",
@@ -26,9 +23,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
   // Helper actions
 
-  $scope.isPageSelected = function(page){
-    return page == UserInterface.getSelectedPage();
-  }
   $scope.isViewSelected = function(view){
     return view == UserInterface.getSelectedView();
   }
@@ -40,30 +34,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     $scope.search =! $scope.search;
     UserInterface.hideMenu();
   }
-  $scope.gotoHome = function()
+  $scope.gotoLocation = function(location)
   {
     UserInterface.hideMenu();
-    UserInterface.gotoPage(0);
-    UserInterface.contentLoaded();
-  }
-  $scope.gotoFeed = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'feed');
-  }
-  $scope.gotoProjects = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'projects');
-  }
-  $scope.gotoAbout = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'about');
-  }
-  $scope.gotoContact = function()
-  {
-    UserInterface.hideMenu();
-    UserInterface.gotoPage(1, 'contact');
+    UserInterface.gotoLocation(location);
   }
 })

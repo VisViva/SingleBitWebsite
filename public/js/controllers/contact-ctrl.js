@@ -1,2 +1,2 @@
-angular.module('AboutCtrl', []).controller('AboutController', function($scope, $location, $timeout, UserInterface, spinnerService) {
+angular.module('AboutCtrl', []).controller('AboutController', function($scope, UserInterface) {
 });

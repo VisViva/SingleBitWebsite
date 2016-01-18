@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $location, $routeParams, $sce, $timeout, UserInterface, spinnerService) {
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, $sce, UserInterface) {
 
   // Initialize
 
@@ -85,8 +85,4 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
   $scope.updatePreview = function(){
     $scope.previewHtml = $sce.trustAsHtml($scope.resource.description);
   }
-
-  $scope.goBack = function(){
-    UserInterface.gotoLocation('/' + UserInterface.getSelectedView());
-  };
 });

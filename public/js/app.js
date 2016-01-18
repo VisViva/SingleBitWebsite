@@ -9,7 +9,8 @@ angular.module("SingleBitApplication", [
     // Controllers
     'MainCtrl',
     'AuthorizeCtrl',
-    'PublishCtrl',
+    'PublishCtrl',    
+    'HomeCtrl',
     'FeedCtrl',
     'ProjectsCtrl',
     'TypeCtrl',

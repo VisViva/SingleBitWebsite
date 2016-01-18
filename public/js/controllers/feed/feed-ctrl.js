@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $timeout, UserInterface, spinnerService) {
+angular.module('FeedCtrl', []).controller('FeedController', function($scope, UserInterface) {
 
   $scope.activities = [];
 
@@ -16,6 +16,6 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   // Actions
 
   $scope.openActivity = function(id){
-    UserInterface.gotoLocation('/feed/view/' + id);
+    UserInterface.gotoLocation('feed/view/' + id);
   };
 });

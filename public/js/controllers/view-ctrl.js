@@ -1,4 +1,4 @@
-angular.module('ViewCtrl', []).controller('ViewController', function($scope, $location, $routeParams, $sce, $timeout, UserInterface, spinnerService) {
+angular.module('ViewCtrl', []).controller('ViewController', function($scope, $routeParams, $sce, UserInterface) {
 
   // Get activity
 
@@ -13,6 +13,6 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $lo
   // Actions
 
   $scope.goBack = function(){
-    UserInterface.gotoLocation('/' + UserInterface.getSelectedView());
+    UserInterface.gotoLocation(UserInterface.getSelectedView());
   };
 });

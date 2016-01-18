@@ -1,15 +1,13 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope', '$location','$timeout','spinnerService', function($rootScope, $location, $timeout, spinnerService) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', function($location, $timeout, spinnerService) {
 
   var userInterface = this;
 
-  userInterface.pages = [];
   userInterface.classes = {};
-  userInterface.selectedPage = 0;
-  userInterface.selectedView = 'feed';
+  userInterface.selectedView = 'home';
   userInterface.zoomInEnabled = false;
   userInterface.scrollbarTemplate = {
     scrollButtons:{
-      enable:true
+      enable: false
     },
     advanced:{
       autoScrollOnFocus: false,
@@ -21,123 +19,41 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
   // Initialization
 
-  userInterface.initializeService = function(pages, classes){
+  userInterface.initializeService = function(classes){
     userInterface.classes = classes;
-    userInterface.pages = pages;
     userInterface.calculateDimensions();
 
     // Subscribe to window events
 
-    $(window).load(function(){
-      userInterface.initializePrimaryScrollbars();
-    });
-    $(window).bind('wheel', function(){
-      return false;
-    });
-    $(window).bind('scroll', function(){
-      userInterface.styleNavbar();
-      $timeout(function () {
-        for (var i = 0, page = 0; i < userInterface.pages.length; ++i){
-          if ($(document).scrollTop() > $('#' + userInterface.pages[i]).offset().top) ++page;
-          else break;
-        }
-        userInterface.selectedPage = page;
-      });
-    });
     var resizeTimer;
     $(window).on('resize', function(e){
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function() {
         userInterface.calculateDimensions();
-        userInterface.scrollByPageNumber(userInterface.selectedPage, 300);
       }, 100);
     });
   };
   userInterface.loadRequestedLocation = function(){
-    var location = $location.path().split('/')[1];
-    switch (location)
-    {
-      case 'feed': case 'projects': case 'about': case 'contact': case 'admin':
-      {
-        userInterface.selectedView = location;
-        userInterface.scrollByPageName('view');
-        $timeout(function(){ userInterface.zoomIn(); }, 500);
-        break;
-      }
-      case 'home':
-      {
-        userInterface.zoomOut();
-        userInterface.scrollByPageName(location);
-        break;
-      }
-    }
+    userInterface.selectedView = $location.path().split('/')[1];
+    $timeout(function(){ userInterface.zoomIn(); }, 500);
   }
   userInterface.updateService = function(){
     userInterface.calculateDimensions();
-    userInterface.initializeSecondaryScrollbars();
+    userInterface.initializeScrollbars();
   };
 
   // Navigation
 
-  userInterface.gotoPage = function(page, view){
-    if (page == 1)
-    {
-      if (userInterface.selectedPage == page)
-      {
-        if (userInterface.selectedView != view)
-        {
-          userInterface.zoomOut();
-          $timeout(function()
-          {
-            spinnerService.show('viewSpinner');
-            $location.path('/' + view);
-            userInterface.selectedView = view;
-            userInterface.zoomIn();
-          }, 300);
-        }
-      }
-      else
-      {
-        spinnerService.show('viewSpinner');
-        $location.path('/' + view);
-        userInterface.selectedView = view;
-        userInterface.scrollByPageNumber(page);
-        $timeout(function(){
-          userInterface.zoomIn();
-        }, 400);
-      }
-    } else {
-      if (userInterface.selectedPage != page){
-        userInterface.zoomOut();
-        $timeout(function (){
-          $location.path('/' + userInterface.pages[page]);
-          if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
-        }, 300);
-      }
-      else {
-        $location.path('/' + userInterface.pages[page]);
-        if (userInterface.selectedPage != page) userInterface.scrollByPageNumber(page);
-      }
-    }
-  };
   userInterface.gotoLocation = function(location){
+    userInterface.fillNavbar();
     userInterface.zoomOut();
     $timeout(function(){
       spinnerService.show('viewSpinner');
-      $location.path(location);
+      $location.path('/' + location);
+      userInterface.selectedView = location.split('/')[0];
       userInterface.updateService();
       userInterface.zoomIn();
     }, 300);
-  };
-  userInterface.scrollByPageNumber = function(pageNumber, speed){
-    $('html, body').animate({
-      scrollTop: $('#' + userInterface.pages[pageNumber]).offset().top
-    }, speed);
-  };
-  userInterface.scrollByPageName = function(pageName, speed){
-    $('html, body').animate({
-      scrollTop: $('#' + pageName).offset().top
-    }, speed);
   };
   userInterface.contentLoaded = function(){
     spinnerService.hide('viewSpinner');
@@ -148,6 +64,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
   // Auxiliary methods
 
   userInterface.zoomIn = function zoom(){
+    userInterface.styleNavbar();
     if (userInterface.zoomInEnabled == false)
     setTimeout(function(){ zoom(); }, 100);
     else {
@@ -161,26 +78,22 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
   userInterface.setZoomEnabled = function(){
     userInterface.zoomInEnabled = true;
   };
-  userInterface.styleNavbar = function(){
-    var navHeight = $(window).height() - 100;
-    if ($(window).scrollTop() > navHeight)
+  userInterface.fillNavbar = function(){
     $('.navbar-default').addClass('on');
-    else $('.navbar-default').removeClass('on');
+  };
+  userInterface.styleNavbar = function(){
+    if (userInterface.selectedView == 'home')
+    $('.navbar-default').removeClass('on');
+    else $('.navbar-default').addClass('on');
   };
 
   // Private methods
 
-  userInterface.initializePrimaryScrollbars = function(){
-    userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
-    $('.scrollable-dark-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
-    userInterface.scrollbarTemplate.theme = "inset";
-    $('.scrollable-light-inside').mCustomScrollbar(userInterface.scrollbarTemplate);
-  };
-  userInterface.initializeSecondaryScrollbars = function(){
-    userInterface.scrollbarTemplate.theme = "inset-dark";
-    userInterface.scrollbarTemplate.scrollbarPosition = "inside";
-    $('.scrollable-dark-inside-view').mCustomScrollbar(userInterface.scrollbarTemplate);
+  userInterface.initializeScrollbars = function(){
+    userInterface.scrollbarTemplate.theme = "minimal-dark";
+    $('.scrollable-dark').mCustomScrollbar(userInterface.scrollbarTemplate);
+    userInterface.scrollbarTemplate.theme = "minimal";
+    $('.scrollable-light').mCustomScrollbar(userInterface.scrollbarTemplate);
   };
   userInterface.calculateDimensions = function(){
     var heightPercentageMultiplier = $(window).height()/100;
@@ -216,17 +129,8 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope
 
     // Navigation
 
-    gotoPage : function(page, view){
-      userInterface.gotoPage(page, view);
-    },
     gotoLocation : function(location){
       userInterface.gotoLocation(location);
-    },
-    scrollByPageNumber : function(pageNumber){
-      userInterface.scrollByPageNumber(pageNumber, 500);
-    },
-    scrollByPageName : function(pageName){
-      userInterface.scrollByPageName(pageName, 500);
     },
     contentLoaded : function(){
       userInterface.contentLoaded();
