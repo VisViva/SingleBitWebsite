@@ -1,5 +1,5 @@
 angular.module("SingleBitApplication", [
-  // Additional  
+  // Additional
   'angularSpinners',
   'summernote',
 
