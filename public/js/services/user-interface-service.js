@@ -45,15 +45,17 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   // Navigation
 
   userInterface.gotoLocation = function(location){
-    userInterface.fillNavbar();
-    userInterface.zoomOut();
-    $timeout(function(){
-      spinnerService.show('viewSpinner');
-      $location.path('/' + location);
-      userInterface.selectedView = location.split('/')[0];
-      userInterface.updateService();
-      userInterface.zoomIn();
-    }, 300);
+    if (location != userInterface.selectedView){
+      userInterface.fillNavbar();
+      userInterface.zoomOut();
+      $timeout(function(){
+        spinnerService.show('viewSpinner');
+        $location.path('/' + location);
+        userInterface.selectedView = location.split('/')[0];
+        userInterface.updateService();
+        userInterface.zoomIn();
+      }, 300);
+    }
   };
   userInterface.contentLoaded = function(){
     spinnerService.hide('viewSpinner');
@@ -68,12 +70,13 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     if (userInterface.zoomInEnabled == false)
     setTimeout(function(){ zoom(); }, 100);
     else {
-      $('.zoom-in-start').removeClass('zoom-in-start').addClass('zoom-in-end');
+      $('.move-above').removeClass('move-above').addClass('move-center');
       userInterface.zoomInEnabled = false;
     }
   };
   userInterface.zoomOut = function(){
-    $('.zoom-in-end').addClass('zoom-in-start').removeClass('zoom-in-end');
+    $('.move-center').addClass('move-below').removeClass('move-center');
+    setTimeout(function(){ $('.move-below').removeClass('move-below').addClass('move-above'); }, 300);
   };
   userInterface.setZoomEnabled = function(){
     userInterface.zoomInEnabled = true;
@@ -104,13 +107,15 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     });
 
     // View
-
-    $(".da-view").css({"height": $(window).height()-50 + "px"});
+    $(".da-view").css({"height": $(window).height() - 50 + "px"});
     $(".da-view").css({"display": "block"});
     $(".da-view").css({"overflow": "hidden"});
-    $(".da-view-min").css({"height": heightPercentageMultiplier * 90 - 50 + "px"});
+    $(".da-view-min").css({"height": $(window).height() - 37 + "px"});
     $(".da-view-min").css({"display": "block"});
     $(".da-view-min").css({"overflow": "hidden"});
+    $(".da-view-min-inner").css({"height": $(window).height() - 87 + "px"});
+    $(".da-view-min-inner").css({"display": "block"});
+    $(".da-view-min-inner").css({"overflow": "hidden"});
   };
 
   return {
