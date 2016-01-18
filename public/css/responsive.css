@@ -1,86 +1,96 @@
+@media screen and (min-width: 768px)
+{
+  .modal:before
+  {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
 @media (min-width: 768px)
 {
-    #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form
-    {
-        margin-bottom: 0px;
-    }
-    .navbar-right
-    {
-        margin-bottom:0px;
-    }
-    .navbar-right .navbar-button-space
-    {
-        margin-right: 10px;
-    }
-    .navbar-right .navbar-button
-    {
-        margin-right: 10px;
-    }
-    .navbar-left .navbar-button
-    {
-        margin-right: 10px;
-    }
-    .navbar-button
-    {
-        display: table !important;
-        margin-left: 10px;
-    }
-    .search-pane
-    {
-        margin-left: 0px;
-    }
-    .navbar-button-right
-    {
-        display: block !important;
-        float:right !important;
-    }
-    .navbar-right
-    {
-        margin-right: 0px;
-    }
+  #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form
+  {
+    margin-bottom: 0px;
+  }
+  .navbar-right
+  {
+    margin-bottom:0px;
+  }
+  .navbar-right .navbar-button-space
+  {
+    margin-right: 10px;
+  }
+  .navbar-right .navbar-button
+  {
+    margin-right: 10px;
+  }
+  .navbar-left .navbar-button
+  {
+    margin-right: 10px;
+  }
+  .navbar-button
+  {
+    display: table !important;
+    margin-left: 10px;
+  }
+  .search-pane
+  {
+    margin-left: 0px;
+  }
+  .navbar-button-right
+  {
+    display: block !important;
+    float:right !important;
+  }
+  .navbar-right
+  {
+    margin-right: 0px;
+  }
 }
 @media (max-width: 768px)
 {
-    .content
-    {
-        padding: 40% 0 0;
-    }
-    .search-pane
-    {
-        margin-left:10px;
-    }
-    .navbar-button
-    {
-        display: table !important;
-    }
+  .content
+  {
+    padding: 40% 0 0;
+  }
+  .search-pane
+  {
+    margin-left:10px;
+  }
+  .navbar-button
+  {
+    display: table !important;
+  }
 }
 @media (max-width: 603px)
 {
-    #feed li.pull-right, #feed li.pull-left
-    {
-        margin-top: 10px;
-        float: none !important;
-        text-align: center;
-        display: block;
-    }
-    label
-    {
-        float: none !important
-    }
-    .pull-left.fnav, .pull-right.fnav
-    {
-        float: none !important;
-        text-align: center;
-    }
-    .hover-bg .hover-text
-    {
-        padding: 12% 10%;
-    }
+  #feed li.pull-right, #feed li.pull-left
+  {
+    margin-top: 10px;
+    float: none !important;
+    text-align: center;
+    display: block;
+  }
+  label
+  {
+    float: none !important
+  }
+  .pull-left.fnav, .pull-right.fnav
+  {
+    float: none !important;
+    text-align: center;
+  }
+  .hover-bg .hover-text
+  {
+    padding: 12% 10%;
+  }
 }
 @media (max-width: 360px)
 {
-    .hover-bg .hover-text
-    {
-        padding: 22% 10%;
-    }
+  .hover-bg .hover-text
+  {
+    padding: 22% 10%;
+  }
 }

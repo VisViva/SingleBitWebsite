@@ -1,7 +1,6 @@
 angular.module("SingleBitApplication", [
   // Additional
   'angularSpinners',
-  'summernote',
 
   // Angular
   'ngRoute',
@@ -22,5 +21,8 @@ angular.module("SingleBitApplication", [
   'ViewCtrl',
 
   // Services
-  'UserInterfaceService'
+  'UserInterfaceService',
+
+  // Directives
+  'summernote'
 ]);

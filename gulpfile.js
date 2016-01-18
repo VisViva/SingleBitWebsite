@@ -18,13 +18,14 @@ var scripts = {
         'public/libs/angular-sanitize/angular-sanitize.min.js',
         'public/libs/angular-spinners/dist/angular-spinners.min.js',
         // Summernote
-        'public/libs/summernote/dist/summernote.min.js',
-        'public/libs/angular-summernote/dist/angular-summernote.min.js',
+        'public/libs/summernote/summernote.js',
 
         // Controllers
         'public/js/controllers/**/*.js',
         // Services
-        'public/js/services/user-interface-service.js',
+        'public/js/services/**/*.js',
+        // Directives
+        'public/js/directives/**/*.js',
         // Application
         'public/dist/temp/routes.js',
         'public/js/app.js'
@@ -48,11 +49,10 @@ var stylesheets = {
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
         // Summernote
-        'public/libs/summernote/dist/summernote.css',
+        'public/libs/summernote/summernote.css',
 
         // Custom styles
-        'public/css/style.css',
-        'public/css/responsive.css'
+        'public/css/*.css'
     ],
 
     // Bootstrap
