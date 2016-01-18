@@ -45,7 +45,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   // Navigation
 
   userInterface.gotoLocation = function(location){
-    if (location != userInterface.selectedView){
+    if ($location.path() != '/' + location){
       userInterface.fillNavbar();
       userInterface.zoomOut();
       $timeout(function(){

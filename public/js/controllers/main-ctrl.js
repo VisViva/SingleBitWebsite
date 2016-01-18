@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, UserInterface) {
+angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface) {
 
   // Initialize user interface
 
