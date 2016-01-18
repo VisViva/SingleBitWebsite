@@ -1,4 +1,11 @@
 node_modules/
 public/dist/
-public/libs/
-!public/libs/summernote
+public/libs/open-sans-fontface
+public/libs/malihu-custom-scrollbar-plugin
+public/libs/lato
+public/libs/jquery
+public/libs/font-awesome
+public/libs/bootstrap
+public/libs/angular-spinners
+public/libs/angular-route
+public/libs/angular
