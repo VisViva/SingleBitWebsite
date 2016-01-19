@@ -52,7 +52,8 @@ var stylesheets = {
         'public/libs/summernote/summernote.css',
 
         // Custom styles
-        'public/css/*.css'
+        'public/css/style.css',
+        'public/css/responsive.css'
     ],
 
     // Bootstrap
