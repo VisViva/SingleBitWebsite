@@ -10,6 +10,8 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
     desktopAbsolute:[
       ".da-100",
       ".da-90",
+      ".da-60",
+      ".da-45",
       ".da-30",
       ".da-20",
       ".da-10",

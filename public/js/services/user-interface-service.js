@@ -85,9 +85,24 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     $('.navbar-default').addClass('on');
   };
   userInterface.styleNavbar = function(){
-    if (userInterface.selectedView == 'home')
-    $('.navbar-default').removeClass('on');
-    else $('.navbar-default').addClass('on');
+    switch (userInterface.selectedView)
+    {
+      case 'home': case '':
+      {
+        userInterface.selectedView = 'home';
+        $('.navbar-default').removeClass('on');
+        break;
+      }
+      case '404':
+      {
+        $('.navbar-default').removeClass('on');
+        break;
+      }
+      default:
+      {
+        $('.navbar-default').addClass('on');
+      }
+    };
   };
 
   // Private methods

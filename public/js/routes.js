@@ -10,6 +10,10 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     controller: 'PublishController'
   })
   // Home
+  .when('/', {
+    templateUrl: '../views/home.html',
+    controller: 'HomeController'
+  })
   .when('/home', {
     templateUrl: '../views/home.html',
     controller: 'HomeController'
@@ -46,10 +50,13 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     templateUrl: '../views/contact.html',
     controller: 'ContactController'
   })
+  // Not found
+  .when('/404', {
+    templateUrl: '../views/404.html'
+  })
   // Otherwise
   .otherwise({
-    templateUrl: '../views/home.html',
-    controller: 'HomeController'
+    redirectTo: '/404',
   })
 
   $locationProvider.html5Mode(true);
