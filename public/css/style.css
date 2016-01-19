@@ -695,3 +695,9 @@ textarea
 {
 	resize: vertical;
 }
+::selection {
+  background: #FFA700;
+}
+::-moz-selection {
+  background: #FFA700;
+}
