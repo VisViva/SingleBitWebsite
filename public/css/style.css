@@ -1,3 +1,7 @@
+/* Custom Fonts *********************************************/
+
+@font-face { font-family: Logo; src: url('../fonts/avenger.ttf'); }
+
 /* Navigation Bar *******************************************/
 
 #menu
@@ -140,7 +144,6 @@
 	border: 2px solid #B4B4B4;
 	border-radius: 50%;
 	font-size: 24px;
-	margin-top: 10%;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	-ms-transition: all 0.3s;

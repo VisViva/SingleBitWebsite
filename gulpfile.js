@@ -74,7 +74,10 @@ var fonts = [
     // Lato
     'public/libs/lato/font/**/*',
     // Open sans
-    'public/libs/open-sans-fontface/fonts/**/*'
+    'public/libs/open-sans-fontface/fonts/**/*',
+
+    // Custom fonts
+    'public/fonts/**/*'
 ]
 
 // Scripts
