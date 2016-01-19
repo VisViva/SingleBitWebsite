@@ -54,7 +54,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
         userInterface.selectedView = location.split('/')[0];
         userInterface.updateService();
         userInterface.zoomIn();
-      }, 300);
+      }, 500);
     }
   };
   userInterface.contentLoaded = function(){
@@ -76,7 +76,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   };
   userInterface.zoomOut = function(){
     $('.move-center').addClass('move-below').removeClass('move-center');
-    setTimeout(function(){ $('.move-below').removeClass('move-below').addClass('move-above'); }, 300);
+    setTimeout(function(){ $('.move-below').removeClass('move-below').addClass('move-above'); }, 500);
   };
   userInterface.setZoomEnabled = function(){
     userInterface.zoomInEnabled = true;
