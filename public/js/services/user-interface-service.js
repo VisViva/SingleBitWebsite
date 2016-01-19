@@ -87,20 +87,21 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.styleNavbar = function(){
     switch (userInterface.selectedView)
     {
+      case 'admin': case 'feed': case 'projects': case 'about': case 'contact':
+      {
+        $('.navbar-default').addClass('on');
+        break;
+      }
       case 'home': case '':
       {
         userInterface.selectedView = 'home';
         $('.navbar-default').removeClass('on');
         break;
       }
-      case '404':
+      default:
       {
         $('.navbar-default').removeClass('on');
         break;
-      }
-      default:
-      {
-        $('.navbar-default').addClass('on');
       }
     };
   };

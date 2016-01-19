@@ -77,7 +77,7 @@ var fonts = [
     'public/libs/open-sans-fontface/fonts/**/*',
 
     // Custom fonts
-    'public/fonts/**/*'
+    'public/fonts/avenger/**/*'
 ]
 
 // Scripts
