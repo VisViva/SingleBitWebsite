@@ -14,7 +14,7 @@
     "gulp-dest": "^0.2.3",
     "gulp-replace": "^0.5.4",
     "method-override": "~2.0.2",
-    "mongoose": "~3.8.0"
+    "mongoose": "4.3.6"
   },
   "engines": {
     "node": "0.12.7"
