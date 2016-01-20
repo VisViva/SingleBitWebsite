@@ -1,33 +1,35 @@
-// grab the nerd model we just created
-var Nerd = require('./models/nerd');
+var Activity = require('./models/activity.js');
 
-module.exports = function(app) {
+module.exports = function(app){
+  app.get('*', function(req, res){
+    res.sendfile('./public/views/index.html');
+  });
 
-    // server routes ===========================================================
-    // handle things like api calls
-    // authentication routes
-
-    // sample api route
-    app.get('/api/nerds', function(req, res) {
-        // use mongoose to get all nerds in the database
-        Nerd.find(function(err, nerds) {
-
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-
-            res.json(nerds); // return all nerds in JSON format
+  app.post('/activity', function(req, res){
+    new Activity.Activity({
+      title : req.body.title,
+      description : req.body.description
+    }).save(function(err, activity){
+      if (!err) {
+        res.send({
+          success : true,
+          message : "Activity named " + req.body.title + " has been saved successfully!",
+          data : activity
         });
+        console.log("Activity named " + req.body.title + " has been saved successfully!");
+      }
     });
+  });
 
-    // route to handle creating goes here (app.post)
-    // route to handle delete goes here (app.delete)
-
-    // frontend routes =========================================================
-    // route to handle all angular requests
-    app.get('*', function(req, res) {
-        res.sendfile('./public/views/index.html'); // load our public/index.html file
+  app.get('/activity', function(req, res){
+    Activity.Activity.find(function(err, activities){
+      if (!err) {
+        res.send({
+          success : true,
+          message : "Activity list has been acquired successfully!",
+          data : activities
+        });
+      }
     });
-
-};
+  });
+}

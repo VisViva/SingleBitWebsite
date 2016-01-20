@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface) {
+angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface, $http) {
 
   // Initialize user interface
 
@@ -35,6 +35,7 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
   {
     $scope.search =! $scope.search;
     UserInterface.hideMenu();
+    $http.post('/activity', { title:"Test title", description:"Test description"}, null);
   }
   $scope.gotoLocation = function(location)
   {

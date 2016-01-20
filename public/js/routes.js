@@ -52,7 +52,7 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   // Not found
   .when('/404', {
-    templateUrl: '../views/404.html'
+    templateUrl: '../views/system/404.html'
   })
   // Otherwise
   .otherwise({

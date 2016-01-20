@@ -1,10 +1,12 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $sce, UserInterface) {
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, UserInterface, Resource) {
 
   // Initialize
+
+  $scope.resource = {};
   $scope.activeTab = 0;
   $scope.summernote = {
     options : {
-      height: 800,
+      height: 100,
       dialogsInBody: true,
       dialogsFade: true,
       toolbar: [
@@ -23,37 +25,10 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     }
   }
 
-  $scope.resource = {
-    title: "How to design achievements?",
-    date: "13 January 2015",
-    description: ''
-  };
-});
+  // Actions
 
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory(require('jquery'));
-  } else {
-    factory(window.jQuery);
+  $scope.save = function()
+  {
+    Resource.save($scope.resource);
   }
-}(function ($) {
-  $.extend($.summernote.plugins, {
-    'soundcloud': function (context) {
-      var self = this;
-      var ui = $.summernote.ui;
-      context.memo('button.soundcloud', function () {
-        var button = ui.button({
-          contents: '<i class="fa fa-soundcloud"/>',
-          tooltip: 'Sound / Music',
-          click: context.createInvokeHandler('soundcloudDialog.show')
-        });
-        var $soundcloud = button.render();
-        return $soundcloud;
-      });
-    },
-  });
-}));
-
-var soundcloudDialog = function (context) {};
+});
