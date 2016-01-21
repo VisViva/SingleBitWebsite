@@ -22,6 +22,7 @@ angular.module("SingleBitApplication", [
 
   // Services
   'UserInterfaceService',
+  'AuthorizationService',
   'ResourceService',
 
   // Directives

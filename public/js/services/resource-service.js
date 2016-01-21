@@ -3,7 +3,7 @@ angular.module('ResourceService', []).factory('Resource', ['$timeout','$http','s
   var resource = this;
 
   resource.save = function(object){
-    $http.post('/activity', object).then(function(response){
+    $http.post('/api/activity', object).then(function(response){
       // Success
       alert(response.data.message);
     }, function(){
@@ -13,7 +13,7 @@ angular.module('ResourceService', []).factory('Resource', ['$timeout','$http','s
   }
 
   resource.list = function(){
-    $http.get('/activity').then(function(response){
+    $http.get('/api/activity').then(function(response){
       // Success
       alert(response.data.message);
     }, function(){
