@@ -3,33 +3,15 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
   var authorization = this;
 
   authorization.register = function(user){
-    $http.post('/api/register', user).then(function(response){
-      // Success
-      alert(response.data.message);
-    }, function(){
-      // Error
-      alert("Error!");
-    });
+    return $http.post('/api/register', user);
   }
 
   authorization.login = function(user){
-    $http.post('/api/login', user).then(function(response){
-      // Success
-      alert(response.data.message);
-    }, function(){
-      // Error
-      alert("Error!");
-    });
+    return $http.post('/api/login', user);
   }
 
   authorization.isLoggedIn = function(){
-    $http.get('/api/isloggedin').then(function(response){
-      // Success
-      alert(response.data.message);
-    }, function(){
-      // Error
-      alert("Error!");
-    });
+    return $http.get('/api/isloggedin');
   }
 
   return {
@@ -37,15 +19,15 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
     // Interaction with resources
 
     register : function(user){
-      authorization.register(user);
+      return authorization.register(user);
     },
 
     login : function(user){
-      authorization.login(user);
+      return authorization.login(user);
     },
 
     isLoggedIn : function(){
-      authorization.isLoggedIn();
+      return authorization.isLoggedIn();
     }
   }
 }]);

@@ -3,23 +3,11 @@ angular.module('ResourceService', []).factory('Resource', ['$timeout','$http','s
   var resource = this;
 
   resource.save = function(object){
-    $http.post('/api/activity', object).then(function(response){
-      // Success
-      alert(response.data.message);
-    }, function(){
-      // Error
-      alert("Error!");
-    });
+    return $http.post('/api/activity', object);
   }
 
   resource.list = function(){
-    $http.get('/api/activity').then(function(response){
-      // Success
-      alert(response.data.message);
-    }, function(){
-      // Error
-      alert("Error!");
-    });
+    return $http.get('/api/activity');
   }
 
   return {
@@ -27,11 +15,11 @@ angular.module('ResourceService', []).factory('Resource', ['$timeout','$http','s
     // Interaction with resources
 
     save : function(object){
-      resource.save(object);
+      return resource.save(object);
     },
 
     list : function(){
-      resource.list();
+      return resource.list();
     }
   }
 }]);
