@@ -8,9 +8,8 @@ tags-input *, tags-input *:before, tags-input *:after {
 }
 tags-input .host {
   position: relative;
-  margin-top: 5px;
-  margin-bottom: 5px;
   height: 100%;
+  outline:none;
 }
 tags-input .host:active {
   outline: none;
@@ -28,6 +27,11 @@ tags-input .tags {
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   height: 100%;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
 }
 tags-input .tags.focused {
   outline: none;
@@ -48,10 +52,10 @@ tags-input .tags .tag-item {
   float: left;
   height: 26px;
   line-height: 22px;
-  border: 1px solid #EEA236;
-  border-radius: 7px;
-  background-color: #FCAC45;
-  color : #FFF;
+  border: 1px solid #222222;
+  border-radius: 4px;
+  background-color: #2F2F2F;
+  color: #FFF;
 }
 tags-input .tags .tag-item.selected {
   background-color: #FCAC45
@@ -66,7 +70,7 @@ tags-input .tags .tag-item .remove-button {
   color: #5A5A5A;
 }
 tags-input .tags .tag-item .remove-button:active {
-  color: #5A5A5A;
+  color: #FCAC45;
 }
 tags-input .tags .input {
   border: 0;
@@ -78,7 +82,7 @@ tags-input .tags .input {
   height: 26px;
 }
 tags-input .tags .input.invalid-tag {
-  color: #ff0000;
+  color: #FCAC45;
 }
 tags-input .tags .input::-ms-clear {
   display: none;

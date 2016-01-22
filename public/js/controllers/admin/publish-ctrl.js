@@ -7,28 +7,27 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     "Project"
   ];
 
-  $scope.activityTypes = [
+  $scope.types = [
     "Article",
     "Diary",
     "Podcast",
     "Blog"
   ];
-  
+
   $scope.tags = [
-    { text: 'just' },
-    { text: 'some' },
-    { text: 'cool' },
-    { text: 'tags' }
+    { id: 'dafadgasg43grf', text: 'just' },
+    { id: 'dsadjfasg44grf', text: 'some' },
+    { id: 'dsafasdsg443gf', text: 'cool' },
+    { id: 'dsafdfg54t5grf', text: 'tags' }
   ];
 
   $scope.content = {
     contentType : $scope.contentTypes[0],
     resource : {
-      activityType : $scope.activityTypes[0]
+      type : $scope.types[0]
     }
   };
 
-  $scope.activeTab = 0;
   $scope.summernote = {
     options : {
       height: 100,
@@ -51,6 +50,34 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
   }
 
   // Actions
+
+  $scope.contentTypeChanged =  function()
+  {
+    switch($scope.content.contentType)
+    {
+      case 'Activity':
+      {
+        $scope.types = [
+          "Article",
+          "Diary",
+          "Podcast",
+          "Blog"
+        ];
+        break;
+      }
+      case 'Project':
+      {
+        $scope.types = [
+          "Game",
+          "2D art",
+          "3D art",
+          "Music"
+        ];
+        break;
+      }
+    }
+    $scope.content.resource.type = $scope.types[0]
+  }
 
   $scope.save = function()
   {

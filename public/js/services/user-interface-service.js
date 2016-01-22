@@ -37,7 +37,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     var location = $location.path().split('/');
     userInterface.selectedView = location[1];
 
-    /*if ((location.length > 2) && (location[1] == 'admin') && (location[2] != 'authorize')){
+    if ((location.length > 2) && (location[1] == 'admin') && (location[2] != 'authorize')){
       Authorization.loggedin().then(function(response){
         if (response.data.success == true){
           $timeout(function(){ userInterface.zoomIn(); }, 500);
@@ -50,9 +50,9 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
       });
     } else {
       $timeout(function(){ userInterface.zoomIn(); }, 500);
-    }*/
+    }
 
-    $timeout(function(){ userInterface.zoomIn(); }, 500);
+    //$timeout(function(){ userInterface.zoomIn(); }, 500);
   }
   userInterface.updateService = function(){
     userInterface.calculateDimensions();

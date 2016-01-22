@@ -285,6 +285,29 @@
 {
 	background: #FCAC45;
 }
+.btn-danger
+{
+	color: #fff;
+	border-color: #222;
+	background: #2F2F2F;
+	outline: none;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger
+{
+	background-color: #5E5E5E !important;
+	border-color: #4E4B4B !important;
+}
+.btn-danger:active, .btn-danger.active {
+	background-color: #3F3F3F !important;
+	border-color: #222 !important;
+	box-shadow: none;
+}
+.btn-danger:focus
+{
+	color: #fff;
+	background-color: #3F3F3F !important;
+	border-color: #222 !important;
+}
 button.btn.tf-btn.btn-default
 {
 	float: right;
@@ -335,8 +358,8 @@ button.btn.tf-btn.btn-default
 	border-top-right-radius: 7px;
 }
 .note-popover .popover-content .dropdown-menu, .panel-heading.note-toolbar .dropdown-menu {
-    min-width: 215px;
-		padding:5px;
+	min-width: 215px;
+	padding:5px;
 }
 .dropdown-menu
 {

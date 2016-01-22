@@ -15,10 +15,10 @@
             <label class="custom-label"><p>Thumbnail:</p></label>
             <div class="view-item" style="margin-top:0px;">
               <div class="hover-bg">
-                <a href="#" ng-click="openActivity(activity.id)">
+                <a href="#" ng-click="loadThumbnail()">
                   <div class="hover-text" style="padding-top:30px;">
-                    <h4 ng-bind="resource.title"></h4>
-                    <small ng-bind="resource.date | Date"></small>
+                    <h4 ng-bind="content.resource.title"></h4>
+                    <small ng-bind="content.resource.date | Date"></small>
                     <div class="clearfix"></div>
                     <i class="fa fa-cloud-upload"></i>
                   </div>
@@ -32,17 +32,17 @@
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Content type:</p></label>
-                <dropdown ng-model="content.contentType" options="contentTypes"></dropdown>
+                <dropdown ng-model="content.contentType" options="contentTypes" on-change="contentTypeChanged()"></dropdown>
               </div>
               <div class="form-group col-sm-6">
-                <label class="custom-label"><p>Activity type:</p></label>
-                <dropdown ng-model="content.resource.activityType" options="activityTypes"></dropdown>
+                <label class="custom-label"><p ng-bind="content.contentType + ' type:'"></p></label>
+                <dropdown ng-model="content.resource.type" options="types"></dropdown>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Title:</p></label>
-                <input ng-model="resource.title" type="text" class="form-control" placeholder="Make up a title">
+                <input ng-model="content.resource.title" type="text" class="form-control" placeholder="Make up a title">
               </div>
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Date:</p></label>
@@ -61,13 +61,12 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label class="custom-label"><p>Tags:</p></label>
-                <!--<input ng-model="content.resource.tags" type="text" class="form-control" placeholder="Input tags">-->
-                <tags-input ng-model="tags"></tags-input>
+                <tags-input ng-model="content.resource.tags"></tags-input>
               </div>
             </div>
           </div>
           <div class="col-sm-12" style="margin-top:20px;">
-            <h2 ng-bind="resource.title" class="center text-center" style="padding:10px; font-weight:300;"></h2>
+            <h2 ng-bind="content.resource.title" class="center text-center" style="padding:10px; font-weight:300;"></h2>
             <div class="da-5"></div>
             <summernote config="summernote.options" ng-model="content.resource.description"></summernote>
           </div>

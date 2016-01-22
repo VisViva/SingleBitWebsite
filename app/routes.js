@@ -25,7 +25,7 @@ module.exports = function(app){
     });
   });
 
-  app.post('/api/login', passport.authenticate('local'), function(req, res) {
+  app.post('/api/login', passport.authenticate('local'), function(req, res){
     res.send({
       success : true,
       message : "Logged in as " + req.user.username,
