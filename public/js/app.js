@@ -1,6 +1,7 @@
 angular.module("SingleBitApplication", [
   // Additional
   'angularSpinners',
+  'ngTagsInput',
 
   // Angular
   'ngRoute',
@@ -29,6 +30,7 @@ angular.module("SingleBitApplication", [
   'SummernoteDirective',
   'DateTimePickerDirective',
   'FormatDateDirective',
+  'DropdownDirective',
 
   // Filters
   'DateFilter'

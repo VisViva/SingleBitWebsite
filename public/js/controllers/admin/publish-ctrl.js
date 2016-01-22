@@ -13,6 +13,13 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     "Podcast",
     "Blog"
   ];
+  
+  $scope.tags = [
+    { text: 'just' },
+    { text: 'some' },
+    { text: 'cool' },
+    { text: 'tags' }
+  ];
 
   $scope.content = {
     contentType : $scope.contentTypes[0],

@@ -21,6 +21,8 @@ var scripts = {
         'public/libs/angular-spinners/dist/angular-spinners.min.js',
         // Summernote
         'public/libs/summernote/summernote.js',
+        // Tags
+        'public/libs/ng-tags-input/ng-tags-input.min.js',
 
         // Controllers
         'public/js/controllers/**/*.js',
@@ -58,7 +60,8 @@ var stylesheets = {
         // Custom styles
         'public/css/style.css',
         'public/css/responsive.css',
-        'public/css/datetimepicker.css'
+        'public/css/datetimepicker.css',
+        'public/css/tags.css'
     ],
 
     // Bootstrap
