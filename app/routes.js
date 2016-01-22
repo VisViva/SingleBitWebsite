@@ -1,7 +1,10 @@
 var Account = require('./models/account');
 var Activity = require('./models/activity.js');
+var Tag = require('./models/tag.js');
 var passport = require('passport');
-
+var mongoose = require('mongoose');
+var q = require('q');
+mongoose.Promise = q.Promise;
 
 module.exports = function(app){
 
@@ -51,18 +54,36 @@ module.exports = function(app){
   // Activities
 
   app.post('/api/activity', function(req, res){
-    new Activity.Activity({
-      title : req.body.title,
-      description : req.body.description
-    }).save(function(err, activity){
-      if (!err) {
-        res.send({
-          success : true,
-          message : "Activity named " + req.body.title + " has been saved successfully!",
-          data : activity
-        });
-        console.log("Activity named " + req.body.title + " has been saved successfully!");
+    var activity = req.body;
+    activity.tagIds = [];
+    q.all(activity.tags.map(function(tag){
+      if (tag._id == undefined){
+        return new Tag.Tag({text : tag.text}).save();
+      } else {
+        return q(tag._id);
       }
+    })).then(function(results){
+      console.log(results);
+      results.forEach(function(element){
+        activity.tagIds.push(element._doc._id);
+      });
+      new Activity.Activity({
+        title : activity.title,
+        description : activity.description,
+        tags : activity.tagIds,
+        date : activity.date
+      }).save(function(err, activity){
+        if (!err) {
+          res.send({
+            success : true,
+            message : "Activity named " + req.body.title + " has been saved successfully!",
+            data : activity
+          });
+          console.log("Activity named " + req.body.title + " has been saved successfully!");
+        }
+      });
+    }, function (err) {
+      console.log(err);
     });
   });
 

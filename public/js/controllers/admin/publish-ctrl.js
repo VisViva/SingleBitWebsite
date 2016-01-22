@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, UserInterface, Resource) {
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource) {
 
   // Initialize
 
@@ -12,13 +12,6 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     "Diary",
     "Podcast",
     "Blog"
-  ];
-
-  $scope.tags = [
-    { id: 'dafadgasg43grf', text: 'just' },
-    { id: 'dsadjfasg44grf', text: 'some' },
-    { id: 'dsafasdsg443gf', text: 'cool' },
-    { id: 'dsafdfg54t5grf', text: 'tags' }
   ];
 
   $scope.content = {
@@ -53,34 +46,40 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.contentTypeChanged =  function()
   {
-    switch($scope.content.contentType)
-    {
-      case 'Activity':
+    $timeout(function(){
+      switch($scope.content.contentType)
       {
-        $scope.types = [
-          "Article",
-          "Diary",
-          "Podcast",
-          "Blog"
-        ];
-        break;
+        case 'Activity':
+        {
+          $scope.types = [
+            "Article",
+            "Diary",
+            "Podcast",
+            "Blog"
+          ];
+          break;
+        }
+        case 'Project':
+        {
+          $scope.types = [
+            "Game",
+            "2D art",
+            "3D art",
+            "Music"
+          ];
+          break;
+        }
       }
-      case 'Project':
-      {
-        $scope.types = [
-          "Game",
-          "2D art",
-          "3D art",
-          "Music"
-        ];
-        break;
-      }
-    }
-    $scope.content.resource.type = $scope.types[0]
+      $scope.content.resource.type = $scope.types[0];
+    });
   }
 
   $scope.save = function()
   {
-    Resource.save($scope.resource);
+    Resource.save($scope.content.resource).then(function(){
+      alert('Resource has been saved successfully!');
+    },function(){
+      alert("Resource has not been saved, something went wrong!");
+    });
   }
 });
