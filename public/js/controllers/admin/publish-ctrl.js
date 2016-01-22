@@ -2,7 +2,25 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   // Initialize
 
-  $scope.resource = {};
+  $scope.contentTypes = [
+    "Activity",
+    "Project"
+  ];
+
+  $scope.activityTypes = [
+    "Article",
+    "Diary",
+    "Podcast",
+    "Blog"
+  ];
+
+  $scope.content = {
+    contentType : $scope.contentTypes[0],
+    resource : {
+      activityType : $scope.activityTypes[0]
+    }
+  };
+
   $scope.activeTab = 0;
   $scope.summernote = {
     options : {

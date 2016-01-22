@@ -26,5 +26,10 @@ angular.module("SingleBitApplication", [
   'ResourceService',
 
   // Directives
-  'summernote'
+  'SummernoteDirective',
+  'DateTimePickerDirective',
+  'FormatDateDirective',
+
+  // Filters
+  'DateFilter'
 ]);

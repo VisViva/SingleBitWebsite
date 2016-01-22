@@ -1,4 +1,4 @@
-angular.module('summernote', []).controller('SummernoteController', ['$scope', '$attrs', '$timeout', function($scope, $attrs, $timeout) {
+angular.module('SummernoteDirective', []).controller('SummernoteController', ['$scope', '$attrs', '$timeout', function($scope, $attrs, $timeout) {
     'use strict';
 
     var currentElement,

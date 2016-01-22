@@ -10,6 +10,8 @@ var scripts = {
         'public/libs/jquery/dist/jquery.min.js',
         // Bootstrap
         'public/libs/bootstrap/dist/js/bootstrap.min.js',
+        // Moment
+        'public/libs/moment/min/moment.min.js',
         // Malihu custom scrollbar
         'public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
         // Angular
@@ -26,6 +28,8 @@ var scripts = {
         'public/js/services/**/*.js',
         // Directives
         'public/js/directives/**/*.js',
+        // Filters
+        'public/js/filters/**/*.js',
         // Application
         'public/dist/temp/routes.js',
         'public/js/app.js'
@@ -53,7 +57,8 @@ var stylesheets = {
 
         // Custom styles
         'public/css/style.css',
-        'public/css/responsive.css'
+        'public/css/responsive.css',
+        'public/css/datetimepicker.css'
     ],
 
     // Bootstrap

@@ -10,8 +10,8 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
     return $http.post('/api/login', user);
   }
 
-  authorization.isLoggedIn = function(){
-    return $http.get('/api/isloggedin');
+  authorization.loggedin = function(){
+    return $http.get('/api/loggedin');
   }
 
   return {
@@ -26,8 +26,8 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
       return authorization.login(user);
     },
 
-    isLoggedIn : function(){
-      return authorization.isLoggedIn();
+    loggedin : function(){
+      return authorization.loggedin();
     }
   }
 }]);

@@ -281,6 +281,10 @@
 	font-size: 12px;
 	font-weight: 400;
 }
+.btn-warning
+{
+	background: #FCAC45;
+}
 button.btn.tf-btn.btn-default
 {
 	float: right;
@@ -290,6 +294,10 @@ button.btn.tf-btn.btn-default
 	padding: 10px 40px;
 	color: #FFF;
 	text-transform: uppercase;
+}
+.btn
+{
+	border-radius:7px;
 }
 .btn:active
 {
@@ -312,6 +320,47 @@ button.btn.tf-btn.btn-default
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
+}
+.input-group-addon
+{
+	border-radius:7px;
+}
+.panel
+{
+	border-radius:7px;
+}
+.panel-heading
+{
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+.note-popover .popover-content .dropdown-menu, .panel-heading.note-toolbar .dropdown-menu {
+    min-width: 215px;
+		padding:5px;
+}
+.dropdown-menu
+{
+	border-radius:7px;
+}
+.custom-caret
+{
+	margin-top: 8px;
+}
+.custom-dropdown-element
+{
+	cursor: pointer;
+	cursor: hand;
+	display: block;
+	padding: 3px 20px;
+	line-height: 1.42857143;
+	white-space: nowrap;
+	color: #222;
+}
+.custom-dropdown-element:hover
+{
+	color: #262626;
+	text-decoration: none;
+	background-color: #f5f5f5;
 }
 
 /* Section Title ********************************************/
@@ -611,6 +660,10 @@ button.btn.tf-btn.btn-default
 {
 	transform: translateY(2500px);
 }
+.full-width
+{
+	width:100%;
+}
 
 /* General **************************************************/
 
@@ -667,37 +720,26 @@ a:hover, a:focus
 	color: #FCAC45;
 }
 ul, ol
-
 .modal {
 	text-align: center;
 }
-
-@media screen and (min-width: 768px) {
-	.modal:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-	}
-}
-
 .modal-dialog {
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
 }
+table tr td.active
 {
-	padding: 0;
-	webkit-padding: 0;
-	moz-padding: 0;
+	background-image:none;
+	background-color:#FCAC45;
 }
 textarea
 {
 	resize: vertical;
 }
 ::selection {
-  background: #FFA700;
+	background: #FFA700;
 }
 ::-moz-selection {
-  background: #FFA700;
+	background: #FFA700;
 }

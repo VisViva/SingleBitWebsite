@@ -28,17 +28,17 @@ module.exports = function(app){
   app.post('/api/login', passport.authenticate('local'), function(req, res) {
     res.send({
       success : true,
-      message : "Logged in as " + req.user,
-      data : req.user
+      message : "Logged in as " + req.user.username,
+      data : req.user.username
     });
   });
 
-  app.get('/api/isloggedin', function(req, res) {
+  app.get('/api/loggedin', function(req, res) {
     if (req.user) {
       res.send({
         success : true,
-        message : "Logged in as " + req.user,
-        data : req.user
+        message : "Logged in as " + req.user.username,
+        data : req.user.username
       });
     } else {
       res.send({
