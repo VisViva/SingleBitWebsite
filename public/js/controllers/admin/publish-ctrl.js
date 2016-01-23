@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource) {
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource){
 
   // Initialize
 
@@ -40,12 +40,11 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
         ['view', ['codeview']]
       ]
     }
-  }
+  };
 
   // Actions
 
-  $scope.contentTypeChanged =  function()
-  {
+  $scope.contentTypeChanged =  function(){
     $timeout(function(){
       switch($scope.content.contentType)
       {
@@ -72,14 +71,17 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
       }
       $scope.content.resource.type = $scope.types[0];
     });
-  }
+  };
 
-  $scope.save = function()
-  {
+  $scope.save = function(){
     Resource.save($scope.content.resource).then(function(){
       alert('Resource has been saved successfully!');
     },function(){
       alert("Resource has not been saved, something went wrong!");
     });
-  }
+  };
+
+  $scope.loadTagSuggestions = function(query){
+    return Resource.loadTagSuggestions(query);
+  };
 });

@@ -363,6 +363,7 @@ button.btn.tf-btn.btn-default
 }
 .dropdown-menu
 {
+	border: 1px solid #ccc;
 	border-radius:7px;
 }
 .custom-caret

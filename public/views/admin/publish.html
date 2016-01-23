@@ -61,7 +61,14 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label class="custom-label"><p>Tags:</p></label>
-                <tags-input ng-model="content.resource.tags"></tags-input>
+                <tags-input ng-model="content.resource.tags" min-length="2" display-property="text">
+                  <auto-complete source="loadTagSuggestions($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="10" template="autocomplete-template"></auto-complete>
+                </tags-input>
+                <script id="autocomplete-template" type="text/ng-template">
+                  <div class="autocomplete-template">
+                      <span ng-bind="data.text"></span>
+                  </div>
+                </script>
               </div>
             </div>
           </div>

@@ -55,33 +55,59 @@ module.exports = function(app){
 
   app.post('/api/activity', function(req, res){
     var activity = req.body;
-    activity.tagIds = [];
     q.all(activity.tags.map(function(tag){
       if (tag._id == undefined){
         return new Tag.Tag({text : tag.text}).save();
       } else {
-        return q(tag._id);
+        tag._id = mongoose.Types.ObjectId(tag._id);
+        return q(tag);
       }
     })).then(function(results){
       console.log(results);
       results.forEach(function(element){
-        activity.tagIds.push(element._doc._id);
-      });
-      new Activity.Activity({
-        title : activity.title,
-        description : activity.description,
-        tags : activity.tagIds,
-        date : activity.date
-      }).save(function(err, activity){
-        if (!err) {
-          res.send({
-            success : true,
-            message : "Activity named " + req.body.title + " has been saved successfully!",
-            data : activity
-          });
-          console.log("Activity named " + req.body.title + " has been saved successfully!");
+        if (element._doc != undefined){
+          for (var i = 0; i < activity.tags.length; ++i){
+            if (activity.tags[i].text == element._doc.text){
+              activity.tags[i]._id = element._doc._id;
+            }
+          }
         }
       });
+
+      if (activity._id != undefined){
+        Activity.Activity.findByIdAndUpdate(mongoose.Types.ObjectId(activity._id), {
+          title : activity.title,
+          description : activity.description,
+          tags : activity.tags,
+          date : activity.date
+        }, function(err, updatedActivity) {
+          if (!err) {
+            updatedActivity._doc.tags = activity.tags;
+            res.send({
+              success: true,
+              message: "Activity named " + req.body.title + " has been updated successfully!",
+              data: updatedActivity._doc
+            });
+          }
+        });
+      } else {
+        new Activity.Activity({
+          title : activity.title,
+          description : activity.description,
+          tags : activity.tags,
+          date : activity.date
+        }).save(function(err, savedActivity){
+          if (!err) {
+            savedActivity._doc.tags = activity.tags;
+            res.send({
+              success : true,
+              message : "Activity named " + req.body.title + " has been saved successfully!",
+              data : savedActivity._doc
+            });
+            console.log("Activity named " + req.body.title + " has been saved successfully!");
+          }
+        });
+      }
     }, function (err) {
       console.log(err);
     });
@@ -98,6 +124,22 @@ module.exports = function(app){
       }
     });
   });
+
+  // Tags
+
+  app.post('/api/tags', function(req, res){
+    Tag.Tag.find({'text': {'$regex': '.*' + req.body.query + '.*'}}, function(err, tags){
+      if (!err) {
+        res.send({
+          success : true,
+          message : "Tags suggestions list has been acquired successfully!",
+          data : tags
+        });
+      }
+    });
+  });
+
+  // Single Page Redirection
 
   app.get('*', function(req, res) {
     res.sendfile('./public/views/index.html');
