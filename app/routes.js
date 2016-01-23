@@ -3,7 +3,7 @@ var ActivityController = require('./controllers/activity');
 var TagController = require('./controllers/tag');
 var Passport = require('passport');
 
-module.exports = function(app){
+module.exports = function(app, root){
 
   // Authentication
 
@@ -22,7 +22,7 @@ module.exports = function(app){
 
   // Single Page Redirection
 
-  app.get('*', function(req, res) {
-    res.sendfile('./public/views/index.html');
+  app.get('*', function (req, res) {
+    res.sendFile(root + '/public/views/index.html');
   });
 }
