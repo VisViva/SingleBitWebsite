@@ -4,7 +4,7 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
 
   resource.save = function(object){
     var deferred = $q.defer();
-    $http.post('/api/activity', object).then(function(data){
+    $http.post('/api/resource', object).then(function(data){
       object._id = data.data.data._id;
       object.tags = data.data.data.tags;
       deferred.resolve(data.data.data);
@@ -13,7 +13,7 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
   }
 
   resource.list = function(){
-    return $http.get('/api/activity');
+    return $http.get('/api/resource');
   }
 
   resource.loadTagSuggestions = function(query){

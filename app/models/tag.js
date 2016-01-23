@@ -1,12 +1,12 @@
-var mongoose = require("mongoose");
+var Mongoose = require("mongoose");
 
-var TagSchema = mongoose.Schema({
+var TagSchema = Mongoose.Schema({
   text: {
     type: String
   }
 });
 
-var Tag = mongoose.model('Tag', TagSchema);
+var Tag = Mongoose.model('Tag', TagSchema);
 
 module.exports = {
   Tag: Tag

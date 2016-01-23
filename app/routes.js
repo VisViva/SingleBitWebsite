@@ -1,5 +1,5 @@
 var AccountController = require('./controllers/account');
-var ActivityController = require('./controllers/activity');
+var ResourceController = require('./controllers/resource');
 var TagController = require('./controllers/tag');
 var Passport = require('passport');
 
@@ -13,8 +13,8 @@ module.exports = function(app, root){
 
   // Activities
 
-  app.post('/api/activity', ActivityController.save);
-  app.get('/api/activity', ActivityController.list);
+  app.post('/api/resource', ResourceController.save);
+  app.get('/api/resource', ResourceController.list);
 
   // Tags
 
