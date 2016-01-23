@@ -1,8 +1,11 @@
 var Mongoose = require("mongoose");
 
 var ResourceSchema = Mongoose.Schema({
-  type: {
-    type: Mongoose.Schema.Types.ObjectId
+  contentType: {
+    type: String
+  },
+  resourceType: {
+    type: String
   },
   title: {
     type: String

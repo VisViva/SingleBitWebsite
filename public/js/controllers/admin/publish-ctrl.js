@@ -7,18 +7,16 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     "Project"
   ];
 
-  $scope.types = [
+  $scope.resourceTypes = [
     "Article",
     "Diary",
     "Podcast",
     "Blog"
   ];
 
-  $scope.content = {
+  $scope.resource = {
     contentType : $scope.contentTypes[0],
-    resource : {
-      type : $scope.types[0]
-    }
+    resourceType : $scope.resourceTypes[0]
   };
 
   $scope.summernote = {
@@ -46,11 +44,11 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.contentTypeChanged =  function(){
     $timeout(function(){
-      switch($scope.content.contentType)
+      switch($scope.resource.contentType)
       {
         case 'Activity':
         {
-          $scope.types = [
+          $scope.resourceTypes = [
             "Article",
             "Diary",
             "Podcast",
@@ -60,7 +58,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
         }
         case 'Project':
         {
-          $scope.types = [
+          $scope.resourceTypes = [
             "Game",
             "2D art",
             "3D art",
@@ -69,12 +67,12 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
           break;
         }
       }
-      $scope.content.resource.type = $scope.types[0];
+      $scope.resourceType = $scope.resourceTypes[0];
     });
   };
 
   $scope.save = function(){
-    Resource.save($scope.content.resource).then(function(){
+    Resource.save($scope.resource).then(function(){
       alert('Resource has been saved successfully!');
     },function(){
       alert("Resource has not been saved, something went wrong!");

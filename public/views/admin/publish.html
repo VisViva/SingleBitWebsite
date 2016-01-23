@@ -17,8 +17,8 @@
               <div class="hover-bg">
                 <a href="#" ng-click="loadThumbnail()">
                   <div class="hover-text" style="padding-top:30px;">
-                    <h4 ng-bind="content.resource.title"></h4>
-                    <small ng-bind="content.resource.date | Date"></small>
+                    <h4 ng-bind="resource.title"></h4>
+                    <small ng-bind="resource.date | Date"></small>
                     <div class="clearfix"></div>
                     <i class="fa fa-cloud-upload"></i>
                   </div>
@@ -32,28 +32,28 @@
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Content type:</p></label>
-                <dropdown ng-model="content.contentType" options="contentTypes" on-change="contentTypeChanged()"></dropdown>
+                <dropdown ng-model="resource.contentType" options="contentTypes" on-change="contentTypeChanged()"></dropdown>
               </div>
               <div class="form-group col-sm-6">
-                <label class="custom-label"><p ng-bind="content.contentType + ' type:'"></p></label>
-                <dropdown ng-model="content.resource.type" options="types"></dropdown>
+                <label class="custom-label"><p ng-bind="resource.contentType + ' type:'"></p></label>
+                <dropdown ng-model="resource.resourceType" options="resourceTypes"></dropdown>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Title:</p></label>
-                <input ng-model="content.resource.title" type="text" class="form-control" placeholder="Make up a title">
+                <input ng-model="resource.title" type="text" class="form-control" placeholder="Make up a title">
               </div>
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Date:</p></label>
                 <div class="dropdown dtp-dropdown">
                   <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown">
                     <div class="input-group">
-                      <input format-date="DD.MM.YYYY" type="text" class="form-control" data-ng-model="content.resource.date" placeholder="Set date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      <input format-date="DD.MM.YYYY" type="text" class="form-control" data-ng-model="resource.date" placeholder="Set date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="content.resource.date" data-datetimepicker-config="{dropdownSelector: '#dropdown', minView:'day', startView:'day'}" />
+                    <datetimepicker data-ng-model="resource.date" data-datetimepicker-config="{dropdownSelector: '#dropdown', minView:'day', startView:'day'}" />
                   </ul>
                 </div>
               </div>
@@ -61,7 +61,7 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label class="custom-label"><p>Tags:</p></label>
-                <tags-input ng-model="content.resource.tags" min-length="2" display-property="text">
+                <tags-input ng-model="resource.tags" min-length="2" display-property="text">
                   <auto-complete source="loadTagSuggestions($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="10" template="autocomplete-template"></auto-complete>
                 </tags-input>
                 <script id="autocomplete-template" type="text/ng-template">
@@ -73,9 +73,9 @@
             </div>
           </div>
           <div class="col-sm-12" style="margin-top:20px;">
-            <h2 ng-bind="content.resource.title" class="center text-center" style="padding:10px; font-weight:300;"></h2>
+            <h2 ng-bind="resource.title" class="center text-center" style="padding:10px; font-weight:300;"></h2>
             <div class="da-5"></div>
-            <summernote config="summernote.options" ng-model="content.resource.description"></summernote>
+            <summernote config="summernote.options" ng-model="resource.description"></summernote>
           </div>
           <div class="form-group col-sm-12">
             <div class="pull-right">
