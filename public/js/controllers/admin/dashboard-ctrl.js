@@ -3,7 +3,12 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   // Initialize
 
   UserInterface.fillNavbar();
-  $scope.resources = [];
+
+  // Get user name
+  
+  Authorization.check().then(function(data){
+    $scope.currentUser = data.data.data;
+  });
 
   // Actions
 

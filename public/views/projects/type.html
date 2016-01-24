@@ -13,10 +13,10 @@
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
           <div class="view-item">
             <div class="hover-bg">
-              <a href="#" ng-click="openProject(project.type)">
+              <a href="#" ng-click="openProject(project._id)">
                 <div class="hover-text">
                   <h4 ng-bind="project.title"></h4>
-                  <small ng-bind="project.date"></small>
+                  <small ng-bind="project.date | Date"></small>
                   <div class="clearfix"></div>
                   <i class="fa fa-arrow-right"></i>
                 </div>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="categories">
+    <!--<div class="categories">
       <ul>
         <li><div class="active pagination-link"></div></li>
         <li><div class="pagination-link"></div></li>
@@ -37,7 +37,7 @@
         <li><div class="pagination-link"></div></li>
         <li><div class="pagination-link"></div></li>
       </ul>
-    </div>
+    </div>-->
     <div style="height:50px;"></div>
   </div>
 </div>

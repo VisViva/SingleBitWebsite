@@ -1,4 +1,4 @@
-angular.module('TypeCtrl', []).controller('TypeController', function($scope, $routeParams, UserInterface) {
+angular.module('TypeCtrl', []).controller('TypeController', function($scope, $routeParams, UserInterface, Resource) {
 
   // Initialize
 
@@ -8,15 +8,9 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $ro
 
   // Get activities
 
-  for (var i = 0; i < 8; ++i)
-  {
-    $scope.projects.push({
-      id: 15,
-      type: "game",
-      title: "Project #1",
-      date: "13 January 2015"
-    });
-  }
+  Resource.list().then(function(data){
+    $scope.projects = data.data.data;
+  });
 
   // Actions
 

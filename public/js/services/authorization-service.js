@@ -10,6 +10,10 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
     return $http.post('/api/login', user);
   };
 
+  authorization.check = function(){
+    return $http.get('/api/check');
+  };
+
   authorization.logout = function(){
     return $http.get('/api/logout');
   };
@@ -48,6 +52,10 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
 
     login : function(user){
       return authorization.login(user);
+    },
+
+    check : function(){
+      return authorization.check();
     },
 
     logout : function(){

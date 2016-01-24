@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, UserInterface) {
+angular.module('FeedCtrl', []).controller('FeedController', function($scope, UserInterface, Resource) {
 
   // Initialize
 
@@ -7,14 +7,9 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, Use
 
   // Get activities
 
-  for (var i = 0; i < 16; ++i){
-    $scope.activities.push({
-      id: 15,
-      title: "How to design achievements?",
-      date: "13 January 2015",
-      size: "5 minutes"
-    });
-  }
+  Resource.list().then(function(data){
+    $scope.activities = data.data.data;
+  });
 
   // Actions
 
