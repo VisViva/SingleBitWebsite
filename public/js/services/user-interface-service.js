@@ -1,4 +1,4 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', 'Authorization', function($location, $timeout, spinnerService, Authorization) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', function($location, $timeout, spinnerService) {
 
   var userInterface = this;
 
@@ -36,23 +36,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.loadRequestedLocation = function(){
     var location = $location.path().split('/');
     userInterface.selectedView = location[1];
-
-    if ((location.length > 2) && (location[1] == 'admin') && (location[2] != 'authorize')){
-      Authorization.loggedin().then(function(response){
-        if (response.data.success == true){
-          $timeout(function(){ userInterface.zoomIn(); }, 500);
-          alert(response.data.message);
-        } else {
-          userInterface.gotoLocation('admin/authorize');
-        }
-      }, function(){
-        alert('Error connecting to the server!');
-      });
-    } else {
-      $timeout(function(){ userInterface.zoomIn(); }, 500);
-    }
-
-    //$timeout(function(){ userInterface.zoomIn(); }, 500);
+    $timeout(function(){ userInterface.zoomIn(); }, 500);
   }
   userInterface.updateService = function(){
     userInterface.calculateDimensions();

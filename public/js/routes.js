@@ -3,11 +3,30 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   // Admin
   .when('/admin/authorize', {
     templateUrl: '../views/admin/authorize.html',
-    controller: 'AuthorizeController'
+    controller: 'AuthorizeController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.gotoDashboardIfLoggedIn();
+      }
+    }
+  })
+  .when('/admin/dashboard', {
+    templateUrl: '../views/admin/dashboard.html',
+    controller: 'DashboardController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
   })
   .when('/admin/publish', {
     templateUrl: '../views/admin/publish.html',
-    controller: 'PublishController'
+    controller: 'PublishController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
   })
   // Home
   .when('/', {

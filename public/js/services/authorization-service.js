@@ -1,18 +1,38 @@
-angular.module('AuthorizationService', []).factory('Authorization', ['$timeout','$http','spinnerService', function($timeout, $http, spinnerService) {
+angular.module('AuthorizationService', []).factory('Authorization', ['$timeout','$http','$q','UserInterface','spinnerService', function($timeout, $http, $q, UserInterface, spinnerService) {
 
   var authorization = this;
 
   authorization.register = function(user){
     return $http.post('/api/register', user);
-  }
+  };
 
   authorization.login = function(user){
     return $http.post('/api/login', user);
-  }
+  };
 
-  authorization.loggedin = function(){
-    return $http.get('/api/loggedin');
-  }
+  authorization.proceedIfLoggedIn = function(){
+    var defer = $q.defer();
+    $http.get('/api/check').then(function(response){
+      if (response.data.success == true){
+        defer.resolve();
+      } else {
+        defer.reject('401');
+      }
+    });
+    return defer.promise;
+  };
+
+  authorization.gotoDashboardIfLoggedIn = function(){
+    var defer = $q.defer();
+    $http.get('/api/check').then(function(response){
+      if (response.data.success == true){
+        defer.reject('already_authorized');
+      } else {
+        defer.resolve();
+      }
+    });
+    return defer.promise;
+  };
 
   return {
 
@@ -26,8 +46,12 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
       return authorization.login(user);
     },
 
-    loggedin : function(){
-      return authorization.loggedin();
+    proceedIfLoggedIn : function(){
+      return authorization.proceedIfLoggedIn();
+    },
+
+    gotoDashboardIfLoggedIn : function(){
+      return authorization.gotoDashboardIfLoggedIn();
     }
   }
 }]);

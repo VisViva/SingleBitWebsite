@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource){
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource, Authorization){
 
   // Initialize
 
@@ -67,8 +67,12 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
           break;
         }
       }
-      $scope.resourceType = $scope.resourceTypes[0];
+      $scope.resource.resourceType = $scope.resourceTypes[0];
     });
+  };
+
+  $scope.loadTagSuggestions = function(query){
+    return Resource.loadTagSuggestions(query);
   };
 
   $scope.save = function(){
@@ -79,7 +83,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     });
   };
 
-  $scope.loadTagSuggestions = function(query){
-    return Resource.loadTagSuggestions(query);
+  $scope.back = function(){
+
   };
 });

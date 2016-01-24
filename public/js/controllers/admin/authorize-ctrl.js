@@ -8,7 +8,7 @@ angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($
 
   $scope.login = function(){
     Authorization.login($scope.user).then(function(){
-      UserInterface.gotoLocation('admin/publish');
+      UserInterface.gotoLocation('admin/dashboard');
     },function(){
       alert("Wrong username / password!");
     });

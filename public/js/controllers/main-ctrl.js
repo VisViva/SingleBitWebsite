@@ -1,6 +1,19 @@
-angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface, $http) {
+angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface) {
 
   // Initialize user interface
+
+  $scope.$on("$routeChangeError", function(evt,current,previous,rejection){
+    switch(rejection){
+      case '401':{
+        $scope.gotoLocation('admin/authorize');
+        break;
+      }
+      case 'already_authorized':{
+        $scope.gotoLocation('admin/dashboard');
+        break;
+      }
+    }
+  });
 
   $scope.$on('$viewContentLoaded', function(){
     UserInterface.contentLoaded();
