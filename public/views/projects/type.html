@@ -9,7 +9,8 @@
     </div>
     <div style="height:20px;"></div>
     <div class="container">
-      <div ng-repeat="project in projects">
+      <div class="spinner da-45" ng-show="loading"></div>
+      <div ng-repeat="project in projects" ng-hide="loading">
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
           <view-item ng-model="project" ng-click="openProject(project._id)"></view-item>
         </div>

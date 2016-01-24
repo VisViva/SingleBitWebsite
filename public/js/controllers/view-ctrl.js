@@ -3,6 +3,7 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
   // Initialize
 
   UserInterface.fillNavbar();
+  $scope.loading = true;
 
   // Get activity
 
@@ -10,7 +11,8 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
   {
     Resource.get($routeParams.id).then(function(data){
       $scope.resource = data.data.data;
-      $scope.resource.description = $sce.trustAsHtml($scope.resource.description);
+      $scope.resource.description = $sce.trustAsHtml($scope.resource.description);      
+      $scope.loading = false;
     });
   }
 

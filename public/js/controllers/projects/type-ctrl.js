@@ -3,13 +3,13 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $ro
   // Initialize
 
   UserInterface.fillNavbar();
-  $scope.projects = [];
-  $scope.type = $routeParams.type;
+  $scope.loading = true;
 
   // Get activities
 
   Resource.list().then(function(data){
     $scope.projects = data.data.data;
+    $scope.loading = false;
   });
 
   // Actions

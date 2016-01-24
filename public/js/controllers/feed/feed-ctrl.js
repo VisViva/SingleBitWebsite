@@ -3,12 +3,13 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, Use
   // Initialize
 
   UserInterface.fillNavbar();
-  $scope.activities = [];
+  $scope.loading = true;
 
   // Get activities
 
   Resource.list().then(function(data){
     $scope.activities = data.data.data;
+    $scope.loading = false;
   });
 
   // Actions
