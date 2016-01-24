@@ -2,6 +2,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $ro
 
   // Initialize
 
+  UserInterface.fillNavbar();
   $scope.projects = [];
   $scope.type = $routeParams.type;
 

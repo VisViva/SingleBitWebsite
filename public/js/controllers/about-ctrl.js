@@ -1,2 +1,6 @@
-angular.module('ContactCtrl', []).controller('ContactController', function($scope, UserInterface) {
+angular.module('AboutCtrl', []).controller('AboutController', function($scope, UserInterface) {
+
+  // Initialize
+
+  UserInterface.fillNavbar();
 });

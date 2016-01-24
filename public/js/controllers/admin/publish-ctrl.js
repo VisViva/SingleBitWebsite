@@ -2,6 +2,8 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   // Initialize
 
+  UserInterface.fillNavbar();
+
   $scope.contentTypes = [
     "Activity",
     "Project"

@@ -1,4 +1,8 @@
 angular.module('ProjectsCtrl', []).controller('ProjectsController', function($scope, UserInterface) {
+  
+  // Initialize
+
+  UserInterface.fillNavbar();
 
   // Actions
 

@@ -67,7 +67,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   // Auxiliary methods
 
   userInterface.zoomIn = function zoom(){
-    userInterface.styleNavbar();
     if (userInterface.zoomInEnabled == false)
     setTimeout(function(){ zoom(); }, 100);
     else {
@@ -85,26 +84,8 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.fillNavbar = function(){
     $('.navbar-default').addClass('on');
   };
-  userInterface.styleNavbar = function(){
-    switch (userInterface.selectedView)
-    {
-      case 'admin': case 'feed': case 'projects': case 'about': case 'contact':
-      {
-        $('.navbar-default').addClass('on');
-        break;
-      }
-      case 'home': case '':
-      {
-        userInterface.selectedView = 'home';
-        $('.navbar-default').removeClass('on');
-        break;
-      }
-      default:
-      {
-        $('.navbar-default').removeClass('on');
-        break;
-      }
-    };
+  userInterface.emptyNavbar = function(){
+    $('.navbar-default').removeClass('on');
   };
 
   // Private methods
@@ -187,6 +168,12 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     },
     setZoomEnabled : function(){
       userInterface.setZoomEnabled();
+    },
+    fillNavbar : function(){
+      userInterface.fillNavbar();
+    },
+    emptyNavbar : function(){
+      userInterface.emptyNavbar();
     }
   }
 }]);

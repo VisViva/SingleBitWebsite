@@ -2,6 +2,8 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
 
   // Initialize
 
+  UserInterface.fillNavbar();  
+
   // Actions
 
   $scope.newResource = function(){

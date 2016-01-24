@@ -1,5 +1,9 @@
 angular.module('ViewCtrl', []).controller('ViewController', function($scope, $routeParams, $sce, UserInterface) {
 
+  // Initialize
+
+  UserInterface.fillNavbar();
+
   // Get activity
 
   $scope.resource = {

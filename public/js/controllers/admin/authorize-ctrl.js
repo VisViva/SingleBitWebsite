@@ -2,6 +2,7 @@ angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($
 
   // Initialization
 
+  UserInterface.fillNavbar();
   $scope.user;
 
   // Actions
