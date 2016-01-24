@@ -79,6 +79,37 @@ module.exports = {
     });
   },
 
+  get : function(req, res){
+    Resource.Resource.findById(Mongoose.Types.ObjectId(req.params.id), function (err, resource) {
+      if (!err) {
+        Q.all(resource._doc.tags.map(function (tag) {
+          return Tag.Tag.findById(Mongoose.Types.ObjectId(tag._doc._id));
+        })).then(function(results){
+          var foundResource = {
+            _id : resource._doc._id,
+            contentType : resource._doc.contentType,
+            date : resource._doc.date,
+            description : resource._doc.description,
+            resourceType : resource._doc.resourceType,
+            title : resource._doc.title,
+            tags : []
+          };
+          results.forEach(function (element) {
+            foundResource.tags.push({
+              _id : element._doc._id,
+              text : element._doc.text
+            });
+          });          
+          res.send({
+            success: true,
+            message: "Resource with id " + req.body.id + " has been successfully found!",
+            data: foundResource
+          });
+        });
+      }
+    });
+  },
+
   delete : function(req, res){
     Resource.Resource.findByIdAndRemove(Mongoose.Types.ObjectId(req.params.id), function (err) {
       if (!err) {

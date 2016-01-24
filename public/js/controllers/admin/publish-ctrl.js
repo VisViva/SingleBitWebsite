@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, UserInterface, Resource, Authorization){
+angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, $routeParams, UserInterface, Resource, Authorization){
 
   // Initialize
 
@@ -41,6 +41,15 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
       ]
     }
   };
+
+  // Get resource for editing
+
+  if ($routeParams.id != undefined)
+  {
+    Resource.get($routeParams.id).then(function(data){
+      $scope.resource = data.data.data;
+    });
+  }
 
   // Actions
 

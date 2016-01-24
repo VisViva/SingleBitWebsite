@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ccfbb1-8225-485d-985f-68e669ac947d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/account.js" afterPath="$PROJECT_DIR$/app/controllers/account.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/authorization-service.js" afterPath="$PROJECT_DIR$/public/js/services/authorization-service.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/admin/dashboard-ctrl.js" afterPath="$PROJECT_DIR$/public/js/controllers/admin/dashboard-ctrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/admin/dashboard.html" afterPath="$PROJECT_DIR$/public/views/admin/dashboard.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/admin/publish-ctrl.js" afterPath="$PROJECT_DIR$/public/js/controllers/admin/publish-ctrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/admin/publish.html" afterPath="$PROJECT_DIR$/public/views/admin/publish.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/resource-service.js" afterPath="$PROJECT_DIR$/public/js/services/resource-service.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/resource.js" afterPath="$PROJECT_DIR$/app/controllers/resource.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tag.js" afterPath="$PROJECT_DIR$/app/controllers/tag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/view.html" afterPath="$PROJECT_DIR$/public/views/view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/routes.js" afterPath="$PROJECT_DIR$/public/js/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SingleBit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,21 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2089041">
-              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="resource.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="resource.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/resource.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.30136988">
+              <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -377,7 +371,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="63" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -478,18 +472,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/resource.js">
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
+    <entry file="file://$PROJECT_DIR$/app/controllers/resource.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2089041">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.30136988">
+          <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
           <folding />
         </state>
       </provider>

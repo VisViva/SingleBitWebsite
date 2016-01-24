@@ -19,7 +19,16 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
       }
     }
   })
-  .when('/admin/publish', {
+  .when('/admin/publish/:id', {
+    templateUrl: '../views/admin/publish.html',
+    controller: 'PublishController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
+  })
+  .when('/admin/publish/', {
     templateUrl: '../views/admin/publish.html',
     controller: 'PublishController',
     resolve: {

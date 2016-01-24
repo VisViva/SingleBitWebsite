@@ -13,6 +13,10 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
     });
   }
 
+  $scope.editResource = function(id){
+    UserInterface.gotoLocation('admin/publish/' + id);
+  };
+
   $scope.deleteResource = function(id){
     Resource.delete(id).then(function(){
       $scope.refreshList();
