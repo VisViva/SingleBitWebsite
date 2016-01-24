@@ -2,6 +2,7 @@ angular.module("SingleBitApplication", [
   // Additional
   'angularSpinners',
   'ngTagsInput',
+  'naif.base64',
 
   // Angular
   'ngRoute',

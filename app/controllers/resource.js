@@ -38,6 +38,7 @@ module.exports = {
           contentType: resource.contentType,
           resourceType: resource.resourceType,
           title: resource.title,
+          thumbnail: resource.thumbnail,
           description: resource.description,
           tags: resource.tags,
           date: resource.date
@@ -59,6 +60,7 @@ module.exports = {
           contentType: resource.contentType,
           resourceType: resource.resourceType,
           title: resource.title,
+          thumbnail: resource.thumbnail,
           description: resource.description,
           tags: resource.tags,
           date: resource.date
@@ -90,6 +92,7 @@ module.exports = {
             contentType : resource._doc.contentType,
             date : resource._doc.date,
             description : resource._doc.description,
+            thumbnail : resource._doc.thumbnail,
             resourceType : resource._doc.resourceType,
             title : resource._doc.title,
             tags : []
@@ -99,7 +102,7 @@ module.exports = {
               _id : element._doc._id,
               text : element._doc.text
             });
-          });          
+          });
           res.send({
             success: true,
             message: "Resource with id " + req.body.id + " has been successfully found!",

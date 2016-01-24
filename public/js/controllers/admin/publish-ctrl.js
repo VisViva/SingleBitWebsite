@@ -97,4 +97,19 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
   $scope.goBack = function(){
     UserInterface.gotoLocation('admin/dashboard');
   };
+
+  $scope.performClick = function(id){
+    var elem = document.getElementById(id);
+    if(elem && document.createEvent) {
+      var evt = document.createEvent("MouseEvents");
+      evt.initEvent("click", true, false);
+      elem.dispatchEvent(evt);
+    }
+  }
+
+  $scope.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+    $timeout(function(){
+      $scope.resource.thumbnail = 'data:' + $scope.thumbnail.filetype + ';base64,' + $scope.thumbnail.base64;
+    });
+  };
 });

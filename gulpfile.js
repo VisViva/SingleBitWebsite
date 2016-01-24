@@ -23,6 +23,8 @@ var scripts = {
         'public/libs/summernote/summernote.js',
         // Tags
         'public/libs/ng-tags-input/ng-tags-input.min.js',
+        // Tags
+        'public/libs/angular-base64-upload/dist/angular-base64-upload.min.js',
 
         // Controllers
         'public/js/controllers/**/*.js',

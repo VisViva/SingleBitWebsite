@@ -9,22 +9,24 @@
         <h2>Publish <strong>content</strong></h2>
       </div>
       <div class="da-5"></div>
+      <input id="thumbnailInput" style="width: 100%;	height: 100%;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;" type="file" ng-model="thumbnail" name="thumbnail" onload="onLoad" base-sixty-four-input required maxsize="2000" accept="image/*">
       <div class="col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10">
         <div class="col-sm-12 row">
           <div class="col-sm-3">
             <label class="custom-label"><p>Thumbnail:</p></label>
             <div class="view-item" style="margin-top:0px;">
               <div class="hover-bg">
-                <a href="#" ng-click="loadThumbnail()">
+                <a href="#" ng-click="performClick('thumbnailInput')">
                   <div class="hover-text" style="padding-top:30px;">
                     <h4 ng-bind="resource.title"></h4>
                     <small ng-bind="resource.date | Date"></small>
                     <div class="clearfix"></div>
                     <i class="fa fa-cloud-upload"></i>
                   </div>
-                  <div style="height: 199px; background-color: #222; background-image: url('img/portfolio/item_video.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 7px;">
-                  </a>
-                </div>
+                  <div style="height: 199px; background-color: #222; background-image: url('img/portfolio/item_article.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 7px;">
+                    <img ng-src="{{resource.thumbnail}}" style="width:100%">
+                  </div>
+                </a>
               </div>
             </div>
           </div>

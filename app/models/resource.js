@@ -11,7 +11,7 @@ var ResourceSchema = Mongoose.Schema({
     type: String
   },
   thumbnail: {
-    type: Buffer
+    type: String
   },
   date: {
     type: Date

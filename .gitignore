@@ -4,9 +4,11 @@ public/dist/
 public/libs/angular
 public/libs/angular-route
 public/libs/angular-spinners
+public/libs/angular-base64-upload
 public/libs/bootstrap
 public/libs/font-awesome
 public/libs/jquery
+public/libs/jquery-mousewheel
 public/libs/lato
 public/libs/malihu-custom-scrollbar-plugin
 public/libs/moment

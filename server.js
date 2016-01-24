@@ -16,9 +16,9 @@ var Strategy = require('passport-local').Strategy;
 
 var app = Express();
 app.use(Logger('dev'));
-app.use(BodyParser.json());
-app.use(BodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.json({limit: '5mb'}));
+app.use(BodyParser.json({ type: 'application/vnd.api+json', limit: '5mb' }));
+app.use(BodyParser.urlencoded({ extended: true, limit: '5mb' }));
 app.use(CookieParser());
 app.use(Session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 app.use(MethodOverride('X-HTTP-Method-Override'));
