@@ -32,6 +32,7 @@ angular.module("SingleBitApplication", [
   'DateTimePickerDirective',
   'FormatDateDirective',
   'DropdownDirective',
+  'ViewItemDirective',
 
   // Filters
   'DateFilter'
