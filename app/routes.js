@@ -15,14 +15,15 @@ module.exports = function(root){
   Router.get('/api/logout', AccountController.logout);
   Router.get('/api/check', AccountController.check);
 
-  // Activities
+  // Resources
 
-  Router.post('/api/resource', ResourceController.save);
-  Router.get('/api/resource', ResourceController.list);
+  Router.post('/api/resource/save', ResourceController.save);
+  Router.delete('/api/resource/delete/:id', ResourceController.delete);
+  Router.get('/api/resource/list', ResourceController.list);
 
   // Tags
 
-  Router.post('/api/tags', TagController.suggest);
+  Router.get('/api/tags/:query', TagController.suggest);
 
   // Single Page Application
 

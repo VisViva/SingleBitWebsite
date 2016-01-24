@@ -20,7 +20,7 @@ app.use(BodyParser.json());
 app.use(BodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(CookieParser());
-app.use(Session({keys: ['secretkey1', 'secretkey2', '...']}));
+app.use(Session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 app.use(MethodOverride('X-HTTP-Method-Override'));
 app.use(Express.static(__dirname + Config.web));
 app.use(Passport.initialize());

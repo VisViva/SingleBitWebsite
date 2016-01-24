@@ -29,13 +29,12 @@ module.exports = {
   },
 
   logout : function(req, res){
-    req.session.destroy(function (err) {
+    req.session = null;
       res.send({
         success : true,
         message : req.user.username + "just logged out!",
         data : req.user.username
       });
-    });    
   },
 
   check : function(req, res) {

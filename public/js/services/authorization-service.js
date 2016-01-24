@@ -1,4 +1,4 @@
-angular.module('AuthorizationService', []).factory('Authorization', ['$timeout','$http','$q','UserInterface','spinnerService', function($timeout, $http, $q, UserInterface, spinnerService) {
+angular.module('AuthorizationService', []).factory('Authorization', ['$timeout','$http','$q','spinnerService', function($timeout, $http, $q, spinnerService) {
 
   var authorization = this;
 
@@ -8,6 +8,10 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
 
   authorization.login = function(user){
     return $http.post('/api/login', user);
+  };
+
+  authorization.logout = function(){
+    return $http.get('/api/logout');
   };
 
   authorization.proceedIfLoggedIn = function(){
@@ -44,6 +48,10 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
 
     login : function(user){
       return authorization.login(user);
+    },
+
+    logout : function(){
+      return authorization.logout();
     },
 
     proceedIfLoggedIn : function(){

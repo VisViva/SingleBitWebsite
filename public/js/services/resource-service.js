@@ -4,25 +4,29 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
 
   resource.save = function(object){
     var deferred = $q.defer();
-    $http.post('/api/resource', object).then(function(data){
+    $http.post('/api/resource/save', object).then(function(data){
       object._id = data.data.data._id;
       object.tags = data.data.data.tags;
       deferred.resolve(data.data.data);
     });
     return deferred.promise;
-  }
+  };
+
+  resource.delete = function(id){
+    return $http.delete('/api/resource/delete/' + id);
+  };
 
   resource.list = function(){
-    return $http.get('/api/resource');
-  }
+    return $http.get('/api/resource/list');
+  };
 
   resource.loadTagSuggestions = function(query){
     var deferred = $q.defer();
-    $http.post('/api/tags', {query:query}).then(function(data){
+    $http.get('/api/tags/' + query).then(function(data){
       deferred.resolve(data.data);
     });
     return deferred.promise;
-  }
+  };
 
   return {
 
@@ -30,6 +34,10 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
 
     save : function(object){
       return resource.save(object);
+    },
+
+    delete : function(id){
+      return resource.delete(id);
     },
 
     list : function(){

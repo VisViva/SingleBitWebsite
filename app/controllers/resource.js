@@ -46,7 +46,7 @@ module.exports = {
             updatedResource._doc.tags = resource.tags;
             res.send({
               success: true,
-              message: "Resource named " + req.body.title + " has been updated successfully!",
+              message: "Resource named " + req.body.title + " has been successfully updated!",
               data: updatedResource._doc
             });
           }
@@ -67,10 +67,10 @@ module.exports = {
             savedResource._doc.tags = resource.tags;
             res.send({
               success: true,
-              message: "Resource named " + req.body.title + " has been saved successfully!",
+              message: "Resource named " + req.body.title + " has been successfully saved!",
               data: savedResource._doc
             });
-            console.log("Resource named " + req.body.title + " has been saved successfully!");
+            console.log("Resource named " + req.body.title + " has been successfully saved!");
           }
         });
       }
@@ -79,12 +79,23 @@ module.exports = {
     });
   },
 
+  delete : function(req, res){
+    Resource.Resource.findByIdAndRemove(Mongoose.Types.ObjectId(req.params.id), function (err) {
+      if (!err) {
+        res.send({
+          success: true,
+          message: "Resource with id " + req.body.id + " has been successfully removed!"
+        });
+      }
+    });
+  },
+
   list : function(req, res){
     Resource.Resource.find(function(err, activities){
       if (!err) {
         res.send({
           success : true,
-          message : "Resource list has been acquired successfully!",
+          message : "Resource list has been successfully acquired!",
           data : activities
         });
       }

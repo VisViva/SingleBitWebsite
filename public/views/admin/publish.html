@@ -62,13 +62,8 @@
               <div class="form-group col-sm-12">
                 <label class="custom-label"><p>Tags:</p></label>
                 <tags-input ng-model="resource.tags" min-length="2" display-property="text">
-                  <auto-complete source="loadTagSuggestions($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="10" template="autocomplete-template"></auto-complete>
+                  <auto-complete source="loadTagSuggestions($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="10" ></auto-complete>
                 </tags-input>
-                <script id="autocomplete-template" type="text/ng-template">
-                  <div class="autocomplete-template">
-                      <span ng-bind="data.text"></span>
-                  </div>
-                </script>
               </div>
             </div>
           </div>
@@ -79,8 +74,8 @@
           </div>
           <div class="form-group col-sm-12">
             <div class="pull-right">
+              <button ng-click="goBack()" type="submit" class="btn btn-default btn-default">Back</button>
               <button ng-click="save()" type="submit" class="btn btn-warning btn-default">Save</button>
-              <button ng-click="back()" type="submit" class="btn btn-default btn-default">Back</button>
             </div>
           </div>
         </div>

@@ -619,9 +619,11 @@ button.btn.tf-btn.btn-default
 	font-weight: 400;
 	color: #FCAC45;
 }
-.back-arrow
+.circle-button
 {
 	font-size: 30px;
+	margin-left:3px;
+	margin-right:3px;
 	cursor: pointer;
 	cursor: hand;
 	color: #5A5A5A;
@@ -631,7 +633,25 @@ button.btn.tf-btn.btn-default
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
 }
-.back-arrow:hover
+.circle-button:hover
+{
+	color: #FCAC45;
+}
+.circle-button-small
+{
+	font-size: 20px;
+	margin-left:3px;
+	margin-right:3px;
+	cursor: pointer;
+	cursor: hand;
+	color: #5A5A5A;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.circle-button-small:hover
 {
 	color: #FCAC45;
 }

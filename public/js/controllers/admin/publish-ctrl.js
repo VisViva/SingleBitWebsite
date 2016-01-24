@@ -85,7 +85,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     });
   };
 
-  $scope.back = function(){
-
+  $scope.goBack = function(){
+    UserInterface.gotoLocation('admin/dashboard');
   };
 });

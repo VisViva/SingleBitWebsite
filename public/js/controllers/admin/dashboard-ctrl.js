@@ -1,20 +1,37 @@
-angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, UserInterface, Resource){
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, UserInterface, Authorization, Resource){
 
   // Initialize
 
-  UserInterface.fillNavbar();  
+  UserInterface.fillNavbar();
+  $scope.resources = [];
 
   // Actions
 
+  $scope.refreshList = function(){
+    Resource.list().then(function(data){
+      $scope.resources = data.data.data;
+    });
+  }
+
+  $scope.deleteResource = function(id){
+    Resource.delete(id).then(function(){
+      $scope.refreshList();
+    });
+  }
+
   $scope.newResource = function(){
-    UserInterface.loadRequestedLocation().then(function(){
-      UserInterface.gotoLocation('admin/dashboard');
+    UserInterface.gotoLocation('admin/publish');
+  };
+
+  $scope.logout = function(){
+    Authorization.logout().then(function(){
+      UserInterface.gotoLocation('home');
     },function(){
-      UserInterface.gotoLocation('admin/authorize');
+      alert("Something went wrong!");
     });
   };
 
-  $scope.back = function(){
-    UserInterface.gotoLocation('home');
-  };
+  // Get List
+
+  $scope.refreshList();
 });
