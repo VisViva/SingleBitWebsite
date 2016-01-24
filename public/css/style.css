@@ -7,11 +7,11 @@
 #menu
 {
 	padding: 20px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 .search-pane
 {
@@ -44,11 +44,11 @@
 	font-weight: 700;
 	cursor: pointer;
 	cursor: hand;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 .navbar-button:hover, .navbar-button:focus, .navbar-button.active
 {
@@ -73,12 +73,11 @@
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus
 {
 	color: #FCAC45 !important;
-	background-color: transparent;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 #menu span.navbar-brand
 {
@@ -105,11 +104,11 @@
 .navbar-default .navbar-toggle:hover > .icon-bar
 {
 	background-color: #FCAC45;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 .on
 {
@@ -212,7 +211,6 @@
 
 #about
 {
-
 	background: url(../img/backgrounds/BACKGROUND.jpg);
 	background-size: cover;
 	background-position: center;
@@ -604,11 +602,11 @@ button.btn.tf-btn.btn-default
 	cursor: hand;
 	font-weight: 400;
 	color: #B4B4B4;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 .custom-link.active
 {
@@ -684,26 +682,25 @@ button.btn.tf-btn.btn-default
 }
 .move-below
 {
-	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	-ms-transition: all 0.5s ease-in-out;
-	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
-	transform: translateY(-2500px);
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	transform: translateY(-2000px);
 }
 .move-center
 {
-
-	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	-ms-transition: all 0.5s ease-in-out;
-	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 	transform: translateY(0px);
 }
 .move-above
 {
-	transform: translateY(2500px);
+	transform: translateY(-2000px);
 }
 .full-width
 {
@@ -765,10 +762,12 @@ a:hover, a:focus
 	color: #FCAC45;
 }
 ul, ol
-.modal {
+.modal
+{
 	text-align: center;
 }
-.modal-dialog {
+.modal-dialog
+{
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
@@ -782,9 +781,11 @@ textarea
 {
 	resize: vertical;
 }
-::selection {
+::selection
+{
 	background: #FFA700;
 }
-::-moz-selection {
+::-moz-selection
+{
 	background: #FFA700;
 }

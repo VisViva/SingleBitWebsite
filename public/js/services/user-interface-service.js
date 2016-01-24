@@ -36,7 +36,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   userInterface.loadRequestedLocation = function(){
     var location = $location.path().split('/');
     userInterface.selectedView = location[1];
-    $timeout(function(){ userInterface.zoomIn(); }, 500);
+    $timeout(function(){ userInterface.zoomIn(); }, 300);
   }
   userInterface.updateService = function(){
     userInterface.calculateDimensions();
@@ -47,15 +47,16 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
 
   userInterface.gotoLocation = function(location){
     if ($location.path() != '/' + location){
-      userInterface.fillNavbar();
       userInterface.zoomOut();
+      if (location != 'home') userInterface.fillNavbar();
       $timeout(function(){
         spinnerService.show('viewSpinner');
         $location.path('/' + location);
         userInterface.selectedView = location.split('/')[0];
         userInterface.updateService();
+        if (location == 'home') userInterface.emptyNavbar();
         userInterface.zoomIn();
-      }, 500);
+      }, 300);
     }
   };
   userInterface.contentLoaded = function(){
@@ -76,7 +77,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   };
   userInterface.zoomOut = function(){
     $('.move-center').addClass('move-below').removeClass('move-center');
-    setTimeout(function(){ $('.move-below').removeClass('move-below').addClass('move-above'); }, 500);
+    setTimeout(function(){ $('.move-below').removeClass('move-below').addClass('move-above'); }, 300);
   };
   userInterface.setZoomEnabled = function(){
     userInterface.zoomInEnabled = true;
