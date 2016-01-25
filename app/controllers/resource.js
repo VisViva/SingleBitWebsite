@@ -126,7 +126,7 @@ module.exports = {
 
   list : function(req, res){
     var fields = '';
-    switch(req.params.type)
+    switch(req.params.fields)
     {
       case 'dashboard':{
         fields = 'contentType resourceType';
@@ -137,7 +137,55 @@ module.exports = {
         break;
       }
     };
-    Resource.Resource.find({}, fields + ' title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
+    var type = {};
+    switch(req.params.type)
+    {
+      case 'article':{
+        criteria = {'resourceType':'Article'};
+        break;
+      }
+      case 'diary':{
+        criteria = {'resourceType':'Article'};
+        break;
+      }
+      case 'podcast':{
+        criteria = {'resourceType':'Article'};
+        break;
+      }
+      case 'blog':{
+        criteria = {'resourceType':'Article'};
+        break;
+      }
+      case 'game':{
+        criteria = {'resourceType':'Game'};
+        break;
+      }
+      case '2d':{
+        criteria = {'resourceType':'2D art'};
+        break;
+      }
+      case '3d':{
+        criteria = {'resourceType':'3D art'};
+        break;
+      }
+      case 'music':{
+        criteria = {'resourceType':'Music'};
+        break;
+      }
+      case 'activity':{
+        criteria = {'contentType':'Activity'};
+        break;
+      }
+      case 'project':{
+        criteria = {'contentType':'Project'};
+        break;
+      }
+      default:{
+        criteria = {};
+        break;
+      }
+    };
+    Resource.Resource.find(criteria, fields + ' title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
           res.send({
@@ -160,6 +208,6 @@ module.exports = {
           });
         }
       }
-  });
+    });
   }
 }

@@ -9,11 +9,11 @@
     </div>
     <div class="categories">
       <ul>
-        <li><div href="#" class="active custom-link">All</div></li>
-        <li><div href="#" class="custom-link">Articles</div></li>
-        <li><div href="#" class="custom-link">Diary</div></li>
-        <li><div href="#" class="custom-link">Podcasts</div></li>
-        <li><div href="#" class="custom-link">Blog</div></li>
+        <li><div href="#" ng-class="type == 'activity' ? 'active' : ''" class="custom-link" ng-click="changeType('activity')">All</div></li>
+        <li><div href="#" ng-class="type == 'article' ? 'active' : ''" class="custom-link" ng-click="changeType('article')">Articles</div></li>
+        <li><div href="#" ng-class="type == 'diary' ? 'active' : ''" class="custom-link" ng-click="changeType('diary')">Diary</div></li>
+        <li><div href="#" ng-class="type == 'podcast' ? 'active' : ''" class="custom-link" ng-click="changeType('podcast')">Podcasts</div></li>
+        <li><div href="#" ng-class="type == 'blog' ? 'active' : ''" class="custom-link" ng-click="changeType('blog')">Blog</div></li>
       </ul>
       <div class="clearfix"></div>
     </div>

@@ -3,6 +3,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   // Initialize
 
   UserInterface.fillNavbar();
+  $scope.type = 'activity';
   $scope.page = ($routeParams.page != undefined) ? $routeParams.page : 1;
   $scope.total = 1;
   $scope.itemsPerPage = 8;
@@ -13,7 +14,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   $scope.listWithThumbnails = function(page)
   {
     $location.search('page', page);
-    Resource.listWithThumbnails(page, $scope.itemsPerPage).then(function(data){
+    Resource.listWithThumbnails($scope.type, page, $scope.itemsPerPage).then(function(data){
       if (data.data.success == true){
         $scope.activities = data.data.data.docs;
         $scope.page = data.data.data.page;
@@ -42,5 +43,11 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
 
   $scope.openActivity = function(id){
     UserInterface.gotoLocation('feed/view/' + id);
+  };
+
+  $scope.changeType = function(type){
+    $scope.type = type;
+    $scope.loading = true;
+    $scope.listWithThumbnails(1);
   };
 });

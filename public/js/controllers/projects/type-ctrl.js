@@ -13,7 +13,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   $scope.listWithThumbnails = function(page)
   {
     $location.search('page', page);
-    Resource.listWithThumbnails(page, $scope.itemsPerPage).then(function(data){
+    Resource.listWithThumbnails($routeParams.type, page, $scope.itemsPerPage).then(function(data){
       if (data.data.success == true){
         $scope.projects = data.data.data.docs;
         $scope.page = data.data.data.page;
@@ -27,8 +27,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
 
   $scope.listWithThumbnails($scope.page);
 
-  $scope.getPagesArray = function()
-  {
+  $scope.getPagesArray = function(){
     if ($scope.total == 0) return [];
     else return new Array(Math.floor($scope.total / $scope.itemsPerPage) + 1);
   }
