@@ -16,17 +16,11 @@
         </div>
       </div>
     </div>
-    <!--<div class="categories">
+    <div class="categories" ng-hide="loading">
       <ul>
-        <li><div class="active pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
-        <li><div class="pagination-link"></div></li>
+        <li ng-repeat="i in getPagesArray() track by $index"><div ng-class="page == $index+1 ? 'active' : ''" class="pagination-link" ng-click="paginateTo($index+1);"></div></li>
       </ul>
-    </div>-->
+    </div>
     <div style="height:50px;"></div>
   </div>
 </div>

@@ -1,0 +1,4 @@
+Client
+
+  . Fix the size of the thumbnail on the upload page
+  . Improve scrolling on touch devices

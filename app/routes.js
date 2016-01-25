@@ -4,8 +4,6 @@ var TagController = require('./controllers/tag');
 var Passport = require('passport');
 var Router = require('express').Router();
 
-
-
 module.exports = function(root){
 
   // Authentication
@@ -20,7 +18,7 @@ module.exports = function(root){
   Router.post('/api/resource/', ResourceController.save);
   Router.delete('/api/resource/:id', ResourceController.delete);
   Router.get('/api/resource/:id', ResourceController.get);
-  Router.get('/api/resource/list/:type', ResourceController.list);
+  Router.get('/api/resource/list/:type/:page/:itemsperpage', ResourceController.list);
 
   // Tags
 

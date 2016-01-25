@@ -2,11 +2,11 @@ var Resource = require('../models/resource.js');
 var Tag = require('../models/tag.js');
 var Mongoose = require('mongoose');
 var Q = require('q');
+require('mongoose-pagination');
 
 Mongoose.Promise = Q.Promise;
 
 module.exports = {
-
   save : function (req, res) {
     var resource = req.body;
 
@@ -136,15 +136,19 @@ module.exports = {
         fields = 'thumbnail';
         break;
       }
-    }
-    Resource.Resource.find({}, fields + ' title date ' , function(err, activities){
-      if (!err) {
+    };
+    Resource.Resource.find({}, fields + ' title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
+      if (!err){
         res.send({
           success : true,
           message : "Resource list has been successfully acquired!",
-          data : activities
+          data : {
+            docs : resources,
+            total : total,
+            page : req.params.page
+          }
         });
       }
-    });
+  });
   }
 }

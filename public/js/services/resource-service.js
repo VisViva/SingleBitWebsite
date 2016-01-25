@@ -20,8 +20,8 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
     return $http.delete('/api/resource/' + id);
   };
 
-  resource.list = function(type){
-    return $http.get('/api/resource/list/' + type);
+  resource.list = function(type, page, itemsPerPage){
+    return $http.get('/api/resource/list/' + type + '/' + page + '/' + itemsPerPage);
   };
 
   resource.loadTagSuggestions = function(query){
@@ -48,12 +48,12 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
       return resource.delete(id);
     },
 
-    listWithTypes : function(){
-      return resource.list('dashboard');
+    listWithTypes : function(page, itemsPerPage){
+      return resource.list('dashboard', page, itemsPerPage);
     },
 
-    listWithThumbnails : function(){
-      return resource.list('feed');
+    listWithThumbnails : function(page, itemsPerPage){
+      return resource.list('feed', page, itemsPerPage);
     },
 
     loadTagSuggestions : function(query){
