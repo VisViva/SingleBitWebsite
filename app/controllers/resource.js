@@ -139,15 +139,26 @@ module.exports = {
     };
     Resource.Resource.find({}, fields + ' title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
       if (!err){
-        res.send({
-          success : true,
-          message : "Resource list has been successfully acquired!",
-          data : {
-            docs : resources,
-            total : total,
-            page : req.params.page
-          }
-        });
+        if (resources.length != 0){
+          res.send({
+            success : true,
+            message : "Resource list has been successfully acquired!",
+            data : {
+              docs : resources,
+              total : total,
+              page : req.params.page
+            }
+          });
+        } else {
+          res.send({
+            success : false,
+            message : "No resources!",
+            data : {
+              total : total,
+              page : req.params.page
+            }
+          });
+        }
       }
   });
   }

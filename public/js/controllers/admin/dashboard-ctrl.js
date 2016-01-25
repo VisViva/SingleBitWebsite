@@ -1,9 +1,9 @@
-angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, UserInterface, Authorization, Resource){
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $location, $routeParams, UserInterface, Authorization, Resource){
 
   // Initialize
 
   UserInterface.fillNavbar();
-  $scope.page = 1;
+  $scope.page = ($routeParams.page != undefined) ? $routeParams.page : 1;
   $scope.total = 1;
   $scope.itemsPerPage = 8;
   $scope.loading = true;
@@ -19,10 +19,14 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   $scope.listWithTypes = function(page)
   {
     Resource.listWithTypes(page, $scope.itemsPerPage).then(function(data){
-      $scope.resources = data.data.data.docs;
-      $scope.page = data.data.data.page;
-      $scope.total = data.data.data.total;
-      $scope.loading = false;
+      if (data.data.success == true){
+        $scope.resources = data.data.data.docs;
+        $scope.page = data.data.data.page;
+        $scope.total = data.data.data.total;
+        $scope.loading = false;
+      } else {
+        UserInterface.gotoLocation('404');
+      }
     });
   }
 
@@ -35,6 +39,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   // Actions
 
   $scope.paginateTo = function(page){
+    $location.search('page', page);
     $scope.loading = true;
     $scope.listWithTypes(page);
   }

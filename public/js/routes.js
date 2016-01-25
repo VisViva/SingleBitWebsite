@@ -13,6 +13,17 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   .when('/admin/dashboard', {
     templateUrl: '../views/admin/dashboard.html',
     controller: 'DashboardController',
+    reloadOnSearch: false,
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
+  })
+  .when('/admin/dashboard/:page', {
+    templateUrl: '../views/admin/dashboard.html',
+    controller: 'DashboardController',
+    reloadOnSearch: false,
     resolve: {
       load : function(Authorization){
         return Authorization.proceedIfLoggedIn();
@@ -49,7 +60,13 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   // Activities
   .when('/feed', {
     templateUrl: '../views/feed/feed.html',
-    controller: 'FeedController'
+    controller: 'FeedController',
+    reloadOnSearch: false
+  })
+  .when('/feed/:page', {
+    templateUrl: '../views/feed/feed.html',
+    controller: 'FeedController',
+    reloadOnSearch: false
   })
   .when('/feed/view/:id', {
     templateUrl: '../views/view.html',
@@ -62,7 +79,13 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   .when('/projects/type/:type', {
     templateUrl: '../views/projects/type.html',
-    controller: 'TypeController'
+    controller: 'TypeController',
+    reloadOnSearch: false
+  })
+  .when('/projects/type/:type/:page', {
+    templateUrl: '../views/projects/type.html',
+    controller: 'TypeController',
+    reloadOnSearch: false
   })
   .when('/projects/view/:id', {
     templateUrl: '../views/view.html',

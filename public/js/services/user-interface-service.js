@@ -51,6 +51,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
       if (location != 'home') userInterface.fillNavbar();
       $timeout(function(){
         spinnerService.show('viewSpinner');
+        $location.url('/' + location);
         $location.path('/' + location);
         userInterface.selectedView = location.split('/')[0];
         userInterface.updateService();
