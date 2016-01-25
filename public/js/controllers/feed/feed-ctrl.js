@@ -7,7 +7,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, Use
 
   // Get activities
 
-  Resource.list().then(function(data){
+  Resource.listWithThumbnails().then(function(data){
     $scope.activities = data.data.data;
     $scope.loading = false;
   });

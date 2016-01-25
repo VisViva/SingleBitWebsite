@@ -7,7 +7,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $ro
 
   // Get activities
 
-  Resource.list().then(function(data){
+  Resource.listWithThumbnails().then(function(data){
     $scope.projects = data.data.data;
     $scope.loading = false;
   });

@@ -125,7 +125,19 @@ module.exports = {
   },
 
   list : function(req, res){
-    Resource.Resource.find(function(err, activities){
+    var fields = '';
+    switch(req.params.type)
+    {
+      case 'dashboard':{
+        fields = 'contentType resourceType';
+        break;
+      }
+      case 'feed':{
+        fields = 'thumbnail';
+        break;
+      }
+    }
+    Resource.Resource.find({}, fields + ' title date ' , function(err, activities){
       if (!err) {
         res.send({
           success : true,

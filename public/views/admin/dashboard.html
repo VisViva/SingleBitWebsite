@@ -25,6 +25,7 @@
               <th class="text-right">Actions</th>
             </tr>
           </thead>
+          <div class="spinner da-30" ng-show="loading"></div>
           <tbody ng-repeat="resource in resources">
             <tr>
               <td ng-bind="resource.contentType + '/' + resource.resourceType"></td>

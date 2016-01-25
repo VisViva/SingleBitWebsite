@@ -14,7 +14,7 @@ angular.module('ViewItemDirective', []).directive('viewItem', function ($compile
                               <div class="clearfix"></div>\
                               <i class="fa fa-arrow-right"></i>\
                             </div>\
-                            <img ng-src="{{model.thumbnail}}" class="img-responsive" alt="...">\
+                            <img ng-src="{{model.thumbnail}}" class="img-responsive full-width" alt="...">\
                           </a>\
                         </div>\
                       </div>';

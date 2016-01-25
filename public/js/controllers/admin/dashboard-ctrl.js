@@ -5,7 +5,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   UserInterface.fillNavbar();
 
   // Get user name
-  
+
   Authorization.check().then(function(data){
     $scope.currentUser = data.data.data;
   });
@@ -13,8 +13,10 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   // Actions
 
   $scope.refreshList = function(){
-    Resource.list().then(function(data){
+    $scope.loading = true;
+    Resource.listWithTypes().then(function(data){
       $scope.resources = data.data.data;
+      $scope.loading = false;
     });
   }
 

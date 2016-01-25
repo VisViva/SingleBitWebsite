@@ -15,7 +15,7 @@ var Strategy = require('passport-local').Strategy;
 // Application config
 
 var app = Express();
-app.use(Logger('dev'));
+//app.use(Logger('dev'));
 app.use(BodyParser.json({limit: '5mb'}));
 app.use(BodyParser.json({ type: 'application/vnd.api+json', limit: '5mb' }));
 app.use(BodyParser.urlencoded({ extended: true, limit: '5mb' }));

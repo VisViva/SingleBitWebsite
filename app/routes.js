@@ -20,7 +20,7 @@ module.exports = function(root){
   Router.post('/api/resource/', ResourceController.save);
   Router.delete('/api/resource/:id', ResourceController.delete);
   Router.get('/api/resource/:id', ResourceController.get);
-  Router.get('/api/resource/', ResourceController.list);
+  Router.get('/api/resource/list/:type', ResourceController.list);
 
   // Tags
 
