@@ -45,7 +45,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   }
 
   $scope.refreshList = function(){
-    $scope.listWithTypes($scope.page);
+    $scope.listWithoutThumbnails($scope.page);
   }
 
   $scope.editResource = function(id){
