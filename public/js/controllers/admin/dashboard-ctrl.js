@@ -3,7 +3,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   // Initialize
 
   UserInterface.fillNavbar();
-  $scope.page = ($routeParams.page != undefined) ? $routeParams.page : 1;
+  $scope.page = $routeParams.page;
   $scope.total = 1;
   $scope.itemsPerPage = 8;
   $scope.loading = true;
@@ -25,7 +25,8 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         $scope.total = data.data.data.total;
         $scope.loading = false;
       } else {
-        UserInterface.gotoLocation('404');
+        if ($scope.page != 1) UserInterface.gotoLocation('admin/dashboard');
+        else UserInterface.gotoLocation('404');
       }
     });
   }
@@ -33,19 +34,17 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   $scope.getPagesArray = function()
   {
     if ($scope.total == 0) return [];
-    else return new Array(Math.floor($scope.total / $scope.itemsPerPage) + 1);
+    else return new Array(Math.ceil($scope.total / $scope.itemsPerPage));
   }
 
   // Actions
 
   $scope.paginateTo = function(page){
-    $location.search('page', page);
-    $scope.loading = true;
-    $scope.listWithTypes(page);
+    UserInterface.gotoLocation('admin/dashboard/' + page);
   }
 
   $scope.refreshList = function(){
-    $scope.paginateTo($scope.page);
+    $scope.listWithTypes($scope.page);
   }
 
   $scope.editResource = function(id){

@@ -11,26 +11,18 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     }
   })
   .when('/admin/dashboard', {
-    templateUrl: '../views/admin/dashboard.html',
-    controller: 'DashboardController',
-    reloadOnSearch: false,
-    resolve: {
-      load : function(Authorization){
-        return Authorization.proceedIfLoggedIn();
-      }
-    }
+    redirectTo: '/admin/dashboard/1'
   })
   .when('/admin/dashboard/:page', {
     templateUrl: '../views/admin/dashboard.html',
     controller: 'DashboardController',
-    reloadOnSearch: false,
     resolve: {
       load : function(Authorization){
         return Authorization.proceedIfLoggedIn();
       }
     }
   })
-  .when('/admin/publish/:id', {
+  .when('/admin/publish/', {
     templateUrl: '../views/admin/publish.html',
     controller: 'PublishController',
     resolve: {
@@ -39,7 +31,7 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
       }
     }
   })
-  .when('/admin/publish/', {
+  .when('/admin/publish/:id', {
     templateUrl: '../views/admin/publish.html',
     controller: 'PublishController',
     resolve: {
@@ -59,18 +51,11 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   // Activities
   .when('/feed', {
-    templateUrl: '../views/feed/feed.html',
-    controller: 'FeedController',
-    reloadOnSearch: false
+    redirectTo: '/feed/activity/1'
   })
-  .when('/feed/:page', {
+  .when('/feed/:type/:page', {
     templateUrl: '../views/feed/feed.html',
-    controller: 'FeedController',
-    reloadOnSearch: false
-  })
-  .when('/feed/view/:id', {
-    templateUrl: '../views/view.html',
-    controller: 'ViewController'
+    controller: 'FeedController'
   })
   // Projects
   .when('/projects', {
@@ -79,15 +64,13 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   .when('/projects/type/:type', {
     templateUrl: '../views/projects/type.html',
-    controller: 'TypeController',
-    reloadOnSearch: false
+    controller: 'TypeController'
   })
   .when('/projects/type/:type/:page', {
     templateUrl: '../views/projects/type.html',
-    controller: 'TypeController',
-    reloadOnSearch: false
+    controller: 'TypeController'
   })
-  .when('/projects/view/:id', {
+  .when('/view/:id', {
     templateUrl: '../views/view.html',
     controller: 'ViewController'
   })
@@ -107,7 +90,7 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   })
   // Otherwise
   .otherwise({
-    redirectTo: '/404',
+    redirectTo: '/404'
   })
 
   $locationProvider.html5Mode(true);

@@ -145,15 +145,15 @@ module.exports = {
         break;
       }
       case 'diary':{
-        criteria = {'resourceType':'Article'};
+        criteria = {'resourceType':'Diary'};
         break;
       }
       case 'podcast':{
-        criteria = {'resourceType':'Article'};
+        criteria = {'resourceType':'Podcast'};
         break;
       }
       case 'blog':{
-        criteria = {'resourceType':'Article'};
+        criteria = {'resourceType':'Blog'};
         break;
       }
       case 'game':{
