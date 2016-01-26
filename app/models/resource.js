@@ -21,6 +21,9 @@ var ResourceSchema = Mongoose.Schema({
   }],
   description: {
     type: String
+  },
+  number: {
+    type: String
   }
 });
 

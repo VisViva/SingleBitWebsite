@@ -47,11 +47,15 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-sm-12">
+              <div class="form-group col-sm-10">
                 <label class="custom-label"><p>Tags:</p></label>
                 <tags-input ng-model="resource.tags" min-length="2" display-property="text">
                   <auto-complete source="loadTagSuggestions($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="10" ></auto-complete>
                 </tags-input>
+              </div>
+              <div class="form-group col-sm-2">
+                <label class="custom-label"><p>Number:</p></label>
+                <input ng-model="resource.number" type="text" class="form-control" placeholder="Number">
               </div>
             </div>
           </div>

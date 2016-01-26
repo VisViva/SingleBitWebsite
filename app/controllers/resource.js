@@ -41,7 +41,8 @@ module.exports = {
           thumbnail: resource.thumbnail,
           description: resource.description,
           tags: resource.tags,
-          date: resource.date
+          date: resource.date,
+          number: resource.number
         }, function (err, updatedResource) {
           if (!err) {
             updatedResource._doc.tags = resource.tags;
@@ -63,7 +64,8 @@ module.exports = {
           thumbnail: resource.thumbnail,
           description: resource.description,
           tags: resource.tags,
-          date: resource.date
+          date: resource.date,
+          number: resource.number
         }).save(function (err, savedResource) {
           if (!err) {
             savedResource._doc.tags = resource.tags;
@@ -95,7 +97,8 @@ module.exports = {
             thumbnail : resource._doc.thumbnail,
             resourceType : resource._doc.resourceType,
             title : resource._doc.title,
-            tags : []
+            tags : [],
+            number: resource._doc.number
           };
           results.forEach(function (element) {
             foundResource.tags.push({
@@ -181,7 +184,7 @@ module.exports = {
         break;
       }
     };
-    Resource.Resource.find(criteria, fields + ' contentType resourceType title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
+    Resource.Resource.find(criteria, fields + ' contentType resourceType title date number').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
           res.send({

@@ -10,7 +10,7 @@ angular.module('ViewItemDirective', []).directive('viewItem', function ($compile
         return (scope.model.resourceType == type);
       }
       scope.showThumbnailIfExists = function(){
-        return !((angular.isUndefined(scope.model.thumbnail)) || (scope.model.thumbnail.length == 0));
+        return (angular.isUndefined(scope.model.thumbnail) || (scope.model.thumbnail == null)) ? false : ((scope.model.thumbnail.length == 0) ? false : true);
       }
       var template = '<div class="view-item">\
                         <div class="hover-bg">\
@@ -23,15 +23,17 @@ angular.module('ViewItemDirective', []).directive('viewItem', function ($compile
                             </div>\
                             <img ng-show="showThumbnailIfExists();" ng-src="{{model.thumbnail}}" class="img-responsive full-width">\
                             <img ng-show="!showThumbnailIfExists();" ng-src="{{placeholder}}" class="img-responsive full-width">\
-                            <div style="top: 100%; transform: translateY(-100%); position: absolute; width: 100px;">\
-                              <i ng-show="showIf(' + "'Music'" + ')"class="fa fa-music" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: 3px;height: 60px;width: 60px;font-size: 50px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'Diary'" + ')"class="fa fa-youtube" style="color: #FFF;z-index:0;margin-left: 10px;margin-bottom: 10px;height: 60px;width: 60px;font-size: 60px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'Blog'" + ')"class="fa fa-rss" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: 5px;height: 60px;width: 60px;font-size: 60px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'Podcast'" + ')"class="fa fa-microphone" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: 8px;height: 60px;width: 60px;font-size: 60px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'Article'" + ')"class="fa fa-newspaper-o" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: -3px;height: 60px;width: 60px;font-size: 50px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'Game'" + ')"class="fa fa-gamepad" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: -3px;height: 60px;width: 60px;font-size: 50px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'2D art'" + ')"class="fa fa-paint-brush" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: 2px;height: 60px;width: 60px;font-size: 50px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
-                              <i ng-show="showIf(' + "'3D art'" + ')"class="fa fa-cube" style="color: #FFF;z-index:0;margin-left: 15px;margin-bottom: 3px;height: 60px;width: 60px;font-size: 50px;padding:0px;border:none;text-shadow: 1px 1px 1px #000;"></i>\
+                            <div class="view-item-icon-container">\
+                              <span ng-show="showIf(' + "'Music'" + ')"class="fa fa-music music-fix"></span>\
+                              <span ng-show="showIf(' + "'Diary'" + ')"class="fa fa-youtube diary-fix"></span>\
+                              <span ng-show="showIf(' + "'Blog'" + ')"class="fa fa-rss blog-fix"></span>\
+                              <span ng-show="showIf(' + "'Podcast'" + ')"class="fa fa-microphone podcast-fix"></span>\
+                              <span ng-show="showIf(' + "'Article'" + ')"class="fa fa-newspaper-o article-fix"></span>\
+                              <span ng-show="showIf(' + "'Game'" + ')"class="fa fa-gamepad game-fix"></span>\
+                              <span ng-show="showIf(' + "'2D art'" + ')"class="fa fa-paint-brush brush-fix"></span>\
+                              <span ng-show="showIf(' + "'3D art'" + ')"class="fa fa-cube cube-fix"></span>\
+                            </div>\
+                            <div ng-bind="' + "'#'" + ' + model.number" class="view-item-number">\
                             </div>\
                           </a>\
                         </div>\
