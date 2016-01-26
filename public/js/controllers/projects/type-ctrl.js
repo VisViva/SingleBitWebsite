@@ -23,14 +23,15 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   });
 
   $scope.getPagesArray = function(){
-    if ($scope.total == 0) return [];
-    else return new Array(Math.ceil($scope.total / $scope.itemsPerPage));
+    var count = Math.ceil($scope.total / $scope.itemsPerPage);
+    if (count < 2) return [];
+    else return new Array(count);
   }
 
   // Actions
 
   $scope.paginateTo = function(page){
-    UserInterface.gotoLocation('projects/type/' + $routeParams.type + '/' + page);
+    if (page != $scope.page) UserInterface.gotoLocation('projects/type/' + $routeParams.type + '/' + page);
   }
 
   $scope.openProject = function(id){

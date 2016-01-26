@@ -25,14 +25,15 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
 
   $scope.getPagesArray = function()
   {
-    if ($scope.total == 0) return [];
-    else return new Array(Math.ceil($scope.total / $scope.itemsPerPage));
+    var count = Math.ceil($scope.total / $scope.itemsPerPage);
+    if (count < 2) return [];
+    else return new Array(count);
   }
 
   // Actions
 
   $scope.paginateTo = function(page){
-    UserInterface.gotoLocation('feed/' + $scope.type + '/' + page);
+    if (page != $scope.page) UserInterface.gotoLocation('feed/' + $scope.type + '/' + page);
   }
 
   $scope.openActivity = function(id){
