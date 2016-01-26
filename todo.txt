@@ -1,6 +1,6 @@
  Client
 
   . Improve scrolling on touch devices
-  . Spinner in editing while resource is loading
-  . Search
+  . Spinner in editing while resource is loading  
   . Sort pagination by date
+  . Search

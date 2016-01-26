@@ -46,7 +46,9 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   if ($routeParams.id != undefined)
   {
+    $scope.loading = true;
     Resource.get($routeParams.id).then(function(data){
+      $scope.loading = false;
       $scope.resource = data.data.data;
     });
   }
