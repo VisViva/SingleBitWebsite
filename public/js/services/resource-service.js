@@ -48,8 +48,8 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
       return resource.delete(id);
     },
 
-    listWithTypes : function(page, itemsPerPage){
-      return resource.list('all', 'dashboard', page, itemsPerPage);
+    listWithoutThumbnails : function(page, itemsPerPage){
+      return resource.list('all', 'none', page, itemsPerPage);
     },
 
     listWithThumbnails : function(type, page, itemsPerPage){

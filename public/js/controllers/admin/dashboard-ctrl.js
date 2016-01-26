@@ -16,9 +16,9 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
 
   // Get activities
 
-  $scope.listWithTypes = function(page)
+  $scope.listWithoutThumbnails = function(page)
   {
-    Resource.listWithTypes(page, $scope.itemsPerPage).then(function(data){
+    Resource.listWithoutThumbnails(page, $scope.itemsPerPage).then(function(data){
       if (data.data.success == true){
         $scope.resources = data.data.data.docs;
         $scope.page = data.data.data.page;

@@ -88,7 +88,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.save = function(){
     Resource.save($scope.resource).then(function(){
-      alert('Resource has been saved successfully!');
+        UserInterface.gotoLocation('admin/dashboard');
     },function(){
       alert("Resource has not been saved, something went wrong!");
     });

@@ -128,10 +128,6 @@ module.exports = {
     var fields = '';
     switch(req.params.fields)
     {
-      case 'dashboard':{
-        fields = 'contentType resourceType';
-        break;
-      }
       case 'feed':{
         fields = 'thumbnail';
         break;
@@ -185,7 +181,7 @@ module.exports = {
         break;
       }
     };
-    Resource.Resource.find(criteria, fields + ' title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
+    Resource.Resource.find(criteria, fields + ' contentType resourceType title date').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
           res.send({

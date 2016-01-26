@@ -1,4 +1,10 @@
-Client
+ Client
 
   . Fix the size of the thumbnail on the upload page
   . Improve scrolling on touch devices
+
+  . Spinner in editing while resource is loading
+  . Dynamic numbers
+  . Search
+
+  . Problems when suggestions are duplicate due to slow speed

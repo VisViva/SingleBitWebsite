@@ -3,6 +3,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   // Initialize
 
   UserInterface.fillNavbar();
+  $scope.type = $routeParams.type;
   $scope.page = $routeParams.page;
   $scope.total = 1;
   $scope.itemsPerPage = 8;

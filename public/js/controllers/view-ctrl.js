@@ -11,7 +11,7 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
   {
     Resource.get($routeParams.id).then(function(data){
       $scope.resource = data.data.data;
-      $scope.resource.description = $sce.trustAsHtml($scope.resource.description);      
+      $scope.resource.description = $sce.trustAsHtml($scope.resource.description);
       $scope.loading = false;
     });
   }
@@ -19,6 +19,21 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
   // Actions
 
   $scope.goBack = function(){
-    UserInterface.gotoLocation(UserInterface.getSelectedView());
+    var location = 'home';
+    if (!angular.isUndefined($scope.resource))
+    {
+      switch($scope.resource.contentType)
+      {
+        case 'Activity':{
+          location = 'feed';
+          break;
+        }
+        case 'Project':{
+          location = 'projects/type/' + $scope.resource.resourceType.toLowerCase().split(' ')[0];
+          break;
+        }
+      }
+    }
+    UserInterface.gotoLocation(location);
   };
 });
