@@ -10,74 +10,98 @@ module.exports = {
   save : function (req, res) {
     var resource = req.body;
 
-    // Insert tags
+    // Check tags for existence
 
     Q.all(resource.tags.map(function (tag) {
       if (tag._id == undefined) {
-        return new Tag.Tag({text: tag.text}).save();
+        return Tag.Tag.findOne({text:tag.text});
       } else {
-        tag._id = Mongoose.Types.ObjectId(tag._id);
         return Q(tag);
       }
     })).then(function (results) {
       console.log(results);
       results.forEach(function (element) {
-        if (element._doc != undefined) {
-          for (var i = 0; i < resource.tags.length; ++i) {
-            if (resource.tags[i].text == element._doc.text) {
-              resource.tags[i]._id = element._doc._id;
+        if (element != null) {
+          if (element._doc != undefined) {
+            for (var i = 0; i < resource.tags.length; ++i) {
+              if (resource.tags[i].text == element._doc.text) {
+                resource.tags[i]._id = element._doc._id;
+              }
             }
           }
         }
       });
+    }).then(function(){
 
-      // Update resource
+      // Insert tags
 
-      if (resource._id != undefined) {
-        Resource.Resource.findByIdAndUpdate(Mongoose.Types.ObjectId(resource._id), {
-          contentType: resource.contentType,
-          resourceType: resource.resourceType,
-          title: resource.title,
-          thumbnail: resource.thumbnail,
-          description: resource.description,
-          tags: resource.tags,
-          date: resource.date,
-          number: resource.number
-        }, function (err, updatedResource) {
-          if (!err) {
-            updatedResource._doc.tags = resource.tags;
-            res.send({
-              success: true,
-              message: "Resource named " + req.body.title + " has been successfully updated!",
-              data: updatedResource._doc
-            });
+      Q.all(resource.tags.map(function (tag) {
+        if (tag._id == undefined) {
+          return new Tag.Tag({text: tag.text}).save();
+        } else {
+          tag._id = Mongoose.Types.ObjectId(tag._id);
+          return Q(tag);
+        }
+      })).then(function (results) {
+        console.log(results);
+        results.forEach(function (element) {
+          if (element._doc != undefined) {
+            for (var i = 0; i < resource.tags.length; ++i) {
+              if (resource.tags[i].text == element._doc.text) {
+                resource.tags[i]._id = element._doc._id;
+              }
+            }
           }
         });
-      } else {
 
-        // Insert resource
+        // Update resource
 
-        new Resource.Resource({
-          contentType: resource.contentType,
-          resourceType: resource.resourceType,
-          title: resource.title,
-          thumbnail: resource.thumbnail,
-          description: resource.description,
-          tags: resource.tags,
-          date: resource.date,
-          number: resource.number
-        }).save(function (err, savedResource) {
-          if (!err) {
-            savedResource._doc.tags = resource.tags;
-            res.send({
-              success: true,
-              message: "Resource named " + req.body.title + " has been successfully saved!",
-              data: savedResource._doc
-            });
-            console.log("Resource named " + req.body.title + " has been successfully saved!");
-          }
-        });
-      }
+        if (resource._id != undefined) {
+          Resource.Resource.findByIdAndUpdate(Mongoose.Types.ObjectId(resource._id), {
+            contentType: resource.contentType,
+            resourceType: resource.resourceType,
+            title: resource.title,
+            thumbnail: resource.thumbnail,
+            description: resource.description,
+            tags: resource.tags,
+            date: resource.date,
+            number: resource.number
+          }, function (err, updatedResource) {
+            if (!err) {
+              updatedResource._doc.tags = resource.tags;
+              res.send({
+                success: true,
+                message: "Resource named " + req.body.title + " has been successfully updated!",
+                data: updatedResource._doc
+              });
+            }
+          });
+        } else {
+
+          // Insert resource
+
+          new Resource.Resource({
+            contentType: resource.contentType,
+            resourceType: resource.resourceType,
+            title: resource.title,
+            thumbnail: resource.thumbnail,
+            description: resource.description,
+            tags: resource.tags,
+            date: resource.date,
+            number: resource.number
+          }).save(function (err, savedResource) {
+                if (!err) {
+                  savedResource._doc.tags = resource.tags;
+                  res.send({
+                    success: true,
+                    message: "Resource named " + req.body.title + " has been successfully saved!",
+                    data: savedResource._doc
+                  });
+                  console.log("Resource named " + req.body.title + " has been successfully saved!");
+                }
+              });
+        }
+      });
     }, function (err) {
       console.log(err);
     });
