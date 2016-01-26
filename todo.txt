@@ -1,5 +1,6 @@
  Client
 
+  . Double click on menu items result in freezing
   . Improve scrolling on touch devices
   . Sort pagination by date
   . Search
