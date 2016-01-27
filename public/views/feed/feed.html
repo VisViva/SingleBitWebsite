@@ -6,8 +6,10 @@
     <div class="da-5"></div>
     <div class="section-title text-center center">
       <h2>Latest <strong>activities</strong></h2>
+      <div style="height:10px;"></div>
+      <h4 ng-bind="'(' + total + ')'"></h4>
     </div>
-    <div class="da-10"></div>
+    <div class="da-5"></div>
     <div class="categories">
       <ul>
         <li><div href="#" ng-class="type == 'activity' ? 'active' : ''" class="custom-link" ng-click="changeType('activity')">All</div></li>

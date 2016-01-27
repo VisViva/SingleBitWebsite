@@ -5,7 +5,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
   UserInterface.fillNavbar();
   $scope.page = $routeParams.page;
   $scope.total = 1;
-  $scope.itemsPerPage = 8;
+  $scope.itemsPerPage = 16;
   $scope.loading = true;
 
   // Get user name

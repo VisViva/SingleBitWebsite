@@ -24,6 +24,10 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
     return $http.get('/api/resource/list/' + type + '/' + fields + '/' + page + '/' + itemsPerPage);
   };
 
+  resource.next = function(type){
+    return $http.get('/api/resource/next/' + type);
+  };
+
   resource.loadTagSuggestions = function(query){
     var deferred = $q.defer();
     $http.get('/api/tags/' + query).then(function(data){
@@ -58,6 +62,10 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
 
     loadTagSuggestions : function(query){
       return resource.loadTagSuggestions(query);
+    },
+
+    next : function(type){
+      return resource.next(type);
     }
   }
 }]);

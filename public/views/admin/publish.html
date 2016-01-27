@@ -21,11 +21,11 @@
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p>Content type:</p></label>
-                <dropdown ng-model="resource.contentType" options="contentTypes" on-change="contentTypeChanged()"></dropdown>
+                <dropdown ng-model="resource.contentType" options="contentTypes" on-change="contentTypeChanged();"></dropdown>
               </div>
               <div class="form-group col-sm-6">
                 <label class="custom-label"><p ng-bind="resource.contentType + ' type:'"></p></label>
-                <dropdown ng-model="resource.resourceType" options="resourceTypes"></dropdown>
+                <dropdown ng-model="resource.resourceType" options="resourceTypes" on-change="resourceTypeChanged();"></dropdown>
               </div>
             </div>
             <div class="row">

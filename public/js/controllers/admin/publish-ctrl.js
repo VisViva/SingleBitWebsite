@@ -18,7 +18,8 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.resource = {
     contentType : $scope.contentTypes[0],
-    resourceType : $scope.resourceTypes[0]
+    resourceType : $scope.resourceTypes[0],
+    date : Date.now()
   };
 
   $scope.summernote = {
@@ -42,6 +43,14 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
     }
   };
 
+  // Helper methods
+
+  $scope.getNextNumber = function(){
+    Resource.next($scope.resource.resourceType).then(function(data){
+      $scope.resource.number = data.data.data;
+    });
+  };
+
   // Get resource for editing
 
   if ($routeParams.id != undefined)
@@ -51,6 +60,8 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
       $scope.loading = false;
       $scope.resource = data.data.data;
     });
+  } else {
+    $scope.getNextNumber();
   }
 
   // Actions
@@ -81,6 +92,13 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
         }
       }
       $scope.resource.resourceType = $scope.resourceTypes[0];
+      $scope.getNextNumber();
+    });
+  };
+
+  $scope.resourceTypeChanged =  function(){
+    $timeout(function(){
+      $scope.getNextNumber();
     });
   };
 
@@ -90,7 +108,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.save = function(){
     Resource.save($scope.resource).then(function(){
-        UserInterface.gotoLocation('admin/dashboard');
+      UserInterface.gotoLocation('admin/dashboard');
     },function(){
       alert("Resource has not been saved, something went wrong!");
     });

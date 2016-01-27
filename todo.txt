@@ -3,3 +3,4 @@
   . Double click on menu items results in freezing
   . Improve scrolling on touch devices
   . Search
+  . Back doesn't return to last page

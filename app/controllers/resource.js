@@ -92,16 +92,16 @@ module.exports = {
             date: resource.date,
             number: resource.number
           }).save(function (err, savedResource) {
-                if (!err) {
-                  savedResource._doc.tags = resource.tags;
-                  res.send({
-                    success: true,
-                    message: "Resource named " + req.body.title + " has been successfully saved!",
-                    data: savedResource._doc
-                  });
-                  console.log("Resource named " + req.body.title + " has been successfully saved!");
-                }
+            if (!err) {
+              savedResource._doc.tags = resource.tags;
+              res.send({
+                success: true,
+                message: "Resource named " + req.body.title + " has been successfully saved!",
+                data: savedResource._doc
               });
+              console.log("Resource named " + req.body.title + " has been successfully saved!");
+            }
+          });
         }
       });
     }, function (err) {
@@ -232,6 +232,19 @@ module.exports = {
             }
           });
         }
+      }
+    });
+  },
+
+  next : function(req, res){
+    var findQuery = Resource.Resource.find({'resourceType': req.params.type}, 'number').sort({number : -1}).limit(1);
+    findQuery.exec(function(err, foundResource){
+      if (!err){
+        res.send({
+          success : true,
+          message : "New " + req.params.type + "'s number acquired!",
+          data : parseInt(foundResource[0]._doc.number) + 1
+        });
       }
     });
   }
