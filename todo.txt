@@ -6,4 +6,5 @@
   . Animations on project type buttons
   . E-mail
   . Search
-  . Back doesn't return to last page
+  . Convert String type to Buffer for images
+  . Add tags to a view

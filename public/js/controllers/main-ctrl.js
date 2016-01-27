@@ -7,12 +7,12 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
       case '401':{
         $scope.gotoLocation('admin/authorize');
         break;
-      }
+      };
       case 'already_authorized':{
         $scope.gotoLocation('admin/dashboard');
         break;
-      }
-    }
+      };
+    };
   });
 
   $scope.$on('$viewContentLoaded', function(){
@@ -33,6 +33,8 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
     ]
   });
 
+  $scope.searchText = "";
+
   // Get current location and scroll if needed
 
   UserInterface.loadRequestedLocation();
@@ -41,18 +43,27 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
 
   $scope.isViewSelected = function(view){
     return view == UserInterface.getSelectedView();
-  }
+  };
 
   // Actions
 
-  $scope.toggleSearch = function()
-  {
-    $scope.search =! $scope.search;
+  $scope.toggleSearch = function(){
     UserInterface.hideMenu();
-  }
-  $scope.gotoLocation = function(location)
-  {
+    $scope.search =! $scope.search;
+    if (($scope.search == false) && ($scope.isViewSelected('search'))){
+      UserInterface.gotoLocation('home');
+    }
+  };
+
+  $scope.gotoLocation = function(location){
     UserInterface.hideMenu();
     UserInterface.gotoLocation(location);
-  }
-})
+  };
+
+  $scope.searchIfEnter = function(event){
+    UserInterface.hideMenu();
+    if (event.keyCode == 13){
+      UserInterface.gotoLocation('search/' + $scope.searchText + '/1');
+    };
+  };
+});

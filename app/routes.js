@@ -20,6 +20,7 @@ module.exports = function(root){
   Router.get('/api/resource/:id', ResourceController.get);
   Router.get('/api/resource/list/:type/:fields/:page/:itemsperpage', ResourceController.list);
   Router.get('/api/resource/next/:type', ResourceController.next);
+  Router.get('/api/resource/search/:text/:page/:itemsperpage', ResourceController.find)
 
   // Tags
 

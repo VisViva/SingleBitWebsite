@@ -1,0 +1,28 @@
+<!-- Search Section -->
+
+<div id="projects" class="da-100">
+  <div style="height:50px;"></div>
+  <div class="scrollable-dark da-view">
+    <div class="da-5"></div>
+    <div class="section-title text-center center">
+      <h2>Search by <strong ng-bind="text"></strong></h2>
+      <div style="height:10px;"></div>
+      <h4 ng-bind="'(' + total + ')'"></h4>
+    </div>
+    <div class="da-5"></div>
+    <div class="container">
+      <div class="spinner da-45" ng-show="loading"></div>
+      <div ng-repeat="resource in resources" ng-hide="loading">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+          <view-item ng-model="resource" ng-click="openResource(resource._id)" placeholder="img/backgrounds/VIEW_ITEM_PLACEHOLDER.jpg"></view-item>
+        </div>
+      </div>
+    </div>
+    <div class="categories" ng-hide="loading">
+      <ul>
+        <li ng-repeat="i in getPagesArray() track by $index"><div ng-class="page == $index+1 ? 'active' : ''" class="pagination-link" ng-click="paginateTo($index+1);"></div></li>
+      </ul>
+    </div>
+    <div style="height:50px;"></div>
+  </div>
+</div>

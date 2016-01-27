@@ -42,7 +42,7 @@
         <a class="navbar-brand" href="#" ng-hide="search">
           <img src="img/company/LOGO_SINGLEBIT.png" class="img-responsive" ng-click="gotoLocation('admin/dashboard')">
         </a>
-        <input ng-show="search" type="text" class="form-control search-pane" placeholder="Search">
+        <input ng-model="searchText" ng-show="search" type="text" class="form-control search-pane" placeholder="Search" ng-keyup="searchIfEnter($event)">
       </div>
 
       <!-- Main Menu Actions -->

@@ -28,6 +28,10 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
     return $http.get('/api/resource/next/' + type);
   };
 
+  resource.find = function(text){
+    return $http.get('/api/resource/search/' + type + '/' + page + '/' + itemsPerPage);
+  };
+
   resource.loadTagSuggestions = function(query){
     var deferred = $q.defer();
     $http.get('/api/tags/' + query).then(function(data){
@@ -60,12 +64,16 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
       return resource.list(type, 'feed', page, itemsPerPage);
     },
 
-    loadTagSuggestions : function(query){
-      return resource.loadTagSuggestions(query);
-    },
-
     next : function(type){
       return resource.next(type);
+    },
+
+    findByTagWithThumbnails : function(text, page, itemsPerPage){
+      return resource.list('activity', 'feed', page, itemsPerPage);
+    },
+
+    loadTagSuggestions : function(query){
+      return resource.loadTagSuggestions(query);
     }
   }
 }]);

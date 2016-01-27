@@ -244,8 +244,13 @@ module.exports = {
           success : true,
           message : "New " + req.params.type + "'s number acquired!",
           data : (foundResource.length == 0) ? 0 : (parseInt(foundResource[0]._doc.number) + 1)
+
         });
       }
     });
+  },
+
+  find : function(req, res){
+    // Find tags
   }
 }

@@ -40,6 +40,15 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
       }
     }
   })
+  // Search
+  .when('/search', {
+    templateUrl: '../views/search/search.html',
+    controller: 'SearchController'
+  })
+  .when('/search/:text/:page', {
+    templateUrl: '../views/search/search.html',
+    controller: 'SearchController'
+  })
   // Home
   .when('/', {
     templateUrl: '../views/home.html',
