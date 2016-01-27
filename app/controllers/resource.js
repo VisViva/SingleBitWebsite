@@ -10,6 +10,8 @@ module.exports = {
   save : function (req, res) {
     var resource = req.body;
 
+    if ((resource.tags == undefined) || (resource.tags == null)) resource.tags = [];
+
     // Check tags for existence
 
     Q.all(resource.tags.map(function (tag) {
@@ -208,7 +210,7 @@ module.exports = {
         break;
       }
     };
-    Resource.Resource.find(criteria, fields + ' contentType resourceType title date number').paginate(req.params.page, req.params.itemsperpage, function(err, resources, total) {
+    Resource.Resource.find(criteria, fields + ' contentType resourceType title date number').paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
           res.send({

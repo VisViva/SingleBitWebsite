@@ -19,7 +19,9 @@
         <table class="table table-hover table-condensed">
           <thead>
             <tr>
-              <th>Type</th>
+              <th>Episode</th>
+              <th>Content Type</th>
+              <th>Activity Type</th>
               <th>Date</th>
               <th>Title</th>
               <th class="text-right">Actions</th>
@@ -27,7 +29,9 @@
           </thead>
           <tbody ng-repeat="resource in resources" ng-hide="loading">
             <tr>
-              <td ng-bind="resource.contentType + '/' + resource.resourceType"></td>
+              <td ng-bind="'# ' + resource.number"></td>
+              <td ng-bind="resource.contentType"</td>
+              <td ng-bind="resource.resourceType"></td>
               <td ng-bind="resource.date | Date"></td>
               <td ng-bind="resource.title"></td>
               <td class="pull-right">
