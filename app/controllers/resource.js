@@ -243,7 +243,7 @@ module.exports = {
         res.send({
           success : true,
           message : "New " + req.params.type + "'s number acquired!",
-          data : parseInt(foundResource[0]._doc.number) + 1
+          data : (parseInt(foundResource[0]._doc.number) == null) ? 0 : (parseInt(foundResource[0]._doc.number) + 1)
         });
       }
     });
