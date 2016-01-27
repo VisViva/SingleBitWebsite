@@ -59,8 +59,11 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
   $scope.toggleSearch = function(){
     UserInterface.hideMenu();
     $scope.search =! $scope.search;
-    if (($scope.search == false) && ($scope.isViewSelected('search'))){
-      UserInterface.gotoLocation('home');
+    if ($scope.search == false){
+      $scope.searchText = "";
+      if ($scope.isViewSelected('search')){
+        UserInterface.gotoLocation('home');
+      }
     }
   };
 
