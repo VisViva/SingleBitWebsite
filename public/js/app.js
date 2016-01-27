@@ -36,6 +36,7 @@ angular.module("SingleBitApplication", [
   'FormatDateDirective',
   'DropdownDirective',
   'ViewItemDirective',
+  'SearchPaneDirective',
 
   // Filters
   'DateFilter'

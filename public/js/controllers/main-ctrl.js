@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface) {
+angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface, Resource) {
 
   // Initialize user interface
 
@@ -33,8 +33,6 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
     ]
   });
 
-  $scope.searchText = "";
-
   // Get current location and scroll if needed
 
   UserInterface.loadRequestedLocation();
@@ -43,6 +41,17 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
 
   $scope.isViewSelected = function(view){
     return view == UserInterface.getSelectedView();
+  };
+
+  // Search related callbacks
+
+  $scope.onSubmit = function(query){
+    UserInterface.hideMenu();
+    UserInterface.gotoLocation('search/' + query + '/1');
+  }
+
+  $scope.loadSuggestions = function(query){
+    return Resource.loadTagSuggestions(query);
   };
 
   // Actions
@@ -58,12 +67,5 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
   $scope.gotoLocation = function(location){
     UserInterface.hideMenu();
     UserInterface.gotoLocation(location);
-  };
-
-  $scope.searchIfEnter = function(event){
-    UserInterface.hideMenu();
-    if (event.keyCode == 13){
-      UserInterface.gotoLocation('search/' + $scope.searchText + '/1');
-    };
   };
 });

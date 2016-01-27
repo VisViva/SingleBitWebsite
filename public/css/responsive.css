@@ -59,6 +59,10 @@
   {
     margin-left:10px;
   }
+  .search-pane-dropdown
+  {
+    margin-left: 9px;
+  }
   .navbar-button
   {
     display: table !important;
