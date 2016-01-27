@@ -27,6 +27,7 @@ angular.module("SingleBitApplication", [
   'UserInterfaceService',
   'AuthorizationService',
   'ResourceService',
+  'HistoryService',
 
   // Directives
   'SummernoteDirective',

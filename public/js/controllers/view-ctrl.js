@@ -1,4 +1,4 @@
-angular.module('ViewCtrl', []).controller('ViewController', function($scope, $routeParams, $sce, UserInterface, Resource) {
+angular.module('ViewCtrl', []).controller('ViewController', function($scope, $routeParams, $sce, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -19,18 +19,23 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
   // Actions
 
   $scope.goBack = function(){
-    var location = 'home';
-    if (!angular.isUndefined($scope.resource))
-    {
-      switch($scope.resource.contentType)
+    var location = '';
+
+    if (History.historyExists() == true){
+      location = History.getLastRoute();
+    } else {
+      if (!angular.isUndefined($scope.resource))
       {
-        case 'Activity':{
-          location = 'feed';
-          break;
-        }
-        case 'Project':{
-          location = 'projects/type/' + $scope.resource.resourceType.toLowerCase().split(' ')[0];
-          break;
+        switch($scope.resource.contentType)
+        {
+          case 'Activity':{
+            location = 'feed';
+            break;
+          }
+          case 'Project':{
+            location = 'projects/type/' + $scope.resource.resourceType.toLowerCase().split(' ')[0];
+            break;
+          }
         }
       }
     }

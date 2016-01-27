@@ -2,5 +2,8 @@
 
   . Double click on menu items results in freezing
   . Improve scrolling on touch devices
+  . Comments
+  . Animations on project type buttons
+  . E-mail
   . Search
   . Back doesn't return to last page

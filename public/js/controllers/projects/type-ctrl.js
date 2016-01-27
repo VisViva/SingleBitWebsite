@@ -1,4 +1,4 @@
-angular.module('TypeCtrl', []).controller('TypeController', function($scope, $location, $routeParams, UserInterface, Resource) {
+angular.module('TypeCtrl', []).controller('TypeController', function($scope, $location, $routeParams, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -36,6 +36,7 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
   }
 
   $scope.openProject = function(id){
+    History.saveAsLastRoute();
     UserInterface.gotoLocation('view/' + id);
   };
 });

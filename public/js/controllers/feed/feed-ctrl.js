@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $routeParams, UserInterface, Resource) {
+angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $routeParams, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -37,6 +37,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   }
 
   $scope.openActivity = function(id){
+    History.saveAsLastRoute();
     UserInterface.gotoLocation('view/' + id);
   };
 
