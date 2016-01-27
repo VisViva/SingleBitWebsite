@@ -210,7 +210,7 @@ module.exports = {
         break;
       }
     };
-    Resource.Resource.find(criteria, fields + ' contentType resourceType title date number').paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, resources, total) {
+    Resource.Resource.find(criteria, fields + ' contentType resourceType title date number', {sort: {date: -1}}).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
           res.send({
