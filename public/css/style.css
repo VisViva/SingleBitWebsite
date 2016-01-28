@@ -15,18 +15,18 @@
 }
 .search-pane
 {
-	width:182px;
+	width:190px;
 	margin-right:17px;
 	margin-left:16px;
 	margin-top: 12px;
 	margin-bottom: 12px;
-	height: 27px;
+	height: 24px;
 	border: 1px solid #FFF;
 	border-radius: 7px;
 }
 .search-pane-dropdown
 {
-	width: 183px;
+	width: 190px;
 	margin-top:-8px;
 	border : 1px solid #CCC !important;
 }

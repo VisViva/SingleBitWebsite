@@ -39,10 +39,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" ng-hide="search">
-          <img src="img/company/LOGO_SINGLEBIT.png" class="img-responsive" ng-click="gotoLocation('admin/dashboard')">
-        </a>
-        <search-pane ng-show="search" ng-model="searchText" on-submit="onSubmit(query)" load-suggestions="loadSuggestions(query)"></search-pane>
+        <div style="width:205px;">
+          <a class="navbar-brand" href="#" ng-hide="search" style="height: 20px; padding: 14px;">
+            <div style="font-family: Logo;font-size: 29px; color: #FFF;margin-bottom: -50px;" ng-click="gotoLocation('admin/dashboard')">
+              SinglebiT
+            </div>
+          </a>
+          <search-pane ng-show="search" ng-model="searchText" on-submit="onSubmit(query)" load-suggestions="loadSuggestions(query)"></search-pane>
+        </div>
       </div>
 
       <!-- Main Menu Actions -->
