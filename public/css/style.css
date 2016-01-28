@@ -25,7 +25,7 @@
 .search-pane-dropdown
 {
 	width: 190px;
-	margin-top:-8px;
+	margin-top:2px;
 	border : 1px solid #CCC !important;
 }
 .search-pane:focus
@@ -440,41 +440,55 @@ button.btn.tf-btn.btn-default
 	margin-bottom: 10px;
 	margin-top: 10px;
 
+	border-radius:7px;
+
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
+
+	-webkit-transform: perspective(500px);
+	-moz-transform: perspective(500px);
+	-o-transform: perspective(500px);
+	-ms-transform: perspective(500px);
+	transform: perspective(500px);
+
+	-webkit-box-shadow: -1px -7px 2px -25px rgba(0,0,0,1);
+	-moz-box-shadow: -1px -7px 2px -25px rgba(0,0,0,1);
+	box-shadow: -1px -7px 2px -25px rgba(0,0,0,1);
 }
 .view-item:hover
 {
 	-webkit-backface-visibility: visible;
--moz-backface-visibility: visible;
-backface-visibility: visible;
--webkit-perspective: 1000px;
--moz-perspective: 1000px;
--o-perspective: 1000px;
--ms-perspective: 1000px;
-perspective: 1000px;
--webkit-transform-origin: 50% 100%;
--moz-transform-origin: 50% 100%;
--o-transform-origin: 50% 100%;
--ms-transform-origin: 50% 100%;
-transform-origin: 50% 100%;
--webkit-transform-style: preserve-3d;
--moz-transform-style: preserve-3d;
--o-transform-style: preserve-3d;
--ms-transform-style: preserve-3d;
-transform-style: preserve-3d;
--webkit-transform: rotate(0deg) rotateX(20deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, -10px, 20px);
--moz-transform: rotate(0deg) rotateX(20deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, -10px, 20px);
--o-transform: rotate(0deg) rotateX(20deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, -10px, 20px);
--ms-transform: rotate(0deg) rotateX(20deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, -10px, 20px);
-transform: rotate(0deg) rotateX(20deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, -10px, 20px);
--webkit-transition: all 0.3s ease;
--moz-transition: all 0.3s ease;
--o-transition: all 0.3s ease;
-transition: all 0.3s ease;
-
+	-moz-backface-visibility: visible;
+	backface-visibility: visible;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
+	-o-perspective: 500px;
+	-ms-perspective: 500px;
+	perspective: 500px;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: perspective(500px) rotate(0) rotateX(12deg) rotateY(0) rotateZ(0) translate3d(0,-8px,30px);
+	-moz-transform: perspective(500px) rotate(0) rotateX(12deg) rotateY(0) rotateZ(0) translate3d(0,-8px,30px);
+	-o-transform: perspective(500px) rotate(0) rotateX(12deg) rotateY(0) rotateZ(0) translate3d(0,-8px,30px);
+	-ms-transform: perspective(500px) rotate(0) rotateX(12deg) rotateY(0) rotateZ(0) translate3d(0,-8px,30px);
+	transform: perspective(500px) rotate(0) rotateX(12deg) rotateY(0) rotateZ(0) translate3d(0,-8px,30px);
+	-webkit-box-shadow: 0px 17px 13px -7px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 17px 13px -7px rgba(0,0,0,0.6);
+	box-shadow: 0px 17px 13px -7px rgba(0,0,0,0.6);
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;	
 }
 .view-item .hover-bg
 {

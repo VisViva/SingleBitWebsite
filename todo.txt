@@ -4,6 +4,6 @@
   . Improve scrolling on touch devices
   . Convert String type to Buffer for images
   . Comments
-  . E-mail
+  . Refactor server code
 
-  . Animations on project type buttons
+  . E-mail
