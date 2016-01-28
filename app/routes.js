@@ -27,6 +27,7 @@ module.exports = function(root){
 
   Router.post('/api/message/', MessageController.save);
   Router.delete('/api/message/:id', MessageController.delete);
+  Router.get('/api/message/:id', MessageController.get);
   Router.get('/api/message/list/:page/:itemsperpage', MessageController.list);
 
   // Tags

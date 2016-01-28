@@ -5,9 +5,13 @@ angular.module('MessageService', []).factory('Message', ['$http', function($http
   message.save = function(object){
     return $http.post('/api/message', object);
   };
-
+  
   message.delete = function(id){
     return $http.delete('/api/message/' + id);
+  };
+
+  message.get = function(id){
+    return $http.get('/api/message/' + id);
   };
 
   message.list = function(page, itemsPerPage){
@@ -24,6 +28,10 @@ angular.module('MessageService', []).factory('Message', ['$http', function($http
 
     delete : function(id){
       return message.delete(id);
+    },
+
+    get : function(id){
+      return message.get(id);
     },
 
     list : function(page, itemsPerPage){

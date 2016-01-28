@@ -1,6 +1,8 @@
 var Message = require('../models/message.js');
+var Mongoose = require('mongoose');
+require('mongoose-pagination');
 
-module.exports = {  
+module.exports = {
   save : function (req, res) {
     var date = new Date();
     var message = req.body;
@@ -24,14 +26,26 @@ module.exports = {
       if (!err) {
         res.send({
           success: true,
-          message: "Message with id " + req.body.id + " has been successfully removed!"
+          message: "Message with id " + req.params.id + " has been successfully removed!"
+        });
+      }
+    });
+  },
+
+  get : function(req, res){
+    Message.Message.findById(Mongoose.Types.ObjectId(req.params.id), function (err, foundMessage) {
+      if (!err) {
+        res.send({
+          success: true,
+          message: "Message with id " + req.params.id + " has been successfully found!",
+          data: foundMessage
         });
       }
     });
   },
 
   list : function (req, res) {
-    Message.Message.find().sort(['_id', 1]).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, messages, total) {
+    Message.Message.find({}, '_id date text email', {sort: {date: -1}}).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, messages, total) {
       if (!err){
         if (messages.length != 0){
           res.send({

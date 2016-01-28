@@ -109,6 +109,17 @@ module.exports = {
     });
   },
 
+  delete : function(req, res){
+    Resource.Resource.findByIdAndRemove(Mongoose.Types.ObjectId(req.params.id), function (err) {
+      if (!err) {
+        res.send({
+          success: true,
+          message: "Resource with id " + req.body.id + " has been successfully removed!"
+        });
+      }
+    });
+  },
+
   get : function(req, res){
     Resource.Resource.findById(Mongoose.Types.ObjectId(req.params.id), function (err, resource) {
       if (!err) {
@@ -137,17 +148,6 @@ module.exports = {
             message: "Resource with id " + req.body.id + " has been successfully found!",
             data: foundResource
           });
-        });
-      }
-    });
-  },
-
-  delete : function(req, res){
-    Resource.Resource.findByIdAndRemove(Mongoose.Types.ObjectId(req.params.id), function (err) {
-      if (!err) {
-        res.send({
-          success: true,
-          message: "Resource with id " + req.body.id + " has been successfully removed!"
         });
       }
     });

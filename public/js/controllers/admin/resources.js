@@ -1,11 +1,11 @@
-angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $location, $routeParams, UserInterface, Authorization, Resource){
+angular.module('ResourcesCtrl', []).controller('ResourcesController', function($scope, $location, $routeParams, UserInterface, Authorization, Resource){
 
   // Initialize
 
   UserInterface.fillNavbar();
   $scope.page = $routeParams.page;
-  $scope.total = 1;
-  $scope.itemsPerPage = 16;
+  $scope.total = 0;
+  $scope.itemsPerPage = 8;
   $scope.loading = true;
 
   // Get user name
@@ -14,10 +14,23 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
     $scope.currentUser = data.data.data;
   });
 
-  // Get activities
+  // Resources
 
-  $scope.listWithoutThumbnails = function(page)
-  {
+  $scope.create = function(){
+    UserInterface.gotoLocation('admin/publish');
+  };
+
+  $scope.edit = function(id){
+    UserInterface.gotoLocation('admin/publish/' + id);
+  };
+
+  $scope.delete = function(id){
+    Resource.delete(id).then(function(){
+      $scope.refresh();
+    });
+  }
+
+  $scope.list = function(page){
     Resource.listWithoutThumbnails(page, $scope.itemsPerPage).then(function(data){
       if (data.data.success == true){
         $scope.resources = data.data.data.docs;
@@ -25,10 +38,17 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         $scope.total = data.data.data.total;
         $scope.loading = false;
       } else {
-        if ($scope.page != 1) UserInterface.gotoLocation('admin/dashboard');
-        else UserInterface.gotoLocation('404');
+        if ($scope.page != 1) UserInterface.gotoLocation('admin/messages');
+        else $scope.total = 0;
       }
+      $scope.loading = false;
     });
+  }
+
+  // Pagination
+
+  $scope.refresh = function(){
+    $scope.list($scope.page);
   }
 
   $scope.getPagesArray = function()
@@ -38,29 +58,15 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
     else return new Array(count);
   }
 
-  // Actions
-
   $scope.paginateTo = function(page){
-    if (page != $scope.page) UserInterface.gotoLocation('admin/dashboard/' + page);
+    if (page != $scope.page) UserInterface.gotoLocation('admin/resources/' + page);
   }
 
-  $scope.refreshList = function(){
-    $scope.listWithoutThumbnails($scope.page);
+  $scope.gotoMessages = function(){
+    UserInterface.gotoLocation('admin/messages');
   }
 
-  $scope.editResource = function(id){
-    UserInterface.gotoLocation('admin/publish/' + id);
-  };
-
-  $scope.deleteResource = function(id){
-    Resource.delete(id).then(function(){
-      $scope.refreshList();
-    });
-  }
-
-  $scope.newResource = function(){
-    UserInterface.gotoLocation('admin/publish');
-  };
+  // Authorization
 
   $scope.logout = function(){
     Authorization.logout().then(function(){
@@ -72,5 +78,6 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
 
   // Get List
 
-  $scope.refreshList();
+  $scope.refresh();
+
 });

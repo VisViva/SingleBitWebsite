@@ -10,18 +10,42 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
       }
     }
   })
-  .when('/admin/dashboard', {
-    redirectTo: '/admin/dashboard/1'
+  // Resources
+  .when('/admin/resources', {
+    redirectTo: '/admin/resources/1'
   })
-  .when('/admin/dashboard/:page', {
-    templateUrl: '../views/admin/dashboard.html',
-    controller: 'DashboardController',
+  .when('/admin/resources/:page', {
+    templateUrl: '../views/admin/resources.html',
+    controller: 'ResourcesController',
     resolve: {
       load : function(Authorization){
         return Authorization.proceedIfLoggedIn();
       }
     }
   })
+  // Messages
+  .when('/admin/messages', {
+    redirectTo: '/admin/messages/1'
+  })
+  .when('/admin/messages/:page', {
+    templateUrl: '../views/admin/messages.html',
+    controller: 'MessagesController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
+  })
+  .when('/admin/messages/view/:id', {
+    templateUrl: '../views/admin/message.html',
+    controller: 'MessageController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
+  })
+  // Publish
   .when('/admin/publish/', {
     templateUrl: '../views/admin/publish.html',
     controller: 'PublishController',

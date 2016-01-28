@@ -14,7 +14,9 @@ angular.module("SingleBitApplication", [
   'MainCtrl',
   'SearchCtrl',
   'AuthorizeCtrl',
-  'DashboardCtrl',
+  'ResourcesCtrl',
+  'MessagesCtrl',
+  'MessageCtrl',
   'PublishCtrl',
   'HomeCtrl',
   'FeedCtrl',
@@ -41,5 +43,6 @@ angular.module("SingleBitApplication", [
   'TagListDirective',
 
   // Filters
-  'DateFilter'
+  'DateFilter',
+  'MessagePreviewFilter'
 ]);

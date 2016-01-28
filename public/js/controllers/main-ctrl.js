@@ -9,7 +9,7 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
         break;
       };
       case 'already_authorized':{
-        $scope.gotoLocation('admin/dashboard');
+        $scope.gotoLocation('admin/resources');
         break;
       };
     };

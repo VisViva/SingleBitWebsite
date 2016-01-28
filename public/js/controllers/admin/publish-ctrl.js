@@ -108,14 +108,14 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.save = function(){
     Resource.save($scope.resource).then(function(){
-      UserInterface.gotoLocation('admin/dashboard');
+      UserInterface.gotoLocation('admin/resources');
     },function(){
       alert("Resource has not been saved, something went wrong!");
     });
   };
 
   $scope.goBack = function(){
-    UserInterface.gotoLocation('admin/dashboard');
+    UserInterface.gotoLocation('admin/resources');
   };
 
   $scope.performClick = function(id){

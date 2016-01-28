@@ -5,14 +5,15 @@
   <div class="scrollable-dark da-view">
     <div class="da-5"></div>
     <div class="section-title text-center center">
-      <h2 ng-bind="resource.title"></h2>
+      <h2>Message from <strong ng-bind="message.email"></strong></h2>
+      <br>
+      <span>Posted on <span ng-bind="message.date | Date"></span></span>
     </div>
-    <tag-list ng-model="resource.tags" on-click="searchByTag(query)"></tag-list>
     <div style="height:50px;"></div>
     <div class="container">
       <div class="spinner da-45" ng-show="loading"></div>
-      <div ng-hide="loading">
-        <div ng-bind-html="resource.description"></div>
+      <div ng-hide="loading" class="text-center center">
+        <div ng-bind-html="message.text"></div>
       </div>
     </div>
     <div style="height:50px;"></div>
