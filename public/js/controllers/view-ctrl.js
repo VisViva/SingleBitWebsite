@@ -18,6 +18,10 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
 
   // Actions
 
+  $scope.searchByTag = function(query){
+    UserInterface.gotoLocation('search/' + query + '/1');
+  }
+
   $scope.goBack = function(){
     var location = '';
 

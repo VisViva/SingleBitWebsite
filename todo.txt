@@ -2,9 +2,8 @@
 
   . Double click on menu items results in freezing
   . Improve scrolling on touch devices
-  . Comments
-  . Animations on project type buttons
-  . E-mail
   . Convert String type to Buffer for images
-  . Add tags to a view
-  . Fix pixel
+  . Comments
+  . E-mail
+
+  . Animations on project type buttons
