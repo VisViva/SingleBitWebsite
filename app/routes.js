@@ -1,5 +1,6 @@
 var AccountController = require('./controllers/account');
 var ResourceController = require('./controllers/resource');
+var MessageController = require('./controllers/message');
 var TagController = require('./controllers/tag');
 var Passport = require('passport');
 var Router = require('express').Router();
@@ -21,6 +22,12 @@ module.exports = function(root){
   Router.get('/api/resource/list/:type/:fields/:page/:itemsperpage', ResourceController.list);
   Router.get('/api/resource/next/:type', ResourceController.next);
   Router.get('/api/resource/search/:text/:page/:itemsperpage', ResourceController.find)
+
+  // Messages
+
+  Router.post('/api/message/', MessageController.save);
+  Router.delete('/api/message/:id', MessageController.delete);
+  Router.get('/api/message/list/:page/:itemsperpage', MessageController.list);
 
   // Tags
 

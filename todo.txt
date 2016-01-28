@@ -1,8 +1,8 @@
  Client
 
-  . Double click on menu items results in freezing
-  . Improve scrolling on touch devices
   . Convert String type to Buffer for images
+  . Double click on menu items results in freezing
+  . Improve scrolling on touch devices - https://jamesflorentino.github.io/nanoScrollerJS/
   . Comments
   . Refactor server code
 

@@ -13,15 +13,15 @@
         <form>
           <div class="form-group">
             <label class="custom-label">Email address:</label>
-            <input type="email" class="form-control">
+            <input ng-model="message.email" type="text" class="form-control">
           </div>
           <div class="form-group">
             <label class="custom-label">Message:</label>
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea ng-model="message.text" class="form-control" rows="3"></textarea>
           </div>
         </form>
         <div class="center">
-          <button type="submit" class="btn btn-warning btn-default">Submit</button>
+          <button ng-click="send()" type="submit" class="btn btn-warning btn-default">Submit</button>
         </div>
       </div>
     </div>
