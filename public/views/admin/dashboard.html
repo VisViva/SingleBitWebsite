@@ -5,13 +5,13 @@
   <div class="scrollable-dark da-view">
     <div class="da-5"></div>
     <div class="container-fluid">
-      <div class="section-title center text-center">
+      <div class="section-title center text-center" ng-hide="loading">
         <h2>Hello, <strong ng-bind="currentUser + '!'"></strong></h2>
       </div>
       <div class="da-5"></div>
       <div class="col-sm-offset-1 col-sm-10">
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a ng-bind="'Resources (' + total + ')'"></a></li>
+          <li role="presentation" class="active"><a ng-hide="loading" ng-bind="'Resources (' + total + ')'"></a></li>
         </ul>
       </div>
       <div class="da-10"></div>
