@@ -96,8 +96,7 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
     controller: 'ProjectsController'
   })
   .when('/projects/type/:type', {
-    templateUrl: '../views/projects/type.html',
-    controller: 'TypeController'
+    redirectTo: '/projects/type/:type/1'
   })
   .when('/projects/type/:type/:page', {
     templateUrl: '../views/projects/type.html',

@@ -6,4 +6,3 @@
   . Improve scrolling on touch devices - https://jamesflorentino.github.io/nanoScrollerJS/
   . Comments
   . Refactor server code
-  . Redirection in angular routes

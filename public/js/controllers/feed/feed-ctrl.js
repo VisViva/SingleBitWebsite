@@ -5,7 +5,7 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   UserInterface.fillNavbar();
   $scope.type = $routeParams.type;
   $scope.page = $routeParams.page;
-  $scope.total = 1;
+  $scope.total = 0;
   $scope.itemsPerPage = 8;
   $scope.loading = true;
 
@@ -19,8 +19,9 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
       $scope.loading = false;
     } else {
       if ($scope.page != 1) UserInterface.gotoLocation('feed/' + $scope.type + '/1');
-      else UserInterface.gotoLocation('404');
+      else $scope.total = 0;
     }
+    $scope.loading = false;
   });
 
   $scope.getPagesArray = function()
