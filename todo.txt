@@ -5,6 +5,6 @@
   . Comments
   . Animations on project type buttons
   . E-mail
-  . Search
   . Convert String type to Buffer for images
   . Add tags to a view
+  . Fix pixel

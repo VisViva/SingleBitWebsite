@@ -28,8 +28,8 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
     return $http.get('/api/resource/next/' + type);
   };
 
-  resource.find = function(text){
-    return $http.get('/api/resource/search/' + type + '/' + page + '/' + itemsPerPage);
+  resource.find = function(text, page, itemsPerPage){
+    return $http.get('/api/resource/search/' + text + '/' + page + '/' + itemsPerPage);
   };
 
   resource.loadTagSuggestions = function(query){
@@ -69,7 +69,7 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$ht
     },
 
     findByTagWithThumbnails : function(text, page, itemsPerPage){
-      return resource.list('activity', 'feed', page, itemsPerPage);
+      return resource.find(text, page, itemsPerPage);
     },
 
     loadTagSuggestions : function(query){

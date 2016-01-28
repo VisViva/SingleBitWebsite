@@ -250,6 +250,31 @@ module.exports = {
   },
 
   find : function(req, res){
-    // Find tags
+    Tag.Tag.find({'text': req.params.text}, function(err, foundTags){
+      Resource.Resource.find({'tags._id': Mongoose.Types.ObjectId(foundTags[0]._doc._id)}).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, resources, total) {
+        if (!err){
+          if (resources.length != 0){
+            res.send({
+              success : true,
+              message : "Resource list has been successfully acquired!",
+              data : {
+                docs : resources,
+                total : total,
+                page : req.params.page
+              }
+            });
+          } else {
+            res.send({
+              success : false,
+              message : "No resources!",
+              data : {
+                total : total,
+                page : req.params.page
+              }
+            });
+          }
+        }
+      });
+    });
   }
 }
