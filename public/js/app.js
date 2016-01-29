@@ -17,6 +17,7 @@ angular.module("SingleBitApplication", [
   'ResourcesCtrl',
   'MessagesCtrl',
   'MessageCtrl',
+  'CommentsCtrl',
   'PublishCtrl',
   'HomeCtrl',
   'FeedCtrl',

@@ -45,6 +45,16 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
       }
     }
   })
+  // Comments
+  .when('/admin/comments/:id', {
+    templateUrl: '../views/admin/comments.html',
+    controller: 'CommentsController',
+    resolve: {
+      load : function(Authorization){
+        return Authorization.proceedIfLoggedIn();
+      }
+    }
+  })
   // Publish
   .when('/admin/publish/', {
     templateUrl: '../views/admin/publish.html',

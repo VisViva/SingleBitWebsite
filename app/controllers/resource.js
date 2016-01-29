@@ -132,6 +132,7 @@ module.exports = {
 
   list : function(req, res){
     var type = req.params.type[0].toUpperCase() + req.params.type.substring(1, req.params.type.length);
+    var fields = '';
     switch(req.params.fields){
       case 'feed': { fields = 'thumbnail'; break; }
     };

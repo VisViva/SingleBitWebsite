@@ -39,6 +39,7 @@
                 <td ng-bind="resource.date | Date"></td>
                 <td ng-bind="resource.title"></td>
                 <td class="pull-right">
+                  <i class="fa fa-comments circle-button-small" ng-click="editComments(resource._id); $event.stopPropagation();"></i>
                   <i class="fa fa-times-circle circle-button-small" ng-click="delete(resource._id); $event.stopPropagation();"></i>
                 </td>
               </tr>

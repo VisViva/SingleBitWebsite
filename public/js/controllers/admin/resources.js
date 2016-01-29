@@ -45,6 +45,10 @@ angular.module('ResourcesCtrl', []).controller('ResourcesController', function($
     });
   }
 
+  $scope.editComments = function(id){
+    UserInterface.gotoLocation('admin/comments/' + id);
+  }
+
   // Pagination
 
   $scope.refresh = function(){

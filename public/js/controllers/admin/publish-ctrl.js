@@ -24,7 +24,7 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
 
   $scope.summernote = {
     options : {
-      height: 100,
+      height: 800,
       dialogsInBody: true,
       dialogsFade: true,
       toolbar: [

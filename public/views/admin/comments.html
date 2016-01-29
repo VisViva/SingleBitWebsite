@@ -1,0 +1,56 @@
+<!-- Comments Section -->
+
+<div class="da-100">
+  <div style="height:50px;"></div>
+  <div class="scrollable-dark da-view">
+    <div class="da-5"></div>
+    <div class="container-fluid">
+      <div class="section-title center text-center" ng-hide="loading">
+        <h2>Hello, <strong ng-bind="currentUser + '!'"></strong></h2>
+        <div class="da-5"></div>
+        <i class="fa fa-lock circle-button" ng-click="logout()"></i>
+      </div>
+      <div class="da-5"></div>
+      <div class="col-sm-offset-1 col-sm-10">
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-click="gotoResources();"><a>Resources</a></li>
+          <li role="presentation" ng-click="gotoMessages();"><a>Messages</a></li>
+          <li role="presentation" class="active"><a ng-bind="'Comments (' + comments.length + ')'"></a></li>
+        </ul>
+      </div>
+      <div class="da-10"></div>
+      <div class="col-sm-offset-1 col-sm-10 table-responsive">
+        <table class="table table-hover table-condensed" ng-hide="comments.length == 0">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Comment</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="comment in comments" ng-hide="loading">
+            <tr>
+              <td ng-bind="'# ' + ($index + 1)"></td>
+              <td ng-bind="comment.date | Date"></td>
+              <td ng-bind="comment.sender"></td>
+              <td ng-bind="comment.text"></td>
+              <td class="pull-right">
+                <i class="fa fa-times-circle circle-button-small" ng-click="delete(comment._id); $event.stopPropagation();"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="section-title center text-center" ng-show="!loading && (comments.length == 0)">
+          <div style="height:80px;"></div>
+          <span>Sorry, there are no comments right now</span>
+          <div style="height:80px;"></div>
+        </div>
+        <div class="spinner da-30" ng-show="loading"></div>
+      </div>
+    </div>
+    <div class="da-5"></div>
+    <div style="height:50px;"></div>
+  </div>
+</div>
