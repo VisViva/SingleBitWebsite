@@ -5,50 +5,34 @@ module.exports = {
   register : function(req, res){
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account){
       if (err){
-        res.send({
-          success : false,
-          message : "Error registering user " + req.body.username + "!"
-        });
+        res.send({ success : false });
+        console.log(err);
       }
       Passport.authenticate('local')(req, res, function(){
-        res.send({
-          success : true,
-          message : "Success registering user " + req.body.username + "!",
-          data : account
-        });
+        res.send({ success : true, data : account });
+        console.log("Success registering user " + req.body.username + "!");
       });
     });
   },
 
   login : function(req, res){
-    res.send({
-      success : true,
-      message : "Logged in as " + req.user.username,
-      data : req.user.username
-    });
+    res.send({ success : true, data : req.user.username });
+    console.log("Logged in as " + req.user.username);
   },
 
   logout : function(req, res){
     req.session = null;
-      res.send({
-        success : true,
-        message : req.user.username + "just logged out!",
-        data : req.user.username
-      });
+    res.send({ success : true, data : req.user.username });
+    console.log(req.user.username + "just logged out!");
   },
 
   check : function(req, res) {
     if (req.user) {
-      res.send({
-        success : true,
-        message : "Logged in as " + req.user.username,
-        data : req.user.username
-      });
+      res.send({ success : true, data : req.user.username });
+      console.log("Logged in as " + req.user.username);
     } else {
-      res.send({
-        success : false,
-        message : "You have no permissions to access this page!"
-      });
+      res.send({ success : false });
+      console.log("You have no permissions to access this page!");
     }
   }
 };

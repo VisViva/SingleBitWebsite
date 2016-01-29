@@ -44,5 +44,6 @@ angular.module("SingleBitApplication", [
 
   // Filters
   'DateFilter',
-  'MessagePreviewFilter'
+  'MessagePreviewFilter',
+  'PluralFilter'
 ]);

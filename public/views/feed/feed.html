@@ -5,7 +5,7 @@
   <div class="scrollable-dark da-view">
     <div class="da-5"></div>
     <div class="section-title text-center center">
-      <h2>Latest <strong>activities</strong></h2>
+      <h2>Latest <strong ng-bind="type | Plural"></strong></h2>
       <div style="height:10px;"></div>
       <span style="font-size:13px; color:#CCC" ng-bind="'(' + total + ')'"></span>
     </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="section-title center text-center" ng-show="!loading && (total == 0)">
       <div style="height:80px;"></div>
-      <span>Sorry, there are no activities of this type right now</span>
+      <span>Sorry, there are no <span ng-bind="type | Plural"></span> right now</span>
       <div style="height:80px;"></div>
     </div>
     <div class="container">
