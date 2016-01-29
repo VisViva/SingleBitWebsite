@@ -18,7 +18,7 @@ angular.module('HistoryService', []).factory('History', ['$location', function($
 
   return {
 
-    // History actions
+    // Interaction with history
 
     saveAsLastRoute : function(){
       history.saveAsLastRoute();

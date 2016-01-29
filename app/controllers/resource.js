@@ -142,7 +142,7 @@ module.exports = {
     };
     Resource.find(criteria).
     select(fields + ' contentType resourceType title date number').
-    sort({date: -1}).
+    sort({ date: -1 }).
     paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, resources, total) {
       if (!err){
         if (resources.length != 0){
@@ -161,7 +161,7 @@ module.exports = {
   next : function(req, res){
     Resource.find({'resourceType': req.params.type}).
     select('number').
-    sort({number : -1}).
+    sort({ number : -1 }).
     limit(1).
     exec(function(err, result){
       if (!err){

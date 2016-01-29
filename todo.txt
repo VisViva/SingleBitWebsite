@@ -1,8 +1,4 @@
- Client
-
-  . Convert String type to Buffer for images
-  . Check authorization on CRUD
-  . Double click on menu items results in freezing
-  . Improve scrolling on touch devices - https://jamesflorentino.github.io/nanoScrollerJS/
-  . Comments
-  . Refactor server code
+. Convert String type to Buffer for images
+. Check authorization on CRUD
+. Double click on menu items results in freezing
+. Improve scrolling on touch devices - https://jamesflorentino.github.io/nanoScrollerJS/

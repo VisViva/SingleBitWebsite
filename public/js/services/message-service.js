@@ -5,7 +5,7 @@ angular.module('MessageService', []).factory('Message', ['$http', function($http
   message.save = function(object){
     return $http.post('/api/message', object);
   };
-  
+
   message.delete = function(id){
     return $http.delete('/api/message/' + id);
   };
@@ -20,7 +20,7 @@ angular.module('MessageService', []).factory('Message', ['$http', function($http
 
   return {
 
-    // Interaction with resources
+    // Interaction with messages
 
     save : function(object){
       return message.save(object);

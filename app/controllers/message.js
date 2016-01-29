@@ -43,7 +43,7 @@ module.exports = {
   },
 
   list : function (req, res) {
-    Message.find({}, '_id date text email', {sort: {date: -1}}).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, messages, total) {
+    Message.find({}, '_id date text email', { sort: { date: -1 }}).paginate(req.params.page, parseInt(req.params.itemsperpage), function(err, messages, total) {
       if (!err){
         if (messages.length != 0){
           res.send({ success : true, data : { docs : messages, total : total, page : req.params.page }});

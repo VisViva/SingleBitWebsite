@@ -842,6 +842,19 @@ button.btn.tf-btn.btn-default
 	margin-right:7px;
 	display: inline-block;
 }
+.comment-label
+{
+  font-size: 11px;
+}
+.comment-body
+{
+	border-radius: 7px;
+	padding: 10px 20px;
+	margin: 0 0 20px;
+	font-size: 17.5px;
+	background-color: #F3F3F3;
+	font-size: 14px;
+}
 
 /* General **************************************************/
 

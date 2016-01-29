@@ -31,6 +31,7 @@ angular.module("SingleBitApplication", [
   'AuthorizationService',
   'ResourceService',
   'MessageService',
+  'CommentService',
   'HistoryService',
 
   // Directives

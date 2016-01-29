@@ -44,7 +44,7 @@ angular.module('AuthorizationService', []).factory('Authorization', ['$timeout',
 
   return {
 
-    // Interaction with resources
+    // Interaction with authorization
 
     register : function(user){
       return authorization.register(user);

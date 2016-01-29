@@ -14,7 +14,9 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
       updateOnContentResize: true
     },
     documentTouchScroll: true,
-    alwaysShowScrollbar: true
+    alwaysShowScrollbar: true,
+    scrollInertia : 0,
+    mouseWheelPixels: 60
   }
 
   // Initialization
