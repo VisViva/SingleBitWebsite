@@ -10,18 +10,18 @@ module.exports = function(root){
 
   // Authentication
 
-  Router.post('/api/register', AccountController.register);
+  Router.post('/api/register', AccountController.isAuthenticated, AccountController.register);
   Router.post('/api/login', Passport.authenticate('local'), AccountController.login);
-  Router.get('/api/logout', AccountController.logout);
+  Router.get('/api/logout', AccountController.isAuthenticated, AccountController.logout);
   Router.get('/api/check', AccountController.check);
 
   // Resources
 
-  Router.post('/api/resource/', ResourceController.save);
-  Router.delete('/api/resource/:id', ResourceController.delete);
+  Router.post('/api/resource/', AccountController.isAuthenticated, ResourceController.save);
+  Router.delete('/api/resource/:id', AccountController.isAuthenticated, ResourceController.delete);
   Router.get('/api/resource/:id', ResourceController.get);
   Router.get('/api/resource/list/:type/:fields/:page/:itemsperpage', ResourceController.list);
-  Router.get('/api/resource/next/:type', ResourceController.next);
+  Router.get('/api/resource/next/:type', AccountController.isAuthenticated, ResourceController.next);
   Router.get('/api/resource/search/:text/:page/:itemsperpage', ResourceController.find);
 
   // Comments
@@ -33,9 +33,9 @@ module.exports = function(root){
   // Messages
 
   Router.post('/api/message/', MessageController.save);
-  Router.delete('/api/message/:id', MessageController.delete);
-  Router.get('/api/message/:id', MessageController.get);
-  Router.get('/api/message/list/:page/:itemsperpage', MessageController.list);
+  Router.delete('/api/message/:id', AccountController.isAuthenticated, MessageController.delete);
+  Router.get('/api/message/:id', AccountController.isAuthenticated, MessageController.get);
+  Router.get('/api/message/list/:page/:itemsperpage', AccountController.isAuthenticated, MessageController.list);
 
   // Tags
 

@@ -34,5 +34,16 @@ module.exports = {
       res.send({ success : false });
       console.log("You have no permissions to access this page!");
     }
+  },
+
+  // Middleware
+
+  isAuthenticated : function(req, res, next) {
+    if (req.user != undefined) {
+      return next();
+    } else {
+      res.send({ success : false });
+      console.log("You have no permissions to access api!");
+    }
   }
 };
