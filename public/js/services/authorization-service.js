@@ -1,4 +1,4 @@
-angular.module('AuthorizationService', []).factory('Authorization', ['$timeout','$http','$q','spinnerService', function($timeout, $http, $q, spinnerService) {
+angular.module('AuthorizationService', []).factory('Authorization', ['$http','$q', function($http, $q) {
 
   var authorization = this;
 

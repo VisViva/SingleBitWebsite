@@ -1,4 +1,4 @@
-angular.module('ViewItemDirective', []).directive('viewItem', function ($compile) {
+angular.module('ViewItemDirective', []).directive('viewItem', ['$compile', function ($compile) {
   return {
     scope: {
       model: '=ngModel',
@@ -42,4 +42,4 @@ angular.module('ViewItemDirective', []).directive('viewItem', function ($compile
       element.append(content);
     }
   }
-});
+}]);

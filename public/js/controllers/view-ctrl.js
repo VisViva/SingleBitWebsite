@@ -1,4 +1,4 @@
-angular.module('ViewCtrl', []).controller('ViewController', function($scope, $routeParams, $sce, UserInterface, Resource, Comment, History) {
+angular.module('ViewCtrl', []).controller('ViewController', ['$scope', '$routeParams', '$sce', 'UserInterface', 'Resource', 'Comment', 'History', function($scope, $routeParams, $sce, UserInterface, Resource, Comment, History) {
 
   // Initialize
 
@@ -77,4 +77,4 @@ angular.module('ViewCtrl', []).controller('ViewController', function($scope, $ro
       });
     };
   }
-});
+}]);

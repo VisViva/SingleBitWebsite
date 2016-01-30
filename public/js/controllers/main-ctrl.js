@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($rootScope, $scope, UserInterface, Resource) {
+angular.module('MainCtrl', []).controller('MainController', ['$rootScope', '$scope', 'UserInterface', 'Resource', function($rootScope, $scope, UserInterface, Resource) {
 
   // Initialize user interface
 
@@ -71,4 +71,4 @@ angular.module('MainCtrl', []).controller('MainController', function($rootScope,
     UserInterface.hideMenu();
     UserInterface.gotoLocation(location);
   };
-});
+}]);

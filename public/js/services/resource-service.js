@@ -1,4 +1,4 @@
-angular.module('ResourceService', []).factory('Resource', ['$q', '$timeout','$http','spinnerService', function($q, $timeout, $http, spinnerService) {
+angular.module('ResourceService', []).factory('Resource', ['$q', '$http', function($q, $http) {
 
   var resource = this;
 

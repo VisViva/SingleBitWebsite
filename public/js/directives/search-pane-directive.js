@@ -1,4 +1,4 @@
-angular.module('SearchPaneDirective', []).directive('searchPane', function ($compile, $timeout) {
+angular.module('SearchPaneDirective', []).directive('searchPane', ['$compile', '$timeout', function ($compile, $timeout) {
   return {
     scope: {
       model: '=ngModel',
@@ -54,4 +54,4 @@ angular.module('SearchPaneDirective', []).directive('searchPane', function ($com
       element.append(content);
     }
   }
-});
+}]);

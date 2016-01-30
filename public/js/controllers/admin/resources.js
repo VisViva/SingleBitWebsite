@@ -1,4 +1,4 @@
-angular.module('ResourcesCtrl', []).controller('ResourcesController', function($scope, $location, $routeParams, UserInterface, Authorization, Resource){
+angular.module('ResourcesCtrl', []).controller('ResourcesController', ['$scope', '$routeParams', 'UserInterface', 'Authorization', 'Resource', function($scope, $routeParams, UserInterface, Authorization, Resource){
 
   // Initialize
 
@@ -84,4 +84,4 @@ angular.module('ResourcesCtrl', []).controller('ResourcesController', function($
 
   $scope.refresh();
 
-});
+}]);

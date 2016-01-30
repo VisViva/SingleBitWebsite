@@ -1,4 +1,4 @@
-angular.module('MessageCtrl', []).controller('MessageController', function($scope, $location, $routeParams, $sce, UserInterface, Authorization, Message){
+angular.module('MessageCtrl', []).controller('MessageController', ['$scope', '$routeParams', '$sce', 'UserInterface', 'Message', function($scope, $routeParams, $sce, UserInterface, Message){
 
   // Initialize
 
@@ -19,4 +19,4 @@ angular.module('MessageCtrl', []).controller('MessageController', function($scop
   $scope.goBack = function(){
     UserInterface.gotoLocation('admin/messages');
   }
-});
+}]);

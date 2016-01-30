@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', function($scope, $timeout, $routeParams, UserInterface, Resource, Authorization){
+angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$timeout', '$routeParams', 'UserInterface', 'Resource', function($scope, $timeout, $routeParams, UserInterface, Resource){
 
   // Initialize
 
@@ -132,4 +132,4 @@ angular.module('PublishCtrl', []).controller('PublishController', function($scop
       $scope.resource.thumbnail = 'data:' + $scope.thumbnail.filetype + ';base64,' + $scope.thumbnail.base64;
     });
   };
-});
+}]);

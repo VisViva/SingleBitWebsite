@@ -1,4 +1,4 @@
-angular.module('DropdownDirective', []).directive('dropdown', function ($compile) {
+angular.module('DropdownDirective', []).directive('dropdown', ['$compile', function ($compile) {
   return {
     scope: {
       options: '=options',
@@ -26,4 +26,4 @@ angular.module('DropdownDirective', []).directive('dropdown', function ($compile
       element.append(content);
     }
   }
-});
+}]);

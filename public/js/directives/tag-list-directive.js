@@ -1,4 +1,4 @@
-angular.module('TagListDirective', []).directive('tagList', function ($compile){
+angular.module('TagListDirective', []).directive('tagList', ['$compile', function ($compile){
   return {
     scope: {
       model: '=ngModel',
@@ -18,4 +18,4 @@ angular.module('TagListDirective', []).directive('tagList', function ($compile){
       element.append(content);
     }
   }
-  });
+}]);

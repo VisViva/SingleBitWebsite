@@ -1,4 +1,4 @@
-angular.module('SearchCtrl', []).controller('SearchController', function($scope, $location, $routeParams, UserInterface, Resource, History) {
+angular.module('SearchCtrl', []).controller('SearchController', ['$scope', '$routeParams', 'UserInterface', 'Resource', 'History', function($scope, $routeParams, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -40,4 +40,4 @@ angular.module('SearchCtrl', []).controller('SearchController', function($scope,
     History.saveAsLastRoute();
     UserInterface.gotoLocation('view/' + id);
   };
-});
+}]);

@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', []).controller('FeedController', function($scope, $location, $routeParams, UserInterface, Resource, History) {
+angular.module('FeedCtrl', []).controller('FeedController', ['$scope', '$routeParams', 'UserInterface', 'Resource', 'History', function($scope, $routeParams, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -45,4 +45,4 @@ angular.module('FeedCtrl', []).controller('FeedController', function($scope, $lo
   $scope.changeType = function(type){
     UserInterface.gotoLocation('feed/' + type + '/' + 1);
   };
-});
+}]);

@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     del = require('del'),
     gp_concat = require('gulp-concat'),
     gp_replace = require('gulp-replace'),
+    gp_uglifyjs = require('gulp-uglifyjs'),
     gp_cssmin = require('gulp-cssmin');
 
 var scripts = {
@@ -100,7 +101,7 @@ gulp.task('routes', ['cleanup-pre'], function(){
 
 gulp.task('combine-scripts', ['routes'], function(){
     return gulp.src(scripts.scripts)
-        .pipe(gp_concat('scripts.min.js'))
+        .pipe(gp_uglifyjs('scripts.min.js', {mangle:false}))
         .pipe(gulp.dest('public/dist/js'));
 });
 

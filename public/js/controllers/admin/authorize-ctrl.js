@@ -1,4 +1,4 @@
-angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($scope, Authorization, UserInterface) {
+angular.module('AuthorizeCtrl', []).controller('AuthorizeController', ['$scope', 'Authorization', 'UserInterface', function($scope, Authorization, UserInterface) {
 
   // Initialization
 
@@ -14,4 +14,4 @@ angular.module('AuthorizeCtrl', []).controller('AuthorizeController', function($
       alert("Wrong username / password!");
     });
   };
-});
+}]);

@@ -1,4 +1,4 @@
-angular.module('TypeCtrl', []).controller('TypeController', function($scope, $location, $routeParams, UserInterface, Resource, History) {
+angular.module('TypeCtrl', []).controller('TypeController', ['$scope', '$routeParams', 'UserInterface', 'Resource', 'History', function($scope, $routeParams, UserInterface, Resource, History) {
 
   // Initialize
 
@@ -40,4 +40,4 @@ angular.module('TypeCtrl', []).controller('TypeController', function($scope, $lo
     History.saveAsLastRoute();
     UserInterface.gotoLocation('view/' + id);
   };
-});
+}]);

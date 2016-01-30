@@ -1,4 +1,4 @@
-angular.module('ContactCtrl', []).controller('ContactController', function($scope, UserInterface, Message) {
+angular.module('ContactCtrl', []).controller('ContactController', ['$scope', 'UserInterface', 'Message', function($scope, UserInterface, Message) {
 
   // Initialize
 
@@ -20,4 +20,4 @@ angular.module('ContactCtrl', []).controller('ContactController', function($scop
       });
     };
   }
-});
+}]);

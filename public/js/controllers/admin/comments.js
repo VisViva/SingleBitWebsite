@@ -1,4 +1,4 @@
-angular.module('CommentsCtrl', []).controller('CommentsController', function($scope, $location, $routeParams, UserInterface, Authorization, Comment){
+angular.module('CommentsCtrl', []).controller('CommentsController', ['$scope', '$routeParams', 'UserInterface', 'Authorization', 'Comment', function($scope, $routeParams, UserInterface, Authorization, Comment){
 
   // Initialize
 
@@ -52,4 +52,4 @@ angular.module('CommentsCtrl', []).controller('CommentsController', function($sc
   // Get List
 
   $scope.getComments();
-});
+}]);

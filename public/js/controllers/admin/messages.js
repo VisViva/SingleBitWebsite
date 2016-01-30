@@ -1,4 +1,4 @@
-angular.module('MessagesCtrl', []).controller('MessagesController', function($scope, $location, $routeParams, UserInterface, Authorization, Message){
+angular.module('MessagesCtrl', []).controller('MessagesController', ['$scope', '$routeParams', 'UserInterface', 'Authorization', 'Message', function($scope, $routeParams, UserInterface, Authorization, Message){
 
   // Initialize
 
@@ -74,4 +74,4 @@ angular.module('MessagesCtrl', []).controller('MessagesController', function($sc
   // Get List
 
   $scope.refresh();
-});
+}]);

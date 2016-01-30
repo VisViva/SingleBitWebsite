@@ -1,5 +1,5 @@
-angular.module('ProjectsCtrl', []).controller('ProjectsController', function($scope, UserInterface) {
-  
+angular.module('ProjectsCtrl', []).controller('ProjectsController', ['$scope', 'UserInterface', function($scope, UserInterface) {
+
   // Initialize
 
   UserInterface.fillNavbar();
@@ -9,4 +9,4 @@ angular.module('ProjectsCtrl', []).controller('ProjectsController', function($sc
   $scope.openProjectsOfType = function(type){
       UserInterface.gotoLocation('projects/type/' + type);
   };
-});
+}]);
