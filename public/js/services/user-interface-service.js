@@ -1,10 +1,11 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', function($location, $timeout, spinnerService) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', 'Authorization', function($location, $timeout, spinnerService, Authorization) {
 
   var userInterface = this;
 
   userInterface.classes = {};
   userInterface.selectedView = 'home';
   userInterface.zoomInEnabled = false;
+  userInterface.animationsInProgress = false;
   userInterface.scrollbarTemplate = {
     scrollButtons:{
       enable: false
@@ -47,19 +48,36 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
 
   // Navigation
 
-  userInterface.gotoLocation = function(location){
+  userInterface.changeLocation = function(location){
     if ($location.path() != '/' + location){
-      userInterface.zoomOut();
-      if (location != 'home') userInterface.fillNavbar();
-      $timeout(function(){
-        spinnerService.show('viewSpinner');
-        $location.url('/' + location);
-        $location.path('/' + location);
-        userInterface.selectedView = location.split('/')[0];
-        userInterface.updateService();
-        if (location == 'home') userInterface.emptyNavbar();
-        userInterface.zoomIn();
-      }, 300);
+      if (userInterface.animationsInProgress == false)
+      {
+        userInterface.animationsInProgress = true;
+        userInterface.zoomOut();
+        if (location != 'home') userInterface.fillNavbar();
+        $timeout(function(){
+          spinnerService.show('viewSpinner');
+          $location.url('/' + location);
+          $location.path('/' + location);
+          userInterface.selectedView = location.split('/')[0];
+          userInterface.updateService();
+          if (location == 'home') userInterface.emptyNavbar();
+          userInterface.zoomIn();
+        }, 300);
+      }
+    }
+  };
+  userInterface.gotoLocation = function(location){
+    if (location.split('/')[0] == 'admin'){
+      Authorization.check().then(function(data){
+        if (data.data.success == true){
+          userInterface.changeLocation(location);
+        } else {
+          userInterface.changeLocation('admin/authorize');
+        }
+      });
+    } else {
+      userInterface.changeLocation(location);
     }
   };
   userInterface.contentLoaded = function(){
@@ -76,6 +94,7 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     else {
       $('.move-above').removeClass('move-above').addClass('move-center');
       userInterface.zoomInEnabled = false;
+      setTimeout(function(){ userInterface.animationsInProgress = false; }, 300);
     }
   };
   userInterface.zoomOut = function(){

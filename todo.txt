@@ -1,3 +1,4 @@
 . Convert String type to Buffer for images
 . Improve scrolling on touch devices - https://jamesflorentino.github.io/nanoScrollerJS/
 . Double click on menu items results in freezing
+. Minify
