@@ -10,7 +10,7 @@ module.exports = function(root){
 
   // Authentication
 
-  Router.post('/api/register', AccountController.register);
+  Router.post('/api/register', AccountController.isAuthenticated, AccountController.register);
   Router.post('/api/login', Passport.authenticate('local'), AccountController.login);
   Router.get('/api/logout', AccountController.isAuthenticated, AccountController.logout);
   Router.get('/api/check', AccountController.check);
