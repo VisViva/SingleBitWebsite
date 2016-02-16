@@ -18,6 +18,8 @@ angular.module('CommentsCtrl', []).controller('CommentsController', ['$scope', '
     Comment.list($routeParams.id).then(function(data){
       if (data.data.success == true){
         $scope.comments = data.data.data.docs;
+      } else {
+        $scope.comments = [];
       }
       $scope.loading = false;
     });

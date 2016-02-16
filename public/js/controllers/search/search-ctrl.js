@@ -16,11 +16,11 @@ angular.module('SearchCtrl', []).controller('SearchController', ['$scope', '$rou
       $scope.resources = data.data.data.docs;
       $scope.page = data.data.data.page;
       $scope.total = data.data.data.total;
-      $scope.loading = false;
     } else {
       if ($scope.page != 1) UserInterface.gotoLocation('search/' + $scope.text + '/1');
-      else UserInterface.gotoLocation('404');
+      else $scope.total = 0;
     }
+    $scope.loading = false;
   });
 
   $scope.getPagesArray = function()

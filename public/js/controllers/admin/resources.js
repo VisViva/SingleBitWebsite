@@ -36,7 +36,6 @@ angular.module('ResourcesCtrl', []).controller('ResourcesController', ['$scope',
         $scope.resources = data.data.data.docs;
         $scope.page = data.data.data.page;
         $scope.total = data.data.data.total;
-        $scope.loading = false;
       } else {
         if ($scope.page != 1) UserInterface.gotoLocation('admin/messages');
         else $scope.total = 0;
