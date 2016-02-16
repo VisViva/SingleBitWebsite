@@ -38,7 +38,7 @@ module.exports = {
           res.send({ success : true, data : { docs : comments }});
           console.log("Comment list for resource " + req.params.resource + " has been successfully acquired!");
         } else {
-          res.send({ success : false });
+          res.send({ success : true, data : { docs : [] } });
           console.log("No comments for resource " + req.params.resource + "!");
         }
       } else {
