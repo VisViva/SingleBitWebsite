@@ -34,11 +34,11 @@ tags-input .tags {
   transition: all 0.5s;
 }
 tags-input .tags.focused {
-  outline: none;
-  -webkit-box-shadow: 0 0 3px #FCAC45!important;
-  -moz-box-shadow: 0 0 3px #FCAC45!important;
-  box-shadow: 0 0 3px #FCAC45!important;
-  border: 1px solid #FCAC45;
+	border-color: #5A5A5A;
+	outline: 0;
+	-webkit-box-shadow: 0 0 3px #888888!important;
+  -moz-box-shadow: 0 0 3px #888888!important;
+	box-shadow: 0 0 3px #888888!important;
 }
 tags-input .tags .tag-list {
   margin: 0;
