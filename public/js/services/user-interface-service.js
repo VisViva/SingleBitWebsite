@@ -1,4 +1,4 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', 'Authorization', '$rootScope', function($location, $timeout, spinnerService, Authorizationm, $rootScope) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$rootScope', '$location','$timeout','spinnerService', 'Authorization', function($rootScope, $location, $timeout, spinnerService, Authorization) {
 
   var userInterface = this;
 
