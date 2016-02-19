@@ -1,4 +1,4 @@
-angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', 'Authorization', function($location, $timeout, spinnerService, Authorization) {
+angular.module('UserInterfaceService', []).factory('UserInterface', ['$location','$timeout','spinnerService', 'Authorization', '$rootScope', function($location, $timeout, spinnerService, Authorizationm, $rootScope) {
 
   var userInterface = this;
 
@@ -23,6 +23,18 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
   // Initialization
 
   userInterface.initializeService = function(classes){
+    // Respond to explicit history back action
+
+    $rootScope.$on('$locationChangeSuccess', function() {
+      var location = $location.path().split('/');
+      if (location[1] == ''){
+        $location.url('/home');
+        userInterface.selectedView = 'home';
+      } else {
+        userInterface.selectedView = location[1]
+      }
+    });
+
     userInterface.classes = classes;
     userInterface.calculateDimensions();
 
@@ -37,8 +49,6 @@ angular.module('UserInterfaceService', []).factory('UserInterface', ['$location'
     });
   };
   userInterface.loadRequestedLocation = function(){
-    var location = $location.path().split('/');
-    userInterface.selectedView = location[1];
     $timeout(function(){ userInterface.zoomIn(); }, 300);
   }
   userInterface.updateService = function(){

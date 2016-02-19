@@ -10,6 +10,11 @@
       <span style="font-size:13px; color:#CCC" ng-bind="'(' + total + ')'" ng-hide="loading"></span>
     </div>
     <div class="da-5"></div>
+    <div class="section-title center text-center" ng-show="!loading && (total == 0)">
+      <div style="height:80px;"></div>
+      <span>Sorry, there are no activities marked with this tag</span>
+      <div style="height:80px;"></div>
+    </div>
     <div class="container">
       <div class="spinner da-45" ng-show="loading"></div>
       <div ng-repeat="resource in resources" ng-hide="loading">

@@ -5,7 +5,7 @@ angular.module('SearchCtrl', []).controller('SearchController', ['$scope', '$rou
   UserInterface.fillNavbar();
   $scope.text = $routeParams.text;
   $scope.page = $routeParams.page;
-  $scope.total = 1;
+  $scope.total = 0;
   $scope.itemsPerPage = 8;
   $scope.loading = true;
 
