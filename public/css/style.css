@@ -260,12 +260,13 @@
   -ms-transition: all .5s;
   -o-transition: all .5s;
   transition: all .5s;
-  box-shadow: 0 3px 0 rgba(0,255,255,0.5),0 -3px 0 rgba(255,0,0,0.5);
+	cursor: pointer;
+	cursor: hand;
+	border: 2px solid #FFF;
 }
 .profile-image:hover
 {
 	width: 220px;
-	box-shadow: 0 2px 0 red,0 -2px 0 #0ff;
 }
 .profile-info
 {
