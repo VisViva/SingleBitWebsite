@@ -25,7 +25,7 @@ angular.module('ViewItemDirective', []).directive('viewItem', ['$compile', funct
                             <img ng-show="!showThumbnailIfExists();" ng-src="{{placeholder}}" class="img-responsive full-width">\
                             <div class="view-item-icon-container">\
                               <span ng-show="showIf(' + "'Music'" + ')"class="fa fa-music music-fix"></span>\
-                              <span ng-show="showIf(' + "'Diary'" + ')"class="fa fa-youtube diary-fix"></span>\
+                              <span ng-show="showIf(' + "'Tutorial'" + ')"class="fa fa-youtube tutorial-fix"></span>\
                               <span ng-show="showIf(' + "'Blog'" + ')"class="fa fa-rss blog-fix"></span>\
                               <span ng-show="showIf(' + "'Podcast'" + ')"class="fa fa-microphone podcast-fix"></span>\
                               <span ng-show="showIf(' + "'Article'" + ')"class="fa fa-newspaper-o article-fix"></span>\

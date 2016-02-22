@@ -11,7 +11,7 @@ angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$t
 
   $scope.resourceTypes = [
     "Article",
-    "Diary",
+    "Tutorial",
     "Podcast",
     "Blog"
   ];
@@ -74,7 +74,7 @@ angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$t
         {
           $scope.resourceTypes = [
             "Article",
-            "Diary",
+            "Tutorial",
             "Podcast",
             "Blog"
           ];
