@@ -6260,7 +6260,7 @@
 
       $video.addClass('note-video-clip');
 
-      return $video[0];
+      return $('<div>').addClass('videoWrapper').append($($video))[0];
     };
 
 
