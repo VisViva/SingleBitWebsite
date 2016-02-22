@@ -53,13 +53,13 @@
 	-ms-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.2),0 -1px 0 rgba(0,255,255,0.2);
+	text-shadow: 0 1px 0 rgba(0,255,255,0.2),0 -1px 0 rgba(255,0,0,0.2);
 }
 .navbar-button:hover, .navbar-button:focus, .navbar-button.active
 {
 	text-decoration: none;
 	color: #FFF;
-	text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
+	text-shadow: 0 1px 0 rgba(0,255,255,0.7),0 -1px 0 rgba(255,0,0,0.7);
 }
 #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 	border-color: #444;
@@ -106,7 +106,7 @@
 .navbar-default .navbar-toggle:hover > .icon-bar
 {
 	background-color: transparent;
-	box-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.4);
+	box-shadow: 0 1px 0 rgba(0,255,255,0.4),0 -1px 0 rgba(255,0,0,0.4);
 }
 .navbar-default .navbar-toggle:hover > .icon-bar
 {
@@ -151,7 +151,7 @@
 }
 .down-arrow-button
 {
-	text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.4);
+	text-shadow: 0 1px 0 rgba(0,255,255,0.4),0 -1px 0 rgba(255,0,0,0.4);
   padding: 10px 15px;
   color: #FFF;
   border: 2px solid #FFFFFF;
@@ -160,7 +160,7 @@
   transition: all .5s;
   cursor: pointer;
   cursor: hand;
-  box-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.4);
+  box-shadow: 0 1px 0 rgba(0,255,255,0.4),0 -1px 0 rgba(255,0,0,0.4);
 	z-index:1000;
 }
 .down-arrow-button:hover
@@ -217,7 +217,6 @@
 {
 	color: #ffffff;
 	background: #5A5A5A;
-  text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
 }
 
 /* About Section ********************************************/
@@ -261,7 +260,7 @@
   -ms-transition: all .5s;
   -o-transition: all .5s;
   transition: all .5s;
-  box-shadow: 0 3px 0 rgba(255,0,0,.5),0 -3px 0 rgba(0,255,255,.5);
+  box-shadow: 0 3px 0 rgba(0,255,255,0.5),0 -3px 0 rgba(255,0,0,0.5);
 }
 .profile-image:hover
 {
@@ -572,7 +571,6 @@ button.btn.tf-btn.btn-default
 	padding-top: 3px;
 	padding-left: 1px;
 	color: #FFFFFF;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.4);
 }
 .view-item-number
 {
@@ -750,13 +748,11 @@ button.btn.tf-btn.btn-default
 {
 	font-weight: 400;
 	color: #5A5A5A;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.2),0 -1px 0 rgba(0,255,255,0.2);
 }
 .custom-link:hover
 {
 	font-weight: 400;
 	color: #5A5A5A;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.2),0 -1px 0 rgba(0,255,255,0.2);
 }
 .circle-button
 {
@@ -771,7 +767,6 @@ button.btn.tf-btn.btn-default
 	-ms-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
-  text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.5);
 }
 .circle-button:hover
 {
@@ -790,7 +785,6 @@ button.btn.tf-btn.btn-default
 	-ms-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
-  text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.5);
 }
 .circle-button-small:hover
 {
@@ -869,11 +863,11 @@ button.btn.tf-btn.btn-default
 }
 .chromatic-abberation
 {
-	text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
+	text-shadow: 0 1px 0 rgba(0,255,255,0.7),0 -1px 0 rgba(255,0,0,0.7);
 }
 .chromatic-abberation-light
 {
-	text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.5);
+	text-shadow: 0 1px 0 rgba(0,255,255,0.4),0 -1px 0 rgba(255,0,0,0.4);
 }
 
 /* General **************************************************/
@@ -889,32 +883,26 @@ body, html
 h1
 {
 	text-transform: uppercase;
-	text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
 }
 h1 strong
 {
 	font-weight: 900;
-	text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
 }
 h2
 {
 	text-transform: uppercase;	line-height: 20px;margin: 0;
-	text-shadow: 0px 1px 0 red, 0px -1px 0 cyan;
 }
 h3
 {
 	font-size: 18px; font-weight: 900;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.4),0 -1px 0 rgba(0,255,255,0.5);
 }
 h4
 {
 	text-transform: uppercase;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.2),0 -1px 0 rgba(0,255,255,0.2);
 }
 h5
 {
 	text-transform: uppercase;	font-weight: 700; line-height: 20px;
-	text-shadow: 0 1px 0 rgba(255,0,0,0.2),0 -1px 0 rgba(0,255,255,0.2);
 }
 p
 {
