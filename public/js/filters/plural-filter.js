@@ -6,11 +6,11 @@ angular.module('PluralFilter', []).filter('Plural', function (){
     } else {
       if (input == 'blog')
       {
-        output += 'blog entries';
+        output = 'blog entries';
       }
       else {
         output += 's';
-      }      
+      }
     }
 
     return output;
