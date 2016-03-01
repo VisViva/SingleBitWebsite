@@ -57,7 +57,7 @@ angular.module('ResourceService', []).factory('Resource', ['$q', '$http', functi
     },
 
     listWithoutThumbnails : function(page, itemsPerPage){
-      return resource.list('all', 'none', page, itemsPerPage);
+      return resource.list('activity', 'none', page, itemsPerPage);
     },
 
     listWithThumbnails : function(type, page, itemsPerPage){

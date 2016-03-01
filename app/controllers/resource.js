@@ -137,9 +137,10 @@ module.exports = {
       case 'feed': { fields = 'thumbnail'; break; }
     };
     switch(type){
-      case 'All': { criteria = {}; break; }
-      case 'Activity': case 'Project': { criteria = { contentType: type }; break; }
-      default: { criteria = { resourceType: type }; break; }
+      case 'Game': case '2D art': case '3D art': case 'Music': { criteria = { resourceType: type }; break; }
+      case 'Blog': case 'Tutorial': case 'Podcast': case 'Article': { criteria = { resourceType: type }; break; }
+
+      default: { criteria = {}; break; }
     };
     Resource.find(criteria).
     select(fields + ' contentType resourceType title date number').

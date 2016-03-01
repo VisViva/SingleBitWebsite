@@ -53,13 +53,13 @@
 	-ms-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
-	text-shadow: 0 1px 0 rgba(0,255,255,0.2),0 -1px 0 rgba(255,0,0,0.2);
+	text-shadow: 0 1px 0 rgba(0,255,255,0),0 -1px 0 rgba(255,0,0,0);
 }
 .navbar-button:hover, .navbar-button:focus, .navbar-button.active
 {
 	text-decoration: none;
 	color: #FFF;
-	text-shadow: 0 1px 0 rgba(0,255,255,0.7),0 -1px 0 rgba(255,0,0,0.7);
+	text-shadow: 0 1px 0 rgba(0,255,255,1),0 -1px 0 rgba(255,0,0,1);
 }
 #menu.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 	border-color: #444;
