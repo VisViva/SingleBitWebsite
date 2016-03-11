@@ -259,7 +259,6 @@
   transition: all .5s;
 	cursor: pointer;
 	cursor: hand;
-	border: 2px solid #FFF;
 }
 .profile-image:hover
 {
