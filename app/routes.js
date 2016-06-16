@@ -41,6 +41,12 @@ module.exports = function(root){
 
   Router.get('/api/tags/:query', TagController.suggest);
 
+  // Live demos
+
+  Router.get('/demos/gpu_accelerated_particles', function (req, res) {
+    res.sendFile(root + '/public/views/demos/gpu_accelerated_particles/index.html');
+  });
+
   // Single Page Application
 
   Router.get('*', function (req, res) {
