@@ -1,3 +1,1 @@
-My personal protfolio website.
-
-http://singlebit.org/
+#My personal blog / portfolio web application
