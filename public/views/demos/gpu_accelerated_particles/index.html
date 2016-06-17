@@ -1,18 +1,34 @@
 <html>
 <head>
   <title>Single Bit - GPU Accelerated Particles</title>
-
-  <!-- Favicons -->
-
-  <link rel="shortcut icon" href="img/company/LOGO_COMPACT.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="img/company/APPLE_TOUCH_ICON.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="img/company/APPLE_TOUCH_ICON_72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="img/company/APPLE_TOUCH_ICON_14.png">
-
-  <link type="text/css" rel="stylesheet" href="./stylesheets.min.css"/>
-  <script type="text/javascript" src="./scripts.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="stylesheets.min.css"/>
+  <script type="text/javascript" src="scripts.min.js"></script>
 </head>
 <body>
+  <div id="ui">
+    <div id="buffer_caption_holder" class="hidden">
+      <span class="buffer_caption"><span id="buffer_caption">RENDER</span> BUFFER</span>
+    </div>
+    <div id="logo-holder">
+      <div id="logo">Sb</div>
+    </div>
+    <div id="info">
+      <div style="font-size: 20px; margin-bottom:5px;">GPU ACCELERATED PARTICLES</div>
+      <div style="font-size: 11px; margin-bottom:30px;">CODE AND MUSIC BY ABDULALI GASIMOV</div>
+      <div style="font-size: 11px; margin-bottom:30px;">
+        <span>LMB - ROTATE</span></br>
+        <span>MMB - PAN</span></br>
+        <span>RMB - GRADUAL ZOOM</span></br>
+        <span>MOUSE WHEEL - SNAPPING ZOOM</span></br>
+        <span>Z - RESET CAMERA</span></br>
+        <span>SPACE - PLAY / PAUSE SIMULATION</span></br>
+        <span>R - RESET SIMULATION</span></br>
+        <span>CTRL+LMB - PLACE GRAVITY CENTER</span></br>
+        <span>B - SWITCH BUFFER</span></br>
+      </div>
+      <div style="font-size: 20px;">PRESS SPACE TO START!</div>
+    </div>
+  </div>
   <canvas id="viewport"></canvas>
 </body>
 </html>
