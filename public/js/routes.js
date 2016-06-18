@@ -130,14 +130,6 @@ angular.module('Routes', []).config(['$routeProvider', '$locationProvider', func
   .when('/404', {
     templateUrl: '../views/system/404.html'
   })
-  // Not found
-  .when('/demos/gpu_accelerated_particles', {
-    resolve: {
-      load : function(){
-        window.location.href = '../views/demos/gpu_accelerated_particles/index.html';
-      }
-    }
-  })
   // Otherwise
   .otherwise({
     redirectTo: '/404'
