@@ -1,4 +1,0 @@
-0S6SkO3uiCsz
-
-// Reroute port 80 to 8080
-sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
