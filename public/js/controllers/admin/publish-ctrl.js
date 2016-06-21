@@ -83,6 +83,7 @@ angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$t
         case 'Project':
         {
           $scope.resourceTypes = [
+            "Software",
             "Game",
             "2D art",
             "3D art",

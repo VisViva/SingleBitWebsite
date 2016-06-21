@@ -137,7 +137,7 @@ module.exports = {
       case 'feed': { fields = 'thumbnail'; break; }
     };
     switch(type){
-      case 'Game': case '2D art': case '3D art': case 'Music': { criteria = { resourceType: type }; break; }
+      case 'Software': case 'Game': case '2D art': case '3D art': case 'Music': { criteria = { resourceType: type }; break; }
       case 'Blog': case 'Tutorial': case 'Podcast': case 'Article': { criteria = { resourceType: type }; break; }
       case 'Activity': { criteria = {}; break; }
       default: { criteria = {}; break; }

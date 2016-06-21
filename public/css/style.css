@@ -615,6 +615,10 @@ button.btn.tf-btn.btn-default
 	margin-bottom: 10px !important;
 	font-size: 60px !important;
 }
+.software-fix {
+    margin-left: 10px!important;
+    margin-bottom: -2px!important;
+}
 .music-fix
 {
 	margin-left: 12px !important;
