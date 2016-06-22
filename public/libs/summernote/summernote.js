@@ -6013,8 +6013,8 @@
         '</div>' +
         '<div class="form-group" style="overflow:auto;">' +
         '<label>' + lang.image.url + '</label>' +
-        '<input class="note-image-url" type="text" style="display: block;border-radius: 7px; color: #5A5A5A; border-bottom-right-radius: 0px; border-top-right-radius: 0px; border-right: 0px !important; height: 34px; padding: 6px 12px; background-color: #fff; border: 1px solid #ccc; width: 90%; float: left; outline: none;" />' +
-        '<button href="#" class="btn btn-default" style="display: block; border-radius: 7px; color: #5A5A5A; border-bottom-left-radius: 0px; border-top-left-radius: 0px; height: 34px; float: left; width: 10%; outline: none; text-align: center; padding: 0px;">...</button>' +
+        '<input class="note-image-url" type="text"/>' +
+        '<button href="#" class="btn btn-default note-upload-image-btn">...</button>' +
         '</div>';
         var footer = '<button href="#" class="btn btn-warning note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
 
@@ -6066,7 +6066,8 @@
         return $.Deferred(function (deferred) {
           var $imageInput = self.$dialog.find('.note-image-input'),
           $imageUrl = self.$dialog.find('.note-image-url'),
-          $imageBtn = self.$dialog.find('.note-image-btn');
+          $imageBtn = self.$dialog.find('.note-image-btn'),
+          $imageUploadBtn = self.$dialog.find('.note-upload-image-btn');
 
           ui.onDialogShown(self.$dialog, function () {
             context.triggerEvent('dialog.shown');
@@ -6081,8 +6082,13 @@
 
           $imageBtn.click(function (event) {
             event.preventDefault();
-
             deferred.resolve($imageUrl.val());
+          });
+
+          $imageUploadBtn.click(function (event) {
+            event.preventDefault();
+            alert("Test");
+            //deferred.resolve($imageUrl.val());
           });
 
           $imageUrl.on('keyup paste', function () {
