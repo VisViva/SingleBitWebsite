@@ -6013,7 +6013,8 @@
         '</div>' +
         '<div class="form-group" style="overflow:auto;">' +
         '<label>' + lang.image.url + '</label>' +
-        '<input class="note-image-url form-control col-md-12" type="text" />' +
+        '<input class="note-image-url" type="text" style="display: block;border-radius: 7px; color: #5A5A5A; border-bottom-right-radius: 0px; border-top-right-radius: 0px; border-right: 0px !important; height: 34px; padding: 6px 12px; background-color: #fff; border: 1px solid #ccc; width: 90%; float: left; outline: none;" />' +
+        '<button href="#" class="btn btn-default" style="display: block; border-radius: 7px; color: #5A5A5A; border-bottom-left-radius: 0px; border-top-left-radius: 0px; height: 34px; float: left; width: 10%; outline: none; text-align: center; padding: 0px;">...</button>' +
         '</div>';
         var footer = '<button href="#" class="btn btn-warning note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
 
