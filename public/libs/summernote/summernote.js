@@ -6098,6 +6098,8 @@
           ui.onDialogShown(self.$dialog, function () {
             context.triggerEvent('dialog.shown');
 
+            $imageInput.val('');
+
             $imageInput.on('change', function (evt) {
               upload(evt);
             })
