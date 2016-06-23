@@ -122,7 +122,7 @@ module.exports = {
             foundResource.tags.push({ _id : element._doc._id, text : element._doc.text});
           });
           res.send({ success: true, data: foundResource });
-          console.log("Resource with id " + req.body.id + " has been successfully found!");
+          console.log("Resource with id " + req.params.id + " has been successfully found!");
         });
       } else {
         console.log(err);

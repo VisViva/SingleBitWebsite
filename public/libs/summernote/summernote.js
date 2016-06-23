@@ -6007,8 +6007,7 @@
         }
 
         var body = '<div class="form-group note-group-select-from-files">' +
-        '<label>' + lang.image.selectFromFiles + '</label>' +
-        '<input class="note-image-input form-control" type="file" name="files" accept="image/*" multiple="multiple" />' +
+        '<input class="note-image-input" type="file" name="files" accept="image/*" multiple="multiple" style="display:none;" />' +
         imageLimitation +
         '</div>' +
         '<div class="form-group" style="overflow:auto;">' +
@@ -6069,1026 +6068,1026 @@
           $imageBtn = self.$dialog.find('.note-image-btn'),
           $imageUploadBtn = self.$dialog.find('.note-upload-image-btn');
 
-          var inline = function(evt){
-            deferred.resolve(evt.target.files || evt.target.value);
-            $imageInput.val('');
-          };
           var upload = function(evt){
             var f = evt.target.files[0];
             if (f) {
               var r = new FileReader();
               r.onload = function(e) {
                 var contents = e.target.result;
-                alert( "Got the file.n"
-                +"name: " + f.name + "n"
-                +"type: " + f.type + "n"
-                +"size: " + f.size + " bytesn"
-                + "starts with: " + contents.substr(1, contents.indexOf("n"))
-              );
-            }
-            r.readAsText(f);
-          } else {
-            alert("Failed to load file");
-          }
-          switcher = inline;
-        };
-
-        var switcher = inline;
-
-        ui.onDialogShown(self.$dialog, function () {
-          context.triggerEvent('dialog.shown');
-
-          $imageInput.on('change', function (evt) {
-            switcher(evt);
-          })
-
-          $imageBtn.click(function (event) {
-            event.preventDefault();
-            deferred.resolve($imageUrl.val());
-          });
-
-          $imageUploadBtn.unbind('click').click(function (event) {
-            event.preventDefault();
-            switcher = upload;
-            $imageInput.trigger('click');
-          });
-
-          $imageUrl.on('keyup paste', function () {
-            var url = $imageUrl.val();
-            ui.toggleBtn($imageBtn, url);
-          }).val('').trigger('focus');
-          self.bindEnterKey($imageUrl, $imageBtn);
-        });
-
-        ui.onDialogHidden(self.$dialog, function () {
-          $imageInput.off('change');
-          $imageUrl.off('keyup paste keypress');
-          $imageBtn.off('click');
-
-          if (deferred.state() === 'pending') {
-            deferred.reject();
-          }
-        });
-
-        ui.showDialog(self.$dialog);
-      });
-    };
-  };
-
-  var ImagePopover = function (context) {
-    var ui = $.summernote.ui;
-
-    var options = context.options;
-
-    this.shouldInitialize = function () {
-      return !list.isEmpty(options.popover.image);
-    };
-
-    this.initialize = function () {
-      this.$popover = ui.popover({
-        className: 'note-image-popover'
-      }).render().appendTo('body');
-      var $content = this.$popover.find('.popover-content');
-
-      context.invoke('buttons.build', $content, options.popover.image);
-    };
-
-    this.destroy = function () {
-      this.$popover.remove();
-    };
-
-    this.update = function (target) {
-      if (dom.isImg(target)) {
-        var pos = dom.posFromPlaceholder(target);
-        this.$popover.css({
-          display: 'block',
-          left: pos.left,
-          top: pos.top
-        });
-      } else {
-        this.hide();
-      }
-    };
-
-    this.hide = function () {
-      this.$popover.hide();
-    };
-  };
-
-  var VideoDialog = function (context) {
-    var self = this;
-    var ui = $.summernote.ui;
-
-    var $editor = context.layoutInfo.editor;
-    var options = context.options;
-    var lang = options.langInfo;
-
-    this.initialize = function () {
-      var $container = options.dialogsInBody ? $(document.body) : $editor;
-
-      var body = '<div class="form-group row-fluid">' +
-      '<label>' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
-      '<input class="note-video-url form-control span12" type="text" />' +
-      '</div>';
-      var footer = '<button href="#" class="btn btn-warning note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
-
-      this.$dialog = ui.dialog({
-        title: lang.video.insert,
-        fade: options.dialogsFade,
-        body: body,
-        footer: footer
-      }).render().appendTo($container);
-    };
-
-    this.destroy = function () {
-      ui.hideDialog(this.$dialog);
-      this.$dialog.remove();
-    };
-
-    this.bindEnterKey = function ($input, $btn) {
-      $input.on('keypress', function (event) {
-        if (event.keyCode === key.code.ENTER) {
-          $btn.trigger('click');
-        }
-      });
-    };
-
-    this.createVideoNode = function (url) {
-      // video url patterns(youtube, instagram, vimeo, dailymotion, youku, mp4, ogg, webm)
-      var ytRegExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-      var ytMatch = url.match(ytRegExp);
-
-      var igRegExp = /\/\/instagram.com\/p\/(.[a-zA-Z0-9_-]*)/;
-      var igMatch = url.match(igRegExp);
-
-      var vRegExp = /\/\/vine.co\/v\/(.[a-zA-Z0-9]*)/;
-      var vMatch = url.match(vRegExp);
-
-      var vimRegExp = /\/\/(player.)?vimeo.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/;
-      var vimMatch = url.match(vimRegExp);
-
-      var dmRegExp = /.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/;
-      var dmMatch = url.match(dmRegExp);
-
-      var youkuRegExp = /\/\/v\.youku\.com\/v_show\/id_(\w+)=*\.html/;
-      var youkuMatch = url.match(youkuRegExp);
-
-      var mp4RegExp = /^.+.(mp4|m4v)$/;
-      var mp4Match = url.match(mp4RegExp);
-
-      var oggRegExp = /^.+.(ogg|ogv)$/;
-      var oggMatch = url.match(oggRegExp);
-
-      var webmRegExp = /^.+.(webm)$/;
-      var webmMatch = url.match(webmRegExp);
-
-      var $video;
-      if (ytMatch && ytMatch[1].length === 11) {
-        var youtubeId = ytMatch[1];
-        $video = $('<iframe>')
-        .attr('frameborder', 0)
-        .attr('src', '//www.youtube.com/embed/' + youtubeId)
-        .attr('width', '640').attr('height', '360');
-      } else if (igMatch && igMatch[0].length) {
-        $video = $('<iframe>')
-        .attr('frameborder', 0)
-        .attr('src', igMatch[0] + '/embed/')
-        .attr('width', '612').attr('height', '710')
-        .attr('scrolling', 'no')
-        .attr('allowtransparency', 'true');
-      } else if (vMatch && vMatch[0].length) {
-        $video = $('<iframe>')
-        .attr('frameborder', 0)
-        .attr('src', vMatch[0] + '/embed/simple')
-        .attr('width', '600').attr('height', '600')
-        .attr('class', 'vine-embed');
-      } else if (vimMatch && vimMatch[3].length) {
-        $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
-        .attr('frameborder', 0)
-        .attr('src', '//player.vimeo.com/video/' + vimMatch[3])
-        .attr('width', '640').attr('height', '360');
-      } else if (dmMatch && dmMatch[2].length) {
-        $video = $('<iframe>')
-        .attr('frameborder', 0)
-        .attr('src', '//www.dailymotion.com/embed/video/' + dmMatch[2])
-        .attr('width', '640').attr('height', '360');
-      } else if (youkuMatch && youkuMatch[1].length) {
-        $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
-        .attr('frameborder', 0)
-        .attr('height', '498')
-        .attr('width', '510')
-        .attr('src', '//player.youku.com/embed/' + youkuMatch[1]);
-      } else if (mp4Match || oggMatch || webmMatch) {
-        $video = $('<video controls>')
-        .attr('src', url)
-        .attr('width', '640').attr('height', '360');
-      } else {
-        // this is not a known video link. Now what, Cat? Now what?
-        return false;
-      }
-
-      $video.addClass('note-video-clip');
-
-      return $('<div>').addClass('videoWrapper').append($($video))[0];
-    };
-
-
-    this.show = function () {
-      var text = context.invoke('editor.getSelectedText');
-      context.invoke('editor.saveRange');
-      this.showVideoDialog(text).then(function (url) {
-        // [workaround] hide dialog before restore range for IE range focus
-        ui.hideDialog(self.$dialog);
-        context.invoke('editor.restoreRange');
-
-        // build node
-        var $node = self.createVideoNode(url);
-
-        if ($node) {
-          // insert video node
-          context.invoke('editor.insertNode', $node);
-        }
-      }).fail(function () {
-        context.invoke('editor.restoreRange');
-      });
-    };
-
-    /**
-    * show image dialog
-    *
-    * @param {jQuery} $dialog
-    * @return {Promise}
-    */
-    this.showVideoDialog = function (text) {
-      return $.Deferred(function (deferred) {
-        var $videoUrl = self.$dialog.find('.note-video-url'),
-        $videoBtn = self.$dialog.find('.note-video-btn');
-
-        ui.onDialogShown(self.$dialog, function () {
-          context.triggerEvent('dialog.shown');
-
-          $videoUrl.val(text).on('input', function () {
-            ui.toggleBtn($videoBtn, $videoUrl.val());
-          }).trigger('focus');
-
-          $videoBtn.click(function (event) {
-            event.preventDefault();
-
-            deferred.resolve($videoUrl.val());
-          });
-
-          self.bindEnterKey($videoUrl, $videoBtn);
-        });
-
-        ui.onDialogHidden(self.$dialog, function () {
-          $videoUrl.off('input');
-          $videoBtn.off('click');
-
-          if (deferred.state() === 'pending') {
-            deferred.reject();
-          }
-        });
-
-        ui.showDialog(self.$dialog);
-      });
-    };
-  };
-
-  var SoundcloudDialog = function (context) {
-    var self = this;
-    var ui = $.summernote.ui;
-
-    var $editor = context.layoutInfo.editor;
-    var options = context.options;
-    var lang = options.langInfo;
-
-    this.initialize = function () {
-      var $container = options.dialogsInBody ? $(document.body) : $editor;
-
-      var body = '<div class="form-group row-fluid">' +
-      '<label>' + lang.audio.url + ' <small class="text-muted">' + lang.audio.providers + '</small></label>' +
-      '<input class="note-video-url form-control span12" type="text" />' +
-      '</div>';
-      var footer = '<button href="#" class="btn btn-warning note-video-btn disabled" disabled>' + lang.audio.insert + '</button>';
-
-      this.$dialog = ui.dialog({
-        title: lang.audio.insert,
-        fade: options.dialogsFade,
-        body: body,
-        footer: footer
-      }).render().appendTo($container);
-    };
-
-    this.destroy = function () {
-      ui.hideDialog(this.$dialog);
-      this.$dialog.remove();
-    };
-
-    this.bindEnterKey = function ($input, $btn) {
-      $input.on('keypress', function (event) {
-        if (event.keyCode === key.code.ENTER) {
-          $btn.trigger('click');
-        }
-      });
-    };
-
-    this.createVideoNode = function (url) {
-      var $video = $('<iframe>')
-      .attr('frameborder', 'no')
-      .attr('src', 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + url + '&amp;color=FCAC45')
-      .attr('width', '100%').attr('height', '166')
-      .attr('scrolling', 'no')
-      $video.addClass('note-video-clip');
-      return $video[0];
-    };
-
-    this.show = function () {
-      var text = context.invoke('editor.getSelectedText');
-      context.invoke('editor.saveRange');
-      this.showVideoDialog(text).then(function (url) {
-        // [workaround] hide dialog before restore range for IE range focus
-        ui.hideDialog(self.$dialog);
-        context.invoke('editor.restoreRange');
-
-        // build node
-        var $node = self.createVideoNode(url);
-
-        if ($node) {
-          // insert video node
-          context.invoke('editor.insertNode', $node);
-        }
-      }).fail(function () {
-        context.invoke('editor.restoreRange');
-      });
-    };
-
-    this.showVideoDialog = function (text) {
-      return $.Deferred(function (deferred) {
-        var $videoUrl = self.$dialog.find('.note-video-url'),
-        $videoBtn = self.$dialog.find('.note-video-btn');
-
-        ui.onDialogShown(self.$dialog, function () {
-          context.triggerEvent('dialog.shown');
-
-          $videoUrl.val(text).on('input', function () {
-            ui.toggleBtn($videoBtn, $videoUrl.val());
-          }).trigger('focus');
-
-          $videoBtn.click(function (event) {
-            event.preventDefault();
-
-            deferred.resolve($videoUrl.val());
-          });
-
-          self.bindEnterKey($videoUrl, $videoBtn);
-        });
-
-        ui.onDialogHidden(self.$dialog, function () {
-          $videoUrl.off('input');
-          $videoBtn.off('click');
-
-          if (deferred.state() === 'pending') {
-            deferred.reject();
-          }
-        });
-
-        ui.showDialog(self.$dialog);
-      });
-    };
-  };
-
-  var HelpDialog = function (context) {
-    var self = this;
-    var ui = $.summernote.ui;
-
-    var $editor = context.layoutInfo.editor;
-    var options = context.options;
-    var lang = options.langInfo;
-
-    this.createShortCutList = function () {
-      var keyMap = options.keyMap[agent.isMac ? 'mac' : 'pc'];
-      return Object.keys(keyMap).map(function (key) {
-        var command = keyMap[key];
-        var $row = $('<div><div class="help-list-item"/></div>');
-        $row.append($('<label><kbd>' + key + '</kdb></label>').css({
-          'width': 180,
-          'margin-right': 10
-        })).append($('<span/>').html(context.memo('help.' + command) || command));
-        return $row.html();
-      }).join('');
-    };
-
-    this.initialize = function () {
-      var $container = options.dialogsInBody ? $(document.body) : $editor;
-
-      var body = [
-        '<p class="text-center">',
-        '<a href="//summernote.org/" target="_blank">Summernote 0.7.3</a> · ',
-        '<a href="//github.com/summernote/summernote" target="_blank">Project</a> · ',
-        '<a href="//github.com/summernote/summernote/issues" target="_blank">Issues</a>',
-        '</p>'
-      ].join('');
-
-      this.$dialog = ui.dialog({
-        title: lang.options.help,
-        fade: options.dialogsFade,
-        body: this.createShortCutList(),
-        footer: body,
-        callback: function ($node) {
-          $node.find('.modal-body').css({
-            'max-height': 300,
-            'overflow': 'scroll'
-          });
-        }
-      }).render().appendTo($container);
-    };
-
-    this.destroy = function () {
-      ui.hideDialog(this.$dialog);
-      this.$dialog.remove();
-    };
-
-    /**
-    * show help dialog
-    *
-    * @return {Promise}
-    */
-    this.showHelpDialog = function () {
-      return $.Deferred(function (deferred) {
-        ui.onDialogShown(self.$dialog, function () {
-          context.triggerEvent('dialog.shown');
-          deferred.resolve();
-        });
-        ui.showDialog(self.$dialog);
-      }).promise();
-    };
-
-    this.show = function () {
-      context.invoke('editor.saveRange');
-      this.showHelpDialog().then(function () {
-        context.invoke('editor.restoreRange');
-      });
-    };
-  };
-
-  var AirPopover = function (context) {
-    var self = this;
-    var ui = $.summernote.ui;
-
-    var options = context.options;
-
-    var AIR_MODE_POPOVER_X_OFFSET = 20;
-
-    this.events = {
-      'summernote.keyup summernote.mouseup summernote.scroll': function () {
-        self.update();
-      },
-      'summernote.change summernote.dialog.shown': function () {
-        self.hide();
-      },
-      'summernote.focusout': function (we, e) {
-        // [workaround] Firefox doesn't support relatedTarget on focusout
-        //  - Ignore hide action on focus out in FF.
-        if (agent.isFF) {
-          return;
-        }
-
-        if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(self.$popover[0]))) {
-          self.hide();
-        }
-      }
-    };
-
-    this.shouldInitialize = function () {
-      return options.airMode && !list.isEmpty(options.popover.air);
-    };
-
-    this.initialize = function () {
-      this.$popover = ui.popover({
-        className: 'note-air-popover'
-      }).render().appendTo('body');
-      var $content = this.$popover.find('.popover-content');
-
-      context.invoke('buttons.build', $content, options.popover.air);
-    };
-
-    this.destroy = function () {
-      this.$popover.remove();
-    };
-
-    this.update = function () {
-      var styleInfo = context.invoke('editor.currentStyle');
-      if (styleInfo.range && !styleInfo.range.isCollapsed()) {
-        var rect = list.last(styleInfo.range.getClientRects());
-        if (rect) {
-          var bnd = func.rect2bnd(rect);
-          this.$popover.css({
-            display: 'block',
-            left: Math.max(bnd.left + bnd.width / 2, 0) - AIR_MODE_POPOVER_X_OFFSET,
-            top: bnd.top + bnd.height
-          });
-        }
-      } else {
-        this.hide();
-      }
-    };
-
-    this.hide = function () {
-      this.$popover.hide();
-    };
-  };
-
-  var HintPopover = function (context) {
-    var self = this;
-    var ui = $.summernote.ui;
-
-    var POPOVER_DIST = 5;
-    var hint = context.options.hint || [];
-    var direction = context.options.hintDirection || 'bottom';
-    var hints = $.isArray(hint) ? hint : [hint];
-
-    this.events = {
-      'summernote.keyup': function (we, e) {
-        if (!e.isDefaultPrevented()) {
-          self.handleKeyup(e);
-        }
-      },
-      'summernote.keydown': function (we, e) {
-        self.handleKeydown(e);
-      },
-      'summernote.dialog.shown': function () {
-        self.hide();
-      }
-    };
-
-    this.shouldInitialize = function () {
-      return hints.length > 0;
-    };
-
-    this.initialize = function () {
-      this.lastWordRange = null;
-      this.$popover = ui.popover({
-        className: 'note-hint-popover',
-        hideArrow: true,
-        direction: ''
-      }).render().appendTo('body');
-
-      this.$popover.hide();
-
-      this.$content = this.$popover.find('.popover-content');
-
-      this.$content.on('click', '.note-hint-item', function () {
-        self.$content.find('.active').removeClass('active');
-        $(this).addClass('active');
-        self.replace();
-      });
-    };
-
-    this.destroy = function () {
-      this.$popover.remove();
-    };
-
-    this.selectItem = function ($item) {
-      this.$content.find('.active').removeClass('active');
-      $item.addClass('active');
-
-      this.$content[0].scrollTop = $item[0].offsetTop - (this.$content.innerHeight() / 2);
-    };
-
-    this.moveDown = function () {
-      var $current = this.$content.find('.note-hint-item.active');
-      var $next = $current.next();
-
-      if ($next.length) {
-        this.selectItem($next);
-      } else {
-        var $nextGroup = $current.parent().next();
-
-        if (!$nextGroup.length) {
-          $nextGroup = this.$content.find('.note-hint-group').first();
-        }
-
-        this.selectItem($nextGroup.find('.note-hint-item').first());
-      }
-    };
-
-    this.moveUp = function () {
-      var $current = this.$content.find('.note-hint-item.active');
-      var $prev = $current.prev();
-
-      if ($prev.length) {
-        this.selectItem($prev);
-      } else {
-        var $prevGroup = $current.parent().prev();
-
-        if (!$prevGroup.length) {
-          $prevGroup = this.$content.find('.note-hint-group').last();
-        }
-
-        this.selectItem($prevGroup.find('.note-hint-item').last());
-      }
-    };
-
-    this.replace = function () {
-      var $item = this.$content.find('.note-hint-item.active');
-
-      if ($item.length) {
-        var node = this.nodeFromItem($item);
-        this.lastWordRange.insertNode(node);
-        range.createFromNode(node).collapse().select();
-
-        this.lastWordRange = null;
-        this.hide();
-        context.invoke('editor.focus');
-      }
-
-    };
-
-    this.nodeFromItem = function ($item) {
-      var hint = hints[$item.data('index')];
-      var item = $item.data('item');
-      var node = hint.content ? hint.content(item) : item;
-      if (typeof node === 'string') {
-        node = dom.createText(node);
-      }
-      return node;
-    };
-
-    this.createItemTemplates = function (hintIdx, items) {
-      var hint = hints[hintIdx];
-      return items.map(function (item, idx) {
-        var $item = $('<div class="note-hint-item"/>');
-        $item.append(hint.template ? hint.template(item) : item + '');
-        $item.data({
-          'index': hintIdx,
-          'item': item
-        });
-
-        if (hintIdx === 0 && idx === 0) {
-          $item.addClass('active');
-        }
-        return $item;
-      });
-    };
-
-    this.handleKeydown = function (e) {
-      if (!this.$popover.is(':visible')) {
-        return;
-      }
-
-      if (e.keyCode === key.code.ENTER) {
-        e.preventDefault();
-        this.replace();
-      } else if (e.keyCode === key.code.UP) {
-        e.preventDefault();
-        this.moveUp();
-      } else if (e.keyCode === key.code.DOWN) {
-        e.preventDefault();
-        this.moveDown();
-      }
-    };
-
-    this.searchKeyword = function (index, keyword, callback) {
-      var hint = hints[index];
-      if (hint && hint.match.test(keyword) && hint.search) {
-        var matches = hint.match.exec(keyword);
-        hint.search(matches[1], callback);
-      } else {
-        callback();
-      }
-    };
-
-    this.createGroup = function (idx, keyword) {
-      var $group = $('<div class="note-hint-group note-hint-group-' + idx + '"/>');
-      this.searchKeyword(idx, keyword, function (items) {
-        items = items || [];
-        if (items.length) {
-          $group.html(self.createItemTemplates(idx, items));
-          self.show();
-        }
-      });
-
-      return $group;
-    };
-
-    this.handleKeyup = function (e) {
-      if (list.contains([key.code.ENTER, key.code.UP, key.code.DOWN], e.keyCode)) {
-        if (e.keyCode === key.code.ENTER) {
-          if (this.$popover.is(':visible')) {
-            return;
-          }
-        }
-      } else {
-        var wordRange = context.invoke('editor.createRange').getWordRange();
-        var keyword = wordRange.toString();
-        if (hints.length && keyword) {
-          this.$content.empty();
-
-          var bnd = func.rect2bnd(list.last(wordRange.getClientRects()));
-          if (bnd) {
-
-            this.$popover.hide();
-
-            this.lastWordRange = wordRange;
-
-            hints.forEach(function (hint, idx) {
-              if (hint.match.test(keyword)) {
-                self.createGroup(idx, keyword).appendTo(self.$content);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/api/file/upload');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success == true){
+                          deferred.resolve("http://" + window.location.hostname + ":" + + window.location.port + data.path);
+                        } else {
+                          alert("Could not upload file to server!");
+                        }
+                    }
+                }
+                xhr.send(JSON.stringify({contents: contents}));
               }
+              r.readAsDataURL(f);
+            } else {
+              alert("Failed to load file");
+            }
+          };
+
+          ui.onDialogShown(self.$dialog, function () {
+            context.triggerEvent('dialog.shown');
+
+            $imageInput.on('change', function (evt) {
+              upload(evt);
+            })
+
+            $imageBtn.click(function (event) {
+              event.preventDefault();
+              deferred.resolve($imageUrl.val());
             });
 
-            // set position for popover after group is created
-            if (direction === 'top') {
-              this.$popover.css({
-                left: bnd.left,
-                top: bnd.top - this.$popover.outerHeight() - POPOVER_DIST
-              });
-            } else {
-              this.$popover.css({
-                left: bnd.left,
-                top: bnd.top + bnd.height + POPOVER_DIST
-              });
-            }
+            $imageUploadBtn.unbind('click').click(function (event) {
+              event.preventDefault();
+              $imageInput.trigger('click');
+            });
 
+            $imageUrl.on('keyup paste', function () {
+              var url = $imageUrl.val();
+              ui.toggleBtn($imageBtn, url);
+            }).val('').trigger('focus');
+            self.bindEnterKey($imageUrl, $imageBtn);
+          });
+
+          ui.onDialogHidden(self.$dialog, function () {
+            $imageInput.off('change');
+            $imageUrl.off('keyup paste keypress');
+            $imageBtn.off('click');
+
+            if (deferred.state() === 'pending') {
+              deferred.reject();
+            }
+          });
+
+          ui.showDialog(self.$dialog);
+        });
+      };
+    };
+
+    var ImagePopover = function (context) {
+      var ui = $.summernote.ui;
+
+      var options = context.options;
+
+      this.shouldInitialize = function () {
+        return !list.isEmpty(options.popover.image);
+      };
+
+      this.initialize = function () {
+        this.$popover = ui.popover({
+          className: 'note-image-popover'
+        }).render().appendTo('body');
+        var $content = this.$popover.find('.popover-content');
+
+        context.invoke('buttons.build', $content, options.popover.image);
+      };
+
+      this.destroy = function () {
+        this.$popover.remove();
+      };
+
+      this.update = function (target) {
+        if (dom.isImg(target)) {
+          var pos = dom.posFromPlaceholder(target);
+          this.$popover.css({
+            display: 'block',
+            left: pos.left,
+            top: pos.top
+          });
+        } else {
+          this.hide();
+        }
+      };
+
+      this.hide = function () {
+        this.$popover.hide();
+      };
+    };
+
+    var VideoDialog = function (context) {
+      var self = this;
+      var ui = $.summernote.ui;
+
+      var $editor = context.layoutInfo.editor;
+      var options = context.options;
+      var lang = options.langInfo;
+
+      this.initialize = function () {
+        var $container = options.dialogsInBody ? $(document.body) : $editor;
+
+        var body = '<div class="form-group row-fluid">' +
+        '<label>' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
+        '<input class="note-video-url form-control span12" type="text" />' +
+        '</div>';
+        var footer = '<button href="#" class="btn btn-warning note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
+
+        this.$dialog = ui.dialog({
+          title: lang.video.insert,
+          fade: options.dialogsFade,
+          body: body,
+          footer: footer
+        }).render().appendTo($container);
+      };
+
+      this.destroy = function () {
+        ui.hideDialog(this.$dialog);
+        this.$dialog.remove();
+      };
+
+      this.bindEnterKey = function ($input, $btn) {
+        $input.on('keypress', function (event) {
+          if (event.keyCode === key.code.ENTER) {
+            $btn.trigger('click');
+          }
+        });
+      };
+
+      this.createVideoNode = function (url) {
+        // video url patterns(youtube, instagram, vimeo, dailymotion, youku, mp4, ogg, webm)
+        var ytRegExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        var ytMatch = url.match(ytRegExp);
+
+        var igRegExp = /\/\/instagram.com\/p\/(.[a-zA-Z0-9_-]*)/;
+        var igMatch = url.match(igRegExp);
+
+        var vRegExp = /\/\/vine.co\/v\/(.[a-zA-Z0-9]*)/;
+        var vMatch = url.match(vRegExp);
+
+        var vimRegExp = /\/\/(player.)?vimeo.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/;
+        var vimMatch = url.match(vimRegExp);
+
+        var dmRegExp = /.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/;
+        var dmMatch = url.match(dmRegExp);
+
+        var youkuRegExp = /\/\/v\.youku\.com\/v_show\/id_(\w+)=*\.html/;
+        var youkuMatch = url.match(youkuRegExp);
+
+        var mp4RegExp = /^.+.(mp4|m4v)$/;
+        var mp4Match = url.match(mp4RegExp);
+
+        var oggRegExp = /^.+.(ogg|ogv)$/;
+        var oggMatch = url.match(oggRegExp);
+
+        var webmRegExp = /^.+.(webm)$/;
+        var webmMatch = url.match(webmRegExp);
+
+        var $video;
+        if (ytMatch && ytMatch[1].length === 11) {
+          var youtubeId = ytMatch[1];
+          $video = $('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', '//www.youtube.com/embed/' + youtubeId)
+          .attr('width', '640').attr('height', '360');
+        } else if (igMatch && igMatch[0].length) {
+          $video = $('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', igMatch[0] + '/embed/')
+          .attr('width', '612').attr('height', '710')
+          .attr('scrolling', 'no')
+          .attr('allowtransparency', 'true');
+        } else if (vMatch && vMatch[0].length) {
+          $video = $('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', vMatch[0] + '/embed/simple')
+          .attr('width', '600').attr('height', '600')
+          .attr('class', 'vine-embed');
+        } else if (vimMatch && vimMatch[3].length) {
+          $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+          .attr('frameborder', 0)
+          .attr('src', '//player.vimeo.com/video/' + vimMatch[3])
+          .attr('width', '640').attr('height', '360');
+        } else if (dmMatch && dmMatch[2].length) {
+          $video = $('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', '//www.dailymotion.com/embed/video/' + dmMatch[2])
+          .attr('width', '640').attr('height', '360');
+        } else if (youkuMatch && youkuMatch[1].length) {
+          $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+          .attr('frameborder', 0)
+          .attr('height', '498')
+          .attr('width', '510')
+          .attr('src', '//player.youku.com/embed/' + youkuMatch[1]);
+        } else if (mp4Match || oggMatch || webmMatch) {
+          $video = $('<video controls>')
+          .attr('src', url)
+          .attr('width', '640').attr('height', '360');
+        } else {
+          // this is not a known video link. Now what, Cat? Now what?
+          return false;
+        }
+
+        $video.addClass('note-video-clip');
+
+        return $('<div>').addClass('videoWrapper').append($($video))[0];
+      };
+
+
+      this.show = function () {
+        var text = context.invoke('editor.getSelectedText');
+        context.invoke('editor.saveRange');
+        this.showVideoDialog(text).then(function (url) {
+          // [workaround] hide dialog before restore range for IE range focus
+          ui.hideDialog(self.$dialog);
+          context.invoke('editor.restoreRange');
+
+          // build node
+          var $node = self.createVideoNode(url);
+
+          if ($node) {
+            // insert video node
+            context.invoke('editor.insertNode', $node);
+          }
+        }).fail(function () {
+          context.invoke('editor.restoreRange');
+        });
+      };
+
+      /**
+      * show image dialog
+      *
+      * @param {jQuery} $dialog
+      * @return {Promise}
+      */
+      this.showVideoDialog = function (text) {
+        return $.Deferred(function (deferred) {
+          var $videoUrl = self.$dialog.find('.note-video-url'),
+          $videoBtn = self.$dialog.find('.note-video-btn');
+
+          ui.onDialogShown(self.$dialog, function () {
+            context.triggerEvent('dialog.shown');
+
+            $videoUrl.val(text).on('input', function () {
+              ui.toggleBtn($videoBtn, $videoUrl.val());
+            }).trigger('focus');
+
+            $videoBtn.click(function (event) {
+              event.preventDefault();
+
+              deferred.resolve($videoUrl.val());
+            });
+
+            self.bindEnterKey($videoUrl, $videoBtn);
+          });
+
+          ui.onDialogHidden(self.$dialog, function () {
+            $videoUrl.off('input');
+            $videoBtn.off('click');
+
+            if (deferred.state() === 'pending') {
+              deferred.reject();
+            }
+          });
+
+          ui.showDialog(self.$dialog);
+        });
+      };
+    };
+
+    var SoundcloudDialog = function (context) {
+      var self = this;
+      var ui = $.summernote.ui;
+
+      var $editor = context.layoutInfo.editor;
+      var options = context.options;
+      var lang = options.langInfo;
+
+      this.initialize = function () {
+        var $container = options.dialogsInBody ? $(document.body) : $editor;
+
+        var body = '<div class="form-group row-fluid">' +
+        '<label>' + lang.audio.url + ' <small class="text-muted">' + lang.audio.providers + '</small></label>' +
+        '<input class="note-video-url form-control span12" type="text" />' +
+        '</div>';
+        var footer = '<button href="#" class="btn btn-warning note-video-btn disabled" disabled>' + lang.audio.insert + '</button>';
+
+        this.$dialog = ui.dialog({
+          title: lang.audio.insert,
+          fade: options.dialogsFade,
+          body: body,
+          footer: footer
+        }).render().appendTo($container);
+      };
+
+      this.destroy = function () {
+        ui.hideDialog(this.$dialog);
+        this.$dialog.remove();
+      };
+
+      this.bindEnterKey = function ($input, $btn) {
+        $input.on('keypress', function (event) {
+          if (event.keyCode === key.code.ENTER) {
+            $btn.trigger('click');
+          }
+        });
+      };
+
+      this.createVideoNode = function (url) {
+        var $video = $('<iframe>')
+        .attr('frameborder', 'no')
+        .attr('src', 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + url + '&amp;color=FCAC45')
+        .attr('width', '100%').attr('height', '166')
+        .attr('scrolling', 'no')
+        $video.addClass('note-video-clip');
+        return $video[0];
+      };
+
+      this.show = function () {
+        var text = context.invoke('editor.getSelectedText');
+        context.invoke('editor.saveRange');
+        this.showVideoDialog(text).then(function (url) {
+          // [workaround] hide dialog before restore range for IE range focus
+          ui.hideDialog(self.$dialog);
+          context.invoke('editor.restoreRange');
+
+          // build node
+          var $node = self.createVideoNode(url);
+
+          if ($node) {
+            // insert video node
+            context.invoke('editor.insertNode', $node);
+          }
+        }).fail(function () {
+          context.invoke('editor.restoreRange');
+        });
+      };
+
+      this.showVideoDialog = function (text) {
+        return $.Deferred(function (deferred) {
+          var $videoUrl = self.$dialog.find('.note-video-url'),
+          $videoBtn = self.$dialog.find('.note-video-btn');
+
+          ui.onDialogShown(self.$dialog, function () {
+            context.triggerEvent('dialog.shown');
+
+            $videoUrl.val(text).on('input', function () {
+              ui.toggleBtn($videoBtn, $videoUrl.val());
+            }).trigger('focus');
+
+            $videoBtn.click(function (event) {
+              event.preventDefault();
+
+              deferred.resolve($videoUrl.val());
+            });
+
+            self.bindEnterKey($videoUrl, $videoBtn);
+          });
+
+          ui.onDialogHidden(self.$dialog, function () {
+            $videoUrl.off('input');
+            $videoBtn.off('click');
+
+            if (deferred.state() === 'pending') {
+              deferred.reject();
+            }
+          });
+
+          ui.showDialog(self.$dialog);
+        });
+      };
+    };
+
+    var HelpDialog = function (context) {
+      var self = this;
+      var ui = $.summernote.ui;
+
+      var $editor = context.layoutInfo.editor;
+      var options = context.options;
+      var lang = options.langInfo;
+
+      this.createShortCutList = function () {
+        var keyMap = options.keyMap[agent.isMac ? 'mac' : 'pc'];
+        return Object.keys(keyMap).map(function (key) {
+          var command = keyMap[key];
+          var $row = $('<div><div class="help-list-item"/></div>');
+          $row.append($('<label><kbd>' + key + '</kdb></label>').css({
+            'width': 180,
+            'margin-right': 10
+          })).append($('<span/>').html(context.memo('help.' + command) || command));
+          return $row.html();
+        }).join('');
+      };
+
+      this.initialize = function () {
+        var $container = options.dialogsInBody ? $(document.body) : $editor;
+
+        var body = [
+          '<p class="text-center">',
+          '<a href="//summernote.org/" target="_blank">Summernote 0.7.3</a> · ',
+          '<a href="//github.com/summernote/summernote" target="_blank">Project</a> · ',
+          '<a href="//github.com/summernote/summernote/issues" target="_blank">Issues</a>',
+          '</p>'
+        ].join('');
+
+        this.$dialog = ui.dialog({
+          title: lang.options.help,
+          fade: options.dialogsFade,
+          body: this.createShortCutList(),
+          footer: body,
+          callback: function ($node) {
+            $node.find('.modal-body').css({
+              'max-height': 300,
+              'overflow': 'scroll'
+            });
+          }
+        }).render().appendTo($container);
+      };
+
+      this.destroy = function () {
+        ui.hideDialog(this.$dialog);
+        this.$dialog.remove();
+      };
+
+      /**
+      * show help dialog
+      *
+      * @return {Promise}
+      */
+      this.showHelpDialog = function () {
+        return $.Deferred(function (deferred) {
+          ui.onDialogShown(self.$dialog, function () {
+            context.triggerEvent('dialog.shown');
+            deferred.resolve();
+          });
+          ui.showDialog(self.$dialog);
+        }).promise();
+      };
+
+      this.show = function () {
+        context.invoke('editor.saveRange');
+        this.showHelpDialog().then(function () {
+          context.invoke('editor.restoreRange');
+        });
+      };
+    };
+
+    var AirPopover = function (context) {
+      var self = this;
+      var ui = $.summernote.ui;
+
+      var options = context.options;
+
+      var AIR_MODE_POPOVER_X_OFFSET = 20;
+
+      this.events = {
+        'summernote.keyup summernote.mouseup summernote.scroll': function () {
+          self.update();
+        },
+        'summernote.change summernote.dialog.shown': function () {
+          self.hide();
+        },
+        'summernote.focusout': function (we, e) {
+          // [workaround] Firefox doesn't support relatedTarget on focusout
+          //  - Ignore hide action on focus out in FF.
+          if (agent.isFF) {
+            return;
+          }
+
+          if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(self.$popover[0]))) {
+            self.hide();
+          }
+        }
+      };
+
+      this.shouldInitialize = function () {
+        return options.airMode && !list.isEmpty(options.popover.air);
+      };
+
+      this.initialize = function () {
+        this.$popover = ui.popover({
+          className: 'note-air-popover'
+        }).render().appendTo('body');
+        var $content = this.$popover.find('.popover-content');
+
+        context.invoke('buttons.build', $content, options.popover.air);
+      };
+
+      this.destroy = function () {
+        this.$popover.remove();
+      };
+
+      this.update = function () {
+        var styleInfo = context.invoke('editor.currentStyle');
+        if (styleInfo.range && !styleInfo.range.isCollapsed()) {
+          var rect = list.last(styleInfo.range.getClientRects());
+          if (rect) {
+            var bnd = func.rect2bnd(rect);
+            this.$popover.css({
+              display: 'block',
+              left: Math.max(bnd.left + bnd.width / 2, 0) - AIR_MODE_POPOVER_X_OFFSET,
+              top: bnd.top + bnd.height
+            });
           }
         } else {
           this.hide();
         }
-      }
+      };
+
+      this.hide = function () {
+        this.$popover.hide();
+      };
     };
 
-    this.show = function () {
-      this.$popover.show();
-    };
-
-    this.hide = function () {
-      this.$popover.hide();
-    };
-  };
-
-
-  $.summernote = $.extend($.summernote, {
-    version: '0.7.3',
-    ui: ui,
-
-    plugins: {},
-
-    options: {
-      modules: {
-        'editor': Editor,
-        'clipboard': Clipboard,
-        'dropzone': Dropzone,
-        'codeview': Codeview,
-        'statusbar': Statusbar,
-        'fullscreen': Fullscreen,
-        'handle': Handle,
-        // FIXME: HintPopover must be front of autolink
-        //  - Script error about range when Enter key is pressed on hint popover
-        'hintPopover': HintPopover,
-        'autoLink': AutoLink,
-        'autoSync': AutoSync,
-        'placeholder': Placeholder,
-        'buttons': Buttons,
-        'toolbar': Toolbar,
-        'linkDialog': LinkDialog,
-        'linkPopover': LinkPopover,
-        'imageDialog': ImageDialog,
-        'imagePopover': ImagePopover,
-        'videoDialog': VideoDialog,
-        'soundcloudDialog': SoundcloudDialog,
-        'helpDialog': HelpDialog,
-        'airPopover': AirPopover
-      },
-
-      buttons: {},
-
-      lang: 'en-US',
-
-      // toolbar
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['fontname', ['fontname']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ],
-
-      // popover
-      popover: {
-        image: [
-          ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-          ['float', ['floatLeft', 'floatRight', 'floatNone']],
-          ['remove', ['removeMedia']]
-        ],
-        link: [
-          ['link', ['linkDialogShow', 'unlink']]
-        ],
-        air: [
-          ['color', ['color']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['para', ['ul', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture']]
-        ]
-      },
-
-      // air mode: inline editor
-      airMode: false,
-
-      width: null,
-      height: null,
-
-      focus: false,
-      tabSize: 4,
-      styleWithSpan: true,
-      shortcuts: true,
-      textareaAutoSync: true,
-      direction: null,
-
-      styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-
-      fontNames: [
-        'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
-        'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
-        'Tahoma', 'Times New Roman', 'Verdana'
-      ],
-
-      fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
-
-      // pallete colors(n x n)
-      colors: [
-        ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
-        ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'],
-        ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'],
-        ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'],
-        ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'],
-        ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'],
-        ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'],
-        ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']
-      ],
-
-      lineHeights: ['1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
-
-      tableClassName: 'table table-bordered',
-
-      insertTableMaxSize: {
-        col: 10,
-        row: 10
-      },
-
-      dialogsInBody: false,
-      dialogsFade: false,
-
-      maximumImageFileSize: null,
-
-      callbacks: {
-        onInit: null,
-        onFocus: null,
-        onBlur: null,
-        onEnter: null,
-        onKeyup: null,
-        onKeydown: null,
-        onSubmit: null,
-        onImageUpload: null,
-        onImageUploadError: null
-      },
-
-      codemirror: {
-        mode: 'text/html',
-        htmlMode: true,
-        lineNumbers: true
-      },
-
-      keyMap: {
-        pc: {
-          'ENTER': 'insertParagraph',
-          'CTRL+Z': 'undo',
-          'CTRL+Y': 'redo',
-          'TAB': 'tab',
-          'SHIFT+TAB': 'untab',
-          'CTRL+B': 'bold',
-          'CTRL+I': 'italic',
-          'CTRL+U': 'underline',
-          'CTRL+SHIFT+S': 'strikethrough',
-          'CTRL+BACKSLASH': 'removeFormat',
-          'CTRL+SHIFT+L': 'justifyLeft',
-          'CTRL+SHIFT+E': 'justifyCenter',
-          'CTRL+SHIFT+R': 'justifyRight',
-          'CTRL+SHIFT+J': 'justifyFull',
-          'CTRL+SHIFT+NUM7': 'insertUnorderedList',
-          'CTRL+SHIFT+NUM8': 'insertOrderedList',
-          'CTRL+LEFTBRACKET': 'outdent',
-          'CTRL+RIGHTBRACKET': 'indent',
-          'CTRL+NUM0': 'formatPara',
-          'CTRL+NUM1': 'formatH1',
-          'CTRL+NUM2': 'formatH2',
-          'CTRL+NUM3': 'formatH3',
-          'CTRL+NUM4': 'formatH4',
-          'CTRL+NUM5': 'formatH5',
-          'CTRL+NUM6': 'formatH6',
-          'CTRL+ENTER': 'insertHorizontalRule',
-          'CTRL+K': 'linkDialog.show'
-        },
-
-        mac: {
-          'ENTER': 'insertParagraph',
-          'CMD+Z': 'undo',
-          'CMD+SHIFT+Z': 'redo',
-          'TAB': 'tab',
-          'SHIFT+TAB': 'untab',
-          'CMD+B': 'bold',
-          'CMD+I': 'italic',
-          'CMD+U': 'underline',
-          'CMD+SHIFT+S': 'strikethrough',
-          'CMD+BACKSLASH': 'removeFormat',
-          'CMD+SHIFT+L': 'justifyLeft',
-          'CMD+SHIFT+E': 'justifyCenter',
-          'CMD+SHIFT+R': 'justifyRight',
-          'CMD+SHIFT+J': 'justifyFull',
-          'CMD+SHIFT+NUM7': 'insertUnorderedList',
-          'CMD+SHIFT+NUM8': 'insertOrderedList',
-          'CMD+LEFTBRACKET': 'outdent',
-          'CMD+RIGHTBRACKET': 'indent',
-          'CMD+NUM0': 'formatPara',
-          'CMD+NUM1': 'formatH1',
-          'CMD+NUM2': 'formatH2',
-          'CMD+NUM3': 'formatH3',
-          'CMD+NUM4': 'formatH4',
-          'CMD+NUM5': 'formatH5',
-          'CMD+NUM6': 'formatH6',
-          'CMD+ENTER': 'insertHorizontalRule',
-          'CMD+K': 'linkDialog.show'
-        }
-      },
-      icons: {
-        'align': 'fa fa-align-left',
-        'alignCenter': 'fa fa-align-center',
-        'alignJustify': 'fa fa-align-justify',
-        'alignLeft': 'fa fa-align-left',
-        'alignRight': 'fa fa-align-right',
-        'indent': 'fa fa-indent',
-        'outdent': 'fa fa-outdent',
-        'arrowsAlt': 'fa fa-arrows-alt',
-        'bold': 'fa fa-bold',
-        'caret': 'caret',
-        'circle': 'fa fa-circle',
-        'close': 'fa fa-close',
-        'code': 'fa fa-code',
-        'eraser': 'fa fa-eraser',
-        'font': 'fa fa-font',
-        'frame': 'fa fa-frame',
-        'italic': 'fa fa-italic',
-        'link': 'fa fa-link',
-        'unlink': 'fa fa-chain-broken',
-        'magic': 'fa fa-magic',
-        'menuCheck': 'fa fa-check',
-        'minus': 'fa fa-minus',
-        'orderedlist': 'fa fa-list-ol',
-        'pencil': 'fa fa-pencil',
-        'picture': 'fa fa-picture-o',
-        'question': 'fa fa-question',
-        'redo': 'fa fa-repeat',
-        'square': 'fa fa-square',
-        'strikethrough': 'fa fa-strikethrough',
-        'subscript': 'fa fa-subscript',
-        'superscript': 'fa fa-superscript',
-        'table': 'fa fa-table',
-        'textHeight': 'fa fa-text-height',
-        'trash': 'fa fa-trash',
-        'underline': 'fa fa-underline',
-        'undo': 'fa fa-undo',
-        'unorderedlist': 'fa fa-list-ul',
-        'video': 'fa fa-youtube-play'
-      }
-    }
-  });
-}));
-
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory(require('jquery'));
-  } else {
-    factory(window.jQuery);
-  }
-}(function ($) {
-  $.extend($.summernote.plugins, {
-    'soundcloud': function (context) {
+    var HintPopover = function (context) {
       var self = this;
       var ui = $.summernote.ui;
-      context.memo('button.soundcloud', function () {
-        var button = ui.button({
-          contents: '<i class="fa fa-soundcloud"/>',
-          tooltip: 'Sound / Music',
-          click: context.createInvokeHandler('soundcloudDialog.show')
+
+      var POPOVER_DIST = 5;
+      var hint = context.options.hint || [];
+      var direction = context.options.hintDirection || 'bottom';
+      var hints = $.isArray(hint) ? hint : [hint];
+
+      this.events = {
+        'summernote.keyup': function (we, e) {
+          if (!e.isDefaultPrevented()) {
+            self.handleKeyup(e);
+          }
+        },
+        'summernote.keydown': function (we, e) {
+          self.handleKeydown(e);
+        },
+        'summernote.dialog.shown': function () {
+          self.hide();
+        }
+      };
+
+      this.shouldInitialize = function () {
+        return hints.length > 0;
+      };
+
+      this.initialize = function () {
+        this.lastWordRange = null;
+        this.$popover = ui.popover({
+          className: 'note-hint-popover',
+          hideArrow: true,
+          direction: ''
+        }).render().appendTo('body');
+
+        this.$popover.hide();
+
+        this.$content = this.$popover.find('.popover-content');
+
+        this.$content.on('click', '.note-hint-item', function () {
+          self.$content.find('.active').removeClass('active');
+          $(this).addClass('active');
+          self.replace();
         });
-        var $soundcloud = button.render();
-        return $soundcloud;
-      });
-    },
-  });
-}));
+      };
+
+      this.destroy = function () {
+        this.$popover.remove();
+      };
+
+      this.selectItem = function ($item) {
+        this.$content.find('.active').removeClass('active');
+        $item.addClass('active');
+
+        this.$content[0].scrollTop = $item[0].offsetTop - (this.$content.innerHeight() / 2);
+      };
+
+      this.moveDown = function () {
+        var $current = this.$content.find('.note-hint-item.active');
+        var $next = $current.next();
+
+        if ($next.length) {
+          this.selectItem($next);
+        } else {
+          var $nextGroup = $current.parent().next();
+
+          if (!$nextGroup.length) {
+            $nextGroup = this.$content.find('.note-hint-group').first();
+          }
+
+          this.selectItem($nextGroup.find('.note-hint-item').first());
+        }
+      };
+
+      this.moveUp = function () {
+        var $current = this.$content.find('.note-hint-item.active');
+        var $prev = $current.prev();
+
+        if ($prev.length) {
+          this.selectItem($prev);
+        } else {
+          var $prevGroup = $current.parent().prev();
+
+          if (!$prevGroup.length) {
+            $prevGroup = this.$content.find('.note-hint-group').last();
+          }
+
+          this.selectItem($prevGroup.find('.note-hint-item').last());
+        }
+      };
+
+      this.replace = function () {
+        var $item = this.$content.find('.note-hint-item.active');
+
+        if ($item.length) {
+          var node = this.nodeFromItem($item);
+          this.lastWordRange.insertNode(node);
+          range.createFromNode(node).collapse().select();
+
+          this.lastWordRange = null;
+          this.hide();
+          context.invoke('editor.focus');
+        }
+
+      };
+
+      this.nodeFromItem = function ($item) {
+        var hint = hints[$item.data('index')];
+        var item = $item.data('item');
+        var node = hint.content ? hint.content(item) : item;
+        if (typeof node === 'string') {
+          node = dom.createText(node);
+        }
+        return node;
+      };
+
+      this.createItemTemplates = function (hintIdx, items) {
+        var hint = hints[hintIdx];
+        return items.map(function (item, idx) {
+          var $item = $('<div class="note-hint-item"/>');
+          $item.append(hint.template ? hint.template(item) : item + '');
+          $item.data({
+            'index': hintIdx,
+            'item': item
+          });
+
+          if (hintIdx === 0 && idx === 0) {
+            $item.addClass('active');
+          }
+          return $item;
+        });
+      };
+
+      this.handleKeydown = function (e) {
+        if (!this.$popover.is(':visible')) {
+          return;
+        }
+
+        if (e.keyCode === key.code.ENTER) {
+          e.preventDefault();
+          this.replace();
+        } else if (e.keyCode === key.code.UP) {
+          e.preventDefault();
+          this.moveUp();
+        } else if (e.keyCode === key.code.DOWN) {
+          e.preventDefault();
+          this.moveDown();
+        }
+      };
+
+      this.searchKeyword = function (index, keyword, callback) {
+        var hint = hints[index];
+        if (hint && hint.match.test(keyword) && hint.search) {
+          var matches = hint.match.exec(keyword);
+          hint.search(matches[1], callback);
+        } else {
+          callback();
+        }
+      };
+
+      this.createGroup = function (idx, keyword) {
+        var $group = $('<div class="note-hint-group note-hint-group-' + idx + '"/>');
+        this.searchKeyword(idx, keyword, function (items) {
+          items = items || [];
+          if (items.length) {
+            $group.html(self.createItemTemplates(idx, items));
+            self.show();
+          }
+        });
+
+        return $group;
+      };
+
+      this.handleKeyup = function (e) {
+        if (list.contains([key.code.ENTER, key.code.UP, key.code.DOWN], e.keyCode)) {
+          if (e.keyCode === key.code.ENTER) {
+            if (this.$popover.is(':visible')) {
+              return;
+            }
+          }
+        } else {
+          var wordRange = context.invoke('editor.createRange').getWordRange();
+          var keyword = wordRange.toString();
+          if (hints.length && keyword) {
+            this.$content.empty();
+
+            var bnd = func.rect2bnd(list.last(wordRange.getClientRects()));
+            if (bnd) {
+
+              this.$popover.hide();
+
+              this.lastWordRange = wordRange;
+
+              hints.forEach(function (hint, idx) {
+                if (hint.match.test(keyword)) {
+                  self.createGroup(idx, keyword).appendTo(self.$content);
+                }
+              });
+
+              // set position for popover after group is created
+              if (direction === 'top') {
+                this.$popover.css({
+                  left: bnd.left,
+                  top: bnd.top - this.$popover.outerHeight() - POPOVER_DIST
+                });
+              } else {
+                this.$popover.css({
+                  left: bnd.left,
+                  top: bnd.top + bnd.height + POPOVER_DIST
+                });
+              }
+
+            }
+          } else {
+            this.hide();
+          }
+        }
+      };
+
+      this.show = function () {
+        this.$popover.show();
+      };
+
+      this.hide = function () {
+        this.$popover.hide();
+      };
+    };
+
+
+    $.summernote = $.extend($.summernote, {
+      version: '0.7.3',
+      ui: ui,
+
+      plugins: {},
+
+      options: {
+        modules: {
+          'editor': Editor,
+          'clipboard': Clipboard,
+          'dropzone': Dropzone,
+          'codeview': Codeview,
+          'statusbar': Statusbar,
+          'fullscreen': Fullscreen,
+          'handle': Handle,
+          // FIXME: HintPopover must be front of autolink
+          //  - Script error about range when Enter key is pressed on hint popover
+          'hintPopover': HintPopover,
+          'autoLink': AutoLink,
+          'autoSync': AutoSync,
+          'placeholder': Placeholder,
+          'buttons': Buttons,
+          'toolbar': Toolbar,
+          'linkDialog': LinkDialog,
+          'linkPopover': LinkPopover,
+          'imageDialog': ImageDialog,
+          'imagePopover': ImagePopover,
+          'videoDialog': VideoDialog,
+          'soundcloudDialog': SoundcloudDialog,
+          'helpDialog': HelpDialog,
+          'airPopover': AirPopover
+        },
+
+        buttons: {},
+
+        lang: 'en-US',
+
+        // toolbar
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+
+        // popover
+        popover: {
+          image: [
+            ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+          ],
+          link: [
+            ['link', ['linkDialogShow', 'unlink']]
+          ],
+          air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+          ]
+        },
+
+        // air mode: inline editor
+        airMode: false,
+
+        width: null,
+        height: null,
+
+        focus: false,
+        tabSize: 4,
+        styleWithSpan: true,
+        shortcuts: true,
+        textareaAutoSync: true,
+        direction: null,
+
+        styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+
+        fontNames: [
+          'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
+          'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+          'Tahoma', 'Times New Roman', 'Verdana'
+        ],
+
+        fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
+
+        // pallete colors(n x n)
+        colors: [
+          ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
+          ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'],
+          ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'],
+          ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'],
+          ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'],
+          ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'],
+          ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'],
+          ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']
+        ],
+
+        lineHeights: ['1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
+
+        tableClassName: 'table table-bordered',
+
+        insertTableMaxSize: {
+          col: 10,
+          row: 10
+        },
+
+        dialogsInBody: false,
+        dialogsFade: false,
+
+        maximumImageFileSize: null,
+
+        callbacks: {
+          onInit: null,
+          onFocus: null,
+          onBlur: null,
+          onEnter: null,
+          onKeyup: null,
+          onKeydown: null,
+          onSubmit: null,
+          onImageUpload: null,
+          onImageUploadError: null
+        },
+
+        codemirror: {
+          mode: 'text/html',
+          htmlMode: true,
+          lineNumbers: true
+        },
+
+        keyMap: {
+          pc: {
+            'ENTER': 'insertParagraph',
+            'CTRL+Z': 'undo',
+            'CTRL+Y': 'redo',
+            'TAB': 'tab',
+            'SHIFT+TAB': 'untab',
+            'CTRL+B': 'bold',
+            'CTRL+I': 'italic',
+            'CTRL+U': 'underline',
+            'CTRL+SHIFT+S': 'strikethrough',
+            'CTRL+BACKSLASH': 'removeFormat',
+            'CTRL+SHIFT+L': 'justifyLeft',
+            'CTRL+SHIFT+E': 'justifyCenter',
+            'CTRL+SHIFT+R': 'justifyRight',
+            'CTRL+SHIFT+J': 'justifyFull',
+            'CTRL+SHIFT+NUM7': 'insertUnorderedList',
+            'CTRL+SHIFT+NUM8': 'insertOrderedList',
+            'CTRL+LEFTBRACKET': 'outdent',
+            'CTRL+RIGHTBRACKET': 'indent',
+            'CTRL+NUM0': 'formatPara',
+            'CTRL+NUM1': 'formatH1',
+            'CTRL+NUM2': 'formatH2',
+            'CTRL+NUM3': 'formatH3',
+            'CTRL+NUM4': 'formatH4',
+            'CTRL+NUM5': 'formatH5',
+            'CTRL+NUM6': 'formatH6',
+            'CTRL+ENTER': 'insertHorizontalRule',
+            'CTRL+K': 'linkDialog.show'
+          },
+
+          mac: {
+            'ENTER': 'insertParagraph',
+            'CMD+Z': 'undo',
+            'CMD+SHIFT+Z': 'redo',
+            'TAB': 'tab',
+            'SHIFT+TAB': 'untab',
+            'CMD+B': 'bold',
+            'CMD+I': 'italic',
+            'CMD+U': 'underline',
+            'CMD+SHIFT+S': 'strikethrough',
+            'CMD+BACKSLASH': 'removeFormat',
+            'CMD+SHIFT+L': 'justifyLeft',
+            'CMD+SHIFT+E': 'justifyCenter',
+            'CMD+SHIFT+R': 'justifyRight',
+            'CMD+SHIFT+J': 'justifyFull',
+            'CMD+SHIFT+NUM7': 'insertUnorderedList',
+            'CMD+SHIFT+NUM8': 'insertOrderedList',
+            'CMD+LEFTBRACKET': 'outdent',
+            'CMD+RIGHTBRACKET': 'indent',
+            'CMD+NUM0': 'formatPara',
+            'CMD+NUM1': 'formatH1',
+            'CMD+NUM2': 'formatH2',
+            'CMD+NUM3': 'formatH3',
+            'CMD+NUM4': 'formatH4',
+            'CMD+NUM5': 'formatH5',
+            'CMD+NUM6': 'formatH6',
+            'CMD+ENTER': 'insertHorizontalRule',
+            'CMD+K': 'linkDialog.show'
+          }
+        },
+        icons: {
+          'align': 'fa fa-align-left',
+          'alignCenter': 'fa fa-align-center',
+          'alignJustify': 'fa fa-align-justify',
+          'alignLeft': 'fa fa-align-left',
+          'alignRight': 'fa fa-align-right',
+          'indent': 'fa fa-indent',
+          'outdent': 'fa fa-outdent',
+          'arrowsAlt': 'fa fa-arrows-alt',
+          'bold': 'fa fa-bold',
+          'caret': 'caret',
+          'circle': 'fa fa-circle',
+          'close': 'fa fa-close',
+          'code': 'fa fa-code',
+          'eraser': 'fa fa-eraser',
+          'font': 'fa fa-font',
+          'frame': 'fa fa-frame',
+          'italic': 'fa fa-italic',
+          'link': 'fa fa-link',
+          'unlink': 'fa fa-chain-broken',
+          'magic': 'fa fa-magic',
+          'menuCheck': 'fa fa-check',
+          'minus': 'fa fa-minus',
+          'orderedlist': 'fa fa-list-ol',
+          'pencil': 'fa fa-pencil',
+          'picture': 'fa fa-picture-o',
+          'question': 'fa fa-question',
+          'redo': 'fa fa-repeat',
+          'square': 'fa fa-square',
+          'strikethrough': 'fa fa-strikethrough',
+          'subscript': 'fa fa-subscript',
+          'superscript': 'fa fa-superscript',
+          'table': 'fa fa-table',
+          'textHeight': 'fa fa-text-height',
+          'trash': 'fa fa-trash',
+          'underline': 'fa fa-underline',
+          'undo': 'fa fa-undo',
+          'unorderedlist': 'fa fa-list-ul',
+          'video': 'fa fa-youtube-play'
+        }
+      }
+    });
+  }));
+
+  (function (factory) {
+    if (typeof define === 'function' && define.amd) {
+      define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+      module.exports = factory(require('jquery'));
+    } else {
+      factory(window.jQuery);
+    }
+  }(function ($) {
+    $.extend($.summernote.plugins, {
+      'soundcloud': function (context) {
+        var self = this;
+        var ui = $.summernote.ui;
+        context.memo('button.soundcloud', function () {
+          var button = ui.button({
+            contents: '<i class="fa fa-soundcloud"/>',
+            tooltip: 'Sound / Music',
+            click: context.createInvokeHandler('soundcloudDialog.show')
+          });
+          var $soundcloud = button.render();
+          return $soundcloud;
+        });
+      },
+    });
+  }));

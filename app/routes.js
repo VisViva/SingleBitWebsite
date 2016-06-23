@@ -3,6 +3,7 @@ var ResourceController = require('./controllers/resource');
 var CommentController = require('./controllers/comment');
 var MessageController = require('./controllers/message');
 var TagController = require('./controllers/tag');
+var FileController = require('./controllers/file');
 var Passport = require('passport');
 var Router = require('express').Router();
 
@@ -40,6 +41,10 @@ module.exports = function(root){
   // Tags
 
   Router.get('/api/tags/:query', TagController.suggest);
+
+  // Upload
+
+  Router.post('/api/file/upload/', function(req, res){FileController.upload(root, req, res)});
 
   // Single Page Application
 

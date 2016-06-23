@@ -10,6 +10,7 @@
     "cookie-session": "^2.0.0-alpha.1",
     "del": "^2.2.0",
     "express": "4.8.0",
+    "fs": "0.0.2",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
