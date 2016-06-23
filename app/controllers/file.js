@@ -7,7 +7,11 @@ function Pad(num) {
 
 module.exports = {
   upload : function (root, req, res) {
-    var path = root + '\\public' + Config.images_relative_url.split('/').join('\\');
+    // On windows
+    //var path = root + '\\public' + Config.images_relative_url.split('/').join('\\');
+    // On linux
+    var path = root + '/public' + Config.images_relative_url;
+
     var file = req.body;
     var extension = '.' + file.contents.substring(11, file.contents.indexOf(';base64'));
     file.contents = file.contents.slice(18 + extension.length);
