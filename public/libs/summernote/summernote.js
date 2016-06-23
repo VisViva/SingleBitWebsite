@@ -6081,9 +6081,9 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var data = JSON.parse(xhr.responseText);
                         if (data.success == true){
-                          deferred.resolve("http://" + window.location.hostname + /*":" + + window.location.port +*/ data.path);
+                          deferred.resolve('http://' + window.location.hostname + ((window.location.hostname == 'localhost') ? ':' + window.location.port : '') + data.path);
                         } else {
-                          alert("Could not upload file to server!");
+                          console.log("Error: Could not upload file to server!");
                         }
                     }
                 }
