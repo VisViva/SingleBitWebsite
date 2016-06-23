@@ -6014,7 +6014,7 @@
         '<div class="form-group" style="overflow:auto;">' +
         '<label>' + lang.image.url + '</label>' +
         '<input class="note-image-url" type="text"/>' +
-        '<button href="#" class="btn btn-default note-upload-image-btn">...</button>' +
+        '<button href="#" class="btn btn-default note-upload-image-btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i></button>' +
         '</div>';
         var footer = '<button href="#" class="btn btn-warning note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
 
@@ -6069,26 +6069,48 @@
           $imageBtn = self.$dialog.find('.note-image-btn'),
           $imageUploadBtn = self.$dialog.find('.note-upload-image-btn');
 
-          ui.onDialogShown(self.$dialog, function () {
-            context.triggerEvent('dialog.shown');
+          var inline = function(evt){
+            deferred.resolve(evt.target.files || evt.target.value);
+            $imageInput.val('');
+          };
+          var upload = function(evt){
+            var f = evt.target.files[0];
+            if (f) {
+              var r = new FileReader();
+              r.onload = function(e) {
+                var contents = e.target.result;
+                alert( "Got the file.n"
+                +"name: " + f.name + "n"
+                +"type: " + f.type + "n"
+                +"size: " + f.size + " bytesn"
+                + "starts with: " + contents.substr(1, contents.indexOf("n"))
+              );
+            }
+            r.readAsText(f);
+          } else {
+            alert("Failed to load file");
+          }
+          switcher = inline;
+        };
 
-            // Cloning imageInput to clear element.
-            $imageInput.replaceWith($imageInput.clone()
-            .on('change', function () {
-              deferred.resolve(this.files || this.value);
-            })
-            .val('')
-          );
+        var switcher = inline;
+
+        ui.onDialogShown(self.$dialog, function () {
+          context.triggerEvent('dialog.shown');
+
+          $imageInput.on('change', function (evt) {
+            switcher(evt);
+          })
 
           $imageBtn.click(function (event) {
             event.preventDefault();
             deferred.resolve($imageUrl.val());
           });
 
-          $imageUploadBtn.click(function (event) {
+          $imageUploadBtn.unbind('click').click(function (event) {
             event.preventDefault();
-            alert("Test");
-            //deferred.resolve($imageUrl.val());
+            switcher = upload;
+            $imageInput.trigger('click');
           });
 
           $imageUrl.on('keyup paste', function () {
