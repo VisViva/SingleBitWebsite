@@ -1,4 +1,4 @@
-angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$timeout', '$routeParams', 'UserInterface', 'Resource', function($scope, $timeout, $routeParams, UserInterface, Resource){
+angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$timeout', '$routeParams', 'UserInterface', 'Resource', 'FileUpload', function($scope, $timeout, $routeParams, UserInterface, Resource, FileUpload){
 
   // Initialize
 
@@ -128,9 +128,11 @@ angular.module('PublishCtrl', []).controller('PublishController', ['$scope', '$t
     }
   }
 
-  $scope.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+  // Initialize thumbnail uploader
+
+  FileUpload.initialize('thumbnailInput', 'thumbnails', function(data){
     $timeout(function(){
-      $scope.resource.thumbnail = 'data:' + $scope.thumbnail.filetype + ';base64,' + $scope.thumbnail.base64;
+      $scope.resource.thumbnail = 'http://' + window.location.hostname + ((window.location.hostname == 'localhost') ? ':' + window.location.port : '') + data.path;
     });
-  };
+  })
 }]);

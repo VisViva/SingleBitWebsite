@@ -6087,7 +6087,7 @@
                         }
                     }
                 }
-                xhr.send(JSON.stringify({contents: contents}));
+                xhr.send(JSON.stringify({contents: contents, folder: 'images'}));
               }
               r.readAsDataURL(f);
             } else {
