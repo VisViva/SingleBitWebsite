@@ -2,6 +2,125 @@
 
 @font-face { font-family: Logo; src: url('../fonts/avenger.ttf'); }
 
+/* General **************************************************/
+
+html
+{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+body, html
+{
+	font-family: 'Lato', sans-serif;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	color: #5a5a5a;
+	overflow: hidden;
+}
+h1
+{
+	text-transform: uppercase;
+}
+h1 strong
+{
+	font-weight: 900;
+}
+h2
+{
+	text-transform: uppercase;	line-height: 20px;margin: 0;
+}
+h3
+{
+	font-size: 18px; font-weight: 900;
+}
+h4
+{
+	text-transform: uppercase;
+}
+h5
+{
+	text-transform: uppercase;	font-weight: 700; line-height: 20px;
+}
+p
+{
+	font-family: 'Open Sans', sans-serif;
+}
+p.intro
+{
+	font-size: 16px;
+	margin: 12px 0 0;
+	line-height: 24px;
+	font-family: 'Open Sans', sans-serif;
+}
+a
+{
+	color: #FCAC45;
+}
+a:hover, a:focus
+{
+	text-decoration: none;
+	color: #FCAC45;
+}
+ul, ol
+.modal
+{
+	text-align: center;
+}
+.modal-dialog
+{
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+table tr td.active
+{
+	background-image:none;
+	background-color:#FCAC45;
+}
+textarea
+{
+	resize: vertical;
+}
+::selection
+{
+	background: #FFA700;
+}
+::-moz-selection
+{
+	background: #FFA700;
+}
+.nav>li>a:focus, .nav>li>a:hover
+{
+	text-decoration: none;
+	color: #949494;
+	background-color:#FFF
+}
+.nav-tabs>li>a:hover
+{
+	border-color: #eee #eee #ddd;
+}
+.nav-tabs>li>a
+{
+	margin-right: 2px;
+	line-height: 1.42857143;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+	color: #CCC;
+	cursor: hand;
+	cursor: pointer;
+	border-color: #eee #eee #ddd;
+}
+tr
+{
+	cursor:pointer;
+	cursor:hand;
+}
+
 /* Navigation Bar *******************************************/
 
 #menu
@@ -152,13 +271,13 @@
 .down-arrow-button
 {
 	text-shadow: 0 1px 0 rgba(0,255,255,0.4),0 -1px 0 rgba(255,0,0,0.4);
-  padding: 5px 10px;
-  color: #FFF;
-  border-radius: 50%;
-  font-size: 24px;
-  transition: all .5s;
-  cursor: pointer;
-  cursor: hand;
+	padding: 5px 10px;
+	color: #FFF;
+	border-radius: 50%;
+	font-size: 24px;
+	transition: all .5s;
+	cursor: pointer;
+	cursor: hand;
 	z-index:1000;
 }
 .down-arrow-button:hover
@@ -251,12 +370,12 @@
 .profile-image
 {
 	width: 150px;
-  height: auto;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -ms-transition: all .5s;
-  -o-transition: all .5s;
-  transition: all .5s;
+	height: auto;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
 	cursor: pointer;
 	cursor: hand;
 }
@@ -616,8 +735,8 @@ button.btn.tf-btn.btn-default
 	font-size: 60px !important;
 }
 .software-fix {
-    margin-left: 10px!important;
-    margin-bottom: -2px!important;
+	margin-left: 10px!important;
+	margin-bottom: -2px!important;
 }
 .music-fix
 {
@@ -851,7 +970,7 @@ button.btn.tf-btn.btn-default
 }
 .comment-label
 {
-  font-size: 11px;
+	font-size: 11px;
 }
 .comment-body
 {
@@ -884,113 +1003,4 @@ button.btn.tf-btn.btn-default
 	left: 0;
 	width: 100%;
 	height: 100%;
-}
-
-/* General **************************************************/
-
-body, html
-{
-	font-family: 'Lato', sans-serif;
-	text-rendering: optimizeLegibility !important;
-	-webkit-font-smoothing: antialiased !important;
-	color: #5a5a5a;
-	overflow: hidden;
-}
-h1
-{
-	text-transform: uppercase;
-}
-h1 strong
-{
-	font-weight: 900;
-}
-h2
-{
-	text-transform: uppercase;	line-height: 20px;margin: 0;
-}
-h3
-{
-	font-size: 18px; font-weight: 900;
-}
-h4
-{
-	text-transform: uppercase;
-}
-h5
-{
-	text-transform: uppercase;	font-weight: 700; line-height: 20px;
-}
-p
-{
-	font-family: 'Open Sans', sans-serif;
-}
-p.intro
-{
-	font-size: 16px;
-	margin: 12px 0 0;
-	line-height: 24px;
-	font-family: 'Open Sans', sans-serif;
-}
-a
-{
-	color: #FCAC45;
-}
-a:hover, a:focus
-{
-	text-decoration: none;
-	color: #FCAC45;
-}
-ul, ol
-.modal
-{
-	text-align: center;
-}
-.modal-dialog
-{
-	display: inline-block;
-	text-align: left;
-	vertical-align: middle;
-}
-table tr td.active
-{
-	background-image:none;
-	background-color:#FCAC45;
-}
-textarea
-{
-	resize: vertical;
-}
-::selection
-{
-	background: #FFA700;
-}
-::-moz-selection
-{
-	background: #FFA700;
-}
-.nav>li>a:focus, .nav>li>a:hover
-{
-	text-decoration: none;
-	color: #949494;
-	background-color:#FFF
-}
-.nav-tabs>li>a:hover
-{
-	border-color: #eee #eee #ddd;
-}
-.nav-tabs>li>a
-{
-	margin-right: 2px;
-	line-height: 1.42857143;
-	border: 1px solid transparent;
-	border-radius: 4px 4px 0 0;
-	color: #CCC;
-	cursor: hand;
-	cursor: pointer;
-	border-color: #eee #eee #ddd;
-}
-tr
-{
-	cursor:pointer;
-	cursor:hand;
 }
