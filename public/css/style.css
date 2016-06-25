@@ -872,8 +872,9 @@ button.btn.tf-btn.btn-default
 {
 	cursor: pointer;
 	cursor: hand;
-	width:7px;
-	height:7px;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
 	background-color: #B4B4B4;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
