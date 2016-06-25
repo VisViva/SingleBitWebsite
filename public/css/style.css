@@ -621,6 +621,9 @@ button.btn.tf-btn.btn-default
 	position: relative;
 	border-radius: 7px;
 }
+.hover-text{
+  z-index: 300;
+}
 .view-item .hover-bg .hover-text
 {
 	position: absolute;
@@ -678,6 +681,15 @@ button.btn.tf-btn.btn-default
 .view-item .hover-bg:hover .hover-text
 {
 	opacity: 1;
+}
+.view-item .hover-bg:hover .view-item-icon-container
+{
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	transition: opacity 0.5s;
 }
 .view-item i.fa
 {
@@ -767,6 +779,20 @@ button.btn.tf-btn.btn-default
 	transform: translateY(-100%);
 	position: absolute;
 	width: 100px;
+	opacity: 0.5;
+  z-index: 300;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+.view-item-background
+{
+	background:url(../img/animated/loading.gif) no-repeat center center;
+	background-size: 80px 80px;
+	padding-bottom: 76%;
+	overflow: hidden;
 }
 
 /* Social Icon Set ******************************************/

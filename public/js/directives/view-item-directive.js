@@ -21,8 +21,14 @@ angular.module('ViewItemDirective', []).directive('viewItem', ['$compile', funct
                               <div class="clearfix"></div>\
                               <i class="fa fa-arrow-right"></i>\
                             </div>\
-                            <img ng-show="showThumbnailIfExists();" ng-src="{{model.thumbnail}}" class="img-responsive full-width">\
-                            <img ng-show="!showThumbnailIfExists();" ng-src="{{placeholder}}" class="img-responsive full-width">\
+                            <div ng-show="showThumbnailIfExists();" style="position:relative;padding-bottom:76%;border-radius: 7px;">\
+                              <div class="view-item-background" style="position:absolute;z-index:100;padding-bottom:76%;width:100%;"></div>\
+                              <img ng-src="{{model.thumbnail}}" style="position:absolute;z-index:200;border-radius: 7px;" class="img-responsive full-width">\
+                            </div>\
+                            <div ng-hide="showThumbnailIfExists();" style="position:relative;padding-bottom:76%;">\
+                              <div class="view-item-background" style="position:absolute;z-index:100;padding-bottom:76%;width:100%;"></div>\
+                              <img ng-src="{{placeholder}}" style="position:absolute;z-index:200;border-radius: 7px;" class="img-responsive full-width">\
+                            </div>\
                             <div class="view-item-icon-container">\
                               <span ng-show="showIf(' + "'Software'" + ')"class="fa fa-code software-fix"></span>\
                               <span ng-show="showIf(' + "'Music'" + ')"class="fa fa-music music-fix"></span>\
