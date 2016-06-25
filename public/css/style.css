@@ -789,20 +789,22 @@ button.btn.tf-btn.btn-default
 }
 .view-item-image-container
 {
-	position:relative;
-	padding-bottom:76%;
-}
-.view-item-background
-{
-	position:absolute;
-	z-index:100;
-	width:100%;
+	position: relative;
 	padding-bottom: 76%;
 }
 .view-item-thumbnail
 {
-	position:absolute;
-	z-index:200;
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	padding-bottom: 76%;
+	background:url(../img/animated/loading.gif) no-repeat center center;
+	background-size: 50px 50px;
+}
+.view-item-thumbnail
+{
+	position: absolute;
+	z-index: 200;
 	border-radius: 7px;
 }
 

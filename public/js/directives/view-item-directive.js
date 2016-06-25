@@ -23,11 +23,11 @@ angular.module('ViewItemDirective', []).directive('viewItem', ['$compile', funct
                             </div>\
                             <div class="view-item-image-container">\
                               <div ng-show="showThumbnailIfExists();">\
-                                <div class="spinner view-item-background"></div>\
+                                <div class="view-item-background"></div>\
                                 <img ng-src="{{model.thumbnail}}" class="img-responsive full-width view-item-thumbnail">\
                               </div>\
                               <div ng-hide="showThumbnailIfExists();">\
-                                <div class="spinner view-item-background"></div>\
+                                <div class="view-item-background"></div>\
                                 <img ng-src="{{placeholder}}" class="img-responsive full-width view-item-thumbnail">\
                               </div>\
                             </div>\
