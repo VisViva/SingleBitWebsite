@@ -5,7 +5,7 @@ angular.module('ResourcesCtrl', []).controller('ResourcesController', ['$scope',
   UserInterface.fillNavbar();
   $scope.page = $routeParams.page;
   $scope.total = 0;
-  $scope.itemsPerPage = 8;
+  $scope.itemsPerPage = 30;
   $scope.loading = true;
 
   // Get user name
