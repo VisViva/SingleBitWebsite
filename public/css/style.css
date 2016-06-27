@@ -763,14 +763,12 @@ button.btn.tf-btn.btn-default
 .view-item span.fa
 {
 	color: #FFF;
-	z-index:0;
-	margin-left: 15px;
-	margin-bottom: 3px;
+	z-index: 0;
 	height: 60px;
-	width: 60px;
-	font-size: 50px;
-	padding:0px;
-	border:none;
+	width: 100%;
+	font-size: 30px;
+	padding: 0px;
+	border: none;
 	text-shadow: 1px 1px 1px #000;
 }
 .view-item-icon-container
@@ -778,7 +776,7 @@ button.btn.tf-btn.btn-default
 	top: 100%;
 	transform: translateY(-100%);
 	position: absolute;
-	width: 100px;
+	width: 100%;
 	opacity: 0.6;
   z-index: 300;
 	-webkit-transition: opacity 0.5s;
