@@ -632,7 +632,6 @@ button.btn.tf-btn.btn-default
 {
 	overflow: hidden;
 	position: relative;
-	border-radius: 7px;
 }
 .hover-text{
 	z-index: 300;
