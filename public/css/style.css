@@ -580,10 +580,10 @@ button.btn.tf-btn.btn-default
 	-webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
 	margin-bottom: 10px;
 	margin-top: 10px;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
+	transition: all 2s ease;
 	-webkit-transform: perspective(500px);
 	-moz-transform: perspective(500px);
 	-o-transform: perspective(500px);
@@ -632,6 +632,7 @@ button.btn.tf-btn.btn-default
 {
 	overflow: hidden;
 	position: relative;
+	border-radius: 7px;
 }
 .hover-text{
 	z-index: 300;
@@ -749,11 +750,19 @@ button.btn.tf-btn.btn-default
 	position: absolute;
 	z-index: 200;
 	border-radius: 7px;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
+	transition: all 2s ease;
 }
 .view-item:hover .view-item-thumbnail
 {
 	-webkit-filter: blur(0px);
 	filter: blur(0px);
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 /* Social Icon Set ******************************************/
